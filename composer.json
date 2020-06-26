@@ -1,0 +1,57 @@
+{
+    "name": "eolabs-io/amazon-mws",
+    "description": "A client that connects to Amazon's MWS",
+    "keywords": [
+        "eolabs-io",
+        "amazon-mws"
+    ],
+    "homepage": "https://github.com/eolabs-io/amazon-mws",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Tim Hall",
+            "email": "thall@eolabs.io",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.1",
+        "eolabs-io/amazon-mws-client": "^1.0",
+        "eolabs-io/amazon-mws-response-parser": "^1.0",
+        "eolabs-io/amazon-mws-throttling-middleware": "^1.0",
+        "illuminate/support": "^7.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^5.0",
+        "phpunit/phpunit": "^8.4|^9.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "EolabsIo\\AmazonMws\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "EolabsIo\\AmazonMws\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "EolabsIo\\AmazonMws\\AmazonMwsServiceProvider"
+            ],
+            "aliases": {
+                "AmazonMws": "EolabsIo\\AmazonMws\\AmazonMwsFacade"
+            }
+        }
+    }
+}
