@@ -1,10 +1,10 @@
 <?php
 
-namespace EolabsIo\AmazonMws\Listeners;
+namespace EolabsIo\AmazonMws\Domain\Orders\Listeners;
 
 use EolabsIo\AmazonMwsClient\Models\Store;
 use EolabsIo\AmazonMws\Domain\Orders\Events\FetchListOrderItems;
-use EolabsIo\AmazonMws\Events\OrderWasUpdated;
+use EolabsIo\AmazonMws\Domain\Orders\Events\OrderWasUpdated;
 use EolabsIo\AmazonMws\Support\Facades\ListOrderItems;
 
 class UpdateOrderItems

@@ -2,14 +2,14 @@
 
 namespace EolabsIo\AmazonMws\Domain\Orders\Models;
 
+use EolabsIo\AmazonMws\Domain\Orders\Events\OrderWasCreated;
+use EolabsIo\AmazonMws\Domain\Orders\Events\OrderWasUpdated;
 use EolabsIo\AmazonMws\Domain\Orders\Models\Address;
 use EolabsIo\AmazonMws\Domain\Orders\Models\BuyerTaxInfo;
 use EolabsIo\AmazonMws\Domain\Orders\Models\Money;
 use EolabsIo\AmazonMws\Domain\Orders\Models\OrderItem;
 use EolabsIo\AmazonMws\Domain\Orders\Models\PaymentExecutionDetailItem;
 use EolabsIo\AmazonMws\Domain\Orders\Models\PaymentMethodDetail;
-use EolabsIo\AmazonMws\Events\OrderWasCreated;
-use EolabsIo\AmazonMws\Events\OrderWasUpdated;
 use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model

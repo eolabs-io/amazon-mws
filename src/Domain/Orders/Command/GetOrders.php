@@ -10,17 +10,21 @@ use Illuminate\Support\Carbon;
 
 class GetOrders extends Command
 {
-    protected $signature = 'amazonmws:get-orders';
+    protected $signature = 'amazonmws:get-orders
+                            {store : The ID of the store}
+                            {--last-updated-after : A date used for selecting orders that were last updated after (or at) a specified time}';
 
     protected $description = 'Gets Orders from Amazon MWS';
+
 
     public function handle()
     {
         $this->info('Geting Orders from Amazon MWS...');
 
-        foreach (Store::all() as $store) {
-            $inventoryList = ListOrders::withStore($store)->withLastUpdatedAfter(Carbon::now()->subDays(30));  
-            FetchListOrders::dispatch($inventoryList);
-        }
+        $store = Store::find($this->argument('store'));
+        $lastUpdatedAfter = Carbon::create($this->option('last-updated-after'));
+        
+        $inventoryList = ListOrders::withStore($store)->withLastUpdatedAfter($lastUpdatedAfter);  
+        FetchListOrders::dispatch($inventoryList);
     }
 }

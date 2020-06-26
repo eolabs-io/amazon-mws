@@ -1,13 +1,13 @@
 <?php
  
-namespace EolabsIo\AmazonMws\Events;
+namespace EolabsIo\AmazonMws\Domain\Orders\Events;
 
 use EolabsIo\AmazonMws\Domain\Orders\Models\Order;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
 
-class OrderWasCreated
+class OrderWasUpdated
 {
     use Dispatchable, SerializesModels;
 

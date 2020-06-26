@@ -2,12 +2,14 @@
 
 namespace EolabsIo\AmazonMws;
 
+use EolabsIo\AmazonMws\Domain\Inventory\Command\GetInventory;
 use EolabsIo\AmazonMws\Domain\Inventory\InventoryList;
+use EolabsIo\AmazonMws\Domain\Inventory\Providers\EventServiceProvider as InventoryEventServiceProvider;
 use EolabsIo\AmazonMws\Domain\Inventory\ServiceStatus as InventoryServiceStatus;
 use EolabsIo\AmazonMws\Domain\Orders\Command\GetOrders;
 use EolabsIo\AmazonMws\Domain\Orders\ListOrderItems;
 use EolabsIo\AmazonMws\Domain\Orders\ListOrders;
-use EolabsIo\AmazonMws\Providers\EventServiceProvider;
+use EolabsIo\AmazonMws\Domain\Orders\Providers\EventServiceProvider as OrdersEventServiceProvider;
 use Illuminate\Support\ServiceProvider;
 
 class AmazonMwsServiceProvider extends ServiceProvider
@@ -48,6 +50,7 @@ class AmazonMwsServiceProvider extends ServiceProvider
             // Registering package commands.
             $this->commands([
                 GetOrders::class,
+                GetInventory::class,
             ]);
         }
     }
@@ -60,7 +63,8 @@ class AmazonMwsServiceProvider extends ServiceProvider
         // Automatically apply the package configuration
         $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'amazon-mws');
 
-        $this->app->register(EventServiceProvider::class);
+        $this->app->register(InventoryEventServiceProvider::class);
+        $this->app->register(OrdersEventServiceProvider::class);
         
         // Register the main class to use with the facade
         $this->app->singleton('inventory-list', function () {

@@ -1,15 +1,15 @@
 <?php
 
-namespace EolabsIo\AmazonMws\Providers;
+namespace EolabsIo\AmazonMws\Domain\Orders\Providers;
 
 use EolabsIo\AmazonMws\Domain\Orders\Events\FetchListOrderItems;
 use EolabsIo\AmazonMws\Domain\Orders\Events\FetchListOrders;
+use EolabsIo\AmazonMws\Domain\Orders\Events\OrderWasCreated;
+use EolabsIo\AmazonMws\Domain\Orders\Events\OrderWasUpdated;
+use EolabsIo\AmazonMws\Domain\Orders\Listeners\CreateOrderItems;
 use EolabsIo\AmazonMws\Domain\Orders\Listeners\FetchListOrderItemsListener;
 use EolabsIo\AmazonMws\Domain\Orders\Listeners\FetchListOrdersListener;
-use EolabsIo\AmazonMws\Events\OrderWasCreated;
-use EolabsIo\AmazonMws\Events\OrderWasUpdated;
-use EolabsIo\AmazonMws\Listeners\CreateOrderItems;
-use EolabsIo\AmazonMws\Listeners\UpdateOrderItems;
+use EolabsIo\AmazonMws\Domain\Orders\Listeners\UpdateOrderItems;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 

@@ -3,7 +3,8 @@
 namespace EolabsIo\AmazonMws\Tests;
 
 use EolabsIo\AmazonMwsClient\Models\Store;
-use EolabsIo\AmazonMws\Domain\Inventory\Jobs\FetchInventoryList;
+use EolabsIo\AmazonMws\Domain\Inventory\Events\FetchInventoryList;
+use EolabsIo\AmazonMws\Domain\Inventory\Jobs\PerformFetchInventoryList;
 use EolabsIo\AmazonMws\Domain\Inventory\Jobs\ProcessInventoryListResponse;
 use EolabsIo\AmazonMws\Support\Facades\InventoryList;
 use EolabsIo\AmazonMws\Tests\Concerns\CreatesInventoryList;
@@ -12,10 +13,11 @@ use EolabsIo\AmazonMws\Tests\Factories\StoreFactory;
 use EolabsIo\AmazonMws\Tests\TestCase;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Queue;
 
-class FetchInventoryListTest extends TestCase
+class PerformFetchInventoryListTest extends TestCase
 {
     use CreatesInventoryList;
 
@@ -36,10 +38,10 @@ class FetchInventoryListTest extends TestCase
     {
         $inventoryList = $this->createInventoryList();
 
-        FetchInventoryList::dispatch($inventoryList);
+        PerformFetchInventoryList::dispatch($inventoryList);
 
         // Assert a job was pushed...
-        Queue::assertPushed(FetchInventoryList::class, function ($job) {
+        Queue::assertPushed(PerformFetchInventoryList::class, function ($job) {
             $job->handle();
             return true;
         });
@@ -50,7 +52,7 @@ class FetchInventoryListTest extends TestCase
         });
 
         // Assert that was not called for NextToken
-        Queue::assertPushed(FetchInventoryList::class, 1);
+        Event::assertNotDispatched(FetchInventoryList::class);
     }
 
     /** @test */
@@ -58,10 +60,10 @@ class FetchInventoryListTest extends TestCase
     {
         $inventoryList = $this->createInventoryListWithToken();
 
-        FetchInventoryList::dispatch($inventoryList);
+        PerformFetchInventoryList::dispatch($inventoryList);
 
         // Assert a job was pushed...
-        Queue::assertPushed(FetchInventoryList::class, function ($job) {
+        Queue::assertPushed(PerformFetchInventoryList::class, function ($job) {
             $job->handle();
             return true;
         });
@@ -72,7 +74,7 @@ class FetchInventoryListTest extends TestCase
         });
 
         // Assert that was not called for NextToken
-        Queue::assertPushed(FetchInventoryList::class, 2);
+        Event::assertDispatched(FetchInventoryList::class);
     }
 
 }
