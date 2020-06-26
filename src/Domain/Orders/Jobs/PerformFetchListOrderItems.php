@@ -21,14 +21,14 @@ class PerformFetchListOrderItems implements ShouldQueue
      *
      * @var int
      */
-    public $tries = 0;
+    // public $tries = 0;
 
     /**
      * The number of seconds the job can run before timing out.
      *
      * @var int
      */
-    public $timeout = 30;
+    // public $timeout = 30;
 
     /** @var EolabsIo\AmazonMws\Domain\Orders\ListOrderItems */
     public $listOrderItems;
@@ -66,9 +66,9 @@ class PerformFetchListOrderItems implements ShouldQueue
      *
      * @return int
      */
-    public function retryAfter()
-    {
-        return 1 * pow(2, $this->attempts());
-    }
+    // public function retryAfter()
+    // {
+    //     return 1 * pow(2, $this->attempts());
+    // }
 
 }
