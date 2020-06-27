@@ -12,7 +12,10 @@ class Orders extends Command
 {
     protected $signature = 'amazonmws:orders
                             {store : The ID of the store}
-                            {--last-updated-after : A date used for selecting orders that were last updated after (or at) a specified time}';
+                            {--last-updated-after= : A date used for selecting orders that were last updated after (or at) a specified time}
+                            {--last-updated-before= : A date used for selecting orders that were last updated before (or at) a specified time}
+                            {--created-after= : A date used for selecting orders created after (or at) a specified time.}
+                            {--created-before= : A date used for selecting orders created before (or at) a specified time.}';
 
     protected $description = 'Gets Orders from Amazon MWS';
 
@@ -22,9 +25,29 @@ class Orders extends Command
         $this->info('Geting Orders from Amazon MWS...');
 
         $store = Store::find($this->argument('store'));
-        $lastUpdatedAfter = Carbon::create($this->option('last-updated-after'));
-        
-        $inventoryList = ListOrders::withStore($store)->withLastUpdatedAfter($lastUpdatedAfter);  
-        FetchListOrders::dispatch($inventoryList);
+        $lastUpdatedAfter = $this->option('last-updated-after');
+        $lastUpdatedBefore = $this->option('last-updated-before');
+        $createdAfter = $this->option('created-after');
+        $createdBefore = $this->option('created-before'); 
+
+        $listOrders = ListOrders::withStore($store);  
+
+        if($lastUpdatedAfter) {
+            $listOrders->withLastUpdatedAfter(Carbon::create($lastUpdatedAfter));
+        }
+
+        if($lastUpdatedBefore) {
+            $listOrders->withLastUpdatedBefore(Carbon::create($lastUpdatedBefore));
+        }
+
+        if($createdAfter) {
+            $listOrders->withCreatedAfter(Carbon::create($createdAfter));
+        }
+
+        if($createdBefore) {
+            $listOrders->withCreatedBefore(Carbon::create($createdBefore));
+        }
+
+        FetchListOrders::dispatch($listOrders);
     }
 }
