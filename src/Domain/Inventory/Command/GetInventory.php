@@ -10,7 +10,7 @@ use Illuminate\Support\Carbon;
 
 class GetInventory extends Command
 {
-    protected $signature = 'amazonmws:get-inventory
+    protected $signature = 'amazonmws:inventory
                             {store : The ID of the store}
                             {--seller-skus : A list of seller SKUs for items that you want inventory availability information about.}
                             {--query-start-date-time : A date used for selecting items that have had changes in inventory availability after (or at) a specified time.}

@@ -10,7 +10,7 @@ use Illuminate\Support\Carbon;
 
 class GetOrders extends Command
 {
-    protected $signature = 'amazonmws:get-orders
+    protected $signature = 'amazonmws:orders
                             {store : The ID of the store}
                             {--last-updated-after : A date used for selecting orders that were last updated after (or at) a specified time}';
 
