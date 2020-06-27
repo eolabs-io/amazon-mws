@@ -8,7 +8,7 @@ use EolabsIo\AmazonMws\Support\Facades\ListOrders;
 use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
 
-class Orders extends Command
+class OrdersCommand extends Command
 {
     protected $signature = 'amazonmws:orders
                             {store : The ID of the store}

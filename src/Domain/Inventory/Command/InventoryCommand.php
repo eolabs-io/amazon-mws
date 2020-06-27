@@ -8,7 +8,7 @@ use EolabsIo\AmazonMws\Support\Facades\InventoryList;
 use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
 
-class Inventory extends Command
+class InventoryCommand extends Command
 {
     protected $signature = 'amazonmws:inventory
                             {store : The ID of the store}

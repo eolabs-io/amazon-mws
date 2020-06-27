@@ -2,11 +2,11 @@
 
 namespace EolabsIo\AmazonMws;
 
-use EolabsIo\AmazonMws\Domain\Inventory\Command\Inventory as InventoryCommand;
+use EolabsIo\AmazonMws\Domain\Inventory\Command\InventoryCommand;
 use EolabsIo\AmazonMws\Domain\Inventory\InventoryList;
 use EolabsIo\AmazonMws\Domain\Inventory\Providers\EventServiceProvider as InventoryEventServiceProvider;
 use EolabsIo\AmazonMws\Domain\Inventory\ServiceStatus as InventoryServiceStatus;
-use EolabsIo\AmazonMws\Domain\Orders\Command\Orders as OrdersCommand;
+use EolabsIo\AmazonMws\Domain\Orders\Command\OrdersCommand;
 use EolabsIo\AmazonMws\Domain\Orders\ListOrderItems;
 use EolabsIo\AmazonMws\Domain\Orders\ListOrders;
 use EolabsIo\AmazonMws\Domain\Orders\Providers\EventServiceProvider as OrdersEventServiceProvider;
