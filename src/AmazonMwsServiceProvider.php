@@ -6,6 +6,7 @@ use EolabsIo\AmazonMws\Domain\Inventory\Command\InventoryCommand;
 use EolabsIo\AmazonMws\Domain\Inventory\InventoryList;
 use EolabsIo\AmazonMws\Domain\Inventory\Providers\EventServiceProvider as InventoryEventServiceProvider;
 use EolabsIo\AmazonMws\Domain\Inventory\ServiceStatus as InventoryServiceStatus;
+use EolabsIo\AmazonMws\Domain\Orders\Command\OrderItemsCommand;
 use EolabsIo\AmazonMws\Domain\Orders\Command\OrdersCommand;
 use EolabsIo\AmazonMws\Domain\Orders\ListOrderItems;
 use EolabsIo\AmazonMws\Domain\Orders\ListOrders;
@@ -50,6 +51,7 @@ class AmazonMwsServiceProvider extends ServiceProvider
             // Registering package commands.
             $this->commands([
                 OrdersCommand::class,
+                OrderItemsCommand::class,
                 InventoryCommand::class,
             ]);
         }

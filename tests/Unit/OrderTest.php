@@ -108,4 +108,5 @@ class OrderTest extends BaseModelTest
 
         $this->assertArraysEqual($orderItems->toArray(), $order->orderItems->toArray());
     } 
+
 }

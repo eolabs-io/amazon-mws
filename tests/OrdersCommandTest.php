@@ -3,7 +3,6 @@
 namespace EolabsIo\AmazonMws\Tests;
 
 use EolabsIo\AmazonMwsClient\Models\Store;
-use EolabsIo\AmazonMws\Domain\Orders\Command\Orders as OrdersCommand;
 use EolabsIo\AmazonMws\Domain\Orders\Events\FetchListOrders;
 use EolabsIo\AmazonMws\Tests\TestCase;
 use Illuminate\Support\Carbon;

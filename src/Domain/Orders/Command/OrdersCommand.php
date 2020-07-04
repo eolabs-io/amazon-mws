@@ -22,7 +22,7 @@ class OrdersCommand extends Command
 
     public function handle()
     {
-        $this->info('Geting Orders from Amazon MWS...');
+        $this->info('Getting Orders from Amazon MWS...');
 
         $store = Store::find($this->argument('store'));
         $lastUpdatedAfter = $this->option('last-updated-after');
