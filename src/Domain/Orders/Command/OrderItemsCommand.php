@@ -31,7 +31,7 @@ class OrderItemsCommand extends Command
 
         if($discover) {
             Order::whereNotIn('amazon_order_id', 
-                                OrderItem::select('amazon_order_id')->get())
+                               OrderItem::select('amazon_order_id')->get())
                    ->select('amazon_order_id')
                    ->get()
                    ->each(function($item) use ($listOrderItems) {
