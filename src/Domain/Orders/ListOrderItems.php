@@ -2,8 +2,8 @@
 
 namespace EolabsIo\AmazonMws\Domain\Orders;
 
-use EolabsIo\AmazonMws\Domain\Orders\Concerns\InteractsWithAmazonOrderId;
 use EolabsIo\AmazonMws\Domain\Orders\OrderCore;
+use EolabsIo\AmazonMws\Domain\Shared\Concerns\InteractsWithAmazonOrderId;
 
 class ListOrderItems extends OrderCore
 {

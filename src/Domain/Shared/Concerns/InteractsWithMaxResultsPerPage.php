@@ -1,6 +1,6 @@
 <?php
 
-namespace EolabsIo\AmazonMws\Domain\Orders\Concerns;
+namespace EolabsIo\AmazonMws\Domain\Shared\Concerns;
 
 trait InteractsWithMaxResultsPerPage
 {
@@ -9,12 +9,15 @@ trait InteractsWithMaxResultsPerPage
 
     public function withMaxResultsPerPage(int $maxResultsPerPage): self
     {
-    	if($maxResultsPerPage < 1) {
-    		$maxResultsPerPage = 1;
+        $minResultsPerPageAllowed = $this->getMinResultsPerPageAllowed();
+        $maxResultsPerPageAllowed = $this->getMaxResultsPerPageAllowed();
+
+    	if($maxResultsPerPage < $minResultsPerPageAllowed) {
+    		$maxResultsPerPage = $minResultsPerPageAllowed;
     	}
 
-    	if($maxResultsPerPage > 100) {
-    		$maxResultsPerPage = 100;
+    	if($maxResultsPerPage > $maxResultsPerPageAllowed) {
+    		$maxResultsPerPage = $maxResultsPerPageAllowed;
     	}
 
         $this->maxResultsPerPage = $maxResultsPerPage;
@@ -31,7 +34,17 @@ trait InteractsWithMaxResultsPerPage
     {
         return $this->maxResultsPerPage;
     }
-    
+
+    public function getMaxResultsPerPageAllowed(): int
+    {
+        return 100;
+    }
+   
+    public function getMinResultsPerPageAllowed(): int
+    {
+        return 1;
+    }
+
     public function getMaxResultsPerPageParameter(): array
     {
         if(! $this->hasMaxResultsPerPage()){

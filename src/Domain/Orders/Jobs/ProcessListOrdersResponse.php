@@ -2,8 +2,6 @@
 
 namespace EolabsIo\AmazonMws\Domain\Orders\Jobs;
 
-
-use EolabsIo\AmazonMws\Domain\Orders\Concerns\FormatsModelAttributes;
 use EolabsIo\AmazonMws\Domain\Orders\Models\Address;
 use EolabsIo\AmazonMws\Domain\Orders\Models\BuyerTaxInfo;
 use EolabsIo\AmazonMws\Domain\Orders\Models\Money;
@@ -11,6 +9,7 @@ use EolabsIo\AmazonMws\Domain\Orders\Models\Order;
 use EolabsIo\AmazonMws\Domain\Orders\Models\PaymentExecutionDetailItem;
 use EolabsIo\AmazonMws\Domain\Orders\Models\PaymentMethodDetail;
 use EolabsIo\AmazonMws\Domain\Orders\Models\TaxClassification;
+use EolabsIo\AmazonMws\Domain\Shared\Concerns\FormatsModelAttributes;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;

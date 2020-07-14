@@ -1,6 +1,6 @@
 <?php
 
-namespace EolabsIo\AmazonMws\Domain\Orders\Concerns;
+namespace EolabsIo\AmazonMws\Domain\Shared\Concerns;
 
 trait InteractsWithAmazonOrderId
 {

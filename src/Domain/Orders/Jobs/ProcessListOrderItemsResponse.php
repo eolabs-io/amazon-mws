@@ -2,13 +2,13 @@
 
 namespace EolabsIo\AmazonMws\Domain\Orders\Jobs;
 
-use EolabsIo\AmazonMws\Domain\Orders\Concerns\FormatsModelAttributes;
 use EolabsIo\AmazonMws\Domain\Orders\Models\BuyerCustomizedInfo;
 use EolabsIo\AmazonMws\Domain\Orders\Models\Money;
 use EolabsIo\AmazonMws\Domain\Orders\Models\OrderItem;
 use EolabsIo\AmazonMws\Domain\Orders\Models\PointsGranted;
 use EolabsIo\AmazonMws\Domain\Orders\Models\ProductInfo;
 use EolabsIo\AmazonMws\Domain\Orders\Models\TaxCollection;
+use EolabsIo\AmazonMws\Domain\Shared\Concerns\FormatsModelAttributes;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;

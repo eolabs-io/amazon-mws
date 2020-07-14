@@ -25,7 +25,7 @@ class AmazonConstantsFactory
                         'products' => '2011-10-01',
                         'reports' => '2009-01-01',
                         'sellers' => '2011-07-01',
-                        'finance' => '2015-05-01',
+                        'finances' => '2015-05-01',
                     ],
                 ];
     }

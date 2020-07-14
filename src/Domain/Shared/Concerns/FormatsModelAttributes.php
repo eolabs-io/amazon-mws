@@ -1,6 +1,6 @@
 <?php
 
-namespace EolabsIo\AmazonMws\Domain\Orders\Concerns;
+namespace EolabsIo\AmazonMws\Domain\Shared\Concerns;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
@@ -19,7 +19,7 @@ trait FormatsModelAttributes
         $this->castable = collect(($model)->getCasts());
     }
 
-	public function getFormatedOrderAttributes(array $items, Model $model): array
+	public function getFormatedAttributes(array $items, Model $model): array
     {
         $this->setModelToFormat($model);
 
@@ -39,6 +39,11 @@ trait FormatsModelAttributes
     public function customFormats($element): string
     {
         $element = Str::replaceFirst('Sku', 'SKU', $element);
+        $element = Str::replaceFirst('Asin', 'ASIN', $element);
+        $element = Str::replaceFirst('SafeTClaimId', 'SAFETClaimId', $element);
+        $element = Str::replaceFirst('Igst', 'IGST', $element);
+        $element = Str::replaceFirst('Cgst', 'CGST', $element);
+        $element = Str::replaceFirst('Sgst', 'SGST', $element);
 
         return $element;
     }

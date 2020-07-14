@@ -8,11 +8,11 @@ use EolabsIo\AmazonMws\Domain\Orders\Concerns\InteractsWithEasyShipShipmentStatu
 use EolabsIo\AmazonMws\Domain\Orders\Concerns\InteractsWithFulfillmentChannel;
 use EolabsIo\AmazonMws\Domain\Orders\Concerns\InteractsWithLastUpdatedTimeFrames;
 use EolabsIo\AmazonMws\Domain\Orders\Concerns\InteractsWithMarketplaceIds;
-use EolabsIo\AmazonMws\Domain\Orders\Concerns\InteractsWithMaxResultsPerPage;
 use EolabsIo\AmazonMws\Domain\Orders\Concerns\InteractsWithOrderStatus;
 use EolabsIo\AmazonMws\Domain\Orders\Concerns\InteractsWithPaymentMethod;
 use EolabsIo\AmazonMws\Domain\Orders\Concerns\InteractsWithSellerOrderId;
 use EolabsIo\AmazonMws\Domain\Orders\OrderCore;
+use EolabsIo\AmazonMws\Domain\Shared\Concerns\InteractsWithMaxResultsPerPage;
 
 
 class ListOrders extends OrderCore
