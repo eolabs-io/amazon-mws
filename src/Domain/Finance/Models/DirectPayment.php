@@ -20,8 +20,6 @@ class DirectPayment extends Model
     
     protected $hidden = ['pivot'];
 
-    protected $with = ['directPaymentAmount'];
-
 	public function directPaymentAmount()
 	{
 		return $this->belongsTo(CurrencyAmount::class, 'direct_payment_amount_id', 'id')->withDefault();

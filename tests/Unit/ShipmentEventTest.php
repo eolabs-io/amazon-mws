@@ -22,7 +22,6 @@ class ShipmentEventTest extends BaseModelTest
     {
         $shipmentEvent = $this->factory()->create();
         $orderChargeList = factory(ChargeComponent::class, 3)->create();
-        $orderChargeList->load('chargeAmount');
 
         $shipmentEvent->orderChargeList()->toggle($orderChargeList);
 
@@ -34,7 +33,6 @@ class ShipmentEventTest extends BaseModelTest
     {
         $shipmentEvent = $this->factory()->create();
         $orderChargeAdjustmentList = factory(ChargeComponent::class, 3)->create();
-        $orderChargeAdjustmentList->load('chargeAmount');
 
         $shipmentEvent->orderChargeAdjustmentList()->toggle($orderChargeAdjustmentList);
 
@@ -46,7 +44,6 @@ class ShipmentEventTest extends BaseModelTest
     {
         $shipmentEvent = $this->factory()->create();
         $shipmentFeeList = factory(FeeComponent::class, 3)->create();
-        $shipmentFeeList->load('feeAmount'); 
 
         $shipmentEvent->shipmentFeeList()->toggle($shipmentFeeList);
 
@@ -58,7 +55,6 @@ class ShipmentEventTest extends BaseModelTest
     {
         $shipmentEvent = $this->factory()->create();
         $shipmentFeeAdjustmentList = factory(FeeComponent::class, 3)->create();
-        $shipmentFeeAdjustmentList->load('feeAmount'); 
 
         $shipmentEvent->shipmentFeeAdjustmentList()->toggle($shipmentFeeAdjustmentList);
 
@@ -70,7 +66,6 @@ class ShipmentEventTest extends BaseModelTest
     {
         $shipmentEvent = $this->factory()->create();
         $orderFeeList = factory(FeeComponent::class, 3)->create();
-        $orderFeeList->load('feeAmount'); 
 
         $shipmentEvent->orderFeeList()->toggle($orderFeeList);
 
@@ -82,7 +77,6 @@ class ShipmentEventTest extends BaseModelTest
     {
         $shipmentEvent = $this->factory()->create();
         $orderFeeAdjustmentList = factory(FeeComponent::class, 3)->create();
-        $orderFeeAdjustmentList->load('feeAmount'); 
 
         $shipmentEvent->orderFeeAdjustmentList()->toggle($orderFeeAdjustmentList);
 
@@ -94,7 +88,6 @@ class ShipmentEventTest extends BaseModelTest
     {
         $shipmentEvent = $this->factory()->create();
         $directPaymentList = factory(DirectPayment::class, 3)->create();
-        $directPaymentList->load('directPaymentAmount');
 
         $shipmentEvent->directPaymentList()->toggle($directPaymentList);
 

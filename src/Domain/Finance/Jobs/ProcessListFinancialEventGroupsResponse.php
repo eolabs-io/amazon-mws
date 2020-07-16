@@ -49,7 +49,7 @@ class ProcessListFinancialEventGroupsResponse implements ShouldQueue
     public function createFinancialEventGroupFromList($financialEventGroupList)
     {
         $attributes = ['financial_event_group_id' => data_get($financialEventGroupList, 'FinancialEventGroupId'),];
-        $values = $this->getFormatedOrderAttributes($financialEventGroupList, new FinancialEventGroup);
+        $values = $this->getFormatedAttributes($financialEventGroupList, new FinancialEventGroup);
 
         $financialEventGroup = FinancialEventGroup::updateOrCreate($attributes, $values);
 
@@ -68,7 +68,7 @@ class ProcessListFinancialEventGroupsResponse implements ShouldQueue
             return;
         }
 
-        $values = $this->getFormatedOrderAttributes($originalTotalList, new CurrencyAmount);
+        $values = $this->getFormatedAttributes($originalTotalList, new CurrencyAmount);
 
         $originalTotal = CurrencyAmount::create($values);
 
@@ -87,7 +87,7 @@ class ProcessListFinancialEventGroupsResponse implements ShouldQueue
             return;
         }
 
-        $values = $this->getFormatedOrderAttributes($convertedTotalList, new CurrencyAmount);
+        $values = $this->getFormatedAttributes($convertedTotalList, new CurrencyAmount);
 
         $convertedTotal = CurrencyAmount::create($values);
 
@@ -106,7 +106,7 @@ class ProcessListFinancialEventGroupsResponse implements ShouldQueue
             return;
         }
 
-        $values = $this->getFormatedOrderAttributes($beginningBalanceList, new CurrencyAmount);
+        $values = $this->getFormatedAttributes($beginningBalanceList, new CurrencyAmount);
 
         $beginningBalance = CurrencyAmount::create($values);
 

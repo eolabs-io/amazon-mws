@@ -20,33 +20,33 @@
                     <PointsNumber>10</PointsNumber>
                     <PointsMonetaryValue>
                         <CurrencyCode>JPY</CurrencyCode>
-                        <Amount>10.00</Amount>
+                        <CurrencyAmount>10.00</CurrencyAmount>
                     </PointsMonetaryValue>
                 </PointsGranted>
                 <ItemPrice>
                     <CurrencyCode>JPY</CurrencyCode>
-                    <Amount>25.99</Amount>
+                    <CurrencyAmount>25.99</CurrencyAmount>
                 </ItemPrice>
                 <ShippingPrice>
                     <CurrencyCode>JPY</CurrencyCode>
-                    <Amount>1.26</Amount>
+                    <CurrencyAmount>1.26</CurrencyAmount>
                 </ShippingPrice>
                 <ScheduledDeliveryEndDate>2013-09-09T01:30:00.000-06:00 </ScheduledDeliveryEndDate>
                 <ScheduledDeliveryStartDate>2013-09-07T02:00:00.000-06:00 </ScheduledDeliveryStartDate>
                 <CODFee>
                     <CurrencyCode>JPY</CurrencyCode>
-                    <Amount>10.00</Amount>
+                    <CurrencyAmount>10.00</CurrencyAmount>
                 </CODFee>
                 <CODFeeDiscount>
                     <CurrencyCode>JPY</CurrencyCode>
-                    <Amount>1.00</Amount>
+                    <CurrencyAmount>1.00</CurrencyAmount>
                 </CODFeeDiscount>
                 <IsGift>false</IsGift>
                 <IsTransparency>true</IsTransparency>
                 <GiftMessageText>For you!</GiftMessageText>
                 <GiftWrapPrice>
                     <CurrencyCode>JPY</CurrencyCode>
-                    <Amount>1.99</Amount>
+                    <CurrencyAmount>1.99</CurrencyAmount>
                 </GiftWrapPrice>
                 <GiftWrapLevel>Classic</GiftWrapLevel>
                 <PriceDesignation>BusinessPrice</PriceDesignation>

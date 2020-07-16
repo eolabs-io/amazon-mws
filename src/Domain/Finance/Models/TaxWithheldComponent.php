@@ -19,8 +19,6 @@ class TaxWithheldComponent extends Model
 
     protected $hidden = ['pivot'];
 
-    protected $with = ['taxesWithheld'];
-
 	public function taxesWithheld()
 	{
 		return $this->belongsToMany(ChargeComponent::class);

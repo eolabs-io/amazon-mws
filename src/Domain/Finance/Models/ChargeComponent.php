@@ -20,8 +20,6 @@ class ChargeComponent extends Model
     
     protected $hidden = ['pivot'];
 
-    protected $with = ['chargeAmount'];
-
 	public function chargeAmount()
 	{
 		return $this->belongsTo(CurrencyAmount::class, 'charge_amount_id', 'id')->withDefault();

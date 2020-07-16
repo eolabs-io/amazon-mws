@@ -34,7 +34,7 @@ trait AssertsRetrochargeEvents
         $this->assertEquals($shippingTax['currency_code'], "INR");
         $this->assertEquals($shippingTax['currency_amount'], 0.1);
 
-        $retrochargeTaxWithheldComponentList = $this->retrochargeEvent->retrochargeTaxWithheldComponentList->toArray();
+        $retrochargeTaxWithheldComponentList = $this->retrochargeEvent->retrochargeTaxWithheldComponentList->load('taxesWithheld')->toArray();
         $this->assertEquals($retrochargeTaxWithheldComponentList[0]['tax_collection_model'], "MarketplaceFacilitator");
 
         $taxesWithheld = $retrochargeTaxWithheldComponentList[0]['taxes_withheld'][0];

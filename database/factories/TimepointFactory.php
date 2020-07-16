@@ -4,6 +4,7 @@
 
 use EolabsIo\AmazonMws\Domain\Shared\Models\Timepoint;
 use Faker\Generator as Faker;
+use Illuminate\Support\Carbon;
 
 $factory->define(Timepoint::class, function (Faker $faker) {
 	

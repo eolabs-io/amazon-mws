@@ -11,7 +11,7 @@
                 <QuantityOrdered>2</QuantityOrdered>
                 <ItemPrice>
                     <CurrencyCode>USD</CurrencyCode>
-                    <Amount>17.95</Amount>
+                    <CurrencyAmount>17.95</CurrencyAmount>
                 </ItemPrice>
                 <PromotionIds>
                     <PromotionId>FREESHIP</PromotionId>

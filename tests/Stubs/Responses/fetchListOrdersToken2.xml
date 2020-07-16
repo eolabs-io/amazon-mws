@@ -18,28 +18,28 @@
                 </ShippingAddress>
                 <OrderTotal>
                     <CurrencyCode>JPY</CurrencyCode>
-                    <Amount>1507.00</Amount>
+                    <CurrencyAmount>1507.00</CurrencyAmount>
                 </OrderTotal>
                 <NumberOfItemsShipped>0</NumberOfItemsShipped>
                 <NumberOfItemsUnshipped>1</NumberOfItemsUnshipped>
                 <PaymentExecutionDetail>
                     <PaymentExecutionDetailItem>
                         <Payment>
-                            <Amount>10.00</Amount>
+                            <CurrencyAmount>10.00</CurrencyAmount>
                             <CurrencyCode>JPY</CurrencyCode>
                         </Payment>
                         <PaymentMethod>PointsAccount</PaymentMethod>
                     </PaymentExecutionDetailItem>
                     <PaymentExecutionDetailItem>
                         <Payment>
-                            <Amount>317.00</Amount>
+                            <CurrencyAmount>317.00</CurrencyAmount>
                             <CurrencyCode>JPY</CurrencyCode>
                         </Payment>
                         <PaymentMethod>GC</PaymentMethod>
                     </PaymentExecutionDetailItem>
                     <PaymentExecutionDetailItem>
                         <Payment>
-                            <Amount>1180.00</Amount>
+                            <CurrencyAmount>1180.00</CurrencyAmount>
                             <CurrencyCode>JPY</CurrencyCode>
                         </Payment>
                         <PaymentMethod>COD</PaymentMethod>

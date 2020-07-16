@@ -9,18 +9,18 @@
                 <FundTransferStatus>Successful</FundTransferStatus>
                 <OriginalTotal>
                     <CurrencyCode>USD</CurrencyCode>
-                    <Amount>19.00</Amount>
+                    <CurrencyAmount>19.00</CurrencyAmount>
                 </OriginalTotal>
                 <ConvertedTotal>
                     <CurrencyCode>USD</CurrencyCode>
-                    <Amount>19.00</Amount>
+                    <CurrencyAmount>19.00</CurrencyAmount>
                 </ConvertedTotal>
                 <FundTransferDate>2014-09-09T01:30:00.000-06:00</FundTransferDate>
                 <TraceId>128311029381HSADJEXAMPLE</TraceId>
                 <AccountTail>1212</AccountTail>
                 <BeginningBalance>
                     <CurrencyCode>USD</CurrencyCode>
-                    <Amount>0.00</Amount>
+                    <CurrencyAmount>0.00</CurrencyAmount>
                 </BeginningBalance>
                 <FinancialEventGroupStart>2014-09-01T01:30:00.000-06:00</FinancialEventGroupStart>
                 <FinancialEventGroupEnd>2014-09-09T01:30:00.000-06:00</FinancialEventGroupEnd>

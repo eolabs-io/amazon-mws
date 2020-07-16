@@ -21,7 +21,7 @@
                 </ShippingAddress>
                 <OrderTotal>
                     <CurrencyCode>USD</CurrencyCode>
-                    <Amount>25.00</Amount>
+                    <CurrencyAmount>25.00</CurrencyAmount>
                 </OrderTotal>
                 <NumberOfItemsShipped>0</NumberOfItemsShipped>
                 <NumberOfItemsUnshipped>1</NumberOfItemsUnshipped>
@@ -67,7 +67,7 @@
                 </ShippingAddress>
                 <OrderTotal>
                     <CurrencyCode>BRL</CurrencyCode>
-                    <Amount>100.00</Amount>
+                    <CurrencyAmount>100.00</CurrencyAmount>
                 </OrderTotal>
                 <NumberOfItemsShipped>0</NumberOfItemsShipped>
                 <NumberOfItemsUnshipped>1</NumberOfItemsUnshipped>

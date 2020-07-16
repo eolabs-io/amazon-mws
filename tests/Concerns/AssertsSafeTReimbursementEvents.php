@@ -26,7 +26,7 @@ trait AssertsSafeTReimbursementEvents
         $this->assertEquals($this->safeTReimbursementEvent->reimbursedAmount->currency_amount, 5.67);
 
         $itemCharge = $this->safeTReimbursementEvent->safeTReimbursementItemList->first()
-        											->itemChargeList->first()
+        											->itemChargeList->load('chargeAmount')->first()
         											->toArray();
 
 		$this->assertEquals($itemCharge['charge_type'], "Discount");

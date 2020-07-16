@@ -55,7 +55,7 @@ class ProcessListOrderItemsResponse implements ShouldQueue
         $attributes = ['amazon_order_id' => data_get($this->results, 'AmazonOrderId'),
                        'order_item_id' => data_get($orderItemList, 'OrderItemId'),
                         ];
-        $values = $this->getFormatedOrderAttributes($orderItemList, new OrderItem);
+        $values = $this->getFormatedAttributes($orderItemList, new OrderItem);
 
         $orderItem = OrderItem::updateOrCreate($attributes, $values);
 
@@ -104,8 +104,8 @@ class ProcessListOrderItemsResponse implements ShouldQueue
             return;
         }
 
-        $values = $this->getFormatedOrderAttributes($pointsGrantedList, new PointsGranted);
-        $moneyValues = $this->getFormatedOrderAttributes(data_get($pointsGrantedList, 'PointsMonetaryValue'), new Money);
+        $values = $this->getFormatedAttributes($pointsGrantedList, new PointsGranted);
+        $moneyValues = $this->getFormatedAttributes(data_get($pointsGrantedList, 'PointsMonetaryValue'), new Money);
 
         $money = Money::create($moneyValues);
         $values['points_monetary_value_id'] = $money->id;
@@ -125,7 +125,7 @@ class ProcessListOrderItemsResponse implements ShouldQueue
             return;
         }
 
-        $values = $this->getFormatedOrderAttributes($productInfoList, new ProductInfo);
+        $values = $this->getFormatedAttributes($productInfoList, new ProductInfo);
 
         $productInfo = $orderItem->productInfo;
         $productInfo->fill($values)->save();
@@ -142,7 +142,7 @@ class ProcessListOrderItemsResponse implements ShouldQueue
             return;
         }
 
-        $values = $this->getFormatedOrderAttributes($itemPriceList, new Money);
+        $values = $this->getFormatedAttributes($itemPriceList, new Money);
 
         $itemPrice = $orderItem->itemPrice;
         $itemPrice->fill($values)->save();
@@ -159,7 +159,7 @@ class ProcessListOrderItemsResponse implements ShouldQueue
             return;
         }
 
-        $values = $this->getFormatedOrderAttributes($shippingPriceList, new Money);
+        $values = $this->getFormatedAttributes($shippingPriceList, new Money);
 
         $shippingPrice = $orderItem->shippingPrice;
         $shippingPrice->fill($values)->save();
@@ -176,7 +176,7 @@ class ProcessListOrderItemsResponse implements ShouldQueue
             return;
         }
 
-        $values = $this->getFormatedOrderAttributes($giftWrapPriceList, new Money);
+        $values = $this->getFormatedAttributes($giftWrapPriceList, new Money);
 
         $giftWrapPrice = $orderItem->giftWrapPrice;
         $giftWrapPrice->fill($values)->save();
@@ -193,7 +193,7 @@ class ProcessListOrderItemsResponse implements ShouldQueue
             return;
         }
 
-        $values = $this->getFormatedOrderAttributes($taxCollectionList, new TaxCollection);
+        $values = $this->getFormatedAttributes($taxCollectionList, new TaxCollection);
 
         $taxCollection = $orderItem->taxCollection;
         $taxCollection->fill($values)->save();
@@ -210,7 +210,7 @@ class ProcessListOrderItemsResponse implements ShouldQueue
             return;
         }
 
-        $values = $this->getFormatedOrderAttributes($itemTaxList, new Money);
+        $values = $this->getFormatedAttributes($itemTaxList, new Money);
 
         $itemTax = $orderItem->itemTax;
         $itemTax->fill($values)->save();
@@ -227,7 +227,7 @@ class ProcessListOrderItemsResponse implements ShouldQueue
             return;
         }
 
-        $values = $this->getFormatedOrderAttributes($shippingTaxList, new Money);
+        $values = $this->getFormatedAttributes($shippingTaxList, new Money);
 
         $shippingTax = $orderItem->ShippingTax;
         $shippingTax->fill($values)->save();
@@ -244,7 +244,7 @@ class ProcessListOrderItemsResponse implements ShouldQueue
             return;
         }
 
-        $values = $this->getFormatedOrderAttributes($giftWrapTaxList, new Money);
+        $values = $this->getFormatedAttributes($giftWrapTaxList, new Money);
 
         $giftWrapTax = $orderItem->giftWrapTax;
         $giftWrapTax->fill($values)->save();
@@ -261,7 +261,7 @@ class ProcessListOrderItemsResponse implements ShouldQueue
             return;
         }
 
-        $values = $this->getFormatedOrderAttributes($shippingDiscountList, new Money);
+        $values = $this->getFormatedAttributes($shippingDiscountList, new Money);
 
         $shippingDiscount = $orderItem->shippingDiscount;
         $shippingDiscount->fill($values)->save();
@@ -278,7 +278,7 @@ class ProcessListOrderItemsResponse implements ShouldQueue
             return;
         }
 
-        $values = $this->getFormatedOrderAttributes($shippingDiscountTaxList, new Money);
+        $values = $this->getFormatedAttributes($shippingDiscountTaxList, new Money);
 
         $shippingDiscountTax = $orderItem->shippingDiscountTax;
         $shippingDiscountTax->fill($values)->save();
@@ -295,7 +295,7 @@ class ProcessListOrderItemsResponse implements ShouldQueue
             return;
         }
 
-        $values = $this->getFormatedOrderAttributes($promotionDiscountList, new Money);
+        $values = $this->getFormatedAttributes($promotionDiscountList, new Money);
 
         $promotionDiscount = $orderItem->promotionDiscount;
         $promotionDiscount->fill($values)->save();
@@ -312,7 +312,7 @@ class ProcessListOrderItemsResponse implements ShouldQueue
             return;
         }
 
-        $values = $this->getFormatedOrderAttributes($promotionDiscountTaxList, new Money);
+        $values = $this->getFormatedAttributes($promotionDiscountTaxList, new Money);
 
         $promotionDiscountTax = $orderItem->promotionDiscountTax;
         $promotionDiscountTax->fill($values)->save();
@@ -329,7 +329,7 @@ class ProcessListOrderItemsResponse implements ShouldQueue
             return;
         }
 
-        $values = $this->getFormatedOrderAttributes($codFeeList, new Money);
+        $values = $this->getFormatedAttributes($codFeeList, new Money);
 
         $codFee = $orderItem->codFee;
         $codFee->fill($values)->save();
@@ -346,7 +346,7 @@ class ProcessListOrderItemsResponse implements ShouldQueue
             return;
         }
 
-        $values = $this->getFormatedOrderAttributes($codFeeDiscountList, new Money);
+        $values = $this->getFormatedAttributes($codFeeDiscountList, new Money);
 
         $codFeeDiscount = $orderItem->codFeeDiscount;
         $codFeeDiscount->fill($values)->save();

@@ -20,8 +20,6 @@ class FeeComponent extends Model
 
     protected $hidden = ['pivot'];
 
-    protected $with = ['feeAmount'];
-
 	public function feeAmount()
 	{
 		return $this->belongsTo(CurrencyAmount::class, 'fee_amount_id', 'id')->withDefault();

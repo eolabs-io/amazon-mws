@@ -36,7 +36,7 @@ class ProcessListFinancialEventGroupsResponseTest extends TestCase
 
         $this->assertEquals($financialEventGroup->processing_status, "Closed");
         $this->assertEquals($financialEventGroup->fund_transfer_status, "Successful");
-        $this->assertEquals($financialEventGroup->originalTotal->amount, 19.00);
+        $this->assertEquals($financialEventGroup->originalTotal->currency_amount, 19.00);
         $this->assertEquals($financialEventGroup->originalTotal->currency_code, "USD");
         
     }

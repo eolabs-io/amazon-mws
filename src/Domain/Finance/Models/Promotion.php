@@ -20,8 +20,6 @@ class Promotion extends Model
 
     protected $hidden = ['pivot'];
 
-    protected $with = ['promotionAmount'];
-
 	public function promotionAmount()
 	{
 		return $this->belongsTo(CurrencyAmount::class, 'promotion_amount_id', 'id')->withDefault();

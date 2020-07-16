@@ -58,7 +58,7 @@ class ProcessListOrdersResponse implements ShouldQueue
     {
         $store_id = data_get($this->results, 'store_id');
         $attributes = ['amazon_order_id' => data_get($orderList, 'AmazonOrderId')];
-        $values = array_merge( $this->getFormatedOrderAttributes($orderList, new Order), compact('store_id') );
+        $values = array_merge( $this->getFormatedAttributes($orderList, new Order), compact('store_id') );
 
         $order = Order::updateOrCreate($attributes, $values);
 
@@ -78,7 +78,7 @@ class ProcessListOrdersResponse implements ShouldQueue
             return;
         }
 
-        $values = $this->getFormatedOrderAttributes($shippingAddressList, new Address);
+        $values = $this->getFormatedAttributes($shippingAddressList, new Address);
 
         $shippingAddress = $order->shippingAddress;
         $shippingAddress->fill($values)->save();
@@ -97,7 +97,7 @@ class ProcessListOrdersResponse implements ShouldQueue
             return;
         }
 
-        $values = $this->getFormatedOrderAttributes($orderTotalList, new Money);
+        $values = $this->getFormatedAttributes($orderTotalList, new Money);
 
         $orderTotal = $order->orderTotal;
         $orderTotal->fill($values)->save();
@@ -119,8 +119,8 @@ class ProcessListOrdersResponse implements ShouldQueue
 
         foreach ($paymentExecutionDetailList as $item) {
 
-            $values = $this->getFormatedOrderAttributes($item, new PaymentExecutionDetailItem);
-            $moneyValues = $this->getFormatedOrderAttributes(data_get($item, 'Payment'), new Money);
+            $values = $this->getFormatedAttributes($item, new PaymentExecutionDetailItem);
+            $moneyValues = $this->getFormatedAttributes(data_get($item, 'Payment'), new Money);
             
             $payment = Money::create($moneyValues);
             $values['money_id'] = $payment->id;
@@ -158,7 +158,7 @@ class ProcessListOrdersResponse implements ShouldQueue
             return;
         }
 
-        $values = $this->getFormatedOrderAttributes($buyerTaxInfoList, new BuyerTaxInfo);
+        $values = $this->getFormatedAttributes($buyerTaxInfoList, new BuyerTaxInfo);
 
         $buyerTaxInfo = $order->buyerTaxInfo()->create($values);
         
@@ -166,7 +166,7 @@ class ProcessListOrdersResponse implements ShouldQueue
 
         foreach($taxClassificationsValues as $taxClassificationsValue) {
             TaxClassification::create(array_merge(['buyer_tax_info_id' => $buyerTaxInfo->id],
-                                          $this->getFormatedOrderAttributes($taxClassificationsValue, new TaxClassification)));
+                                          $this->getFormatedAttributes($taxClassificationsValue, new TaxClassification)));
 
         }
 

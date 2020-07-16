@@ -27,7 +27,7 @@ trait AssertsServiceFeeEvents
         $this->assertEquals($this->serviceFeeEvent->seller_sku, "SKJ-DFSAJKDS");
         $this->assertEquals($this->serviceFeeEvent->asin, "BTYFS63KSD");
 
-        $feeList = $this->serviceFeeEvent->feeList->toArray();
+        $feeList = $this->serviceFeeEvent->feeList->load('feeAmount')->toArray();
         $this->assertEquals($feeList[0]['fee_type'], "ImagingServicesFee");
         $this->assertEquals($feeList[0]['fee_amount']['currency_amount'], 6.78);
 

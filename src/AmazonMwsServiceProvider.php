@@ -2,6 +2,8 @@
 
 namespace EolabsIo\AmazonMws;
 
+use EolabsIo\AmazonMws\Domain\Finance\Command\FinancialEventCommand;
+use EolabsIo\AmazonMws\Domain\Finance\Command\FinancialEventGroupCommand;
 use EolabsIo\AmazonMws\Domain\Finance\ListFinancialEventGroups;
 use EolabsIo\AmazonMws\Domain\Finance\ListFinancialEvents;
 use EolabsIo\AmazonMws\Domain\Finance\Providers\EventServiceProvider as FinanceEventServiceProvider;
@@ -36,7 +38,8 @@ class AmazonMwsServiceProvider extends ServiceProvider
                 OrdersCommand::class,
                 OrderItemsCommand::class,
                 InventoryCommand::class,
-                // FinanceCommand::class,
+                FinancialEventCommand::class,
+                FinancialEventGroupCommand::class,
             ]);
         }
     }

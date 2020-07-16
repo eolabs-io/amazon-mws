@@ -13,10 +13,11 @@ trait AssertsShipmentEvents
     /** @var EolabsIo\AmazonMws\Domain\Finance\Models\ShipmentEvent */
     public $shipmentEvent;
 
+
     public function assertShipmentEventResponse()
     {
         $shipmentEvent = ShipmentEvent::where(["seller_order_id" => "105-0457358-1245022"])
-                                            ->first();
+                                    ->first();
 
         $this->assertSeesShipmentEvent($shipmentEvent);
     }
@@ -24,7 +25,7 @@ trait AssertsShipmentEvents
     public function assertRefundEventResponse()
     {
         $refundEvent = RefundEvent::where(["seller_order_id" => "105-0457358-1245022"])
-                                            ->first();
+                                    ->first();
 
         $this->assertSeesShipmentEvent($refundEvent);
     }
@@ -32,7 +33,7 @@ trait AssertsShipmentEvents
     public function assertGuaranteeClaimEventResponse()
     {
         $guaranteeClaimEvent = GuaranteeClaimEvent::where(["seller_order_id" => "105-0457358-1245022"])
-                                            ->first();
+                                    ->first();
 
         $this->assertSeesShipmentEvent($guaranteeClaimEvent);
     }
@@ -40,7 +41,7 @@ trait AssertsShipmentEvents
     public function assertChargebackEventResponse()
     {
         $chargebackEvent = ChargebackEvent::where(["seller_order_id" => "105-0457358-1245022"])
-                                            ->first();
+                                        ->first();
 
         $this->assertSeesShipmentEvent($chargebackEvent);
     }
@@ -67,7 +68,7 @@ trait AssertsShipmentEvents
 
     public function assertOrderCharges()
     {
-        $orderCharges = $this->shipmentEvent->orderChargeList->toArray();
+        $orderCharges = $this->shipmentEvent->orderChargeList->load('chargeAmount')->toArray();
 
         $this->assertEquals($orderCharges[0]['charge_type'], "Principal");
         $this->assertEquals($orderCharges[1]['charge_amount']['currency_amount'], 25.99);
@@ -75,7 +76,7 @@ trait AssertsShipmentEvents
 
     public function assertOrderChargeAdjustments()
     {
-        $orderChargeAdjustments = $this->shipmentEvent->orderChargeAdjustmentList->toArray();
+        $orderChargeAdjustments = $this->shipmentEvent->orderChargeAdjustmentList->load('chargeAmount')->toArray();
 
         $this->assertEquals($orderChargeAdjustments[0]['charge_amount']['currency_amount'], 2.99);
         $this->assertEquals($orderChargeAdjustments[1]['charge_amount']['currency_amount'], 1.99);
@@ -83,7 +84,7 @@ trait AssertsShipmentEvents
 
     public function assertShipmentFees()
     {
-        $shipmentFees = $this->shipmentEvent->shipmentFeeList->toArray();
+        $shipmentFees = $this->shipmentEvent->shipmentFeeList->load('feeAmount')->toArray();
 
         $this->assertEquals($shipmentFees[0]['fee_amount']['currency_amount'], 4.99);
         $this->assertEquals($shipmentFees[1]['fee_amount']['currency_amount'], 3.99);   
@@ -91,7 +92,7 @@ trait AssertsShipmentEvents
 
     public function assertShipmentFeeAdjustments()
     {
-        $shipmentFeeAdjustments = $this->shipmentEvent->shipmentFeeAdjustmentList->toArray();
+        $shipmentFeeAdjustments = $this->shipmentEvent->shipmentFeeAdjustmentList->load('feeAmount')->toArray();
 
         $this->assertEquals($shipmentFeeAdjustments[0]['fee_amount']['currency_amount'], 0.99);
         $this->assertEquals($shipmentFeeAdjustments[1]['fee_amount']['currency_amount'], 2.99); 
@@ -99,7 +100,7 @@ trait AssertsShipmentEvents
 
     public function assertOrderFees()
     {
-        $orderFees = $this->shipmentEvent->orderFeeList->toArray();
+        $orderFees = $this->shipmentEvent->orderFeeList->load('feeAmount')->toArray();
         
         $this->assertEquals($orderFees[0]['fee_amount']['currency_amount'], 4.90);
         $this->assertEquals($orderFees[1]['fee_amount']['currency_amount'], 3.19);  
@@ -107,7 +108,7 @@ trait AssertsShipmentEvents
 
     public function assertOrderFeeAdjustments()
     {
-        $orderFeeAdjustments = $this->shipmentEvent->orderFeeAdjustmentList->toArray();
+        $orderFeeAdjustments = $this->shipmentEvent->orderFeeAdjustmentList->load('feeAmount')->toArray();
 
         $this->assertEquals($orderFeeAdjustments[0]['fee_amount']['currency_amount'], 1.19);
         $this->assertEquals($orderFeeAdjustments[1]['fee_amount']['currency_amount'], 2.69); 
@@ -115,7 +116,7 @@ trait AssertsShipmentEvents
 
     public function assertDirectPayments()
     {
-        $directPayments = $this->shipmentEvent->directPaymentList->toArray();
+        $directPayments = $this->shipmentEvent->directPaymentList->load('directPaymentAmount')->toArray();
 
         $this->assertEquals($directPayments[0]['direct_payment_type'], 'StoredValueCardRevenue');
         $this->assertEquals($directPayments[0]['direct_payment_amount']['currency_amount'], 2.99); 
@@ -126,7 +127,16 @@ trait AssertsShipmentEvents
     public function assertShipmentItems()
     {
         $shipmentItems = $this->shipmentEvent->shipmentItemList
-                                       ->load(['itemChargeList', 'itemTaxWithheldList', 'itemChargeAdjustmentList','itemFeeList', 'itemFeeAdjustmentList', 'promotionList', 'promotionAdjustmentList', 'costOfPointsGranted', 'costOfPointsReturned' ])
+                                       ->load(['itemChargeList.chargeAmount', 
+                                               'itemTaxWithheldList.taxesWithheld.chargeAmount', 
+                                               'itemChargeAdjustmentList.chargeAmount',
+                                               'itemFeeList.feeAmount', 
+                                               'itemFeeAdjustmentList.feeAmount', 
+                                               'promotionList.promotionAmount', 
+                                               'promotionAdjustmentList.promotionAmount', 
+                                               'costOfPointsGranted', 
+                                               'costOfPointsReturned', ]
+                                        )
                                        ->toArray();
 
        $this->assertShipmentItem($shipmentItems);
@@ -136,7 +146,15 @@ trait AssertsShipmentEvents
     public function assertShipmentItemAdjustments()
     {
        $shipmentItemAdjustments = $this->shipmentEvent->shipmentItemAdjustmentList
-                                       ->load(['itemChargeList', 'itemTaxWithheldList', 'itemChargeAdjustmentList','itemFeeList', 'itemFeeAdjustmentList', 'promotionList', 'promotionAdjustmentList', 'costOfPointsGranted', 'costOfPointsReturned' ])
+                                       ->load(['itemChargeList.chargeAmount', 
+                                               'itemTaxWithheldList.taxesWithheld.chargeAmount', 
+                                               'itemChargeAdjustmentList.chargeAmount',
+                                               'itemFeeList.feeAmount', 
+                                               'itemFeeAdjustmentList.feeAmount', 
+                                               'promotionList.promotionAmount', 
+                                               'promotionAdjustmentList.promotionAmount', 
+                                               'costOfPointsGranted', 
+                                               'costOfPointsReturned',])
                                        ->toArray();
 
         $this->assertShipmentItem($shipmentItemAdjustments);

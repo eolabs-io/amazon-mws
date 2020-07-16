@@ -19,7 +19,6 @@ class PayWithAmazonEventTest extends BaseModelTest
     {
         $payWithAmazonEvent = factory(PayWithAmazonEvent::class)->create(['charge_id' => null]);
         $charge = factory(ChargeComponent::class)->create();
-        $charge->load('chargeAmount');
 
         $payWithAmazonEvent->charge()->associate($charge);
 
@@ -31,7 +30,6 @@ class PayWithAmazonEventTest extends BaseModelTest
     {
         $payWithAmazonEvent = factory(PayWithAmazonEvent::class)->create();
         $feeList = factory(FeeComponent::class, 3)->create();
-        $feeList->load('feeAmount');
 
         $payWithAmazonEvent->feeList()->toggle($feeList);
 
