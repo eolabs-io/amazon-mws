@@ -9,7 +9,7 @@ class FetchListFinancialEventsListener
 {
     public function handle(FetchListFinancialEvents $event)
     {
-    	$fetchListFinancialEvents = $event->fetchListFinancialEvents;
-    	PerformFetchListFinancialEvents::dispatch($fetchListFinancialEvents)->onQueue('list-financial-events');
+    	$listFinancialEvents = $event->listFinancialEvents;
+    	PerformFetchListFinancialEvents::dispatch($listFinancialEvents)->onQueue('list-financial-events');
     }
 }
