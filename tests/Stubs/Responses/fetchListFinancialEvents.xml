@@ -9,22 +9,22 @@
           <ExtensionLength>5</ExtensionLength>
           <PostedDate>2016-11-21T16:18:15.000Z</PostedDate>
           <RentalChargeList>
-            <RentalCharge>
+            <ChargeComponent>
               <ChargeType>Principal</ChargeType>
               <ChargeAmount>
                 <CurrencyCode>USD</CurrencyCode>
                 <CurrencyAmount>1.46</CurrencyAmount>
               </ChargeAmount>
-            </RentalCharge>
+            </ChargeComponent>
           </RentalChargeList>
           <RentalFeeList>
-            <RentalFee>
+            <FeeComponent>
               <FeeType>RefundCommission</FeeType>
               <FeeAmount>
                 <CurrencyCode>USD</CurrencyCode>
                 <CurrencyAmount>1.16</CurrencyAmount>
               </FeeAmount>
-            </RentalFee>
+            </FeeComponent>
           </RentalFeeList>
           <MarketplaceName>eNameMarketplac</MarketplaceName>
           <RentalInitialValue>
@@ -36,16 +36,18 @@
             <CurrencyAmount>1.16</CurrencyAmount>
           </RentalReimbursement>
           <RentalTaxWithheldList>
-            <RentalTaxWithheld>
+            <TaxWithheldComponent>
               <TaxCollectionModel>MarketplaceFacilitator</TaxCollectionModel>
               <TaxesWithheld>
-                <ChargeType>Discount</ChargeType>
-                <ChargeAmount>
-                  <CurrencyCode>USD</CurrencyCode>
-                  <CurrencyAmount>6.45</CurrencyAmount>
-                </ChargeAmount>
+                <ChargeComponent>
+                  <ChargeType>Discount</ChargeType>
+                  <ChargeAmount>
+                    <CurrencyCode>USD</CurrencyCode>
+                    <CurrencyAmount>6.45</CurrencyAmount>
+                  </ChargeAmount>
+                </ChargeComponent>
               </TaxesWithheld>
-            </RentalTaxWithheld>
+            </TaxWithheldComponent>
           </RentalTaxWithheldList>
         </RentalTransactionEvent>
       </RentalTransactionEventList>
@@ -122,13 +124,13 @@
           <AmazonOrderId>991-0457358-1247562</AmazonOrderId>
           <FeeReason>Fee Reason</FeeReason>
           <FeeList>
-            <Fee>
+            <FeeComponent>
               <FeeType>ImagingServicesFee</FeeType>
               <FeeAmount>
                 <CurrencyCode>USD</CurrencyCode>
                 <CurrencyAmount>6.78</CurrencyAmount>
               </FeeAmount>
-            </Fee>
+            </FeeComponent>
           </FeeList>
           <SellerSKU>SKJ-DFSAJKDS</SellerSKU>
           <FnSKU>X54653443</FnSKU>
@@ -234,100 +236,100 @@
       <ShipmentEventList>
         <ShipmentEvent>
           <OrderChargeList>
-            <OrderCharge>
+            <ChargeComponent>
               <ChargeType>Principal</ChargeType>
               <ChargeAmount>
                 <CurrencyAmount>25.99</CurrencyAmount>
                 <CurrencyCode>USD</CurrencyCode>
               </ChargeAmount>
-            </OrderCharge>
-            <OrderCharge>
+            </ChargeComponent>
+            <ChargeComponent>
               <ChargeType>Principal</ChargeType>
               <ChargeAmount>
                 <CurrencyAmount>25.99</CurrencyAmount>
                 <CurrencyCode>USD</CurrencyCode>
               </ChargeAmount>
-            </OrderCharge>
+            </ChargeComponent>
           </OrderChargeList>
           <OrderChargeAdjustmentList>
-            <OrderChargeAdjustment>
+            <ChargeComponent>
               <ChargeType>Principal</ChargeType>
               <ChargeAmount>
                 <CurrencyAmount>2.99</CurrencyAmount>
                 <CurrencyCode>USD</CurrencyCode>
               </ChargeAmount>
-            </OrderChargeAdjustment>
-            <OrderChargeAdjustment>
+            </ChargeComponent>
+            <ChargeComponent>
               <ChargeType>Principal</ChargeType>
               <ChargeAmount>
                 <CurrencyAmount>1.99</CurrencyAmount>
                 <CurrencyCode>USD</CurrencyCode>
               </ChargeAmount>
-            </OrderChargeAdjustment>
+            </ChargeComponent>
           </OrderChargeAdjustmentList>
           <ShipmentFeeList>
-            <ShipmentFee>
+            <FeeComponent>
               <FeeType>Commission</FeeType>
               <FeeAmount>
                 <CurrencyAmount>4.99</CurrencyAmount>
                 <CurrencyCode>USD</CurrencyCode>
               </FeeAmount>
-            </ShipmentFee>
-            <ShipmentFee>
+            </FeeComponent>
+            <FeeComponent>
               <FeeType>Subscription</FeeType>
               <FeeAmount>
                 <CurrencyAmount>3.99</CurrencyAmount>
                 <CurrencyCode>USD</CurrencyCode>
               </FeeAmount>
-            </ShipmentFee>
+            </FeeComponent>
           </ShipmentFeeList>
           <ShipmentFeeAdjustmentList>
-            <ShipmentFeeAdjustment>
+            <FeeComponent>
               <FeeType>Commission</FeeType>
               <FeeAmount>
                 <CurrencyAmount>0.99</CurrencyAmount>
                 <CurrencyCode>USD</CurrencyCode>
               </FeeAmount>
-            </ShipmentFeeAdjustment>
-            <ShipmentFeeAdjustment>
+            </FeeComponent>
+            <FeeComponent>
               <FeeType>Subscription</FeeType>
               <FeeAmount>
                 <CurrencyAmount>2.99</CurrencyAmount>
                 <CurrencyCode>USD</CurrencyCode>
               </FeeAmount>
-            </ShipmentFeeAdjustment>
+            </FeeComponent>
           </ShipmentFeeAdjustmentList>
           <OrderFeeList>
-            <OrderFee>
+            <FeeComponent>
               <FeeType>Commission</FeeType>
               <FeeAmount>
                 <CurrencyAmount>4.90</CurrencyAmount>
                 <CurrencyCode>USD</CurrencyCode>
               </FeeAmount>
-            </OrderFee>
-            <OrderFee>
+            </FeeComponent>
+            <FeeComponent>
               <FeeType>Subscription</FeeType>
               <FeeAmount>
                 <CurrencyAmount>3.19</CurrencyAmount>
                 <CurrencyCode>USD</CurrencyCode>
               </FeeAmount>
-            </OrderFee>
+            </FeeComponent>
           </OrderFeeList>
           <OrderFeeAdjustmentList>
-            <OrderFeeAdjustment>
+            <FeeComponent>
               <FeeType>Commission</FeeType>
               <FeeAmount>
                 <CurrencyAmount>1.19</CurrencyAmount>
                 <CurrencyCode>USD</CurrencyCode>
               </FeeAmount>
-            </OrderFeeAdjustment>
-            <OrderFeeAdjustment>
+            </FeeComponent>
+            <FeeComponent>
               <FeeType>Subscription</FeeType>
               <FeeAmount>
                 <CurrencyAmount>2.69</CurrencyAmount>
                 <CurrencyCode>USD</CurrencyCode>
               </FeeAmount>
-            </OrderFeeAdjustment>
+            </FeeComponent>
           </OrderFeeAdjustmentList>
           <DirectPaymentList>
             <DirectPayment>
@@ -348,90 +350,94 @@
           <ShipmentItemList>
             <ShipmentItem>
               <ItemChargeList>
-                <ItemCharge>
+                <ChargeComponent>
                   <ChargeType>_Principal</ChargeType>
                   <ChargeAmount>
                     <CurrencyAmount>26.99</CurrencyAmount>
                     <CurrencyCode>USD</CurrencyCode>
                   </ChargeAmount>
-                </ItemCharge>
-                <ItemCharge>
+                </ChargeComponent>
+                <ChargeComponent>
                   <ChargeType>Tax</ChargeType>
                   <ChargeAmount>
                     <CurrencyAmount>0.0</CurrencyAmount>
                     <CurrencyCode>USD</CurrencyCode>
                   </ChargeAmount>
-                </ItemCharge>
+                </ChargeComponent>
               </ItemChargeList>
               <ItemTaxWithheldList>
-                <ItemTaxWithheld>
+                <TaxWithheldComponent>
                   <TaxCollectionModel>MarketplaceFacilitator</TaxCollectionModel>
                   <TaxesWithheld>
-                    <ChargeType>Discount</ChargeType>
-                    <ChargeAmount>
-                      <CurrencyCode>USD</CurrencyCode>
-                      <CurrencyAmount>6.45</CurrencyAmount>
-                    </ChargeAmount>
+                    <ChargeComponent>
+                      <ChargeType>Discount</ChargeType>
+                      <ChargeAmount>
+                        <CurrencyCode>USD</CurrencyCode>
+                        <CurrencyAmount>6.45</CurrencyAmount>
+                      </ChargeAmount>
+                    </ChargeComponent>
                   </TaxesWithheld>
-                </ItemTaxWithheld>
-                <ItemTaxWithheld>
+                </TaxWithheldComponent>
+                <TaxWithheldComponent>
                   <TaxCollectionModel>Standard</TaxCollectionModel>
                   <TaxesWithheld>
-                    <ChargeType>TaxDiscount</ChargeType>
-                    <ChargeAmount>
-                      <CurrencyCode>USD</CurrencyCode>
-                      <CurrencyAmount>0.41</CurrencyAmount>
-                    </ChargeAmount>
+                    <ChargeComponent>
+                      <ChargeType>TaxDiscount</ChargeType>
+                      <ChargeAmount>
+                        <CurrencyCode>USD</CurrencyCode>
+                        <CurrencyAmount>0.41</CurrencyAmount>
+                      </ChargeAmount>
+                    </ChargeComponent>
                   </TaxesWithheld>
-                </ItemTaxWithheld>
+                </TaxWithheldComponent>
               </ItemTaxWithheldList>
               <ItemChargeAdjustmentList>
-                <ItemChargeAdjustment>
+                <ChargeComponent>
                   <ChargeType>_Principal</ChargeType>
                   <ChargeAmount>
                     <CurrencyAmount>26.99</CurrencyAmount>
                     <CurrencyCode>USD</CurrencyCode>
                   </ChargeAmount>
-                </ItemChargeAdjustment>
-                <ItemChargeAdjustment>
+                </ChargeComponent>
+                <ChargeComponent>
                   <ChargeType>Tax</ChargeType>
                   <ChargeAmount>
                     <CurrencyAmount>0.0</CurrencyAmount>
                     <CurrencyCode>USD</CurrencyCode>
                   </ChargeAmount>
-                </ItemChargeAdjustment>
+                </ChargeComponent>
               </ItemChargeAdjustmentList>
               <ItemFeeList>
-                <ItemFee>
+                <FeeComponent>
                   <FeeType>ShippingChargeback</FeeType>
                   <FeeAmount>
                     <CurrencyAmount>0.0</CurrencyAmount>
                     <CurrencyCode>USD</CurrencyCode>
                   </FeeAmount>
-                </ItemFee>
-                <ItemFee>
+                </FeeComponent>
+                <FeeComponent>
                   <FeeType>VariableClosingFee</FeeType>
                   <FeeAmount>
                     <CurrencyAmount>0.0</CurrencyAmount>
                     <CurrencyCode>USD</CurrencyCode>
                   </FeeAmount>
-                </ItemFee>
+                </FeeComponent>
               </ItemFeeList>
               <ItemFeeAdjustmentList>
-                <ItemFeeAdjustment>
+                <FeeComponent>
                   <FeeType>VariableClosingFee</FeeType>
                   <FeeAmount>
                     <CurrencyAmount>0.0</CurrencyAmount>
                     <CurrencyCode>USD</CurrencyCode>
                   </FeeAmount>
-                </ItemFeeAdjustment>
-                <ItemFeeAdjustment>
+                </FeeComponent>
+                <FeeComponent>
                   <FeeType>ShippingChargeback</FeeType>
                   <FeeAmount>
                     <CurrencyAmount>0.01</CurrencyAmount>
                     <CurrencyCode>USD</CurrencyCode>
                   </FeeAmount>
-                </ItemFeeAdjustment>
+                </FeeComponent>
               </ItemFeeAdjustmentList>
               <PromotionList>
                 <Promotion>
@@ -485,42 +491,46 @@
           <ShipmentItemAdjustmentList>
             <ShipmentItem>
               <ItemChargeList>
-                <ItemCharge>
+                <ChargeComponent>
                   <ChargeType>_Principal</ChargeType>
                   <ChargeAmount>
                     <CurrencyAmount>26.99</CurrencyAmount>
                     <CurrencyCode>USD</CurrencyCode>
                   </ChargeAmount>
-                </ItemCharge>
-                <ItemCharge>
+                </ChargeComponent>
+                <ChargeComponent>
                   <ChargeType>Tax</ChargeType>
                   <ChargeAmount>
                     <CurrencyAmount>0.0</CurrencyAmount>
                     <CurrencyCode>USD</CurrencyCode>
                   </ChargeAmount>
-                </ItemCharge>
+                </ChargeComponent>
               </ItemChargeList>
               <ItemTaxWithheldList>
-                <ItemTaxWithheld>
+                <TaxWithheldComponent>
                   <TaxCollectionModel>MarketplaceFacilitator</TaxCollectionModel>
                   <TaxesWithheld>
-                    <ChargeType>Discount</ChargeType>
-                    <ChargeAmount>
-                      <CurrencyCode>USD</CurrencyCode>
-                      <CurrencyAmount>6.45</CurrencyAmount>
-                    </ChargeAmount>
+                    <ChargeComponent>
+                      <ChargeType>Discount</ChargeType>
+                      <ChargeAmount>
+                        <CurrencyCode>USD</CurrencyCode>
+                        <CurrencyAmount>6.45</CurrencyAmount>
+                      </ChargeAmount>
+                    </ChargeComponent>
                   </TaxesWithheld>
-                </ItemTaxWithheld>
-                <ItemTaxWithheld>
+                </TaxWithheldComponent>
+                <TaxWithheldComponent>
                   <TaxCollectionModel>Standard</TaxCollectionModel>
                   <TaxesWithheld>
-                    <ChargeType>TaxDiscount</ChargeType>
-                    <ChargeAmount>
-                      <CurrencyCode>USD</CurrencyCode>
-                      <CurrencyAmount>0.41</CurrencyAmount>
-                    </ChargeAmount>
+                    <ChargeComponent>
+                      <ChargeType>TaxDiscount</ChargeType>
+                      <ChargeAmount>
+                        <CurrencyCode>USD</CurrencyCode>
+                        <CurrencyAmount>0.41</CurrencyAmount>
+                      </ChargeAmount>
+                    </ChargeComponent>
                   </TaxesWithheld>
-                </ItemTaxWithheld>
+                </TaxWithheldComponent>
               </ItemTaxWithheldList>
               <ItemChargeAdjustmentList>
                 <ItemChargeAdjustment>
@@ -626,102 +636,102 @@
         </ShipmentEvent>
       </ShipmentEventList>
       <RefundEventList>
-        <RefundEvent>
+        <ShipmentEvent>
           <OrderChargeList>
-            <OrderCharge>
+            <ChargeComponent>
               <ChargeType>Principal</ChargeType>
               <ChargeAmount>
                 <CurrencyAmount>25.99</CurrencyAmount>
                 <CurrencyCode>USD</CurrencyCode>
               </ChargeAmount>
-            </OrderCharge>
-            <OrderCharge>
+            </ChargeComponent>
+            <ChargeComponent>
               <ChargeType>Principal</ChargeType>
               <ChargeAmount>
                 <CurrencyAmount>25.99</CurrencyAmount>
                 <CurrencyCode>USD</CurrencyCode>
               </ChargeAmount>
-            </OrderCharge>
+            </ChargeComponent>
           </OrderChargeList>
           <OrderChargeAdjustmentList>
-            <OrderChargeAdjustment>
+            <ChargeComponent>
               <ChargeType>Principal</ChargeType>
               <ChargeAmount>
                 <CurrencyAmount>2.99</CurrencyAmount>
                 <CurrencyCode>USD</CurrencyCode>
               </ChargeAmount>
-            </OrderChargeAdjustment>
-            <OrderChargeAdjustment>
+            </ChargeComponent>
+            <ChargeComponent>
               <ChargeType>Principal</ChargeType>
               <ChargeAmount>
                 <CurrencyAmount>1.99</CurrencyAmount>
                 <CurrencyCode>USD</CurrencyCode>
               </ChargeAmount>
-            </OrderChargeAdjustment>
+            </ChargeComponent>
           </OrderChargeAdjustmentList>
           <ShipmentFeeList>
-            <ShipmentFee>
+            <FeeComponent>
               <FeeType>Commission</FeeType>
               <FeeAmount>
                 <CurrencyAmount>4.99</CurrencyAmount>
                 <CurrencyCode>USD</CurrencyCode>
               </FeeAmount>
-            </ShipmentFee>
-            <ShipmentFee>
+            </FeeComponent>
+            <FeeComponent>
               <FeeType>Subscription</FeeType>
               <FeeAmount>
                 <CurrencyAmount>3.99</CurrencyAmount>
                 <CurrencyCode>USD</CurrencyCode>
               </FeeAmount>
-            </ShipmentFee>
+            </FeeComponent>
           </ShipmentFeeList>
           <ShipmentFeeAdjustmentList>
-            <ShipmentFeeAdjustment>
+            <FeeComponent>
               <FeeType>Commission</FeeType>
               <FeeAmount>
                 <CurrencyAmount>0.99</CurrencyAmount>
                 <CurrencyCode>USD</CurrencyCode>
               </FeeAmount>
-            </ShipmentFeeAdjustment>
-            <ShipmentFeeAdjustment>
+            </FeeComponent>
+            <FeeComponent>
               <FeeType>Subscription</FeeType>
               <FeeAmount>
                 <CurrencyAmount>2.99</CurrencyAmount>
                 <CurrencyCode>USD</CurrencyCode>
               </FeeAmount>
-            </ShipmentFeeAdjustment>
+            </FeeComponent>
           </ShipmentFeeAdjustmentList>
           <OrderFeeList>
-            <OrderFee>
+            <FeeComponent>
               <FeeType>Commission</FeeType>
               <FeeAmount>
                 <CurrencyAmount>4.90</CurrencyAmount>
                 <CurrencyCode>USD</CurrencyCode>
               </FeeAmount>
-            </OrderFee>
-            <OrderFee>
+            </FeeComponent>
+            <FeeComponent>
               <FeeType>Subscription</FeeType>
               <FeeAmount>
                 <CurrencyAmount>3.19</CurrencyAmount>
                 <CurrencyCode>USD</CurrencyCode>
               </FeeAmount>
-            </OrderFee>
+            </FeeComponent>
           </OrderFeeList>
           <OrderFeeAdjustmentList>
-            <OrderFeeAdjustment>
+            <FeeComponent>
               <FeeType>Commission</FeeType>
               <FeeAmount>
                 <CurrencyAmount>1.19</CurrencyAmount>
                 <CurrencyCode>USD</CurrencyCode>
               </FeeAmount>
-            </OrderFeeAdjustment>
-            <OrderFeeAdjustment>
+            </FeeComponent>
+            <FeeComponent>
               <FeeType>Subscription</FeeType>
               <FeeAmount>
                 <CurrencyAmount>2.69</CurrencyAmount>
                 <CurrencyCode>USD</CurrencyCode>
               </FeeAmount>
-            </OrderFeeAdjustment>
+            </FeeComponent>
           </OrderFeeAdjustmentList>
           <DirectPaymentList>
             <DirectPayment>
@@ -742,90 +752,94 @@
           <ShipmentItemList>
             <ShipmentItem>
               <ItemChargeList>
-                <ItemCharge>
+                <ChargeComponent>
                   <ChargeType>_Principal</ChargeType>
                   <ChargeAmount>
                     <CurrencyAmount>26.99</CurrencyAmount>
                     <CurrencyCode>USD</CurrencyCode>
                   </ChargeAmount>
-                </ItemCharge>
-                <ItemCharge>
+                </ChargeComponent>
+                <ChargeComponent>
                   <ChargeType>Tax</ChargeType>
                   <ChargeAmount>
                     <CurrencyAmount>0.0</CurrencyAmount>
                     <CurrencyCode>USD</CurrencyCode>
                   </ChargeAmount>
-                </ItemCharge>
+                </ChargeComponent>
               </ItemChargeList>
               <ItemTaxWithheldList>
-                <ItemTaxWithheld>
+                <TaxWithheldComponent>
                   <TaxCollectionModel>MarketplaceFacilitator</TaxCollectionModel>
                   <TaxesWithheld>
-                    <ChargeType>Discount</ChargeType>
-                    <ChargeAmount>
-                      <CurrencyCode>USD</CurrencyCode>
-                      <CurrencyAmount>6.45</CurrencyAmount>
-                    </ChargeAmount>
+                    <ChargeComponent>
+                      <ChargeType>Discount</ChargeType>
+                      <ChargeAmount>
+                        <CurrencyCode>USD</CurrencyCode>
+                        <CurrencyAmount>6.45</CurrencyAmount>
+                      </ChargeAmount>
+                    </ChargeComponent>
                   </TaxesWithheld>
-                </ItemTaxWithheld>
-                <ItemTaxWithheld>
+                </TaxWithheldComponent>
+                <TaxWithheldComponent>
                   <TaxCollectionModel>Standard</TaxCollectionModel>
                   <TaxesWithheld>
-                    <ChargeType>TaxDiscount</ChargeType>
-                    <ChargeAmount>
-                      <CurrencyCode>USD</CurrencyCode>
-                      <CurrencyAmount>0.41</CurrencyAmount>
-                    </ChargeAmount>
+                    <ChargeComponent>
+                      <ChargeType>TaxDiscount</ChargeType>
+                      <ChargeAmount>
+                        <CurrencyCode>USD</CurrencyCode>
+                        <CurrencyAmount>0.41</CurrencyAmount>
+                      </ChargeAmount>
+                    </ChargeComponent>
                   </TaxesWithheld>
-                </ItemTaxWithheld>
+                </TaxWithheldComponent>
               </ItemTaxWithheldList>
               <ItemChargeAdjustmentList>
-                <ItemChargeAdjustment>
+                <ChargeComponent>
                   <ChargeType>_Principal</ChargeType>
                   <ChargeAmount>
                     <CurrencyAmount>26.99</CurrencyAmount>
                     <CurrencyCode>USD</CurrencyCode>
                   </ChargeAmount>
-                </ItemChargeAdjustment>
-                <ItemChargeAdjustment>
+                </ChargeComponent>
+                <ChargeComponent>
                   <ChargeType>Tax</ChargeType>
                   <ChargeAmount>
                     <CurrencyAmount>0.0</CurrencyAmount>
                     <CurrencyCode>USD</CurrencyCode>
                   </ChargeAmount>
-                </ItemChargeAdjustment>
+                </ChargeComponent>
               </ItemChargeAdjustmentList>
               <ItemFeeList>
-                <ItemFee>
+                <FeeComponent>
                   <FeeType>ShippingChargeback</FeeType>
                   <FeeAmount>
                     <CurrencyAmount>0.0</CurrencyAmount>
                     <CurrencyCode>USD</CurrencyCode>
                   </FeeAmount>
-                </ItemFee>
-                <ItemFee>
+                </FeeComponent>
+                <FeeComponent>
                   <FeeType>VariableClosingFee</FeeType>
                   <FeeAmount>
                     <CurrencyAmount>0.0</CurrencyAmount>
                     <CurrencyCode>USD</CurrencyCode>
                   </FeeAmount>
-                </ItemFee>
+                </FeeComponent>
               </ItemFeeList>
               <ItemFeeAdjustmentList>
-                <ItemFeeAdjustment>
+                <FeeComponent>
                   <FeeType>VariableClosingFee</FeeType>
                   <FeeAmount>
                     <CurrencyAmount>0.0</CurrencyAmount>
                     <CurrencyCode>USD</CurrencyCode>
                   </FeeAmount>
-                </ItemFeeAdjustment>
-                <ItemFeeAdjustment>
+                </FeeComponent>
+                <FeeComponent>
                   <FeeType>ShippingChargeback</FeeType>
                   <FeeAmount>
                     <CurrencyAmount>0.01</CurrencyAmount>
                     <CurrencyCode>USD</CurrencyCode>
                   </FeeAmount>
-                </ItemFeeAdjustment>
+                </FeeComponent>
               </ItemFeeAdjustmentList>
               <PromotionList>
                 <Promotion>
@@ -879,42 +893,46 @@
           <ShipmentItemAdjustmentList>
             <ShipmentItem>
               <ItemChargeList>
-                <ItemCharge>
+                <ChargeComponent>
                   <ChargeType>_Principal</ChargeType>
                   <ChargeAmount>
                     <CurrencyAmount>26.99</CurrencyAmount>
                     <CurrencyCode>USD</CurrencyCode>
                   </ChargeAmount>
-                </ItemCharge>
-                <ItemCharge>
+                </ChargeComponent>
+                <ChargeComponent>
                   <ChargeType>Tax</ChargeType>
                   <ChargeAmount>
                     <CurrencyAmount>0.0</CurrencyAmount>
                     <CurrencyCode>USD</CurrencyCode>
                   </ChargeAmount>
-                </ItemCharge>
+                </ChargeComponent>
               </ItemChargeList>
               <ItemTaxWithheldList>
-                <ItemTaxWithheld>
+                <TaxWithheldComponent>
                   <TaxCollectionModel>MarketplaceFacilitator</TaxCollectionModel>
                   <TaxesWithheld>
-                    <ChargeType>Discount</ChargeType>
-                    <ChargeAmount>
-                      <CurrencyCode>USD</CurrencyCode>
-                      <CurrencyAmount>6.45</CurrencyAmount>
-                    </ChargeAmount>
+                    <ChargeComponent>
+                      <ChargeType>Discount</ChargeType>
+                      <ChargeAmount>
+                        <CurrencyCode>USD</CurrencyCode>
+                        <CurrencyAmount>6.45</CurrencyAmount>
+                      </ChargeAmount>
+                    </ChargeComponent>
                   </TaxesWithheld>
-                </ItemTaxWithheld>
-                <ItemTaxWithheld>
+                </TaxWithheldComponent>
+                <TaxWithheldComponent>
                   <TaxCollectionModel>Standard</TaxCollectionModel>
                   <TaxesWithheld>
-                    <ChargeType>TaxDiscount</ChargeType>
-                    <ChargeAmount>
-                      <CurrencyCode>USD</CurrencyCode>
-                      <CurrencyAmount>0.41</CurrencyAmount>
-                    </ChargeAmount>
+                    <ChargeComponent>
+                      <ChargeType>TaxDiscount</ChargeType>
+                      <ChargeAmount>
+                        <CurrencyCode>USD</CurrencyCode>
+                        <CurrencyAmount>0.41</CurrencyAmount>
+                      </ChargeAmount>
+                    </ChargeComponent>
                   </TaxesWithheld>
-                </ItemTaxWithheld>
+                </TaxWithheldComponent>
               </ItemTaxWithheldList>
               <ItemChargeAdjustmentList>
                 <ItemChargeAdjustment>
@@ -1017,105 +1035,105 @@
           <PostedDate>2017-01-23T01:31:25Z</PostedDate>
           <MarketplaceName>Amazon.com</MarketplaceName>
           <SellerOrderId>105-0457358-1245022</SellerOrderId>
-        </RefundEvent>
+        </ShipmentEvent>
       </RefundEventList>
       <GuaranteeClaimEventList>
-        <GuaranteeClaimEvent>
+        <ShipmentEvent>
           <OrderChargeList>
-            <OrderCharge>
+            <ChargeComponent>
               <ChargeType>Principal</ChargeType>
               <ChargeAmount>
                 <CurrencyAmount>25.99</CurrencyAmount>
                 <CurrencyCode>USD</CurrencyCode>
               </ChargeAmount>
-            </OrderCharge>
-            <OrderCharge>
+            </ChargeComponent>
+            <ChargeComponent>
               <ChargeType>Principal</ChargeType>
               <ChargeAmount>
                 <CurrencyAmount>25.99</CurrencyAmount>
                 <CurrencyCode>USD</CurrencyCode>
               </ChargeAmount>
-            </OrderCharge>
+            </ChargeComponent>
           </OrderChargeList>
           <OrderChargeAdjustmentList>
-            <OrderChargeAdjustment>
+            <ChargeComponent>
               <ChargeType>Principal</ChargeType>
               <ChargeAmount>
                 <CurrencyAmount>2.99</CurrencyAmount>
                 <CurrencyCode>USD</CurrencyCode>
               </ChargeAmount>
-            </OrderChargeAdjustment>
-            <OrderChargeAdjustment>
+            </ChargeComponent>
+            <ChargeComponent>
               <ChargeType>Principal</ChargeType>
               <ChargeAmount>
                 <CurrencyAmount>1.99</CurrencyAmount>
                 <CurrencyCode>USD</CurrencyCode>
               </ChargeAmount>
-            </OrderChargeAdjustment>
+            </ChargeComponent>
           </OrderChargeAdjustmentList>
           <ShipmentFeeList>
-            <ShipmentFee>
+            <FeeComponent>
               <FeeType>Commission</FeeType>
               <FeeAmount>
                 <CurrencyAmount>4.99</CurrencyAmount>
                 <CurrencyCode>USD</CurrencyCode>
               </FeeAmount>
-            </ShipmentFee>
-            <ShipmentFee>
+            </FeeComponent>
+            <FeeComponent>
               <FeeType>Subscription</FeeType>
               <FeeAmount>
                 <CurrencyAmount>3.99</CurrencyAmount>
                 <CurrencyCode>USD</CurrencyCode>
               </FeeAmount>
-            </ShipmentFee>
+            </FeeComponent>
           </ShipmentFeeList>
           <ShipmentFeeAdjustmentList>
-            <ShipmentFeeAdjustment>
+            <FeeComponent>
               <FeeType>Commission</FeeType>
               <FeeAmount>
                 <CurrencyAmount>0.99</CurrencyAmount>
                 <CurrencyCode>USD</CurrencyCode>
               </FeeAmount>
-            </ShipmentFeeAdjustment>
-            <ShipmentFeeAdjustment>
+            </FeeComponent>
+            <FeeComponent>
               <FeeType>Subscription</FeeType>
               <FeeAmount>
                 <CurrencyAmount>2.99</CurrencyAmount>
                 <CurrencyCode>USD</CurrencyCode>
               </FeeAmount>
-            </ShipmentFeeAdjustment>
+            </FeeComponent>
           </ShipmentFeeAdjustmentList>
           <OrderFeeList>
-            <OrderFee>
+            <FeeComponent>
               <FeeType>Commission</FeeType>
               <FeeAmount>
                 <CurrencyAmount>4.90</CurrencyAmount>
                 <CurrencyCode>USD</CurrencyCode>
               </FeeAmount>
-            </OrderFee>
-            <OrderFee>
+            </FeeComponent>
+            <FeeComponent>
               <FeeType>Subscription</FeeType>
               <FeeAmount>
                 <CurrencyAmount>3.19</CurrencyAmount>
                 <CurrencyCode>USD</CurrencyCode>
               </FeeAmount>
-            </OrderFee>
+            </FeeComponent>
           </OrderFeeList>
           <OrderFeeAdjustmentList>
-            <OrderFeeAdjustment>
+            <FeeComponent>
               <FeeType>Commission</FeeType>
               <FeeAmount>
                 <CurrencyAmount>1.19</CurrencyAmount>
                 <CurrencyCode>USD</CurrencyCode>
               </FeeAmount>
-            </OrderFeeAdjustment>
-            <OrderFeeAdjustment>
+            </FeeComponent>
+            <FeeComponent>
               <FeeType>Subscription</FeeType>
               <FeeAmount>
                 <CurrencyAmount>2.69</CurrencyAmount>
                 <CurrencyCode>USD</CurrencyCode>
               </FeeAmount>
-            </OrderFeeAdjustment>
+            </FeeComponent>
           </OrderFeeAdjustmentList>
           <DirectPaymentList>
             <DirectPayment>
@@ -1136,90 +1154,94 @@
           <ShipmentItemList>
             <ShipmentItem>
               <ItemChargeList>
-                <ItemCharge>
+                <ChargeComponent>
                   <ChargeType>_Principal</ChargeType>
                   <ChargeAmount>
                     <CurrencyAmount>26.99</CurrencyAmount>
                     <CurrencyCode>USD</CurrencyCode>
                   </ChargeAmount>
-                </ItemCharge>
-                <ItemCharge>
+                </ChargeComponent>
+                <ChargeComponent>
                   <ChargeType>Tax</ChargeType>
                   <ChargeAmount>
                     <CurrencyAmount>0.0</CurrencyAmount>
                     <CurrencyCode>USD</CurrencyCode>
                   </ChargeAmount>
-                </ItemCharge>
+                </ChargeComponent>
               </ItemChargeList>
               <ItemTaxWithheldList>
-                <ItemTaxWithheld>
+                <TaxWithheldComponent>
                   <TaxCollectionModel>MarketplaceFacilitator</TaxCollectionModel>
                   <TaxesWithheld>
-                    <ChargeType>Discount</ChargeType>
-                    <ChargeAmount>
-                      <CurrencyCode>USD</CurrencyCode>
-                      <CurrencyAmount>6.45</CurrencyAmount>
-                    </ChargeAmount>
+                    <ChargeComponent>
+                      <ChargeType>Discount</ChargeType>
+                      <ChargeAmount>
+                        <CurrencyCode>USD</CurrencyCode>
+                        <CurrencyAmount>6.45</CurrencyAmount>
+                      </ChargeAmount>
+                    </ChargeComponent>
                   </TaxesWithheld>
-                </ItemTaxWithheld>
-                <ItemTaxWithheld>
+                </TaxWithheldComponent>
+                <TaxWithheldComponent>
                   <TaxCollectionModel>Standard</TaxCollectionModel>
                   <TaxesWithheld>
-                    <ChargeType>TaxDiscount</ChargeType>
-                    <ChargeAmount>
-                      <CurrencyCode>USD</CurrencyCode>
-                      <CurrencyAmount>0.41</CurrencyAmount>
-                    </ChargeAmount>
+                    <ChargeComponent>
+                      <ChargeType>TaxDiscount</ChargeType>
+                      <ChargeAmount>
+                        <CurrencyCode>USD</CurrencyCode>
+                        <CurrencyAmount>0.41</CurrencyAmount>
+                      </ChargeAmount>
+                    </ChargeComponent>
                   </TaxesWithheld>
-                </ItemTaxWithheld>
+                </TaxWithheldComponent>
               </ItemTaxWithheldList>
               <ItemChargeAdjustmentList>
-                <ItemChargeAdjustment>
+                <ChargeComponent>
                   <ChargeType>_Principal</ChargeType>
                   <ChargeAmount>
                     <CurrencyAmount>26.99</CurrencyAmount>
                     <CurrencyCode>USD</CurrencyCode>
                   </ChargeAmount>
-                </ItemChargeAdjustment>
-                <ItemChargeAdjustment>
+                </ChargeComponent>
+                <ChargeComponent>
                   <ChargeType>Tax</ChargeType>
                   <ChargeAmount>
                     <CurrencyAmount>0.0</CurrencyAmount>
                     <CurrencyCode>USD</CurrencyCode>
                   </ChargeAmount>
-                </ItemChargeAdjustment>
+                </ChargeComponent>
               </ItemChargeAdjustmentList>
               <ItemFeeList>
-                <ItemFee>
+                <FeeComponent>
                   <FeeType>ShippingChargeback</FeeType>
                   <FeeAmount>
                     <CurrencyAmount>0.0</CurrencyAmount>
                     <CurrencyCode>USD</CurrencyCode>
                   </FeeAmount>
-                </ItemFee>
-                <ItemFee>
+                </FeeComponent>
+                <FeeComponent>
                   <FeeType>VariableClosingFee</FeeType>
                   <FeeAmount>
                     <CurrencyAmount>0.0</CurrencyAmount>
                     <CurrencyCode>USD</CurrencyCode>
                   </FeeAmount>
-                </ItemFee>
+                </FeeComponent>
               </ItemFeeList>
               <ItemFeeAdjustmentList>
-                <ItemFeeAdjustment>
+                <FeeComponent>
                   <FeeType>VariableClosingFee</FeeType>
                   <FeeAmount>
                     <CurrencyAmount>0.0</CurrencyAmount>
                     <CurrencyCode>USD</CurrencyCode>
                   </FeeAmount>
-                </ItemFeeAdjustment>
-                <ItemFeeAdjustment>
+                </FeeComponent>
+                <FeeComponent>
                   <FeeType>ShippingChargeback</FeeType>
                   <FeeAmount>
                     <CurrencyAmount>0.01</CurrencyAmount>
                     <CurrencyCode>USD</CurrencyCode>
                   </FeeAmount>
-                </ItemFeeAdjustment>
+                </FeeComponent>
               </ItemFeeAdjustmentList>
               <PromotionList>
                 <Promotion>
@@ -1273,42 +1295,46 @@
           <ShipmentItemAdjustmentList>
             <ShipmentItem>
               <ItemChargeList>
-                <ItemCharge>
+                <ChargeComponent>
                   <ChargeType>_Principal</ChargeType>
                   <ChargeAmount>
                     <CurrencyAmount>26.99</CurrencyAmount>
                     <CurrencyCode>USD</CurrencyCode>
                   </ChargeAmount>
-                </ItemCharge>
-                <ItemCharge>
+                </ChargeComponent>
+                <ChargeComponent>
                   <ChargeType>Tax</ChargeType>
                   <ChargeAmount>
                     <CurrencyAmount>0.0</CurrencyAmount>
                     <CurrencyCode>USD</CurrencyCode>
                   </ChargeAmount>
-                </ItemCharge>
+                </ChargeComponent>
               </ItemChargeList>
               <ItemTaxWithheldList>
-                <ItemTaxWithheld>
+                <TaxWithheldComponent>
                   <TaxCollectionModel>MarketplaceFacilitator</TaxCollectionModel>
                   <TaxesWithheld>
-                    <ChargeType>Discount</ChargeType>
-                    <ChargeAmount>
-                      <CurrencyCode>USD</CurrencyCode>
-                      <CurrencyAmount>6.45</CurrencyAmount>
-                    </ChargeAmount>
+                    <ChargeComponent>
+                      <ChargeType>Discount</ChargeType>
+                      <ChargeAmount>
+                        <CurrencyCode>USD</CurrencyCode>
+                        <CurrencyAmount>6.45</CurrencyAmount>
+                      </ChargeAmount>
+                    </ChargeComponent>
                   </TaxesWithheld>
-                </ItemTaxWithheld>
-                <ItemTaxWithheld>
+                </TaxWithheldComponent>
+                <TaxWithheldComponent>
                   <TaxCollectionModel>Standard</TaxCollectionModel>
                   <TaxesWithheld>
-                    <ChargeType>TaxDiscount</ChargeType>
-                    <ChargeAmount>
-                      <CurrencyCode>USD</CurrencyCode>
-                      <CurrencyAmount>0.41</CurrencyAmount>
-                    </ChargeAmount>
+                    <ChargeComponent>
+                      <ChargeType>TaxDiscount</ChargeType>
+                      <ChargeAmount>
+                        <CurrencyCode>USD</CurrencyCode>
+                        <CurrencyAmount>0.41</CurrencyAmount>
+                      </ChargeAmount>
+                    </ChargeComponent>
                   </TaxesWithheld>
-                </ItemTaxWithheld>
+                </TaxWithheldComponent>
               </ItemTaxWithheldList>
               <ItemChargeAdjustmentList>
                 <ItemChargeAdjustment>
@@ -1411,105 +1437,105 @@
           <PostedDate>2017-01-23T01:31:25Z</PostedDate>
           <MarketplaceName>Amazon.com</MarketplaceName>
           <SellerOrderId>105-0457358-1245022</SellerOrderId>
-        </GuaranteeClaimEvent>
+        </ShipmentEvent>
       </GuaranteeClaimEventList>
       <ChargebackEventList>
-        <ChargebackEvent>
+        <ShipmentEvent>
           <OrderChargeList>
-            <OrderCharge>
+            <ChargeComponent>
               <ChargeType>Principal</ChargeType>
               <ChargeAmount>
                 <CurrencyAmount>25.99</CurrencyAmount>
                 <CurrencyCode>USD</CurrencyCode>
               </ChargeAmount>
-            </OrderCharge>
-            <OrderCharge>
+            </ChargeComponent>
+            <ChargeComponent>
               <ChargeType>Principal</ChargeType>
               <ChargeAmount>
                 <CurrencyAmount>25.99</CurrencyAmount>
                 <CurrencyCode>USD</CurrencyCode>
               </ChargeAmount>
-            </OrderCharge>
+            </ChargeComponent>
           </OrderChargeList>
           <OrderChargeAdjustmentList>
-            <OrderChargeAdjustment>
+            <ChargeComponent>
               <ChargeType>Principal</ChargeType>
               <ChargeAmount>
                 <CurrencyAmount>2.99</CurrencyAmount>
                 <CurrencyCode>USD</CurrencyCode>
               </ChargeAmount>
-            </OrderChargeAdjustment>
-            <OrderChargeAdjustment>
+            </ChargeComponent>
+            <ChargeComponent>
               <ChargeType>Principal</ChargeType>
               <ChargeAmount>
                 <CurrencyAmount>1.99</CurrencyAmount>
                 <CurrencyCode>USD</CurrencyCode>
               </ChargeAmount>
-            </OrderChargeAdjustment>
+            </ChargeComponent>
           </OrderChargeAdjustmentList>
           <ShipmentFeeList>
-            <ShipmentFee>
+            <FeeComponent>
               <FeeType>Commission</FeeType>
               <FeeAmount>
                 <CurrencyAmount>4.99</CurrencyAmount>
                 <CurrencyCode>USD</CurrencyCode>
               </FeeAmount>
-            </ShipmentFee>
-            <ShipmentFee>
+            </FeeComponent>
+            <FeeComponent>
               <FeeType>Subscription</FeeType>
               <FeeAmount>
                 <CurrencyAmount>3.99</CurrencyAmount>
                 <CurrencyCode>USD</CurrencyCode>
               </FeeAmount>
-            </ShipmentFee>
+            </FeeComponent>
           </ShipmentFeeList>
           <ShipmentFeeAdjustmentList>
-            <ShipmentFeeAdjustment>
+            <FeeComponent>
               <FeeType>Commission</FeeType>
               <FeeAmount>
                 <CurrencyAmount>0.99</CurrencyAmount>
                 <CurrencyCode>USD</CurrencyCode>
               </FeeAmount>
-            </ShipmentFeeAdjustment>
-            <ShipmentFeeAdjustment>
+            </FeeComponent>
+            <FeeComponent>
               <FeeType>Subscription</FeeType>
               <FeeAmount>
                 <CurrencyAmount>2.99</CurrencyAmount>
                 <CurrencyCode>USD</CurrencyCode>
               </FeeAmount>
-            </ShipmentFeeAdjustment>
+            </FeeComponent>
           </ShipmentFeeAdjustmentList>
           <OrderFeeList>
-            <OrderFee>
+            <FeeComponent>
               <FeeType>Commission</FeeType>
               <FeeAmount>
                 <CurrencyAmount>4.90</CurrencyAmount>
                 <CurrencyCode>USD</CurrencyCode>
               </FeeAmount>
-            </OrderFee>
-            <OrderFee>
+            </FeeComponent>
+            <FeeComponent>
               <FeeType>Subscription</FeeType>
               <FeeAmount>
                 <CurrencyAmount>3.19</CurrencyAmount>
                 <CurrencyCode>USD</CurrencyCode>
               </FeeAmount>
-            </OrderFee>
+            </FeeComponent>
           </OrderFeeList>
           <OrderFeeAdjustmentList>
-            <OrderFeeAdjustment>
+            <FeeComponent>
               <FeeType>Commission</FeeType>
               <FeeAmount>
                 <CurrencyAmount>1.19</CurrencyAmount>
                 <CurrencyCode>USD</CurrencyCode>
               </FeeAmount>
-            </OrderFeeAdjustment>
-            <OrderFeeAdjustment>
+            </FeeComponent>
+            <FeeComponent>
               <FeeType>Subscription</FeeType>
               <FeeAmount>
                 <CurrencyAmount>2.69</CurrencyAmount>
                 <CurrencyCode>USD</CurrencyCode>
               </FeeAmount>
-            </OrderFeeAdjustment>
+            </FeeComponent>
           </OrderFeeAdjustmentList>
           <DirectPaymentList>
             <DirectPayment>
@@ -1530,90 +1556,94 @@
           <ShipmentItemList>
             <ShipmentItem>
               <ItemChargeList>
-                <ItemCharge>
+                <ChargeComponent>
                   <ChargeType>_Principal</ChargeType>
                   <ChargeAmount>
                     <CurrencyAmount>26.99</CurrencyAmount>
                     <CurrencyCode>USD</CurrencyCode>
                   </ChargeAmount>
-                </ItemCharge>
-                <ItemCharge>
+                </ChargeComponent>
+                <ChargeComponent>
                   <ChargeType>Tax</ChargeType>
                   <ChargeAmount>
                     <CurrencyAmount>0.0</CurrencyAmount>
                     <CurrencyCode>USD</CurrencyCode>
                   </ChargeAmount>
-                </ItemCharge>
+                </ChargeComponent>
               </ItemChargeList>
               <ItemTaxWithheldList>
-                <ItemTaxWithheld>
+                <TaxWithheldComponent>
                   <TaxCollectionModel>MarketplaceFacilitator</TaxCollectionModel>
                   <TaxesWithheld>
-                    <ChargeType>Discount</ChargeType>
-                    <ChargeAmount>
-                      <CurrencyCode>USD</CurrencyCode>
-                      <CurrencyAmount>6.45</CurrencyAmount>
-                    </ChargeAmount>
+                    <ChargeComponent>
+                      <ChargeType>Discount</ChargeType>
+                      <ChargeAmount>
+                        <CurrencyCode>USD</CurrencyCode>
+                        <CurrencyAmount>6.45</CurrencyAmount>
+                      </ChargeAmount>
+                    </ChargeComponent>
                   </TaxesWithheld>
-                </ItemTaxWithheld>
-                <ItemTaxWithheld>
+                </TaxWithheldComponent>
+                <TaxWithheldComponent>
                   <TaxCollectionModel>Standard</TaxCollectionModel>
                   <TaxesWithheld>
-                    <ChargeType>TaxDiscount</ChargeType>
-                    <ChargeAmount>
-                      <CurrencyCode>USD</CurrencyCode>
-                      <CurrencyAmount>0.41</CurrencyAmount>
-                    </ChargeAmount>
+                    <ChargeComponent>
+                      <ChargeType>TaxDiscount</ChargeType>
+                      <ChargeAmount>
+                        <CurrencyCode>USD</CurrencyCode>
+                        <CurrencyAmount>0.41</CurrencyAmount>
+                      </ChargeAmount>
+                    </ChargeComponent>
                   </TaxesWithheld>
-                </ItemTaxWithheld>
+                </TaxWithheldComponent>
               </ItemTaxWithheldList>
               <ItemChargeAdjustmentList>
-                <ItemChargeAdjustment>
+                <ChargeComponent>
                   <ChargeType>_Principal</ChargeType>
                   <ChargeAmount>
                     <CurrencyAmount>26.99</CurrencyAmount>
                     <CurrencyCode>USD</CurrencyCode>
                   </ChargeAmount>
-                </ItemChargeAdjustment>
-                <ItemChargeAdjustment>
+                </ChargeComponent>
+                <ChargeComponent>
                   <ChargeType>Tax</ChargeType>
                   <ChargeAmount>
                     <CurrencyAmount>0.0</CurrencyAmount>
                     <CurrencyCode>USD</CurrencyCode>
                   </ChargeAmount>
-                </ItemChargeAdjustment>
+                </ChargeComponent>
               </ItemChargeAdjustmentList>
               <ItemFeeList>
-                <ItemFee>
+                <FeeComponent>
                   <FeeType>ShippingChargeback</FeeType>
                   <FeeAmount>
                     <CurrencyAmount>0.0</CurrencyAmount>
                     <CurrencyCode>USD</CurrencyCode>
                   </FeeAmount>
-                </ItemFee>
-                <ItemFee>
+                </FeeComponent>
+                <FeeComponent>
                   <FeeType>VariableClosingFee</FeeType>
                   <FeeAmount>
                     <CurrencyAmount>0.0</CurrencyAmount>
                     <CurrencyCode>USD</CurrencyCode>
                   </FeeAmount>
-                </ItemFee>
+                </FeeComponent>
               </ItemFeeList>
               <ItemFeeAdjustmentList>
-                <ItemFeeAdjustment>
+                <FeeComponent>
                   <FeeType>VariableClosingFee</FeeType>
                   <FeeAmount>
                     <CurrencyAmount>0.0</CurrencyAmount>
                     <CurrencyCode>USD</CurrencyCode>
                   </FeeAmount>
-                </ItemFeeAdjustment>
-                <ItemFeeAdjustment>
+                </FeeComponent>
+                <FeeComponent>
                   <FeeType>ShippingChargeback</FeeType>
                   <FeeAmount>
                     <CurrencyAmount>0.01</CurrencyAmount>
                     <CurrencyCode>USD</CurrencyCode>
                   </FeeAmount>
-                </ItemFeeAdjustment>
+                </FeeComponent>
               </ItemFeeAdjustmentList>
               <PromotionList>
                 <Promotion>
@@ -1667,42 +1697,46 @@
           <ShipmentItemAdjustmentList>
             <ShipmentItem>
               <ItemChargeList>
-                <ItemCharge>
+                <ChargeComponent>
                   <ChargeType>_Principal</ChargeType>
                   <ChargeAmount>
                     <CurrencyAmount>26.99</CurrencyAmount>
                     <CurrencyCode>USD</CurrencyCode>
                   </ChargeAmount>
-                </ItemCharge>
-                <ItemCharge>
+                </ChargeComponent>
+                <ChargeComponent>
                   <ChargeType>Tax</ChargeType>
                   <ChargeAmount>
                     <CurrencyAmount>0.0</CurrencyAmount>
                     <CurrencyCode>USD</CurrencyCode>
                   </ChargeAmount>
-                </ItemCharge>
+                </ChargeComponent>
               </ItemChargeList>
               <ItemTaxWithheldList>
-                <ItemTaxWithheld>
+                <TaxWithheldComponent>
                   <TaxCollectionModel>MarketplaceFacilitator</TaxCollectionModel>
                   <TaxesWithheld>
-                    <ChargeType>Discount</ChargeType>
-                    <ChargeAmount>
-                      <CurrencyCode>USD</CurrencyCode>
-                      <CurrencyAmount>6.45</CurrencyAmount>
-                    </ChargeAmount>
+                    <ChargeComponent>
+                      <ChargeType>Discount</ChargeType>
+                      <ChargeAmount>
+                        <CurrencyCode>USD</CurrencyCode>
+                        <CurrencyAmount>6.45</CurrencyAmount>
+                      </ChargeAmount>
+                    </ChargeComponent>
                   </TaxesWithheld>
-                </ItemTaxWithheld>
-                <ItemTaxWithheld>
+                </TaxWithheldComponent>
+                <TaxWithheldComponent>
                   <TaxCollectionModel>Standard</TaxCollectionModel>
                   <TaxesWithheld>
-                    <ChargeType>TaxDiscount</ChargeType>
-                    <ChargeAmount>
-                      <CurrencyCode>USD</CurrencyCode>
-                      <CurrencyAmount>0.41</CurrencyAmount>
-                    </ChargeAmount>
+                    <ChargeComponent>
+                      <ChargeType>TaxDiscount</ChargeType>
+                      <ChargeAmount>
+                        <CurrencyCode>USD</CurrencyCode>
+                        <CurrencyAmount>0.41</CurrencyAmount>
+                      </ChargeAmount>
+                    </ChargeComponent>
                   </TaxesWithheld>
-                </ItemTaxWithheld>
+                </TaxWithheldComponent>
               </ItemTaxWithheldList>
               <ItemChargeAdjustmentList>
                 <ItemChargeAdjustment>
@@ -1805,7 +1839,7 @@
           <PostedDate>2017-01-23T01:31:25Z</PostedDate>
           <MarketplaceName>Amazon.com</MarketplaceName>
           <SellerOrderId>105-0457358-1245022</SellerOrderId>
-        </ChargebackEvent>
+        </ShipmentEvent>
       </ChargebackEventList>
       <AffordabilityExpenseEventList>
         <AffordabilityExpenseEvent>
@@ -1850,16 +1884,18 @@
           </ShippingTax>
           <MarketplaceName>Name of Marketplace</MarketplaceName>
           <RetrochargeTaxWithheldComponentList>
-            <RetrochargeTaxWithheldComponent>
+            <TaxWithheldComponent>
               <TaxCollectionModel>MarketplaceFacilitator</TaxCollectionModel>
               <TaxesWithheld>
-                <ChargeType>Discount</ChargeType>
-                <ChargeAmount>
-                  <CurrencyCode>USD</CurrencyCode>
-                  <CurrencyAmount>6.45</CurrencyAmount>
-                </ChargeAmount>
+                <ChargeComponent>
+                  <ChargeType>Discount</ChargeType>
+                  <ChargeAmount>
+                    <CurrencyCode>USD</CurrencyCode>
+                    <CurrencyAmount>6.45</CurrencyAmount>
+                  </ChargeAmount>
+                </ChargeComponent>
               </TaxesWithheld>
-            </RetrochargeTaxWithheldComponent>
+            </TaxWithheldComponent>
           </RetrochargeTaxWithheldComponentList>
         </RetrochargeEvent>
       </RetrochargeEventList>
@@ -1937,13 +1973,13 @@
           <SAFETReimbursementItemList>
             <SAFETReimbursementItem>
               <ItemChargeList>
-                <ItemCharge>
+                <ChargeComponent>
                   <ChargeType>Discount</ChargeType>
                   <ChargeAmount>
                     <CurrencyCode>USD</CurrencyCode>
                     <CurrencyAmount>8.67</CurrencyAmount>              
                   </ChargeAmount>
-                </ItemCharge>
+                </ChargeComponent>
               </ItemChargeList>
             </SAFETReimbursementItem>
           </SAFETReimbursementItemList>
@@ -1994,20 +2030,20 @@
           <ASIN>Bjdfsksdfjkfds</ASIN>
           <PostedDate>2018-05-08T13:17:15.000Z</PostedDate>
           <FeeList>
-            <Fee>
+            <FeeComponent>
               <FeeType>Subscription</FeeType>
               <FeeAmount>
                 <CurrencyCode>USD</CurrencyCode>
                 <CurrencyAmount>6.38</CurrencyAmount>
               </FeeAmount>
-            </Fee>
-            <Fee>
+            </FeeComponent>
+            <FeeComponent>
               <FeeType>LabelingFee</FeeType>
               <FeeAmount>
                 <CurrencyCode>USD</CurrencyCode>
                 <CurrencyAmount>0.34</CurrencyAmount>
               </FeeAmount>
-            </Fee>
+            </FeeComponent>
           </FeeList>
         </ImagingServicesFeeEvent>
       </ImagingServicesFeeEventList>

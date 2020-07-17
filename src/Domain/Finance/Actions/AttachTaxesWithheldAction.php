@@ -3,11 +3,10 @@
 namespace EolabsIo\AmazonMws\Domain\Finance\Actions;
 
 use EolabsIo\AmazonMws\Domain\Finance\Actions\AssociateChargeAmountAction;
-use EolabsIo\AmazonMws\Domain\Finance\Actions\BaseAssociateAction;
+use EolabsIo\AmazonMws\Domain\Finance\Actions\BaseAttachAction;
 use EolabsIo\AmazonMws\Domain\Finance\Models\ChargeComponent;
 
-
-class AssociateTaxesWithheldAction extends BaseAssociateAction 
+class AttachTaxesWithheldAction extends BaseAttachAction
 {
 
     public function getKey(): string

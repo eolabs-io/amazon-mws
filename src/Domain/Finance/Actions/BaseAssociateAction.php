@@ -17,7 +17,7 @@ abstract class BaseAssociateAction
     public function __construct($list)
     {
         $key = $this->getKey();
-        $this->list = data_get($list, $key, []);
+        $this->list = data_get($list, $key, null);
     }
 
     abstract public function getKey(): string;
@@ -27,9 +27,18 @@ abstract class BaseAssociateAction
         $this->model = $model;
         $this->createFromList();
     }
+
+    public function hasNoAttributes(): bool
+    {
+        return is_null($this->list);
+    }
     
     private function createFromList()
     {
+        if($this->hasNoAttributes()) {
+            return;
+        }
+
         $this->createItem($this->list);
     }
 
