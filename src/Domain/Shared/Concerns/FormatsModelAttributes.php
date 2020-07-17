@@ -26,13 +26,15 @@ trait FormatsModelAttributes
         return $this->fillable->flatMap(function($item) use($items) {
             $key = $this->customFormats( Str::ucfirst(Str::camel($item)) );
             $value = data_get($items, $key);
-            if(is_null($value) ) {
+          
+            if( is_null($value) || ($value === []) ) {
                 return [];
             }
 
             $value = $this->cast($item, $value);
 
             return [$item => $value];
+            
         })->toArray();
     }
 

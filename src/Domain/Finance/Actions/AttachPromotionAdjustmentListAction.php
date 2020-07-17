@@ -18,7 +18,7 @@ class AttachPromotionAdjustmentListAction extends BaseAttachAction
 
     protected function createItem($list)
     {
-        $values = $this->getFormatedAttributes($list, new Promotion);
+        $values = $this->getFormatedAttributes($list, new Promotion); 
         $promotion = Promotion::create($values);
 
         (new AssociatePromotionAmountAction($list))->execute($promotion);

@@ -442,7 +442,7 @@
               <PromotionList>
                 <Promotion>
                   <PromotionType>type of promotion</PromotionType>
-                  <PromotionId>12345678</PromotionId>
+                  <PromotionId>Amazon PLCC Free-Financing Universal Merchant PAWS-V2-41222765913-91</PromotionId>
                   <PromotionAmount>
                     <CurrencyCode>USD</CurrencyCode>
                     <CurrencyAmount>21.12</CurrencyAmount>
@@ -450,7 +450,7 @@
                 </Promotion>
                 <Promotion>
                   <PromotionType>type_of_promotion</PromotionType>
-                  <PromotionId>198764</PromotionId>
+                  <PromotionId></PromotionId>
                   <PromotionAmount>
                     <CurrencyCode>USD</CurrencyCode>
                     <CurrencyAmount>2.20</CurrencyAmount>
