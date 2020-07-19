@@ -44,7 +44,7 @@ class PerformFetchListFinancialEvents implements ShouldQueue
         try {
             $results = $this->listFinancialEvents->fetch();
 
-            ProcessListFinancialEventsResponse::dispatch($results);
+            ProcessListFinancialEventsResponse::dispatch($results)->onQueue('process-list-financial-events');
             FetchListFinancialEvents::dispatchIf($this->listFinancialEvents->hasNextToken(), $this->listFinancialEvents);
         }
         catch(RequestException $exception) {
