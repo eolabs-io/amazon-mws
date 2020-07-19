@@ -31,4 +31,37 @@ trait CreatesListFinancialEvent
 
         return ListFinancialEvents::withStore($store);    
     }
+
+    public function createListFinancialEventThrottledError()
+    {
+        ListFinancialEventsFactory::new()->fakeRequestThrottledErrorResponse();
+
+        $store = StoreFactory::new()
+                             ->withValidAttributes()
+                             ->create();
+
+        return ListFinancialEvents::withStore($store);    
+    }
+
+    public function createListFinancialEventQuotaExceededError()
+    {
+        ListFinancialEventsFactory::new()->fakeQuotaExceededErrorResponse();
+
+        $store = StoreFactory::new()
+                             ->withValidAttributes()
+                             ->create();
+
+        return ListFinancialEvents::withStore($store);    
+    }
+
+    public function createListFinancialEventInputStreamDisconnectedError()
+    {
+        ListFinancialEventsFactory::new()->fakeInputStreamDisconnectedErrorResponse();
+
+        $store = StoreFactory::new()
+                             ->withValidAttributes()
+                             ->create();
+
+        return ListFinancialEvents::withStore($store);    
+    }
 }

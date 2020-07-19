@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<ErrorResponse xmlns="https://mws.amazonservices.com/">
+    <Error>
+        <Type>Sender</Type>
+        <Code>RequestThrottled</Code>
+        <Message>The frequency of requests was greater than allowed.</Message>
+    </Error>
+    <RequestID>0f40e8f4-2c00-4634-9eb7-9e9482dc6039</RequestID>
+</ErrorResponse>

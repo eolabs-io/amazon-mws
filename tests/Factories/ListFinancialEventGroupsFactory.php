@@ -2,11 +2,13 @@
 
 namespace EolabsIo\AmazonMws\Tests\Factories;
 
+use EolabsIo\AmazonMws\Tests\Factories\Concerns\HasAmazonMwsErrorResponses;
 use Illuminate\Support\Facades\Http;
 
 
 class ListFinancialEventGroupsFactory
 {
+    use HasAmazonMwsErrorResponses;
 
 	private $endpoint = 'mws.amazonservices.com/Finances/2015-05-01';
 

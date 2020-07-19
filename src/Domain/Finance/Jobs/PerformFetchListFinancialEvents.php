@@ -6,15 +6,20 @@ use EolabsIo\AmazonMwsThrottlingMiddleware\Facades\AmazonMwsThrottlingMiddleware
 use EolabsIo\AmazonMws\Domain\Finance\Events\FetchListFinancialEvents;
 use EolabsIo\AmazonMws\Domain\Finance\Jobs\ProcessListFinancialEventsResponse;
 use EolabsIo\AmazonMws\Domain\Finance\ListFinancialEvents;
+use EolabsIo\AmazonMws\Domain\Shared\Concerns\HandlesJobsRequestException;
+use EolabsIo\AmazonMws\Domain\Shared\Exceptions\QuotaExceededException;
+use EolabsIo\AmazonMws\Domain\Shared\Exceptions\RequestThrottledException;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Http\Client\RequestException;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Carbon;
 
 class PerformFetchListFinancialEvents implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, HandlesJobsRequestException;
 
     /** @var EolabsIo\AmazonMws\Domain\Finance\ListFinancialEvents */
     public $listFinancialEvents;
@@ -36,10 +41,16 @@ class PerformFetchListFinancialEvents implements ShouldQueue
      */
     public function handle()
     {
-        $results = $this->listFinancialEvents->fetch();
+        try {
+            $results = $this->listFinancialEvents->fetch();
 
-        ProcessListFinancialEventsResponse::dispatch($results);
-        FetchListFinancialEvents::dispatchIf($this->listFinancialEvents->hasNextToken(), $this->listFinancialEvents);
+            ProcessListFinancialEventsResponse::dispatch($results);
+            FetchListFinancialEvents::dispatchIf($this->listFinancialEvents->hasNextToken(), $this->listFinancialEvents);
+        }
+        catch(RequestException $exception) {
+            $delay = 30;
+            $this->handleRequestException($exception, $delay);
+        }
     }
 
     public function middleware()

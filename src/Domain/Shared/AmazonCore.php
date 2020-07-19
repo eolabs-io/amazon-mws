@@ -7,10 +7,20 @@ use EolabsIo\AmazonMwsResponseParser\Parsers\ErrorResponseParser;
 use EolabsIo\AmazonMwsResponseParser\Support\Facades\AmazonMwsResponseParser;
 use EolabsIo\AmazonMws\Domain\Shared\Contracts\BranchUrlResolver;
 use EolabsIo\AmazonMws\Domain\Shared\Contracts\TypeAccessor;
+use EolabsIo\AmazonMws\Domain\Shared\Exceptions\AccessDeniedException;
+use EolabsIo\AmazonMws\Domain\Shared\Exceptions\InputStreamDisconnectedException;
+use EolabsIo\AmazonMws\Domain\Shared\Exceptions\InternalErrorException;
+use EolabsIo\AmazonMws\Domain\Shared\Exceptions\InvalidAccessKeyIdException;
+use EolabsIo\AmazonMws\Domain\Shared\Exceptions\InvalidAddressException;
+use EolabsIo\AmazonMws\Domain\Shared\Exceptions\InvalidParameterValueException;
+use EolabsIo\AmazonMws\Domain\Shared\Exceptions\QuotaExceededException;
+use EolabsIo\AmazonMws\Domain\Shared\Exceptions\RequestThrottledException;
+use EolabsIo\AmazonMws\Domain\Shared\Exceptions\SignatureDoesNotMatchException;
 use EolabsIo\AmazonMws\Support\Concerns\GeneratesTime;
 use EolabsIo\AmazonMws\Support\Concerns\HasStoreInteractions;
 use EolabsIo\AmazonMws\Support\Concerns\NextTokenable;
 use EolabsIo\AmazonMws\Support\Throttling\Throttle;
+use Illuminate\Http\Client\RequestException;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
@@ -67,11 +77,47 @@ abstract class AmazonCore implements BranchUrlResolver, TypeAccessor
 		$store = $this->getStore();
 		$endpoint = $this->getBranchUrl();
 		$parameters = $this->getRequestParameters();
-		$response = AmazonMwsHttp::withStore($store)
-				    			 ->fetch($endpoint, $parameters)
-				    			 ->throw();
 
-		return $this->processResponse($response);
+		try {
+			$response = AmazonMwsHttp::withStore($store)
+					    			 ->fetch($endpoint, $parameters)
+					    			 ->throw();
+
+			return $this->processResponse($response);
+		}
+		catch(RequestException $requestException){
+			$this->handleException($requestException);
+		}
+	}
+
+	public function handleException(RequestException $requestException)
+	{
+		$response = $requestException->response;
+		$results = AmazonMwsResponseParser::fromString($response->body());
+		$errorCode = data_get($results, 'Error.Code');
+
+		switch($errorCode) {
+			case 'InputStreamDisconnected':
+				throw new InputStreamDisconnectedException($response);
+			case 'InvalidParameterValue':
+				throw new InvalidParameterValueException($response);	
+			case 'AccessDenied':
+				throw new AccessDeniedException($response);
+			case 'InvalidAccessKeyId':
+				throw new InvalidAccessKeyIdException($response);		
+			case 'SignatureDoesNotMatch':
+				throw new SignatureDoesNotMatchException($response);
+			case 'InvalidAddress':
+				throw new InvalidAddressException($response);	
+			case 'InternalError':
+				throw new InternalErrorException($response);		
+			case 'QuotaExceeded':
+				throw new QuotaExceededException($response);
+			case 'RequestThrottled':
+				throw new RequestThrottledException($response);
+			default:
+				throw $requestException;							
+		} 
 	}
 
  	public function processResponse(Response $response)
@@ -104,7 +150,7 @@ abstract class AmazonCore implements BranchUrlResolver, TypeAccessor
 												});
 		$store_id = $this->getStore()->id;
 
-		$this->results = $response->merge( compact('store_id') ); //$this->results->mergeRecursive($response);
+		$this->results = $response->merge( compact('store_id') );
 	}
 
 	public function getRequestParameters(): array

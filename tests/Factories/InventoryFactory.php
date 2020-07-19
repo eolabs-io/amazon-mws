@@ -3,11 +3,13 @@
 namespace EolabsIo\AmazonMws\Tests\Factories;
 
 use EolabsIo\AmazonMws\Tests\Factories\BaseFactory;
+use EolabsIo\AmazonMws\Tests\Factories\Concerns\HasAmazonMwsErrorResponses;
 use Illuminate\Support\Facades\Http;
 
 
 class InventoryFactory
 {
+    use HasAmazonMwsErrorResponses;
 
 	private $endpoint = 'mws.amazonservices.com/FulfillmentInventory/2010-10-01';
 

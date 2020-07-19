@@ -3,12 +3,14 @@
 namespace EolabsIo\AmazonMws\Tests\Factories;
 
 use EolabsIo\AmazonMws\Tests\Factories\BaseFactory;
+use EolabsIo\AmazonMws\Tests\Factories\Concerns\HasAmazonMwsErrorResponses;
 use Illuminate\Support\Facades\Http;
 
 
 class ListOrdersFactory
 {
-
+    use HasAmazonMwsErrorResponses;
+    
 	private $endpoint = 'mws.amazonservices.com/Orders/2013-09-01';
 
     public static function new(): self
