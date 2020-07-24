@@ -7,13 +7,15 @@ use EolabsIo\AmazonMws\Domain\Finance\Actions\AssociateRentalReimbursementAction
 use EolabsIo\AmazonMws\Domain\Finance\Actions\AttachRentalChargeListAction;
 use EolabsIo\AmazonMws\Domain\Finance\Actions\AttachRentalFeeListAction;
 use EolabsIo\AmazonMws\Domain\Finance\Actions\AttachRentalTaxWithheldListAction;
-use EolabsIo\AmazonMws\Domain\Finance\Actions\BasePersistAction;
 use EolabsIo\AmazonMws\Domain\Finance\Models\RentalTransactionEvent;
+use EolabsIo\AmazonMws\Domain\Shared\Actions\BasePersistAction;
+use EolabsIo\AmazonMws\Domain\Shared\Concerns\FormatsModelAttributes;
 
 
 class PersistRentalTransactionEventAction extends BasePersistAction
 {
-
+    use FormatsModelAttributes;
+    
     public function getKey(): string
     {
     	return 'RentalTransactionEventList';

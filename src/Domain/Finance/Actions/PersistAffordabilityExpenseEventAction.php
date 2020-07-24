@@ -3,18 +3,17 @@
 namespace EolabsIo\AmazonMws\Domain\Finance\Actions;
 
 use EolabsIo\AmazonMws\Domain\Finance\Actions\AssociateBaseExpenseAction;
-// use EolabsIo\AmazonMws\Domain\Finance\Actions\AssociateTaxTypeCGSTAction;
-// use EolabsIo\AmazonMws\Domain\Finance\Actions\AssociateTaxTypeIGSTAction;
-// use EolabsIo\AmazonMws\Domain\Finance\Actions\AssociateTaxTypeSGSTAction;
 use EolabsIo\AmazonMws\Domain\Finance\Actions\AssociateTotalExpenseAction;
-use EolabsIo\AmazonMws\Domain\Finance\Actions\BasePersistAction;
 use EolabsIo\AmazonMws\Domain\Finance\Models\AffordabilityExpenseEvent;
 use EolabsIo\AmazonMws\Domain\Finance\Models\CurrencyAmount;
+use EolabsIo\AmazonMws\Domain\Shared\Actions\BasePersistAction;
+use EolabsIo\AmazonMws\Domain\Shared\Concerns\FormatsModelAttributes;
 
 
 class PersistAffordabilityExpenseEventAction extends BasePersistAction
 {
-
+    use FormatsModelAttributes;
+    
     public function getKey(): string
     {
     	return 'AffordabilityExpenseEventList';

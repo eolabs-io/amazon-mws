@@ -1,13 +1,9 @@
 <?php
 
-namespace EolabsIo\AmazonMws\Domain\Finance\Actions;
-
-use EolabsIo\AmazonMws\Domain\Shared\Concerns\FormatsModelAttributes;
-
+namespace EolabsIo\AmazonMws\Domain\Shared\Actions;
 
 abstract class BasePersistAction 
 {
-	use FormatsModelAttributes;
 	
     /** @var array */
     private $list;

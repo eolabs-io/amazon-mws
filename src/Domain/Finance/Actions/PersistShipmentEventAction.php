@@ -11,12 +11,14 @@ use EolabsIo\AmazonMws\Domain\Finance\Actions\AttachShipmentFeeAdjustmentListAct
 use EolabsIo\AmazonMws\Domain\Finance\Actions\AttachShipmentFeeListAction;
 use EolabsIo\AmazonMws\Domain\Finance\Actions\AttachShipmentItemAdjustmentListAction;
 use EolabsIo\AmazonMws\Domain\Finance\Actions\AttachShipmentItemListAction;
-use EolabsIo\AmazonMws\Domain\Finance\Actions\BasePersistAction;
 use EolabsIo\AmazonMws\Domain\Finance\Models\ShipmentEvent;
+use EolabsIo\AmazonMws\Domain\Shared\Actions\BasePersistAction;
+use EolabsIo\AmazonMws\Domain\Shared\Concerns\FormatsModelAttributes;
 
 
 class PersistShipmentEventAction extends BasePersistAction
 {
+    use FormatsModelAttributes;
 
     public function getKey(): string
     {

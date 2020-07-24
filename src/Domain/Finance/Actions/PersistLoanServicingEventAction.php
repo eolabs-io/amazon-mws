@@ -3,12 +3,14 @@
 namespace EolabsIo\AmazonMws\Domain\Finance\Actions;
 
 use EolabsIo\AmazonMws\Domain\Finance\Actions\AssociateLoanAmountAction;
-use EolabsIo\AmazonMws\Domain\Finance\Actions\BasePersistAction;
 use EolabsIo\AmazonMws\Domain\Finance\Models\LoanServicingEvent;
+use EolabsIo\AmazonMws\Domain\Shared\Actions\BasePersistAction;
+use EolabsIo\AmazonMws\Domain\Shared\Concerns\FormatsModelAttributes;
 
 
 class PersistLoanServicingEventAction extends BasePersistAction
 {
+    use FormatsModelAttributes;
 
     public function getKey(): string
     {

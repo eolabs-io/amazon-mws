@@ -4,13 +4,15 @@ namespace EolabsIo\AmazonMws\Domain\Finance\Actions;
 
 use EolabsIo\AmazonMws\Domain\Finance\Actions\AssociateTaxAmountAction;
 use EolabsIo\AmazonMws\Domain\Finance\Actions\AssociateTaxExclusiveAmountAction;
-use EolabsIo\AmazonMws\Domain\Finance\Actions\BasePersistAction;
 use EolabsIo\AmazonMws\Domain\Finance\Models\NetworkComminglingTransactionEvent;
+use EolabsIo\AmazonMws\Domain\Shared\Actions\BasePersistAction;
+use EolabsIo\AmazonMws\Domain\Shared\Concerns\FormatsModelAttributes;
 
 
 class PersistNetworkComminglingTransactionEventAction extends BasePersistAction
 {
-
+    use FormatsModelAttributes;
+    
     public function getKey(): string
     {
     	return 'NetworkComminglingTransactionEventList';

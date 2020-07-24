@@ -46,6 +46,7 @@ trait FormatsModelAttributes
         $element = Str::replaceFirst('Igst', 'IGST', $element);
         $element = Str::replaceFirst('Cgst', 'CGST', $element);
         $element = Str::replaceFirst('Sgst', 'SGST', $element);
+        $element = Str::replaceFirst('Url', 'URL', $element);
 
         return $element;
     }

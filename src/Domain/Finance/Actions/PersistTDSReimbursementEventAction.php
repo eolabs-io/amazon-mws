@@ -3,13 +3,15 @@
 namespace EolabsIo\AmazonMws\Domain\Finance\Actions;
 
 use EolabsIo\AmazonMws\Domain\Finance\Actions\AssociateReimbursedAmountAction;
-use EolabsIo\AmazonMws\Domain\Finance\Actions\BasePersistAction;
 use EolabsIo\AmazonMws\Domain\Finance\Models\TDSReimbursementEvent;
+use EolabsIo\AmazonMws\Domain\Shared\Actions\BasePersistAction;
+use EolabsIo\AmazonMws\Domain\Shared\Concerns\FormatsModelAttributes;
 
 
 class PersistTDSReimbursementEventAction extends BasePersistAction
 {
-
+    use FormatsModelAttributes;
+    
     public function getKey(): string
     {
     	return 'TDSReimbursementEventList';

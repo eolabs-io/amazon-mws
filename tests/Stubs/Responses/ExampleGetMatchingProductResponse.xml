@@ -1,0 +1,113 @@
+<?xml version="1.0"?>
+<GetMatchingProductResponse xmlns="http://mws.amazonservices.com/schema/Products/2011-10-01">
+	<GetMatchingProductResult ASIN="B071L8D4DQ" status="Success">
+		<Product xmlns:ns2="http://mws.amazonservices.com/schema/Products/2011-10-01/default.xsd">
+			<Identifiers>
+				<MarketplaceASIN>
+					<MarketplaceId>ATVPDKIKX0DER</MarketplaceId>
+					<ASIN>B071L8D4DQ</ASIN>
+				</MarketplaceASIN>
+			</Identifiers>
+			<AttributeSets>
+				<ns2:ItemAttributes xml:lang="en-US">
+					<ns2:Binding>Health and Beauty</ns2:Binding>
+					<ns2:Brand>Lifted Naturals</ns2:Brand>
+					<ns2:ItemDimensions>
+						<ns2:Height Units="inches">4.40</ns2:Height>
+						<ns2:Length Units="inches">2.50</ns2:Length>
+						<ns2:Width Units="inches">2.50</ns2:Width>
+					</ns2:ItemDimensions>
+					<ns2:IsAdultProduct>false</ns2:IsAdultProduct>
+					<ns2:Label>Lifted Naturals</ns2:Label>
+					<ns2:Manufacturer>Lifted Naturals</ns2:Manufacturer>
+					<ns2:PackageDimensions>
+						<ns2:Height Units="inches">2.099999997858</ns2:Height>
+						<ns2:Length Units="inches">4.199999995716</ns2:Length>
+						<ns2:Width Units="inches">2.249999997705</ns2:Width>
+						<ns2:Weight Units="pounds">0.13007273458</ns2:Weight>
+					</ns2:PackageDimensions>
+					<ns2:PackageQuantity>1</ns2:PackageQuantity>
+					<ns2:PartNumber>probioticblend</ns2:PartNumber>
+					<ns2:ProductGroup>Health and Beauty</ns2:ProductGroup>
+					<ns2:ProductTypeName>NUTRITIONAL_SUPPLEMENT</ns2:ProductTypeName>
+					<ns2:Publisher>Lifted Naturals</ns2:Publisher>
+					<ns2:Size>60 Count (Pack of 1)</ns2:Size>
+					<ns2:SmallImage>
+						<ns2:URL>https://m.media-amazon.com/images/I/41zFAhnYxBL._SL75_.jpg</ns2:URL>
+						<ns2:Height Units="pixels">75</ns2:Height>
+						<ns2:Width Units="pixels">75</ns2:Width>
+					</ns2:SmallImage>
+					<ns2:Studio>Lifted Naturals</ns2:Studio>
+					<ns2:Title>Probiotic - Mood Boosting Probiotic - Anxiety Formula w/GOS Prebiotic - Probiotics for Gut Health - Digestive + Immune Blend - Prebiotics for Mental Support</ns2:Title>
+				</ns2:ItemAttributes>
+			</AttributeSets>
+			<Relationships/>
+			<SalesRankings>
+				<SalesRank>
+					<ProductCategoryId>health_and_beauty_display_on_website</ProductCategoryId>
+					<Rank>8265</Rank>
+				</SalesRank>
+				<SalesRank>
+					<ProductCategoryId>3774071</ProductCategoryId>
+					<Rank>118</Rank>
+				</SalesRank>
+			</SalesRankings>
+		</Product>
+	</GetMatchingProductResult>
+	<GetMatchingProductResult ASIN="B079QX7TLH" status="Success">
+		<Product xmlns:ns2="http://mws.amazonservices.com/schema/Products/2011-10-01/default.xsd">
+			<Identifiers>
+				<MarketplaceASIN>
+					<MarketplaceId>ATVPDKIKX0DER</MarketplaceId>
+					<ASIN>B079QX7TLH</ASIN>
+				</MarketplaceASIN>
+			</Identifiers>
+			<AttributeSets>
+				<ns2:ItemAttributes xml:lang="en-US">
+					<ns2:Binding>Health and Beauty</ns2:Binding>
+					<ns2:Brand>Lifted Naturals</ns2:Brand>
+					<ns2:ItemDimensions>
+						<ns2:Height Units="inches">2.12</ns2:Height>
+						<ns2:Length Units="inches">5.31</ns2:Length>
+						<ns2:Width Units="inches">2.24</ns2:Width>
+					</ns2:ItemDimensions>
+					<ns2:IsAdultProduct>false</ns2:IsAdultProduct>
+					<ns2:Label>Lifted Naturals</ns2:Label>
+					<ns2:Manufacturer>Lifted Naturals</ns2:Manufacturer>
+					<ns2:PackageDimensions>
+						<ns2:Height Units="inches">0.99999999898</ns2:Height>
+						<ns2:Length Units="inches">4.299999995614</ns2:Length>
+						<ns2:Width Units="inches">2.199999997756</ns2:Width>
+						<ns2:Weight Units="pounds">0.20062065842</ns2:Weight>
+					</ns2:PackageDimensions>
+					<ns2:PartNumber>1T-KONV-LXJN</ns2:PartNumber>
+					<ns2:ProductGroup>Health and Beauty</ns2:ProductGroup>
+					<ns2:ProductTypeName>NUTRITIONAL_SUPPLEMENT</ns2:ProductTypeName>
+					<ns2:Publisher>Lifted Naturals</ns2:Publisher>
+					<ns2:Size>60 Count (Pack of 1)</ns2:Size>
+					<ns2:SmallImage>
+						<ns2:URL>https://m.media-amazon.com/images/I/41O5R4ZLR7L._SL75_.jpg</ns2:URL>
+						<ns2:Height Units="pixels">75</ns2:Height>
+						<ns2:Width Units="pixels">75</ns2:Width>
+					</ns2:SmallImage>
+					<ns2:Studio>Lifted Naturals</ns2:Studio>
+					<ns2:Title>Anxiety Probiotic - Histamine Free - 60 Capsules - Two Months Supply - Probiotics for Mood with Prebiotics - Bifidus Mood Boost - Prebiotic GOS</ns2:Title>
+				</ns2:ItemAttributes>
+			</AttributeSets>
+			<Relationships/>
+			<SalesRankings>
+				<SalesRank>
+					<ProductCategoryId>health_and_beauty_display_on_website</ProductCategoryId>
+					<Rank>23940</Rank>
+				</SalesRank>
+				<SalesRank>
+					<ProductCategoryId>3774071</ProductCategoryId>
+					<Rank>305</Rank>
+				</SalesRank>
+			</SalesRankings>
+		</Product>
+	</GetMatchingProductResult>
+	<ResponseMetadata>
+		<RequestId>11613028-d020-4973-9dd3-306d19b4c718</RequestId>
+	</ResponseMetadata>
+</GetMatchingProductResponse>

@@ -4,12 +4,14 @@ namespace EolabsIo\AmazonMws\Domain\Finance\Actions;
 
 use EolabsIo\AmazonMws\Domain\Finance\Actions\AssociateReimbursedAmountAction;
 use EolabsIo\AmazonMws\Domain\Finance\Actions\AttachSAFETReimbursementItemListAction;
-use EolabsIo\AmazonMws\Domain\Finance\Actions\BasePersistAction;
 use EolabsIo\AmazonMws\Domain\Finance\Models\SafeTReimbursementEvent;
+use EolabsIo\AmazonMws\Domain\Shared\Actions\BasePersistAction;
+use EolabsIo\AmazonMws\Domain\Shared\Concerns\FormatsModelAttributes;
 
 
 class PersistSAFETReimbursementEventAction extends BasePersistAction
 {
+    use FormatsModelAttributes;
 
     public function getKey(): string
     {

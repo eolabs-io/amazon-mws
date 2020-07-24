@@ -5,12 +5,14 @@ namespace EolabsIo\AmazonMws\Domain\Finance\Actions;
 use EolabsIo\AmazonMws\Domain\Finance\Actions\AssociateChargeComponentAction;
 use EolabsIo\AmazonMws\Domain\Finance\Actions\AssociateFeeComponentAction;
 use EolabsIo\AmazonMws\Domain\Finance\Actions\AssociateTotalAmountAction;
-use EolabsIo\AmazonMws\Domain\Finance\Actions\BasePersistAction;
 use EolabsIo\AmazonMws\Domain\Finance\Models\CouponPaymentEvent;
+use EolabsIo\AmazonMws\Domain\Shared\Actions\BasePersistAction;
+use EolabsIo\AmazonMws\Domain\Shared\Concerns\FormatsModelAttributes;
 
 
 class PersistCouponPaymentEventAction extends BasePersistAction
 {
+    use FormatsModelAttributes;
 
     public function getKey(): string
     {

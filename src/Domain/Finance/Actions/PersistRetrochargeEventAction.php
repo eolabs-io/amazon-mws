@@ -5,12 +5,14 @@ namespace EolabsIo\AmazonMws\Domain\Finance\Actions;
 use EolabsIo\AmazonMws\Domain\Finance\Actions\AssociateBaseTaxAction;
 use EolabsIo\AmazonMws\Domain\Finance\Actions\AssociateShippingTaxAction;
 use EolabsIo\AmazonMws\Domain\Finance\Actions\AttachRetrochargeTaxWithheldComponentAction;
-use EolabsIo\AmazonMws\Domain\Finance\Actions\BasePersistAction;
 use EolabsIo\AmazonMws\Domain\Finance\Models\RetrochargeEvent;
+use EolabsIo\AmazonMws\Domain\Shared\Actions\BasePersistAction;
+use EolabsIo\AmazonMws\Domain\Shared\Concerns\FormatsModelAttributes;
 
 
 class PersistRetrochargeEventAction extends BasePersistAction
 {
+    use FormatsModelAttributes;
 
     public function getKey(): string
     {

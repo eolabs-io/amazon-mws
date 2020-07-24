@@ -3,13 +3,15 @@
 namespace EolabsIo\AmazonMws\Domain\Finance\Actions;
 
 use EolabsIo\AmazonMws\Domain\Finance\Actions\AttachFeeListAction;
-use EolabsIo\AmazonMws\Domain\Finance\Actions\BasePersistAction;
 use EolabsIo\AmazonMws\Domain\Finance\Models\ServiceFeeEvent;
+use EolabsIo\AmazonMws\Domain\Shared\Actions\BasePersistAction;
+use EolabsIo\AmazonMws\Domain\Shared\Concerns\FormatsModelAttributes;
 
 
 class PersistServiceFeeEventAction extends BasePersistAction
 {
-
+    use FormatsModelAttributes;
+    
     public function getKey(): string
     {
     	return 'ServiceFeeEventList';

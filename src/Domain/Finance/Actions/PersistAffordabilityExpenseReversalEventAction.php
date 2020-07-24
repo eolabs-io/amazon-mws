@@ -4,14 +4,16 @@ namespace EolabsIo\AmazonMws\Domain\Finance\Actions;
 
 use EolabsIo\AmazonMws\Domain\Finance\Actions\AssociateBaseExpenseAction;
 use EolabsIo\AmazonMws\Domain\Finance\Actions\AssociateTotalExpenseAction;
-use EolabsIo\AmazonMws\Domain\Finance\Actions\BasePersistAction;
 use EolabsIo\AmazonMws\Domain\Finance\Models\AffordabilityExpenseReversalEvent;
 use EolabsIo\AmazonMws\Domain\Finance\Models\CurrencyAmount;
+use EolabsIo\AmazonMws\Domain\Shared\Actions\BasePersistAction;
+use EolabsIo\AmazonMws\Domain\Shared\Concerns\FormatsModelAttributes;
 
 
 class PersistAffordabilityExpenseReversalEventAction extends BasePersistAction
 {
-
+    use FormatsModelAttributes;
+    
     public function getKey(): string
     {
     	return 'AffordabilityExpenseReversalEventList';

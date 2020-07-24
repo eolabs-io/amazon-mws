@@ -5,12 +5,14 @@ namespace EolabsIo\AmazonMws\Domain\Finance\Actions;
 use EolabsIo\AmazonMws\Domain\Finance\Actions\AssociateBaseValueAction;
 use EolabsIo\AmazonMws\Domain\Finance\Actions\AssociateTaxValueAction;
 use EolabsIo\AmazonMws\Domain\Finance\Actions\AssociateTransactionValueAction;
-use EolabsIo\AmazonMws\Domain\Finance\Actions\BasePersistAction;
 use EolabsIo\AmazonMws\Domain\Finance\Models\ProductAdsPaymentEvent;
+use EolabsIo\AmazonMws\Domain\Shared\Actions\BasePersistAction;
+use EolabsIo\AmazonMws\Domain\Shared\Concerns\FormatsModelAttributes;
 
 
 class PersistProductAdsPaymentEventAction extends BasePersistAction
 {
+    use FormatsModelAttributes;
 
     public function getKey(): string
     {

@@ -6,12 +6,14 @@ use EolabsIo\AmazonMws\Domain\Finance\Actions\AssociateOverPaymentCreditAction;
 use EolabsIo\AmazonMws\Domain\Finance\Actions\AssociateRecoveryAmountAction;
 use EolabsIo\AmazonMws\Domain\Finance\Actions\AttachChargeInstrumentListAction;
 use EolabsIo\AmazonMws\Domain\Finance\Actions\AttachDebtRecoveryItemListAction;
-use EolabsIo\AmazonMws\Domain\Finance\Actions\BasePersistAction;
 use EolabsIo\AmazonMws\Domain\Finance\Models\DebtRecoveryEvent;
+use EolabsIo\AmazonMws\Domain\Shared\Actions\BasePersistAction;
+use EolabsIo\AmazonMws\Domain\Shared\Concerns\FormatsModelAttributes;
 
 
 class PersistDebtRecoveryEventAction extends BasePersistAction
 {
+    use FormatsModelAttributes;
 
     public function getKey(): string
     {
