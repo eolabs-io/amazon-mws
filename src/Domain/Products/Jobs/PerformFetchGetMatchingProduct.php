@@ -6,15 +6,17 @@ use EolabsIo\AmazonMwsThrottlingMiddleware\Facades\AmazonMwsThrottlingMiddleware
 use EolabsIo\AmazonMws\Domain\Products\Events\FetchGetMatchingProduct;
 use EolabsIo\AmazonMws\Domain\Products\GetMatchingProduct;
 use EolabsIo\AmazonMws\Domain\Products\Jobs\ProcessGetMatchingProductsResponse;
+use EolabsIo\AmazonMws\Domain\Shared\Concerns\HandlesJobsRequestException;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Http\Client\RequestException;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
 class PerformFetchGetMatchingProduct implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, HandlesJobsRequestException;
     
 
     /** @var EolabsIo\AmazonMws\Domain\Products\GetMatchingProduct */
@@ -37,9 +39,15 @@ class PerformFetchGetMatchingProduct implements ShouldQueue
      */
     public function handle()
     {
-        $results = $this->getMatchingProduct->fetch();
+        try {
+            $results = $this->getMatchingProduct->fetch();
 
-        ProcessGetMatchingProductsResponse::dispatch($results);
+            ProcessGetMatchingProductsResponse::dispatch($results);
+        }
+        catch(RequestException $exception) {
+            $delay = 30;
+            $this->handleRequestException($exception, $delay);
+        }
     }
 
     public function middleware()
