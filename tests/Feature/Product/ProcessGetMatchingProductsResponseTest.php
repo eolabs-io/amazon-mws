@@ -1,7 +1,6 @@
 <?php
 
-namespace EolabsIo\AmazonMws\Tests;
-
+namespace EolabsIo\AmazonMws\Tests\Feature\Product;
 
 use EolabsIo\AmazonMws\Domain\Products\Jobs\ProcessGetMatchingProductsResponse;
 use EolabsIo\AmazonMws\Domain\Products\Models\Product;
@@ -47,10 +46,10 @@ class ProcessGetMatchingProductsResponseTest extends TestCase
     {
         $this->assertEquals($attributeSet->binding, "Apparel");
         $this->assertEquals($attributeSet->brand, "Pearl iZUMi");
-        $this->assertEquals($attributeSet->itemDimension->height, "2.00");
-        $this->assertEquals($attributeSet->itemDimension->length, "9.00");
-        $this->assertEquals($attributeSet->packageDimension->height, "2.80");
-        $this->assertEquals($attributeSet->packageDimension->width, "8.40");
+        $this->assertEquals($attributeSet->itemDimension->height, 2.00);
+        $this->assertEquals($attributeSet->itemDimension->length, 9.00);
+        $this->assertEquals($attributeSet->packageDimension->height, 2.80);
+        $this->assertEquals($attributeSet->packageDimension->width, 8.40);
         $this->assertEquals($attributeSet->smallImage->url, "http://ecx.images-amazon.com/images/I/41ty3Sn%2BU8L._SL75_.jpg");
         $this->assertEquals($attributeSet->features[4]['feature'], "86 percent nylon, 14% spandex, 9-Inch inseam");
     }

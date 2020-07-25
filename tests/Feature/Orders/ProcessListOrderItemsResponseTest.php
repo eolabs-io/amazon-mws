@@ -1,6 +1,6 @@
 <?php
 
-namespace EolabsIo\AmazonMws\Tests;
+namespace EolabsIo\AmazonMws\Tests\Feature\Orders;
 
 use EolabsIo\AmazonMws\Domain\Orders\Jobs\ProcessListOrderItemsResponse;
 use EolabsIo\AmazonMws\Domain\Orders\Models\Order;

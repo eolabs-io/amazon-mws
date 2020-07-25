@@ -4,6 +4,7 @@ namespace EolabsIo\AmazonMws\Tests\Unit;
 
 use EolabsIo\AmazonMws\Tests\Concerns\RequiresModelFactories;
 use EolabsIo\AmazonMws\Tests\TestCase;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Arr;
 
@@ -12,11 +13,17 @@ abstract class BaseModelTest extends TestCase
 	use RefreshDatabase,
         RequiresModelFactories;
 
+    /** @var string */
+    public $modelClass;
+
+
     public function setUp(): void
     {
         parent::setUp();
 
         $this->seedDatabase();
+
+        $this->modelClass = $this->getModelClass();
     }
 
     public function seedDatabase()
@@ -28,9 +35,8 @@ abstract class BaseModelTest extends TestCase
     public function it_can_find_models()
     {
         $modelsInDb = $this->factory(10)->create();
-        $modelClass = $this->getModelClass();
 
-        $models = $modelClass::All();
+        $models = $this->modelClass::All();
 
         $this->assertArraysEqual($models->toArray(), $modelsInDb->toArray());
     }
@@ -39,13 +45,12 @@ abstract class BaseModelTest extends TestCase
     public function it_can_create_a_model()
     {
         $data = $this->factory()->make()->toArray();
-        $modelClass = $this->getModelClass();
 
-        $model = $modelClass::create($data);
+        $model = $this->modelClass::create($data);
         $table = $model->getTable();
         
-        $this->assertInstanceOf($modelClass, $model);
-        $this->assertDatabaseHas($table, $model->toArray());
+        $this->assertInstanceOf($this->modelClass, $model);
+        $this->assertDatabaseHasModel($model);
     }
 
     /** @test */
@@ -53,11 +58,10 @@ abstract class BaseModelTest extends TestCase
     {
         $model = $this->factory()->create();
         $primaryKey = $this->getPrimaryKeyValue($model);
-        $modelClass = $this->getModelClass();
 
-        $found = $modelClass::find($primaryKey);
+        $found = $this->modelClass::find($primaryKey);
         
-        $this->assertInstanceOf($modelClass, $found);
+        $this->assertInstanceOf($this->modelClass, $found);
         $this->assertEquals($found->toArray(), $model->toArray());
     }
 
@@ -71,7 +75,7 @@ abstract class BaseModelTest extends TestCase
         $update = $model->update($data);
 
         $this->assertTrue($update);
-        $this->assertDatabaseHas($table, $model->toArray());
+        $this->assertDatabaseHasModel($model);
     }
 
 
@@ -94,5 +98,11 @@ abstract class BaseModelTest extends TestCase
 
         // return
         $this->assertEquals($sortedArray1, $sortedArray2);
+    }
+
+    public function assertDatabaseHasModel(Model $model)
+    {
+        $found = $this->modelClass::find($model->id);
+        $this->assertEquals($found->toArray(), $model->toArray());
     }
 }

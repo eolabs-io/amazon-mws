@@ -1,6 +1,6 @@
 <?php
 
-namespace EolabsIo\AmazonMws\Tests;
+namespace EolabsIo\AmazonMws\Tests\Feature\Product;
 
 use EolabsIo\AmazonMwsClient\Models\Store;
 use EolabsIo\AmazonMws\Domain\Products\Events\FetchGetMatchingProduct;

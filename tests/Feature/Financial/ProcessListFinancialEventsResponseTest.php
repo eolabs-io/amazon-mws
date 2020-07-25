@@ -1,6 +1,6 @@
 <?php
 
-namespace EolabsIo\AmazonMws\Tests;
+namespace EolabsIo\AmazonMws\Tests\Feature\Financial;
 
 use EolabsIo\AmazonMws\Domain\Finance\Jobs\ProcessListFinancialEventsResponse;
 use EolabsIo\AmazonMws\Tests\Concerns\AssertsAdjustmentEvents;

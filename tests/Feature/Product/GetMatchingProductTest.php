@@ -1,6 +1,6 @@
 <?php
 
-namespace EolabsIo\AmazonMws\Tests;
+namespace EolabsIo\AmazonMws\Tests\Feature\Product;
 
 use EolabsIo\AmazonMwsClient\Models\Store;
 use EolabsIo\AmazonMws\Support\Facades\GetMatchingProduct;
@@ -76,7 +76,7 @@ class GetMatchingProductTest extends TestCase
       $product = $response['Products'][0]['Product'];
 
       $this->assertEquals($product['Identifiers']['MarketplaceASIN']['ASIN'], "B002KT3XRQ");
-      $this->assertEquals($product['AttributeSets']['ItemAttributes'][4], "86 percent nylon, 14% spandex, 9-Inch inseam");
+      $this->assertEquals($product['AttributeSets']['ItemAttributes']['Feature'][4], "86 percent nylon, 14% spandex, 9-Inch inseam");
       $this->assertEquals($product['Relationships']['VariationChild'][0]['Identifiers']['MarketplaceASIN']['ASIN'], "B002KT3XQC");
       $this->assertEquals($product['SalesRankings']['SalesRank'][1]['ProductCategoryId'], "2420095011");      
     }

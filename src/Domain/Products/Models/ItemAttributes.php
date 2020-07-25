@@ -13,6 +13,15 @@ use Illuminate\Database\Eloquent\Model;
 class ItemAttributes extends Model
 {
     /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'is_adult_product' => 'boolean',
+    ];
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array

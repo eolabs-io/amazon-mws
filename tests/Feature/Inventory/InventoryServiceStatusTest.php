@@ -1,6 +1,6 @@
 <?php
 
-namespace EolabsIo\AmazonMws\Tests;
+namespace EolabsIo\AmazonMws\Tests\Feature\Inventory;
 
 use EolabsIo\AmazonMws\Support\Facades\InventoryServiceStatus;
 use EolabsIo\AmazonMws\Tests\Factories\InventoryFactory;

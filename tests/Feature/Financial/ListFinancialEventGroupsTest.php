@@ -1,16 +1,16 @@
 <?php
 
-namespace EolabsIo\AmazonMws\Tests;
+namespace EolabsIo\AmazonMws\Tests\Feature\Financial;
 
 use EolabsIo\AmazonMwsClient\Models\Store;
-use EolabsIo\AmazonMws\Support\Facades\ListFinancialEvents;
-use EolabsIo\AmazonMws\Tests\Factories\ListFinancialEventsFactory;
+use EolabsIo\AmazonMws\Support\Facades\ListFinancialEventGroups;
+use EolabsIo\AmazonMws\Tests\Factories\ListFinancialEventGroupsFactory;
 use EolabsIo\AmazonMws\Tests\Factories\StoreFactory;
 use EolabsIo\AmazonMws\Tests\TestCase;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Http;
 
-class ListFinancialEventsTest extends TestCase
+class ListFinancialEventGroupsTest extends TestCase
 {
 
     protected function setUp(): void
@@ -30,14 +30,14 @@ class ListFinancialEventsTest extends TestCase
     public function it_sends_the_correct_request_query()
     {
 
-    	ListFinancialEventsFactory::new()->fakeListFinancialEventsResponse();
+    	ListFinancialEventGroupsFactory::new()->fakeListFinancialEventGroupsResponse();
 
     	$store = StoreFactory::new()
               						 ->withValidAttributes()
               					   ->create();
 
-      $response = ListFinancialEvents::withStore($store)
-                            ->withPostedAfter( Carbon::create(2020, 6, 8, 12) )
+      $response = ListFinancialEventGroups::withStore($store)
+                            ->withFinancialEventGroupStartedAfter( Carbon::create(2020, 6, 8, 12) )
                             ->fetch();
 
       Http::assertSent(function ($request){
@@ -49,32 +49,32 @@ class ListFinancialEventsTest extends TestCase
       				   $request['SignatureMethod'] == 'HmacSHA256' &&
       				   $request['SignatureVersion'] == '2' &&
       				   $request['Timestamp'] == '2020-03-24T12:00:00Z' &&
-      				   $request['PostedAfter'] == '2020-06-08T12:00:00Z' &&
-      				   $request['Action'] == 'ListFinancialEvents' &&
-      				   $request['Signature'] == 'hn7N5VFazpg+H3aEUuMh2dLV9V+qHPyg98PtGJ2PUyQ=';
+      				   $request['FinancialEventGroupStartedAfter'] == '2020-06-08T12:00:00Z' &&
+      				   $request['Action'] == 'ListFinancialEventGroups' &&
+      				   $request['Signature'] == 'a9iiowfx2yr7w60qQ/cDT4kSX9curi7RoKXV29v/XtU=';
         });
 
     }
 
     /** @test */
-    public function it_can_get_financial_events()
+    public function it_can_get_orders()
     {
-  		ListFinancialEventsFactory::new()->fakeListFinancialEventsResponse();
+  		ListFinancialEventGroupsFactory::new()->fakeListFinancialEventGroupsResponse();
       
       $store = StoreFactory::new()
       						         ->withValidAttributes()
       					           ->create();
 
-      $response = ListFinancialEvents::withStore($store)
-                                          ->withPostedAfter( Carbon::create(2020, 6, 8, 12) )->fetch();
+      $response = ListFinancialEventGroups::withStore($store)
+                                          ->withFinancialEventGroupStartedAfter( Carbon::create(2020, 6, 8, 12) )->fetch();
 
+  		$this->assertArrayHasKey('FinancialEventGroupList', $response->toArray());
 
-  		$this->assertArrayHasKey('FinancialEvents', $response->toArray());
+  		$financialEventGroupId = data_get($response, 'FinancialEventGroupList.0.FinancialEventGroupId');
+  		$processingStatus = data_get($response, 'FinancialEventGroupList.0.ProcessingStatus');
 
-  		$dealDescription = data_get($response, 'FinancialEvents.SellerDealPaymentEventList.0.DealDescription');
-
-  		$this->assertEquals($dealDescription, 'test fees');
-
+  		$this->assertEquals($financialEventGroupId, '22YgYW55IGNhcm5hbCBwbGVhEXAMPLE');
+  		$this->assertEquals($processingStatus, 'Closed');
       
     }
 
@@ -83,36 +83,36 @@ class ListFinancialEventsTest extends TestCase
     {
       $this->seed();
 
-      ListFinancialEventsFactory::new()->fakeListFinancialEventsTokenResponse();
+      ListFinancialEventGroupsFactory::new()->fakeListFinancialEventGroupsTokenResponse();
 
       $store = StoreFactory::new()
                            ->withValidAttributes()
                            ->withDefaultMarketplaces()
                            ->create();
 
-      $ListFinancialEvents = ListFinancialEvents::withStore($store)
-                                                ->withPostedAfter( Carbon::create(2020, 6, 8, 12) );              
-      $response = $ListFinancialEvents->fetch();
+      $ListFinancialEventGroups = ListFinancialEventGroups::withStore($store)
+                                                          ->withFinancialEventGroupStartedAfter( Carbon::create(2020, 6, 8, 12) );              
+      $response = $ListFinancialEventGroups->fetch();
 
-      $this->assertTrue($ListFinancialEvents->hasNextToken());
+      $this->assertTrue($ListFinancialEventGroups->hasNextToken());
             
-      $nextTokenResponse = $ListFinancialEvents->fetch();
+      $nextTokenResponse = $ListFinancialEventGroups->fetch();
 
-      $this->assertArrayHasKey('FinancialEvents', $response->toArray());
-      $this->assertArrayHasKey('FinancialEvents', $nextTokenResponse->toArray());
+      $this->assertArrayHasKey('FinancialEventGroupList', $response->toArray());
+      $this->assertArrayHasKey('FinancialEventGroupList', $nextTokenResponse->toArray());
 
-      $dealDescription1 = data_get($response, 'FinancialEvents.SellerDealPaymentEventList.0.DealDescription');
-      $dealDescription2 = data_get($nextTokenResponse, 'FinancialEvents.SellerDealPaymentEventList.0.DealDescription');
+      $financialEventGroupId1 = data_get($response, 'FinancialEventGroupList.0.FinancialEventGroupId');
+      $financialEventGroupId2 = data_get($nextTokenResponse, 'FinancialEventGroupList.0.FinancialEventGroupId');
 
-      $this->assertEquals($dealDescription1, 'test fees');
-      $this->assertEquals($dealDescription2, '__test fees__'); 
+      $this->assertEquals($financialEventGroupId1, '22YgYW55IGNhcm5hbCBwbGVhEXAMPLE');
+      $this->assertEquals($financialEventGroupId2, '22YgYW55IsddsfdfsGNhcm5hbCBwbGVhEXAMPLE'); 
 
-      $this->assertSentListFinancialEvents();
-      $this->assertSentListFinancialEventsByNextToken();
+      $this->assertSentListFinancialEventGroups();
+      $this->assertSentListFinancialEventGroupsByNextToken();
 
     }
 
-    public function assertSentListFinancialEvents()
+    public function assertSentListFinancialEventGroups()
     {
       $requestResponsePairs = Http::recorded($cb = null);
       $request = $requestResponsePairs[0][0];
@@ -126,13 +126,13 @@ class ListFinancialEventsTest extends TestCase
          $request['SignatureMethod'] == 'HmacSHA256' &&
          $request['SignatureVersion'] == '2' &&
          $request['Timestamp'] == '2020-03-24T12:00:00Z' &&
-         $request['PostedAfter'] == '2020-06-08T12:00:00Z' &&
-         $request['Action'] == 'ListFinancialEvents' &&
-         $request['Signature'] == 'hn7N5VFazpg+H3aEUuMh2dLV9V+qHPyg98PtGJ2PUyQ='
+         $request['FinancialEventGroupStartedAfter'] == '2020-06-08T12:00:00Z' &&
+         $request['Action'] == 'ListFinancialEventGroups' &&
+         $request['Signature'] == 'a9iiowfx2yr7w60qQ/cDT4kSX9curi7RoKXV29v/XtU='
       );
     }
 
-    public function assertSentListFinancialEventsByNextToken()
+    public function assertSentListFinancialEventGroupsByNextToken()
     {
       $requestResponsePairs = Http::recorded($cb = null);
       $request = $requestResponsePairs[1][0];
@@ -147,8 +147,8 @@ class ListFinancialEventsTest extends TestCase
          $request['SignatureVersion'] == '2' &&
          $request['Timestamp'] == '2020-03-24T12:00:00Z' &&
          $request['NextToken'] == '2YgYW55IGNhcm5hbCBwbGVhcEXAMPLE' &&
-         $request['Action'] == 'ListFinancialEventsByNextToken' &&
-         $request['Signature'] == '0lSmdOXucwgq7HxeKWOvv/qs8e6/AEX7gHOKycc/CXI='
+         $request['Action'] == 'ListFinancialEventGroupsByNextToken' &&
+         $request['Signature'] == 'mFdljIZFRW9mhbB/8fH4qnEk7vZ4rZW9dmfHKWuzE/U='
       );
     }
 

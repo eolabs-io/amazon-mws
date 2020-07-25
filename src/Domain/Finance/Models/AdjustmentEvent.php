@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class AdjustmentEvent extends Model
 {
-        
     /**
      * The attributes that should be cast.
      *

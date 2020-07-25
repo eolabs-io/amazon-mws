@@ -1,6 +1,6 @@
 <?php
 
-namespace EolabsIo\AmazonMws\Tests;
+namespace EolabsIo\AmazonMws\Tests\Feature\Financial;
 
 use Mockery;
 use EolabsIo\AmazonMwsClient\Models\Store;

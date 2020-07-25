@@ -19,9 +19,9 @@ class ProductTest extends BaseModelTest
     public function it_has_attribute_sets_relationship()
     {
         $product = $this->factory()->create();
-        $itemAttributes = factory(ItemAttributes::class, 3)->create(['product_id' => $product->id]);
+        $attributeSets = factory(ItemAttributes::class, 3)->create(['product_id' => $product->id]);
 
-        $this->assertArraysEqual($itemAttributes->toArray(), $product->itemAttributes->toArray());
+        $this->assertArraysEqual($attributeSets->toArray(), $product->attributeSets->toArray());
     }
 
     /** @test */
