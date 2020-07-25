@@ -23,7 +23,7 @@ class PersistProductAction extends BasePersistAction
         $marketplace_id = data_get($list, 'Product.Identifiers.MarketplaceASIN.MarketplaceId');
         $values = compact('asin', 'marketplace_id');
 
-        $product = Product::create($values);
+        $product = Product::updateOrCreate($values);
 
         foreach($this->associateActions() as $associateActions) {
         	(new $associateActions($list))->execute($product);

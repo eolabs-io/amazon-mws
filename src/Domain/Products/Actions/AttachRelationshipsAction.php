@@ -15,7 +15,13 @@ class AttachRelationshipsAction extends BaseAttachAction
     {
         return 'Product.Relationships.VariationChild';    
     }
-
+    
+    protected function createFromList()
+    {
+        VariationChild::where('product_id', $this->model->id)->delete();
+        parent::createFromList();
+    }
+    
     protected function createItem($list)
     {
         $values = $this->getFormatedAttributes($list, new VariationChild);

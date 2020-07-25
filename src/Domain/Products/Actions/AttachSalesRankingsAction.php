@@ -16,7 +16,11 @@ class AttachSalesRankingsAction extends BaseAttachAction
     {
         return 'Product.SalesRankings.SalesRank';    
     }
-
+    protected function createFromList()
+    {
+        SalesRank::where('product_id', $this->model->id)->delete();
+        parent::createFromList();
+    }
     protected function createItem($list)
     {
         $values = $this->getFormatedAttributes($list, new SalesRank);

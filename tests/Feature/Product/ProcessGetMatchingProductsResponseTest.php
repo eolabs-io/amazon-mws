@@ -18,7 +18,7 @@ class ProcessGetMatchingProductsResponseTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        
+
         $getMatchingProduct = $this->createGetMatchingProduct();
 
         $results = $getMatchingProduct->fetch();
@@ -29,7 +29,7 @@ class ProcessGetMatchingProductsResponseTest extends TestCase
     /** @test */
     public function it_can_process_list_financial_event_groups_response()
     {
-        $product = Product::where(["asin" => "B002KT3XRQ"])
+        $product = Product::where(["asin" => "B002KT3XRQ", "marketplace_id" => "ATVPDKIKX0DER"])
                           ->first();
 
         $attributeSet = $product->attributeSets->first();

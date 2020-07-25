@@ -20,6 +20,12 @@ class AttachAttributeSetsAction extends BaseAttachAction
         return 'Product.AttributeSets';    
     }
 
+    protected function createFromList()
+    {
+        ItemAttributes::where('product_id', $this->model->id)->delete();
+        parent::createFromList();
+    }
+
     protected function createItem($list)
     {
         $values = $this->getFormatedAttributes($list, new ItemAttributes);
