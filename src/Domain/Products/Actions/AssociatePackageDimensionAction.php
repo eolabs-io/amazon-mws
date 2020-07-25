@@ -17,7 +17,7 @@ class AssociatePackageDimensionAction extends BaseAssociateAction
     protected function createItem($list)
     {
         $values = $this->getFormatedAttributes($list, new PackageDimension);
-        $packageDimension = PackageDimension::create($values);
+        $packageDimension = PackageDimension::updateOrCreate($values);
 
         $this->model->packageDimension()->associate($packageDimension);
     }

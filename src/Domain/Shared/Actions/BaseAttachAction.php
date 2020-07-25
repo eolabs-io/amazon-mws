@@ -24,7 +24,7 @@ abstract class BaseAttachAction
         $this->createFromList();
     }
     
-    private function createFromList()
+    protected function createFromList()
     {
         foreach($this->list as $value) {
             $this->createItem($value);

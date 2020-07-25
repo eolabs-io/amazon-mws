@@ -14,20 +14,21 @@ class ProcessGetMatchingProductsResponseTest extends TestCase
     use RefreshDatabase,
         CreatesGetMatchingProduct;
 
+    /** @var EolabsIo\AmazonMws\Support\Facades\GetMatchingProduct */
+    public $getMatchingProduct;
+
+    /** @var Illuminate\Support\Collection */
+    public $results;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        $getMatchingProduct = $this->createGetMatchingProduct();
-
-        $results = $getMatchingProduct->fetch();
-
-        (new ProcessGetMatchingProductsResponse($results))->handle();
+        $this->executeProcessGetMatchingProductsResponse();
     }
 
     /** @test */
-    public function it_can_process_list_financial_event_groups_response()
+    public function it_can_process_product_response()
     {
         $product = Product::where(["asin" => "B002KT3XRQ", "marketplace_id" => "ATVPDKIKX0DER"])
                           ->first();
@@ -40,6 +41,21 @@ class ProcessGetMatchingProductsResponseTest extends TestCase
 
         $salesRankings = $product->salesRankings->first();
         $this->assertSeesSalesRankings($salesRankings);
+    }
+
+    /** @test */
+    public function it_can_update_product_response()
+    {
+        (new ProcessGetMatchingProductsResponse($this->results))->handle();
+        
+        $this->assertDatabaseCount('features', 5);
+        $this->assertDatabaseCount('images', 1);
+        $this->assertDatabaseCount('item_attributes', 1);
+        $this->assertDatabaseCount('item_dimensions', 1);
+        $this->assertDatabaseCount('package_dimensions', 1);
+        $this->assertDatabaseCount('products', 1);
+        $this->assertDatabaseCount('sales_ranks', 3);
+        $this->assertDatabaseCount('variation_children', 5);
     }
 
     public function assertSeesAttributeSet($attributeSet)
@@ -64,6 +80,15 @@ class ProcessGetMatchingProductsResponseTest extends TestCase
     {
         $this->assertEquals($salesRankings->product_category_id, "apparel_display_on_website");
         $this->assertEquals($salesRankings->rank, "159");
+    }
+
+    public function executeProcessGetMatchingProductsResponse()
+    {
+        $this->getMatchingProduct = $this->createGetMatchingProduct();
+
+        $this->results = $this->getMatchingProduct->fetch();
+
+        (new ProcessGetMatchingProductsResponse($this->results))->handle();
     }
 
 }

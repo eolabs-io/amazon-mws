@@ -36,9 +36,9 @@ class CreateItemAttributesTable extends Migration
             $table->timestamps();
 
             $table->foreign('product_id')->references('id')->on('products');
-            $table->foreign('item_dimension_id')->references('id')->on('item_dimensions');
-            $table->foreign('package_dimension_id')->references('id')->on('package_dimensions');
-            $table->foreign('small_image_id')->references('id')->on('images');
+            $table->foreign('item_dimension_id')->references('id')->on('item_dimensions')->onDelete('cascade');
+            $table->foreign('package_dimension_id')->references('id')->on('package_dimensions')->onDelete('cascade');
+            $table->foreign('small_image_id')->references('id')->on('images')->onDelete('cascade');
         });
     }
 

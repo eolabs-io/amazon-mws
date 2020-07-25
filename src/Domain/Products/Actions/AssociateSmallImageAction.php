@@ -17,7 +17,8 @@ class AssociateSmallImageAction extends BaseAssociateAction
     protected function createItem($list)
     {
         $values = $this->getFormatedAttributes($list, new Image);
-        $smallImage = Image::create($values);
+        $attributes = $values;
+        $smallImage = Image::updateOrCreate($attributes, $values);
 
         $this->model->smallImage()->associate($smallImage);
     }

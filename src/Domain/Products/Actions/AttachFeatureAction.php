@@ -19,7 +19,7 @@ class AttachFeatureAction extends BaseAttachAction
         $feature = $list;
         $item_attribute_id = $this->model->id;
 
-        Feature::create(compact('feature', 'item_attribute_id'));
+        Feature::updateOrCreate(compact('feature', 'item_attribute_id'));
     }
 
 }

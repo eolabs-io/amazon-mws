@@ -17,7 +17,7 @@ class AssociateItemDimensionAction extends BaseAssociateAction
     protected function createItem($list)
     {
         $values = $this->getFormatedAttributes($list, new ItemDimension);
-        $itemDimension = ItemDimension::create($values);
+        $itemDimension = ItemDimension::updateOrCreate($values);
 
         $this->model->itemDimension()->associate($itemDimension);
     }

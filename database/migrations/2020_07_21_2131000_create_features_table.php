@@ -20,7 +20,7 @@ class CreateFeaturesTable extends Migration
             $table->unsignedBigInteger('item_attribute_id');
             $table->timestamps();
 
-            $table->foreign('item_attribute_id')->references('id')->on('item_attributes'); 
+            $table->foreign('item_attribute_id')->references('id')->on('item_attributes')->onDelete('cascade'); 
         });
     }
 
