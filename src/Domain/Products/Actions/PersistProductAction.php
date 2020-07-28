@@ -19,6 +19,11 @@ class PersistProductAction extends BasePersistAction
 
     protected function createItem($list)
     {
+        $status = data_get($list, '@attributes.Status');
+        if($status !== 'Success') {
+            return;
+        }
+
         $asin = data_get($list, 'Product.Identifiers.MarketplaceASIN.ASIN');
         $marketplace_id = data_get($list, 'Product.Identifiers.MarketplaceASIN.MarketplaceId');
         $values = compact('asin', 'marketplace_id');

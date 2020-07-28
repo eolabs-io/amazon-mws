@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<GetMatchingProductResponse
+    xmlns="http://mws.amazonservices.com/schema/Products/2011-10-01">
+    <GetMatchingProductResult ASIN="B002KT3XRQ" status="ClientError">
+        <Error>
+            <Type>Sender</Type>
+            <Code>InvalidParameterValue</Code>
+            <Message>Invalid ASIN identifier B002KT3XRQ for marketplace XXXXXXXXXX.</Message>
+        </Error>
+    </GetMatchingProductResult>
+    <ResponseMetadata>
+        <RequestId>b12caada-d330-4d87-a789-EXAMPLE35872</RequestId>
+    </ResponseMetadata>
+</GetMatchingProductResponse>

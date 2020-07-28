@@ -40,4 +40,18 @@ class GetMatchingProductFactory
     	return $this;
 	}
 	
+    public function fakeGetMatchingProductWithErrorResponse(): self
+    {
+
+        $file = __DIR__ . '/../Stubs/Responses/fetchGetMatchingProductWithError.xml';
+        $getMatchingProductResponse = file_get_contents($file);
+
+        Http::fake([
+             $this->endpoint => Http::sequence()
+                                    ->push($getMatchingProductResponse, 200)
+                                    ->whenEmpty(Http::response('', 404)),
+        ]);
+
+        return $this;
+    }
 }

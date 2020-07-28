@@ -21,4 +21,14 @@ trait CreatesGetMatchingProduct
         return GetMatchingProduct::withStore($store);    
     }
 
+    public function createGetMatchingProductWithError()
+    {
+        GetMatchingProductFactory::new()->fakeGetMatchingProductWithErrorResponse();
+
+        $store = StoreFactory::new()
+                             ->withValidAttributes()
+                             ->create();
+
+        return GetMatchingProduct::withStore($store);    
+    }
 }

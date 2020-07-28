@@ -24,12 +24,14 @@ class ProcessGetMatchingProductsResponseTest extends TestCase
     {
         parent::setUp();
 
-        $this->executeProcessGetMatchingProductsResponse();
+        // $this->executeProcessGetMatchingProductsResponse();
     }
 
     /** @test */
     public function it_can_process_product_response()
     {
+        $this->executeProcessGetMatchingProductsResponse();
+
         $product = Product::where(["asin" => "B002KT3XRQ", "marketplace_id" => "ATVPDKIKX0DER"])
                           ->first();
 
@@ -44,8 +46,25 @@ class ProcessGetMatchingProductsResponseTest extends TestCase
     }
 
     /** @test */
+    public function it_can_handle_product_error_response()
+    {
+        $this->executeProcessGetMatchingProductsWithErrorResponse();
+        (new ProcessGetMatchingProductsResponse($this->results))->handle();
+        
+        $this->assertDatabaseCount('features', 0);
+        $this->assertDatabaseCount('images', 0);
+        $this->assertDatabaseCount('item_attributes', 0);
+        $this->assertDatabaseCount('item_dimensions', 0);
+        $this->assertDatabaseCount('package_dimensions', 0);
+        $this->assertDatabaseCount('products', 0);
+        $this->assertDatabaseCount('sales_ranks', 0);
+        $this->assertDatabaseCount('variation_children', 0);
+    }
+
+    /** @test */
     public function it_can_update_product_response()
     {
+        $this->executeProcessGetMatchingProductsResponse();
         (new ProcessGetMatchingProductsResponse($this->results))->handle();
         
         $this->assertDatabaseCount('features', 5);
@@ -91,4 +110,12 @@ class ProcessGetMatchingProductsResponseTest extends TestCase
         (new ProcessGetMatchingProductsResponse($this->results))->handle();
     }
 
+    public function executeProcessGetMatchingProductsWithErrorResponse()
+    {
+        $this->getMatchingProduct = $this->createGetMatchingProductWithError();
+
+        $this->results = $this->getMatchingProduct->fetch();
+
+        (new ProcessGetMatchingProductsResponse($this->results))->handle();
+    }
 }
