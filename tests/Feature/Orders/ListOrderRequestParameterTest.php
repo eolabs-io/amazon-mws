@@ -9,6 +9,8 @@ use EolabsIo\AmazonMws\Tests\Factories\StoreFactory;
 use EolabsIo\AmazonMws\Tests\TestCase;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Http;
+use EndpointSeeder;
+
 
 class ListOrderRequestParameterTest extends TestCase
 {
@@ -159,7 +161,7 @@ class ListOrderRequestParameterTest extends TestCase
     /** @test */
     public function it_sets_default_marketplace_ids()
     {
-      $this->seed();
+      $this->seed(EndpointSeeder::class);
       
       ListOrdersFactory::new()->fakeFulfillmentListOrdersResponse();
 
@@ -190,7 +192,7 @@ class ListOrderRequestParameterTest extends TestCase
     /** @test */
     public function it_sets_fulfillmentChannels()
     {
-      $this->seed();
+      $this->seed(EndpointSeeder::class);
       
       ListOrdersFactory::new()->fakeFulfillmentListOrdersResponse();
 
@@ -225,7 +227,7 @@ class ListOrderRequestParameterTest extends TestCase
     /** @test */
     public function it_sets_PaymentMethod()
     {
-      $this->seed();
+      $this->seed(EndpointSeeder::class);
       
       ListOrdersFactory::new()->fakeFulfillmentListOrdersResponse();
 

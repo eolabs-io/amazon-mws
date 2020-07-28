@@ -19,6 +19,9 @@ use EolabsIo\AmazonMws\Domain\Orders\Providers\EventServiceProvider as OrdersEve
 use EolabsIo\AmazonMws\Domain\Products\Command\ProductCommand;
 use EolabsIo\AmazonMws\Domain\Products\GetMatchingProduct;
 use EolabsIo\AmazonMws\Domain\Products\Providers\EventServiceProvider as ProductsEventServiceProvider;
+use EolabsIo\AmazonMws\Domain\Sellers\Command\SellerCommand;
+use EolabsIo\AmazonMws\Domain\Sellers\ListMarketplaceParticipations;
+use EolabsIo\AmazonMws\Domain\Sellers\Providers\EventServiceProvider as SellersEventServiceProvider;
 use Illuminate\Support\ServiceProvider;
 
 class AmazonMwsServiceProvider extends ServiceProvider
@@ -44,6 +47,7 @@ class AmazonMwsServiceProvider extends ServiceProvider
                 FinancialEventCommand::class,
                 FinancialEventGroupCommand::class,
                 ProductCommand::class,
+                SellerCommand::class,
             ]);
         }
     }
@@ -60,6 +64,7 @@ class AmazonMwsServiceProvider extends ServiceProvider
         $this->app->register(OrdersEventServiceProvider::class);
         $this->app->register(FinanceEventServiceProvider::class);
         $this->app->register(ProductsEventServiceProvider::class);
+        $this->app->register(SellersEventServiceProvider::class);
         
         // Register the main class to use with the facade
         $this->app->singleton('inventory-list', function () {
@@ -88,6 +93,10 @@ class AmazonMwsServiceProvider extends ServiceProvider
 
         $this->app->singleton('get-matching-product', function () {
             return new GetMatchingProduct;
+        });
+
+        $this->app->singleton('list-marketplace-participations', function () {
+            return new ListMarketplaceParticipations;
         });
     }
 }

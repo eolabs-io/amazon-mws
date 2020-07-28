@@ -9,6 +9,8 @@ use EolabsIo\AmazonMws\Tests\Factories\StoreFactory;
 use EolabsIo\AmazonMws\Tests\TestCase;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Http;
+use EndpointSeeder;
+
 
 class ListOrdersTest extends TestCase
 {
@@ -80,7 +82,7 @@ class ListOrdersTest extends TestCase
     /** @test */
     public function it_can_get_orders_with_token()
     {
-      $this->seed();
+      $this->seed(EndpointSeeder::class);
 
       ListOrdersFactory::new()->fakeFulfillmentListOrdersTokenResponse();
       $store = StoreFactory::new()

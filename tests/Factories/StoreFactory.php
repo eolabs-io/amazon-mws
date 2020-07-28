@@ -2,7 +2,9 @@
 
 namespace EolabsIo\AmazonMws\Tests\Factories;
 
+use EolabsIo\AmazonMwsClient\Models\Endpoint;
 use EolabsIo\AmazonMwsClient\Models\Marketplace;
+use EolabsIo\AmazonMwsClient\Models\Participation;
 use EolabsIo\AmazonMwsClient\Models\Store;
 use EolabsIo\AmazonMws\Tests\Factories\BaseFactory;
 
@@ -21,14 +23,23 @@ class StoreFactory extends BaseFactory
         $attributes = array_merge($this->attributes, $extra);
 
         $store = factory(Store::class)->create($attributes);
-        $store->marketplaces()->attach($this->marketplaces);
+
+        foreach($this->marketplaces as $marketplace) {
+            factory(Participation::class)->create([
+                                                    'marketplace_id' => $marketplace->marketplace_id, 
+                                                    'seller_id' => $store->seller_id,
+                                                ]);
+        }
+
+        // $store->marketplaces()->attach($this->marketplaces);
 
         return $store;
     }
 
     public function withDefaultMarketplaces(): self
     {
-        $this->marketplaces = Marketplace::where(['country_code' => 'US'])->get();   
+        $endpoint = Endpoint::where(['country_code' => 'US'])->first();  
+        $this->marketplaces[] = factory(Marketplace::class)->create(['marketplace_id' => $endpoint->marketplace_id]); 
 
         return $this;
     }
