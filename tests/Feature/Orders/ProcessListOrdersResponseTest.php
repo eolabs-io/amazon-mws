@@ -66,4 +66,12 @@ class ProcessListOrdersResponseTest extends TestCase
 
     }
 
+    /** @test */
+    public function it_has_a_marketplace_id()
+    {
+        $order = Order::where(["amazon_order_id" => "483-3488972-0896720"])->first();
+        
+        $this->assertEquals($order->marketplace_id, 'A2Q3Y263D00KWC');
+    }
+
 }

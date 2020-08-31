@@ -71,7 +71,7 @@ class Order extends Model
                     'payment_method_details_id',
                     'is_replacement_order',
                     'replaced_order_id',
-                    'market_place_id',
+                    'marketplace_id',
                     'buyer_email',
                     'buyer_name',
                     'buyer_county',

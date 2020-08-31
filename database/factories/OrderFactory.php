@@ -35,7 +35,7 @@ $factory->define(Order::class, function (Faker $faker) {
             },
             'is_replacement_order' => $faker->boolean,
             'replaced_order_id' => $faker->numerify('###-#######-#######'),
-            'market_place_id' => $faker->text(),
+            'marketplace_id' => $faker->text(),
             'buyer_email' => $faker->email,
             'buyer_name' => $faker->name(),
             'buyer_county' => $faker->country,

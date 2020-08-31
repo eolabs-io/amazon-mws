@@ -8,9 +8,11 @@ use EolabsIo\AmazonMws\AmazonMwsServiceProvider;
 use EolabsIo\AmazonMws\Tests\Factories\AmazonConstantsFactory;
 use Illuminate\Support\Facades\Event;
 use Orchestra\Testbench\TestCase as Orchestra;
+use ReflectionObject;
 
 abstract class TestCase extends Orchestra
 {
+
 
     protected function setUp(): void
     {
