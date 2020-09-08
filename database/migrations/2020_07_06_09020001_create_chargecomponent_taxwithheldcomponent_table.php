@@ -19,7 +19,7 @@ class CreateChargeComponentTaxWithheldComponentTable extends Migration
             $table->unsignedBigInteger('tax_withheld_component_id')->index('cc_tc');
             $table->timestamps();
 
-            $table->foreign('tax_withheld_component_id', 'cc_id_tc_id_primary')->references('id')->on('tax_withheld_components')->onDelete('cascade');           
+            $table->foreign('tax_withheld_component_id', 'cc_id_tc_id_primary')->references('id')->on('tax_withheld_components')->onDelete('cascade');
             $table->foreign('charge_component_id', 'tc_id_cc_id_primary')->references('id')->on('charge_components')->onDelete('cascade');
         });
     }

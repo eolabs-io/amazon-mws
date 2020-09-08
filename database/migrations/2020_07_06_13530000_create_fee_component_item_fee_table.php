@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-
 class CreateFeeComponentItemFeeTable extends Migration
 {
     /**
@@ -20,7 +19,7 @@ class CreateFeeComponentItemFeeTable extends Migration
             $table->unsignedBigInteger('shipment_item_id')->index();
             $table->timestamps();
 
-            $table->foreign('shipment_item_id')->references('id')->on('shipment_items')->onDelete('cascade');           
+            $table->foreign('shipment_item_id')->references('id')->on('shipment_items')->onDelete('cascade');
             $table->foreign('fee_component_id')->references('id')->on('fee_components')->onDelete('cascade');
         });
     }

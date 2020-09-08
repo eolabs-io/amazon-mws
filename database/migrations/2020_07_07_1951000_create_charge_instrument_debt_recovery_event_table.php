@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-
 class CreateChargeInstrumentDebtRecoveryEventTable extends Migration
 {
     /**
@@ -20,7 +19,7 @@ class CreateChargeInstrumentDebtRecoveryEventTable extends Migration
             $table->unsignedBigInteger('debt_recovery_event_id')->index('ci_dre_dre_id');
             $table->timestamps();
 
-            $table->foreign('debt_recovery_event_id','ci_dre_dre_id_primary')->references('id')->on('debt_recovery_events')->onDelete('cascade');           
+            $table->foreign('debt_recovery_event_id', 'ci_dre_dre_id_primary')->references('id')->on('debt_recovery_events')->onDelete('cascade');
             $table->foreign('charge_instrument_id', 'ci_dre_ci_id_primary')->references('id')->on('charge_instruments')->onDelete('cascade');
         });
     }

@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-
 class CreateChargeComponentRentalChargeTable extends Migration
 {
     /**
@@ -20,7 +19,7 @@ class CreateChargeComponentRentalChargeTable extends Migration
             $table->unsignedBigInteger('rental_transaction_event_id')->index('cc_rc_rce_id');
             $table->timestamps();
 
-            $table->foreign('rental_transaction_event_id', 'cc_rc_rce_id_primary')->references('id')->on('rental_transaction_events')->onDelete('cascade');           
+            $table->foreign('rental_transaction_event_id', 'cc_rc_rce_id_primary')->references('id')->on('rental_transaction_events')->onDelete('cascade');
             $table->foreign('charge_component_id', 'cc_rc_cc_id_primary')->references('id')->on('charge_components')->onDelete('cascade');
         });
     }

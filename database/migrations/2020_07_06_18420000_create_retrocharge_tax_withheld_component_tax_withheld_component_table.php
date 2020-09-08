@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-
 class CreateRetrochargeTaxWithheldComponentTaxWithheldComponentTable extends Migration
 {
     /**
@@ -20,7 +19,7 @@ class CreateRetrochargeTaxWithheldComponentTaxWithheldComponentTable extends Mig
             $table->unsignedBigInteger('tax_withheld_component_id')->index('rtwc_twc_twc_id');
             $table->timestamps();
 
-            $table->foreign('tax_withheld_component_id', 'rtwc_twc_twc_id_primary')->references('id')->on('tax_withheld_components')->onDelete('cascade');           
+            $table->foreign('tax_withheld_component_id', 'rtwc_twc_twc_id_primary')->references('id')->on('tax_withheld_components')->onDelete('cascade');
             $table->foreign('retrocharge_event_id', 'rtwc_twc_re_id_primary')->references('id')->on('retrocharge_events')->onDelete('cascade');
         });
     }

@@ -13,14 +13,13 @@ class CreateChargeComponentItemChargeTable extends Migration
      */
     public function up()
     {
-
         Schema::create('charge_component_item_charge', function (Blueprint $table) {
             $table->primary(['charge_component_id', 'shipment_item_id'], 'cc_si');
             $table->unsignedBigInteger('charge_component_id')->index('cc_id');
             $table->unsignedBigInteger('shipment_item_id')->index('si_id');
             $table->timestamps();
 
-            $table->foreign('shipment_item_id', 'si_id_primary')->references('id')->on('shipment_items')->onDelete('cascade');           
+            $table->foreign('shipment_item_id', 'si_id_primary')->references('id')->on('shipment_items')->onDelete('cascade');
             $table->foreign('charge_component_id', 'cc_id_primary')->references('id')->on('charge_components')->onDelete('cascade');
         });
     }

@@ -19,7 +19,7 @@ class CreatePromotionPromotionListTable extends Migration
             $table->unsignedBigInteger('shipment_item_id')->index();
             $table->timestamps();
 
-            $table->foreign('shipment_item_id')->references('id')->on('shipment_items')->onDelete('cascade');           
+            $table->foreign('shipment_item_id')->references('id')->on('shipment_items')->onDelete('cascade');
             $table->foreign('promotion_id')->references('id')->on('promotions')->onDelete('cascade');
         });
     }

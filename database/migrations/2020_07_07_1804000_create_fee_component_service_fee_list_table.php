@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-
 class CreateFeeComponentServicefeeListTable extends Migration
 {
     /**
@@ -20,7 +19,7 @@ class CreateFeeComponentServicefeeListTable extends Migration
             $table->unsignedBigInteger('service_fee_event_id')->index('fc_sfl_sfe_id');
             $table->timestamps();
 
-            $table->foreign('service_fee_event_id','fc_sfl_sfe_id_primary')->references('id')->on('service_fee_events')->onDelete('cascade');           
+            $table->foreign('service_fee_event_id', 'fc_sfl_sfe_id_primary')->references('id')->on('service_fee_events')->onDelete('cascade');
             $table->foreign('fee_component_id', 'fc_sfl_fc_id_primary')->references('id')->on('fee_components')->onDelete('cascade');
         });
     }

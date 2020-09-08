@@ -15,17 +15,23 @@
             "role": "Developer"
         }
     ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "require": {
-        "php": "^7.1",
-        "doctrine/dbal": "^2.10",
-        "eolabs-io/amazon-mws-client": "^1.0",
-        "eolabs-io/amazon-mws-response-parser": "^1.0",
-        "eolabs-io/amazon-mws-throttling-middleware": "^1.0",
-        "illuminate/support": "^7.0"
+        "php": "^7.3",
+        "doctrine/dbal": "2.10.2",
+        "eolabs-io/amazon-mws-client": "^2.0",
+        "eolabs-io/amazon-mws-response-parser": "^2.0",
+        "eolabs-io/amazon-mws-throttling-middleware": "^2.0",
+        "illuminate/support": "^8.0",
+        "laravel/legacy-factories": "^1.0"
     },
     "require-dev": {
-        "orchestra/testbench": "^5.0",
-        "phpunit/phpunit": "^8.4|^9.0"
+        "nunomaduro/collision": "^5.0",
+        "orchestra/testbench": "^6.0",
+        "pestphp/pest": "^0.3.1",
+        "pestphp/pest-plugin-laravel": "^0.3.0",
+        "phpunit/phpunit": "^9.0"
     },
     "autoload": {
         "psr-4": {

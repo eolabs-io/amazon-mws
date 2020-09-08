@@ -19,7 +19,7 @@ class CreateItemTaxWithheldTaxWithheldComponentTable extends Migration
             $table->unsignedBigInteger('shipment_item_id')->index('twc_si_si_id');
             $table->timestamps();
 
-            $table->foreign('shipment_item_id', 'twc_si_si_id_primary')->references('id')->on('shipment_items')->onDelete('cascade');           
+            $table->foreign('shipment_item_id', 'twc_si_si_id_primary')->references('id')->on('shipment_items')->onDelete('cascade');
             $table->foreign('tax_withheld_component_id', 'twc_si_twc_id_primary')->references('id')->on('tax_withheld_components')->onDelete('cascade');
         });
     }

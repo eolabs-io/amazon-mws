@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-
 class CreateDirectPaymentFeeComponentTable extends Migration
 {
     /**
@@ -20,7 +19,7 @@ class CreateDirectPaymentFeeComponentTable extends Migration
             $table->unsignedBigInteger('shipment_event_id')->index('dp_dpl_se_id');
             $table->timestamps();
 
-            $table->foreign('shipment_event_id', 'dp_dpl_se_id_primary')->references('id')->on('shipment_events')->onDelete('cascade');           
+            $table->foreign('shipment_event_id', 'dp_dpl_se_id_primary')->references('id')->on('shipment_events')->onDelete('cascade');
             $table->foreign('direct_payment_id', 'dp_dpl_dp_id_primary')->references('id')->on('direct_payments')->onDelete('cascade');
         });
     }

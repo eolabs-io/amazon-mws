@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-
 class CreateShipmentEventShipmentFeeTable extends Migration
 {
     /**
@@ -20,7 +19,7 @@ class CreateShipmentEventShipmentFeeTable extends Migration
             $table->unsignedBigInteger('shipment_event_id')->index('fc_se_se_id');
             $table->timestamps();
 
-            $table->foreign('shipment_event_id', 'fc_se_se_id_primary')->references('id')->on('shipment_events')->onDelete('cascade');           
+            $table->foreign('shipment_event_id', 'fc_se_se_id_primary')->references('id')->on('shipment_events')->onDelete('cascade');
             $table->foreign('fee_component_id', 'fc_se_fc_id_primary')->references('id')->on('fee_components')->onDelete('cascade');
         });
     }
