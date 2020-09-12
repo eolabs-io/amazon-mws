@@ -2,28 +2,30 @@
 
 namespace EolabsIo\AmazonMws;
 
-use EolabsIo\AmazonMws\Domain\Finance\Command\FinancialEventCommand;
-use EolabsIo\AmazonMws\Domain\Finance\Command\FinancialEventGroupCommand;
-use EolabsIo\AmazonMws\Domain\Finance\ListFinancialEventGroups;
-use EolabsIo\AmazonMws\Domain\Finance\ListFinancialEvents;
-use EolabsIo\AmazonMws\Domain\Finance\Providers\EventServiceProvider as FinanceEventServiceProvider;
-use EolabsIo\AmazonMws\Domain\Inventory\Command\InventoryCommand;
-use EolabsIo\AmazonMws\Domain\Inventory\InventoryList;
-use EolabsIo\AmazonMws\Domain\Inventory\Providers\EventServiceProvider as InventoryEventServiceProvider;
-use EolabsIo\AmazonMws\Domain\Inventory\ServiceStatus as InventoryServiceStatus;
-use EolabsIo\AmazonMws\Domain\Orders\Command\OrderItemsCommand;
-use EolabsIo\AmazonMws\Domain\Orders\Command\OrdersCommand;
-use EolabsIo\AmazonMws\Domain\Orders\ListOrderItems;
-use EolabsIo\AmazonMws\Domain\Orders\ListOrders;
-use EolabsIo\AmazonMws\Domain\Orders\Providers\EventServiceProvider as OrdersEventServiceProvider;
-use EolabsIo\AmazonMws\Domain\Products\Command\ProductCommand;
-use EolabsIo\AmazonMws\Domain\Products\GetMatchingProduct;
-use EolabsIo\AmazonMws\Domain\Products\Providers\EventServiceProvider as ProductsEventServiceProvider;
-use EolabsIo\AmazonMws\Domain\Reviews\GetReview;
-use EolabsIo\AmazonMws\Domain\Sellers\Command\SellerCommand;
-use EolabsIo\AmazonMws\Domain\Sellers\ListMarketplaceParticipations;
-use EolabsIo\AmazonMws\Domain\Sellers\Providers\EventServiceProvider as SellersEventServiceProvider;
 use Illuminate\Support\ServiceProvider;
+use EolabsIo\AmazonMws\Domain\Orders\ListOrders;
+use EolabsIo\AmazonMws\Domain\Orders\ListOrderItems;
+use EolabsIo\AmazonMws\Domain\Inventory\InventoryList;
+use EolabsIo\AmazonMws\Domain\Reviews\GetReviewRating;
+use EolabsIo\AmazonMws\Domain\Finance\ListFinancialEvents;
+use EolabsIo\AmazonMws\Domain\Products\GetMatchingProduct;
+use EolabsIo\AmazonMws\Domain\Orders\Command\OrdersCommand;
+use EolabsIo\AmazonMws\Domain\Sellers\Command\SellerCommand;
+use EolabsIo\AmazonMws\Domain\Products\Command\ProductCommand;
+use EolabsIo\AmazonMws\Domain\Finance\ListFinancialEventGroups;
+use EolabsIo\AmazonMws\Domain\Orders\Command\OrderItemsCommand;
+use EolabsIo\AmazonMws\Domain\Inventory\Command\InventoryCommand;
+use EolabsIo\AmazonMws\Domain\Finance\Command\FinancialEventCommand;
+use EolabsIo\AmazonMws\Domain\Sellers\ListMarketplaceParticipations;
+use EolabsIo\AmazonMws\Domain\Reviews\Command\LogReviewRatingCommand;
+use EolabsIo\AmazonMws\Domain\Reviews\Providers\ReviewsServiceProvider;
+use EolabsIo\AmazonMws\Domain\Finance\Command\FinancialEventGroupCommand;
+use EolabsIo\AmazonMws\Domain\Inventory\ServiceStatus as InventoryServiceStatus;
+use EolabsIo\AmazonMws\Domain\Orders\Providers\EventServiceProvider as OrdersEventServiceProvider;
+use EolabsIo\AmazonMws\Domain\Finance\Providers\EventServiceProvider as FinanceEventServiceProvider;
+use EolabsIo\AmazonMws\Domain\Sellers\Providers\EventServiceProvider as SellersEventServiceProvider;
+use EolabsIo\AmazonMws\Domain\Products\Providers\EventServiceProvider as ProductsEventServiceProvider;
+use EolabsIo\AmazonMws\Domain\Inventory\Providers\EventServiceProvider as InventoryEventServiceProvider;
 
 class AmazonMwsServiceProvider extends ServiceProvider
 {
@@ -48,6 +50,7 @@ class AmazonMwsServiceProvider extends ServiceProvider
                 FinancialEventCommand::class,
                 FinancialEventGroupCommand::class,
                 ProductCommand::class,
+                LogReviewRatingCommand::class,
                 SellerCommand::class,
             ]);
         }
@@ -65,6 +68,7 @@ class AmazonMwsServiceProvider extends ServiceProvider
         $this->app->register(OrdersEventServiceProvider::class);
         $this->app->register(FinanceEventServiceProvider::class);
         $this->app->register(ProductsEventServiceProvider::class);
+        $this->app->register(ReviewsServiceProvider::class);
         $this->app->register(SellersEventServiceProvider::class);
 
         // Register the main class to use with the facade
@@ -100,8 +104,8 @@ class AmazonMwsServiceProvider extends ServiceProvider
             return new ListMarketplaceParticipations;
         });
 
-        $this->app->singleton('get-review', function () {
-            return new GetReview;
+        $this->app->singleton('get-review-rating', function () {
+            return new GetReviewRating;
         });
     }
 }

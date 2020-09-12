@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Queue;
 
 class ProductCommandTest extends TestCase
 {
-
     protected function setUp(): void
     {
         parent::setUp();
@@ -22,7 +21,6 @@ class ProductCommandTest extends TestCase
     /** @test */
     public function it_can_execute_product_artisan_command()
     {
-
         $store = factory(Store::class)->create();
 
         $this->artisan('amazonmws:product '.$store->id.'
@@ -32,14 +30,11 @@ class ProductCommandTest extends TestCase
                     ->assertExitCode(0);
 
         // Assert that event is called
-        Event::assertDispatched(FetchGetMatchingProduct::class, function($event){
+        Event::assertDispatched(FetchGetMatchingProduct::class, function ($event) {
             $getMatchingProduct = $event->getMatchingProduct;
 
             return $getMatchingProduct->getMarketplaceId() === 'ATVPDKIKX0DER' &&
                    in_array('B123456789', $getMatchingProduct->getAsins());
         });
-
     }
-
-
 }
