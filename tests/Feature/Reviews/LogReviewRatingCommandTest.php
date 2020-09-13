@@ -56,7 +56,6 @@ class LogReviewRatingCommandTest extends TestCase
         // Assert that event is called
         Event::assertDispatched(FetchGetReviewRating::class, function ($event) {
             $getReviewRating = $event->getReviewRating;
-            dump($getReviewRating->getAsin());
             return $getReviewRating->getAsin() === 'B987654321';
         });
 
