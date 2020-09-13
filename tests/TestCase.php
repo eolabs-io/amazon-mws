@@ -12,12 +12,12 @@ use ReflectionObject;
 
 abstract class TestCase extends Orchestra
 {
-
+    public $initialEvent;
 
     protected function setUp(): void
     {
         parent::setUp();
-        
+
         $vendorPath = '/vendor/eolabs-io/amazon-mws-client';
 
         $this->loadMigrationsFrom(realpath(dirname(__DIR__) . $vendorPath .'/database/migrations'));
@@ -26,6 +26,7 @@ abstract class TestCase extends Orchestra
         $this->loadMigrationsFrom(realpath(dirname(__DIR__) .'/database/migrations'));
         $this->withFactories(realpath(dirname(__DIR__) .'/database/factories'));
 
+        $this->initialEvent = Event::getFacadeRoot();
         Event::fake();
     }
 
@@ -37,7 +38,7 @@ abstract class TestCase extends Orchestra
      */
     protected function getEnvironmentSetUp($app)
     {
-        $app['config']->set('amazon-mws.constants', AmazonConstantsFactory::getAll() );
+        $app['config']->set('amazon-mws.constants', AmazonConstantsFactory::getAll());
     }
 
     /**
@@ -74,5 +75,4 @@ abstract class TestCase extends Orchestra
     //         // 'Sentry' => 'Cartalyst\Sentry\Facades\Laravel\Sentry',
     //     ];
     // }
-
 }
