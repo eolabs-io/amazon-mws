@@ -14,7 +14,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-
     /**
      * The event map for the model.
      *
@@ -92,37 +91,41 @@ class Order extends Model
                     'promise_response_due_date',
                     'is_estimated_ship_dateset',
                     'store_id',
-				];
+                ];
 
 
     public function shippingAddress()
     {
-        return $this->belongsTo(Address::class, 'shipping_address_id')->withDefault();     
-    }             
+        return $this->belongsTo(Address::class, 'shipping_address_id')->withDefault();
+    }
 
     public function orderTotal()
     {
-        return $this->belongsTo(Money::class, 'order_total_id')->withDefault(); 
-    } 
+        return $this->belongsTo(Money::class, 'order_total_id')->withDefault();
+    }
 
     public function paymentExecutionDetail()
     {
-        return $this->hasMany(PaymentExecutionDetailItem::class); 
-    }             
+        return $this->hasMany(PaymentExecutionDetailItem::class);
+    }
 
     public function paymentMethodDetails()
     {
-        return $this->belongsTo(PaymentMethodDetail::class, 'payment_method_details_id')->withDefault(); 
-    }    
+        return $this->belongsTo(PaymentMethodDetail::class, 'payment_method_details_id')->withDefault();
+    }
 
     public function buyerTaxInfo()
     {
-        return $this->belongsTo(BuyerTaxInfo::class, 'buyer_tax_info_id')->withDefault();     
-    } 
+        return $this->belongsTo(BuyerTaxInfo::class, 'buyer_tax_info_id')->withDefault();
+    }
 
     public function orderItems()
     {
         return $this->hasMany(OrderItem::class, 'amazon_order_id', 'amazon_order_id');
     }
 
+    public function orderHistory()
+    {
+        return $this->hasMany(Order::class, 'buyer_email', 'buyer_email');
+    }
 }

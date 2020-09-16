@@ -2,17 +2,17 @@
 
 namespace EolabsIo\AmazonMws\Tests\Unit;
 
-use EolabsIo\AmazonMws\Domain\Orders\Models\BuyerCustomizedInfo;
+use Illuminate\Support\Carbon;
 use EolabsIo\AmazonMws\Domain\Orders\Models\Money;
 use EolabsIo\AmazonMws\Domain\Orders\Models\Order;
 use EolabsIo\AmazonMws\Domain\Orders\Models\OrderItem;
-use EolabsIo\AmazonMws\Domain\Orders\Models\PointsGranted;
 use EolabsIo\AmazonMws\Domain\Orders\Models\ProductInfo;
+use EolabsIo\AmazonMws\Domain\Orders\Models\PointsGranted;
 use EolabsIo\AmazonMws\Domain\Orders\Models\TaxCollection;
+use EolabsIo\AmazonMws\Domain\Orders\Models\BuyerCustomizedInfo;
 
 class OrderItemTest extends BaseModelTest
 {
-
     protected function getModelClass()
     {
         return OrderItem::class;
@@ -21,25 +21,25 @@ class OrderItemTest extends BaseModelTest
     /** @test */
     public function it_has_buyerCustomizedInfo_relationship()
     {
-    	$orderItem = factory(OrderItem::class)->create(['buyer_customized_info_id' => null]);
-    	$buyerCustomizedInfo = factory(BuyerCustomizedInfo::class)->create();
+        $orderItem = factory(OrderItem::class)->create(['buyer_customized_info_id' => null]);
+        $buyerCustomizedInfo = factory(BuyerCustomizedInfo::class)->create();
 
-    	$orderItem->buyerCustomizedInfo()->associate($buyerCustomizedInfo);
+        $orderItem->buyerCustomizedInfo()->associate($buyerCustomizedInfo);
 
-    	$this->assertArraysEqual($buyerCustomizedInfo->toArray(), $orderItem->buyerCustomizedInfo->toArray());
+        $this->assertArraysEqual($buyerCustomizedInfo->toArray(), $orderItem->buyerCustomizedInfo->toArray());
     }
 
     /** @test */
     public function it_has_pointsGranted_relationship()
     {
-    	$order = factory(OrderItem::class)->create(['points_granted_id' => null]);
-    	$pointsGranted = factory(PointsGranted::class)->create();
+        $order = factory(OrderItem::class)->create(['points_granted_id' => null]);
+        $pointsGranted = factory(PointsGranted::class)->create();
 
-    	$order->pointsGranted()->associate($pointsGranted);
+        $order->pointsGranted()->associate($pointsGranted);
 
-    	$this->assertArraysEqual($pointsGranted->toArray(), $order->pointsGranted->toArray());
+        $this->assertArraysEqual($pointsGranted->toArray(), $order->pointsGranted->toArray());
     }
- 
+
     /** @test */
     public function it_has_productInfo_relationship()
     {
@@ -202,5 +202,5 @@ class OrderItemTest extends BaseModelTest
         factory(OrderItem::class, 3)->create();
 
         $this->assertArraysEqual($order->toArray(), $orderItem->order->toArray());
-    } 
+    }
 }
