@@ -5,7 +5,7 @@ namespace EolabsIo\AmazonMws\Domain\Sellers\Actions;
 use EolabsIo\AmazonMwsClient\Models\Marketplace;
 use EolabsIo\AmazonMws\Domain\Shared\Actions\BasePersistAction;
 use EolabsIo\AmazonMws\Domain\Shared\Concerns\FormatsModelAttributes;
-
+use Illuminate\Database\Eloquent\Model;
 
 class PersistMarketplaceAction extends BasePersistAction
 {
@@ -13,15 +13,16 @@ class PersistMarketplaceAction extends BasePersistAction
 
     public function getKey(): string
     {
-    	return 'ListMarketplaces';
+        return 'ListMarketplaces';
     }
 
-    protected function createItem($list)
+    protected function createItem($list): Model
     {
         $values = $this->getFormatedAttributes($list, new Marketplace);
-		$attributes['marketplace_id'] = $values['marketplace_id'];
+        $attributes['marketplace_id'] = $values['marketplace_id'];
 
-        Marketplace::updateOrCreate($attributes, $values);
+        $marketplace = Marketplace::updateOrCreate($attributes, $values);
+
+        return $marketplace;
     }
-
 }

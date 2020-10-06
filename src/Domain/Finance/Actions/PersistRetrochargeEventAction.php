@@ -2,13 +2,14 @@
 
 namespace EolabsIo\AmazonMws\Domain\Finance\Actions;
 
-use EolabsIo\AmazonMws\Domain\Finance\Actions\AssociateBaseTaxAction;
-use EolabsIo\AmazonMws\Domain\Finance\Actions\AssociateShippingTaxAction;
-use EolabsIo\AmazonMws\Domain\Finance\Actions\AttachRetrochargeTaxWithheldComponentAction;
+use Illuminate\Database\Eloquent\Model;
 use EolabsIo\AmazonMws\Domain\Finance\Models\RetrochargeEvent;
 use EolabsIo\AmazonMws\Domain\Shared\Actions\BasePersistAction;
+use EolabsIo\AmazonMws\Domain\Finance\Actions\AssociateBaseTaxAction;
 use EolabsIo\AmazonMws\Domain\Shared\Concerns\FormatsModelAttributes;
-
+use EolabsIo\AmazonMws\Domain\Finance\Events\PersistedRetrochargeEvent;
+use EolabsIo\AmazonMws\Domain\Finance\Actions\AssociateShippingTaxAction;
+use EolabsIo\AmazonMws\Domain\Finance\Actions\AttachRetrochargeTaxWithheldComponentAction;
 
 class PersistRetrochargeEventAction extends BasePersistAction
 {
@@ -16,29 +17,36 @@ class PersistRetrochargeEventAction extends BasePersistAction
 
     public function getKey(): string
     {
-    	return 'RetrochargeEventList';
+        return 'RetrochargeEventList';
     }
 
-    protected function createItem($list)
+    protected function createItem($list): Model
     {
         $values = $this->getFormatedAttributes($list, new RetrochargeEvent);
-		$attributes = ['amazon_order_id' => data_get($list, 'AmazonOrderId'),];
+        $attributes = ['amazon_order_id' => data_get($list, 'AmazonOrderId'),];
 
         $retrochargeEvent = RetrochargeEvent::updateOrCreate($attributes, $values);
 
-        foreach($this->associateActions() as $associateActions) {
-        	(new $associateActions($list))->execute($retrochargeEvent);
+        foreach ($this->associateActions() as $associateActions) {
+            (new $associateActions($list))->execute($retrochargeEvent);
         }
 
         $retrochargeEvent->push();
+
+        return $retrochargeEvent;
     }
 
     protected function associateActions(): array
     {
-    	return [
+        return [
             AssociateBaseTaxAction::class,
             AssociateShippingTaxAction::class,
-    		AttachRetrochargeTaxWithheldComponentAction::class,
-    	];
+            AttachRetrochargeTaxWithheldComponentAction::class,
+        ];
+    }
+
+    public function getPersistedEvent()
+    {
+        return PersistedRetrochargeEvent::class;
     }
 }

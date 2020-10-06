@@ -2,9 +2,11 @@
 
 namespace EolabsIo\AmazonMws\Domain\Shared\Actions;
 
-abstract class BasePersistAction 
+use Illuminate\Database\Eloquent\Model;
+
+abstract class BasePersistAction
 {
-	
+
     /** @var array */
     private $list;
 
@@ -14,20 +16,36 @@ abstract class BasePersistAction
         $this->list = data_get($list, $key, []);
     }
 
-     abstract public function getKey(): string;
+    abstract public function getKey(): string;
 
     public function execute()
     {
         $this->createFromList();
     }
-    
+
     private function createFromList()
     {
-        foreach($this->list as $value) {
-            $this->createItem($value);
+        foreach ($this->list as $value) {
+            $item = $this->createItem($value);
+
+            $this->firePersistedActionEvent($item);
         }
     }
 
-    abstract protected function createItem($list);
+    abstract protected function createItem($list): Model;
 
+    private function firePersistedActionEvent(Model $item)
+    {
+        $event = $this->getPersistedEvent();
+        if (is_null($event)) {
+            return;
+        }
+
+        $event::dispatch($item);
+    }
+
+    public function getPersistedEvent()
+    {
+        return null;
+    }
 }
