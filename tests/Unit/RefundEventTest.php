@@ -23,20 +23,24 @@ class RefundEventTest extends ShipmentEventTest
 
         $orders = factory(Order::class, 10)->create(['buyer_email' => $buyerEmail]);
         $amazonOrderId = $orders->first()->amazon_order_id;
-        $orders->take($expectedRefundEvents)->each(function ($order) {
-            $amazonOrderId = $order->amazon_order_id;
-            $orderItem = factory(OrderItem::class)->create([
-                'amazon_order_id' => $amazonOrderId,
+
+        $orders->each(function ($order) {
+            factory(OrderItem::class)->create([
+                'amazon_order_id' => $order->amazon_order_id,
                 'seller_sku' => 'sku1',
                 'quantity_shipped' => 1
             ]);
+        });
 
-            $refundEvent = factory(RefundEvent::class)->create(['amazon_order_id' => $amazonOrderId]);
-            $shipmentItem = factory(ShipmentItem::class)->create([
-                'seller_sku' => $orderItem->seller_sku,
-                'quantity_shipped' => $orderItem->quantity_shipped
-            ]);
-            $refundEvent->shipmentItemAdjustmentList()->attach($shipmentItem);
+        $orders->take($expectedRefundEvents)->each(function ($order) {
+            $refundEvent = factory(RefundEvent::class)->create(['amazon_order_id' => $order->amazon_order_id]);
+            $order->orderItems->each(function ($orderItem) use ($refundEvent) {
+                $shipmentItem = factory(ShipmentItem::class)->create([
+                    'seller_sku' => $orderItem->seller_sku,
+                    'quantity_shipped' => $orderItem->quantity_shipped
+                ]);
+                $refundEvent->shipmentItemAdjustmentList()->attach($shipmentItem);
+            });
         });
 
         $refundEvent = RefundEvent::where(['amazon_order_id' => $amazonOrderId])->first();

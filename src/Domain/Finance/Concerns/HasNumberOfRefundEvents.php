@@ -11,6 +11,7 @@ trait HasNumberOfRefundEvents
     {
         return Order::join('orders as order_history', 'orders.buyer_email', 'order_history.buyer_email')
             ->join('order_items as order_item_history', 'order_history.amazon_order_id', 'order_item_history.amazon_order_id')
+            ->join('refund_events', 'order_history.amazon_order_id', 'refund_events.amazon_order_id')
             ->where('orders.amazon_order_id', $this->amazon_order_id)
             ->whereIn(
                 'seller_sku',
@@ -21,7 +22,7 @@ trait HasNumberOfRefundEvents
                     ->flatten()
                     ->pluck('seller_sku')
             )
-            ->selectRaw('count(*) as numberOfReturns')
+            ->selectRaw('count( DISTINCT refund_events.amazon_order_id) as numberOfReturns')
             ->pluck('numberOfReturns')
             ->first();
     }
