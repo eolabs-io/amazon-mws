@@ -15,6 +15,7 @@ class ProductReview extends Model
         'verifiedPurchase' => 'boolean',
         'earlyReviewerRewards' => 'boolean',
         'vineVoice' => 'boolean',
+        'date' => 'datetime',
     ];
 
     /**

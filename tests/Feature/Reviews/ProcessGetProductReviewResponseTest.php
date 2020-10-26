@@ -2,6 +2,7 @@
 
 namespace EolabsIo\AmazonMws\Tests\Feature\Reviews;
 
+use Illuminate\Support\Carbon;
 use EolabsIo\AmazonMws\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use EolabsIo\AmazonMws\Domain\Reviews\Models\ProductReview;
@@ -35,6 +36,7 @@ class ProcessGetProductReviewResponseTest extends TestCase
         $this->assertEquals('Thomas', $review->profileName);
         $this->assertEquals(5.0, $review->starRating);
         $this->assertEquals('It works!', $review->title);
+        $this->assertEquals(new Carbon('April 29, 2019'), $review->date);
 
         $this->assertDatabaseCount('product_reviews', 10);
     }
