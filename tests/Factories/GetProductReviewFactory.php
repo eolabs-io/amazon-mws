@@ -4,7 +4,7 @@ namespace EolabsIo\AmazonMws\Tests\Factories;
 
 use Illuminate\Support\Facades\Http;
 
-class GetReviewRatingFactory
+class GetProductReviewFactory
 {
     private $endpoint = 'https://www.amazon.com/*';
 
@@ -20,7 +20,7 @@ class GetReviewRatingFactory
         return $this;
     }
 
-    public function fakeGetReviewRatingResponse(): self
+    public function fakeGetProductReviewResponse(): self
     {
         $file = __DIR__ . '/../Stubs/Responses/Html/AmazonProductReviewPage.html';
         $getReviewResponse = file_get_contents($file);

@@ -7,8 +7,9 @@ use EolabsIo\AmazonMws\Domain\Reviews\Models\ReviewRatingHistory;
 
 $factory->define(ReviewRatingHistory::class, function (Faker $faker) {
     return [
-            'asin' => $faker->text(30),
-            'ratings' => $faker->numberBetween(0, 99999),
-            'average_stars_rating' => $faker->numberBetween(0, 99999),
+            'asin' => $faker->numerify('B###########'),
+            'number_of_ratings' => $faker->numberBetween(0, 9999),
+            'number_of_reviews' => $faker->numberBetween(0, 9999),
+            'average_stars_rating' => $faker->randomFloat(0.0, 5.0),
     ];
 });

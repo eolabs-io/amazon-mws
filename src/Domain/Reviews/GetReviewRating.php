@@ -8,27 +8,27 @@ use EolabsIo\AmazonMwsResponseParser\Support\Facades\ReviewRatingResponseParser;
 
 class GetReviewRating extends ReviewCore
 {
-    private $asin;
+    // private $asin;
 
-    public function withAsin($asin): self
-    {
-        $this->asin = $asin;
+    // public function withAsin($asin): self
+    // {
+    //     $this->asin = $asin;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function getAsin(): string
-    {
-        return $this->asin;
-    }
+    // public function getAsin(): string
+    // {
+    //     return $this->asin;
+    // }
 
-    public function parseResponse($response): Collection
-    {
-        return ReviewRatingResponseParser::fromString($response);
-    }
+    // public function parseResponse($response): Collection
+    // {
+    //     return ReviewRatingResponseParser::fromString($response);
+    // }
 
-    public function getUrl(): string
-    {
-        return "{$this->getBaseUrl()}/dp/{$this->asin}";
-    }
+    // public function getUrl(): string
+    // {
+    //     return "{$this->getBaseUrl()}/dp/{$this->asin}";
+    // }
 }

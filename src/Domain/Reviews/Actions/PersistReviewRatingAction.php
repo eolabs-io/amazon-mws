@@ -18,7 +18,8 @@ class PersistReviewRatingAction
     {
         ReviewRatingHistory::create([
             'asin' => $this->item['asin'],
-            'ratings' => $this->item['ratings'],
+            'number_of_ratings' => $this->item['numberOfRatings'],
+            'number_of_reviews' => $this->item['numberOfReviews'],
             'average_stars_rating' => $this->item['averageStarsRating'],
         ]);
     }

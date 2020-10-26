@@ -7,6 +7,7 @@ use EolabsIo\AmazonMws\Domain\Orders\ListOrders;
 use EolabsIo\AmazonMws\Domain\Orders\ListOrderItems;
 use EolabsIo\AmazonMws\Domain\Inventory\InventoryList;
 use EolabsIo\AmazonMws\Domain\Reviews\GetReviewRating;
+use EolabsIo\AmazonMws\Domain\Reviews\GetProductReview;
 use EolabsIo\AmazonMws\Domain\Finance\ListFinancialEvents;
 use EolabsIo\AmazonMws\Domain\Products\GetMatchingProduct;
 use EolabsIo\AmazonMws\Domain\Orders\Command\OrdersCommand;
@@ -26,6 +27,7 @@ use EolabsIo\AmazonMws\Domain\Finance\Providers\EventServiceProvider as FinanceE
 use EolabsIo\AmazonMws\Domain\Sellers\Providers\EventServiceProvider as SellersEventServiceProvider;
 use EolabsIo\AmazonMws\Domain\Products\Providers\EventServiceProvider as ProductsEventServiceProvider;
 use EolabsIo\AmazonMws\Domain\Inventory\Providers\EventServiceProvider as InventoryEventServiceProvider;
+use EolabsIo\AmazonMws\Domain\Reviews\Command\GetProductReviewsCommand;
 
 class AmazonMwsServiceProvider extends ServiceProvider
 {
@@ -51,6 +53,7 @@ class AmazonMwsServiceProvider extends ServiceProvider
                 FinancialEventGroupCommand::class,
                 ProductCommand::class,
                 LogReviewRatingCommand::class,
+                GetProductReviewsCommand::class,
                 SellerCommand::class,
             ]);
         }
@@ -106,6 +109,10 @@ class AmazonMwsServiceProvider extends ServiceProvider
 
         $this->app->singleton('get-review-rating', function () {
             return new GetReviewRating;
+        });
+
+        $this->app->singleton('get-product-review', function () {
+            return new GetProductReview;
         });
     }
 }

@@ -13,7 +13,8 @@ class ReviewRatingHistory extends Model
      */
     protected $fillable = [
                             'asin',
-                            'ratings',
+                            'number_of_ratings',
+                            'number_of_reviews',
                             'average_stars_rating'
                         ];
 }

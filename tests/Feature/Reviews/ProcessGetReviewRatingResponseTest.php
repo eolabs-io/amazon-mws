@@ -31,7 +31,8 @@ class ProcessGetReviewRatingResponseTest extends TestCase
         $reviewRatingHistory = ReviewRatingHistory::first();
 
         $this->assertEquals('B00200000Q', $reviewRatingHistory->asin);
-        $this->assertEquals(11976, $reviewRatingHistory->ratings);
-        $this->assertEquals(4.7, $reviewRatingHistory->average_stars_rating);
+        $this->assertEquals(945, $reviewRatingHistory->number_of_ratings);
+        $this->assertEquals(439, $reviewRatingHistory->number_of_reviews);
+        $this->assertEquals(4.3, $reviewRatingHistory->average_stars_rating);
     }
 }
