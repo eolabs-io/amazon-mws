@@ -3,6 +3,7 @@
 namespace EolabsIo\AmazonMws\Domain\Reviews\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use EolabsIo\AmazonMws\Domain\Reviews\Models\ProductReviewImage;
 
 class ProductReview extends Model
 {
@@ -35,4 +36,9 @@ class ProductReview extends Model
                             'vineVoice',
                             'body',
                         ];
+
+    public function images()
+    {
+        return $this->hasMany(ProductReviewImage::class);
+    }
 }

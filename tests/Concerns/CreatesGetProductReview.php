@@ -20,4 +20,11 @@ trait CreatesGetProductReview
 
         return GetProductReview::withAsin($asin)->withPageNumber(44);
     }
+
+    public function createGetProductReviewWithImages($asin = "B00200000Q")
+    {
+        GetProductReviewFactory::new()->fakeGetProductReviewWithImagesResponse();
+
+        return GetProductReview::withAsin($asin);
+    }
 }

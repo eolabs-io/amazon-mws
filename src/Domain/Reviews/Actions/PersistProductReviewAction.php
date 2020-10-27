@@ -3,6 +3,8 @@
 namespace EolabsIo\AmazonMws\Domain\Reviews\Actions;
 
 use EolabsIo\AmazonMws\Domain\Reviews\Models\ProductReview;
+use EolabsIo\AmazonMws\Domain\Reviews\Models\ProductReviewImage;
+use EolabsIo\AmazonMws\Domain\Reviews\Actions\SaveProductReviewImageAction;
 
 class PersistProductReviewAction
 {
@@ -23,8 +25,8 @@ class PersistProductReviewAction
             $review['asin'] = $asin;
             $attributes = ['reviewId' => data_get($review, 'reviewId')];
 
-            ProductReview::updateOrCreate($attributes, $review);
-            // need to associate images
+            $productReview = ProductReview::updateOrCreate($attributes, $review);
+            (new SaveProductReviewImageAction($review))->execute($productReview);
         }
     }
 }

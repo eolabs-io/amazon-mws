@@ -18,7 +18,7 @@ class ProcessGetProductReviewResponseTest extends TestCase
     {
         parent::setUp();
 
-        $getProductReview = $this->createGetProductReview();
+        $getProductReview = $this->createGetProductReviewWithImages(); //createGetProductReview();
 
         $results = $getProductReview->fetch();
         $results['asin'] = $getProductReview->getAsin();
@@ -32,12 +32,20 @@ class ProcessGetProductReviewResponseTest extends TestCase
         $review = ProductReview::first();
 
         $this->assertEquals('B00200000Q', $review->asin);
-        $this->assertEquals('R3DK9D3YPXLMRD', $review->reviewId);
-        $this->assertEquals('Thomas', $review->profileName);
+        $this->assertEquals('R3AEH6GOU3Q3A4', $review->reviewId);
+        $this->assertEquals('Amazon Customer', $review->profileName);
         $this->assertEquals(5.0, $review->starRating);
-        $this->assertEquals('It works!', $review->title);
-        $this->assertEquals(new Carbon('April 29, 2019'), $review->date);
+        $this->assertEquals('Great Product', $review->title);
+        $this->assertEquals(new Carbon('Oct 24, 2020'), $review->date);
 
-        $this->assertDatabaseCount('product_reviews', 10);
+        $this->assertDatabaseCount('product_reviews', 8);
+    }
+
+    /** @test */
+    public function it_has_product_review_images_response()
+    {
+        $review = ProductReview::where('reviewId', 'RNKKMVAMV3QSN')->first();
+
+        $this->assertCount(3, $review->images);
     }
 }

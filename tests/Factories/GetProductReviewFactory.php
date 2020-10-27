@@ -34,18 +34,17 @@ class GetProductReviewFactory
         return $this;
     }
 
-    // public function fakeGetMatchingProductWithErrorResponse(): self
-    // {
+    public function fakeGetProductReviewWithImagesResponse(): self
+    {
+        $file = __DIR__ . '/../Stubs/Responses/Html/AmazonProductReviewWithImagesPage.html';
+        $getReviewResponse = file_get_contents($file);
 
-    //     $file = __DIR__ . '/../Stubs/Responses/fetchGetMatchingProductWithError.xml';
-    //     $getMatchingProductResponse = file_get_contents($file);
+        Http::fake([
+             $this->endpoint => Http::sequence()
+                                    ->push($getReviewResponse, 200)
+                                    ->whenEmpty(Http::response('', 404)),
+        ]);
 
-    //     Http::fake([
-    //          $this->endpoint => Http::sequence()
-    //                                 ->push($getMatchingProductResponse, 200)
-    //                                 ->whenEmpty(Http::response('', 404)),
-    //     ]);
-
-    //     return $this;
-    // }
+        return $this;
+    }
 }
