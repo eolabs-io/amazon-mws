@@ -47,7 +47,7 @@ class ProductReview extends Model
 
     public function getDateForHumansAttribute()
     {
-        return $this->date->format('M, d Y');
+        return $this->date->format('M d, Y');
     }
 
     public function getDateForEditingAttribute()
