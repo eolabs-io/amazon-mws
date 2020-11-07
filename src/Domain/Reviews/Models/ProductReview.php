@@ -2,6 +2,7 @@
 
 namespace EolabsIo\AmazonMws\Domain\Reviews\Models;
 
+use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use EolabsIo\AmazonMws\Domain\Reviews\Models\ProductReviewImage;
 
@@ -18,6 +19,8 @@ class ProductReview extends Model
         'vineVoice' => 'boolean',
         'date' => 'datetime',
     ];
+
+    protected $appends = ['date_for_editing'];
 
     /**
      * The attributes that are mass assignable.
@@ -40,5 +43,20 @@ class ProductReview extends Model
     public function images()
     {
         return $this->hasMany(ProductReviewImage::class);
+    }
+
+    public function getDateForHumansAttribute()
+    {
+        return $this->date->format('M, d Y');
+    }
+
+    public function getDateForEditingAttribute()
+    {
+        return $this->date->format('m/d/Y');
+    }
+
+    public function setDateForEditingAttribute($value)
+    {
+        $this->date = Carbon::parse($value);
     }
 }
