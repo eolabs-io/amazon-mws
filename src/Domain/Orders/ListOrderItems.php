@@ -7,16 +7,16 @@ use EolabsIo\AmazonMws\Domain\Shared\Concerns\InteractsWithAmazonOrderId;
 
 class ListOrderItems extends OrderCore
 {
-	use InteractsWithAmazonOrderId;
+    use InteractsWithAmazonOrderId;
 
 
-	public function resolveOptionalParameters(): void
-	{
-		$this->mergeParameters( [$this->getAmazonOrderIdParameter()] );
-	}
+    public function resolveOptionalParameters(): void
+    {
+        $this->mergeParameters([$this->getAmazonOrderIdParameter()]);
+    }
 
-	public function getAction(): string
-	{
-		return ($this->hasNextToken()) ? 'ListOrderItemsByNextToken' : 'ListOrderItems';
-	}
+    public function getAction(): string
+    {
+        return ($this->hasNextToken()) ? 'ListOrderItemsByNextToken' : 'ListOrderItems';
+    }
 }

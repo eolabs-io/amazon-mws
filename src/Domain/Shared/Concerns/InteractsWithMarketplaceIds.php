@@ -1,6 +1,6 @@
 <?php
 
-namespace EolabsIo\AmazonMws\Domain\Orders\Concerns;
+namespace EolabsIo\AmazonMws\Domain\Shared\Concerns;
 
 trait InteractsWithMarketplaceIds
 {
@@ -15,33 +15,31 @@ trait InteractsWithMarketplaceIds
     }
 
     public function hasMarketplaceIds(): bool
-	{
-		return count($this->marketplaceIds) > 0;
-	}
+    {
+        return count($this->marketplaceIds) > 0;
+    }
 
-	public function getMarketplaceIds(): array
-	{
-		return $this->marketplaceIds;
-	}
+    public function getMarketplaceIds(): array
+    {
+        return $this->marketplaceIds;
+    }
 
     public function formattedMarketplaceIds(): array
     {
-         return collect($this->getMarketplaceIds())->mapWithKeys(function ($item, $key){
-             $key++;
-             return ["MarketplaceId.Id.{$key}" => $item ];
-         })->toArray();
+        return collect($this->getMarketplaceIds())->mapWithKeys(function ($item, $key) {
+            $key++;
+            return ["MarketplaceId.Id.{$key}" => $item ];
+        })->toArray();
     }
 
     public function getMarketplaceIdsParameter(): array
     {
-        if( ! $this->hasMarketplaceIds() ) {
+        if (! $this->hasMarketplaceIds()) {
             // Attempt to find them in the store
             $marketplaceIds = $this->getStore()->marketplaces->pluck('marketplace_id')->toArray();
-            $this->withMarketplaceIds($marketplaceIds);   
+            $this->withMarketplaceIds($marketplaceIds);
         }
 
         return $this->formattedMarketplaceIds();
-
     }
-
 }

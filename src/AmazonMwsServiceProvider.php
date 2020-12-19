@@ -5,29 +5,35 @@ namespace EolabsIo\AmazonMws;
 use Illuminate\Support\ServiceProvider;
 use EolabsIo\AmazonMws\Domain\Orders\ListOrders;
 use EolabsIo\AmazonMws\Domain\Orders\ListOrderItems;
+use EolabsIo\AmazonMws\Domain\Reports\RequestReport;
 use EolabsIo\AmazonMws\Domain\Inventory\InventoryList;
 use EolabsIo\AmazonMws\Domain\Reviews\GetReviewRating;
 use EolabsIo\AmazonMws\Domain\Reviews\GetProductReview;
 use EolabsIo\AmazonMws\Domain\Finance\ListFinancialEvents;
 use EolabsIo\AmazonMws\Domain\Products\GetMatchingProduct;
 use EolabsIo\AmazonMws\Domain\Orders\Command\OrdersCommand;
+use EolabsIo\AmazonMws\Domain\Reports\CancelReportRequests;
+use EolabsIo\AmazonMws\Domain\Reports\GetReportRequestList;
+use EolabsIo\AmazonMws\Domain\Reports\GetReportRequestCount;
 use EolabsIo\AmazonMws\Domain\Sellers\Command\SellerCommand;
 use EolabsIo\AmazonMws\Domain\Products\Command\ProductCommand;
 use EolabsIo\AmazonMws\Domain\Finance\ListFinancialEventGroups;
 use EolabsIo\AmazonMws\Domain\Orders\Command\OrderItemsCommand;
 use EolabsIo\AmazonMws\Domain\Inventory\Command\InventoryCommand;
+use EolabsIo\AmazonMws\Domain\Reports\Command\RequestReportCommand;
 use EolabsIo\AmazonMws\Domain\Finance\Command\FinancialEventCommand;
 use EolabsIo\AmazonMws\Domain\Sellers\ListMarketplaceParticipations;
 use EolabsIo\AmazonMws\Domain\Reviews\Command\LogReviewRatingCommand;
+use EolabsIo\AmazonMws\Domain\Reviews\Command\GetProductReviewsCommand;
 use EolabsIo\AmazonMws\Domain\Reviews\Providers\ReviewsServiceProvider;
 use EolabsIo\AmazonMws\Domain\Finance\Command\FinancialEventGroupCommand;
 use EolabsIo\AmazonMws\Domain\Inventory\ServiceStatus as InventoryServiceStatus;
 use EolabsIo\AmazonMws\Domain\Orders\Providers\EventServiceProvider as OrdersEventServiceProvider;
 use EolabsIo\AmazonMws\Domain\Finance\Providers\EventServiceProvider as FinanceEventServiceProvider;
+use EolabsIo\AmazonMws\Domain\Reports\Providers\EventServiceProvider as ReportsEventServiceProvider;
 use EolabsIo\AmazonMws\Domain\Sellers\Providers\EventServiceProvider as SellersEventServiceProvider;
 use EolabsIo\AmazonMws\Domain\Products\Providers\EventServiceProvider as ProductsEventServiceProvider;
 use EolabsIo\AmazonMws\Domain\Inventory\Providers\EventServiceProvider as InventoryEventServiceProvider;
-use EolabsIo\AmazonMws\Domain\Reviews\Command\GetProductReviewsCommand;
 
 class AmazonMwsServiceProvider extends ServiceProvider
 {
@@ -55,6 +61,7 @@ class AmazonMwsServiceProvider extends ServiceProvider
                 LogReviewRatingCommand::class,
                 GetProductReviewsCommand::class,
                 SellerCommand::class,
+                RequestReportCommand::class,
             ]);
         }
     }
@@ -73,6 +80,7 @@ class AmazonMwsServiceProvider extends ServiceProvider
         $this->app->register(ProductsEventServiceProvider::class);
         $this->app->register(ReviewsServiceProvider::class);
         $this->app->register(SellersEventServiceProvider::class);
+        $this->app->register(ReportsEventServiceProvider::class);
 
         // Register the main class to use with the facade
         $this->app->singleton('inventory-list', function () {
@@ -113,6 +121,22 @@ class AmazonMwsServiceProvider extends ServiceProvider
 
         $this->app->singleton('get-product-review', function () {
             return new GetProductReview;
+        });
+
+        $this->app->singleton('request-report', function () {
+            return new RequestReport;
+        });
+
+        $this->app->singleton('get-report-request-list', function () {
+            return new GetReportRequestList;
+        });
+
+        $this->app->singleton('get-report-request-count', function () {
+            return new GetReportRequestCount;
+        });
+
+        $this->app->singleton('cancel-report-requests', function () {
+            return new CancelReportRequests;
         });
     }
 }
