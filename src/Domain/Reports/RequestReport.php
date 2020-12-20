@@ -4,14 +4,14 @@ namespace EolabsIo\AmazonMws\Domain\Reports;
 
 use EolabsIo\AmazonMws\Domain\Reports\ReportCore;
 use EolabsIo\AmazonMws\Domain\Reports\Concerns\HasReportType;
-use EolabsIo\AmazonMws\Domain\Shared\Concerns\InteractsWithMarketplaceIds;
 use EolabsIo\AmazonMws\Domain\Reports\Concerns\InteractsWithReportTimeFrames;
+use EolabsIo\AmazonMws\Domain\Shared\Concerns\InteractsWithMarketplaceIdList;
 
 class RequestReport extends ReportCore
 {
     use HasReportType,
         InteractsWithReportTimeFrames,
-        InteractsWithMarketplaceIds;
+        InteractsWithMarketplaceIdList;
 
 
     public function resolveOptionalParameters(): void
@@ -19,7 +19,7 @@ class RequestReport extends ReportCore
         $this->mergeParameters([
             $this->getReportTypeParameters(),
             $this->getPostedTimeFrameParameter(),
-            $this->getMarketplaceIdsParameter(),
+            $this->getMarketplaceIdListParameter(),
         ]);
     }
 

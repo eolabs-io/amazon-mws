@@ -50,10 +50,10 @@ class RequestReportCommand extends Command
             $requestedReport->withReportOptions($reportOptions);
         }
 
-        if ($marketplaceIds) {
+        if (filled($marketplaceIds)) {
             $requestedReport->withMarketplaceIds($marketplaceIds);
         }
 
-        PerformRequestReport::dispatch($requestedReport);
+        PerformRequestReport::dispatch($requestedReport)->onQueue('request-report');
     }
 }

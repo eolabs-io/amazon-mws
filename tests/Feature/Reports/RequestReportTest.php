@@ -41,7 +41,7 @@ class RequestReportTest extends TestCase
             ->withReportTypeFbaAmazonFulfilledShipmentsReport()
             ->withStartDate($startDate)
             ->withEndDate($endDate)
-            ->withMarketplaceIds($marketplaceIds)
+            ->withMarketplaceIdList($marketplaceIds)
             ->fetch();
 
         Http::assertSent(function ($request) {
@@ -56,9 +56,9 @@ class RequestReportTest extends TestCase
                     $request['ReportType'] == '_GET_AMAZON_FULFILLED_SHIPMENTS_DATA_' &&
                     $request['StartDate'] == '2020-03-24T12:00:00Z' &&
                     $request['EndDate'] == '2020-03-24T12:00:00Z' &&
-                    $request['MarketplaceId.Id.1'] == 'ATVPDKIKX0DER' &&
+                    $request['MarketplaceIdList.Id.1'] == 'ATVPDKIKX0DER' &&
                     $request['Action'] == 'RequestReport' &&
-                    $request['Signature'] == 'zJrY/gcnlzSOTO7F/wIYO+91I/Hq06NxjtYuoWu8Rns=';
+                    $request['Signature'] == 'gBEwD4pGmBaKSFPjV6m1sw7GqVbEAUFnZyE3qyXshYc=';
         });
     }
 
