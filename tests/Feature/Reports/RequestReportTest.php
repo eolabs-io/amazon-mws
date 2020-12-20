@@ -58,7 +58,7 @@ class RequestReportTest extends TestCase
                     $request['EndDate'] == '2020-03-24T12:00:00Z' &&
                     $request['MarketplaceIdList.Id.1'] == 'ATVPDKIKX0DER' &&
                     $request['Action'] == 'RequestReport' &&
-                    $request['Signature'] == 'gBEwD4pGmBaKSFPjV6m1sw7GqVbEAUFnZyE3qyXshYc=';
+                    $request['Signature'] == 'I4txRIMWPTSh8i3mEERXYsFQDaHEplbXd6mi1LmjmXQ=';
         });
     }
 

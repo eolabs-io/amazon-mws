@@ -106,6 +106,6 @@ trait HasReportType
 
     public function getReportTypeParameters(): array
     {
-        return $this->reportTypeParameters;
+        return array_filter($this->reportTypeParameters);
     }
 }
