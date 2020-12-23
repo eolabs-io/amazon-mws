@@ -20,4 +20,9 @@ trait HasStoreInteractions
     {
         return $this->store;
     }
+
+    public function getStoreId()
+    {
+        return $this->store->id;
+    }
 }

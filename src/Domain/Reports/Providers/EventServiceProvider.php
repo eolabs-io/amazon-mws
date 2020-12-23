@@ -6,14 +6,7 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 
 class EventServiceProvider extends ServiceProvider
 {
-    protected $listen = [
-        // FetchListFinancialEventGroups::class => [
-        //     FetchListFinancialEventGroupsListener::class,
-        // ],
-        // FetchListFinancialEvents::class => [
-        //     FetchListFinancialEventsListener::class,
-        // ],
-    ];
+    // protected $listen = [];
 
     /**
      * Register any events for your application.

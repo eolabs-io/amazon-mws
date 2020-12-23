@@ -1,6 +1,6 @@
 <?php
 
-namespace EolabsIo\AmazonMws\Tests\Feature\Reviews;
+namespace EolabsIo\AmazonMws\Tests\Feature\Reports;
 
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Http;

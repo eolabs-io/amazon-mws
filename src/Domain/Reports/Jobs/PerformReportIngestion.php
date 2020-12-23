@@ -7,25 +7,25 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use EolabsIo\AmazonMws\Domain\Reports\RequestReport;
+use EolabsIo\AmazonMws\Domain\Reports\GetReportRequestList;
 use EolabsIo\AmazonMws\Domain\Reports\Events\SubmittedRequestReport;
 use EolabsIo\AmazonMwsThrottlingMiddleware\Facades\AmazonMwsThrottlingMiddleware;
 
-class PerformRequestReport implements ShouldQueue
+class PerformReportIngestion implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    /** @var EolabsIo\AmazonMws\Domain\Reports\RequestReport */
-    public $requestReport;
+    /** @var EolabsIo\AmazonMws\Domain\Reports\GetReportRequestList */
+    public $getReportRequestList;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(RequestReport $requestReport)
+    public function __construct(GetReportRequestList $getReportRequestList)
     {
-        $this->requestReport = $requestReport;
+        $this->getReportRequestList = $getReportRequestList;
     }
 
     /**
@@ -35,13 +35,13 @@ class PerformRequestReport implements ShouldQueue
      */
     public function handle()
     {
-        $results = $this->requestReport->fetch();
+        $results = $this->getReportRequestList->fetch();
 
         SubmittedRequestReport::dispatch($this->requestReport);
     }
 
     public function middleware()
     {
-        return [AmazonMwsThrottlingMiddleware::forRequestReport()];
+        return [AmazonMwsThrottlingMiddleware::forGetReportRequestList()];
     }
 }

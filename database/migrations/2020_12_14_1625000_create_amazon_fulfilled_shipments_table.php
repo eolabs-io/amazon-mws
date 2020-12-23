@@ -39,8 +39,8 @@ class CreateAmazonFulfilledShipmentsTable extends Migration
             $table->float('gift_wrap_price')->nullable();
             $table->float('gift_wrap_tax')->nullable();
             $table->string('ship_service_level');
-            $table->string('recipient_name');
-            $table->string('ship_address_1');
+            $table->string('recipient_name')->nullable();
+            $table->string('ship_address_1')->nullable();
             $table->string('ship_address_2')->nullable();
             $table->string('ship_address_3')->nullable();
             $table->string('ship_city');

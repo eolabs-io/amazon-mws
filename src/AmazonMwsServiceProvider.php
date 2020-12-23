@@ -5,6 +5,7 @@ namespace EolabsIo\AmazonMws;
 use Illuminate\Support\ServiceProvider;
 use EolabsIo\AmazonMws\Domain\Orders\ListOrders;
 use EolabsIo\AmazonMws\Domain\Orders\ListOrderItems;
+use EolabsIo\AmazonMws\Domain\Reports\GetReportList;
 use EolabsIo\AmazonMws\Domain\Reports\RequestReport;
 use EolabsIo\AmazonMws\Domain\Inventory\InventoryList;
 use EolabsIo\AmazonMws\Domain\Reviews\GetReviewRating;
@@ -137,6 +138,10 @@ class AmazonMwsServiceProvider extends ServiceProvider
 
         $this->app->singleton('cancel-report-requests', function () {
             return new CancelReportRequests;
+        });
+
+        $this->app->singleton('get-report-list', function () {
+            return new GetReportList;
         });
     }
 }
