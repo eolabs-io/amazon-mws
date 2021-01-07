@@ -2,12 +2,14 @@
 
 namespace EolabsIo\AmazonMws\Domain\Reports\Jobs;
 
+use Illuminate\Support\Arr;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use EolabsIo\AmazonMws\Domain\Shared\Csv;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use EolabsIo\AmazonMws\Domain\Reports\Models\AmazonFulfilledShipment;
 use EolabsIo\AmazonMws\Domain\Reports\Jobs\ImportAmazonFulfilledShipment;
 
 class ImportAmazonFulfilledShipments implements ShouldQueue
@@ -33,12 +35,12 @@ class ImportAmazonFulfilledShipments implements ShouldQueue
      */
     public function handle()
     {
-        $importCount = 0;
-
         Csv::from($this->file)
-            ->eachRow(function ($row) use (&$importCount) {
-                ImportAmazonFulfilledShipment::dispatch($row);
-                $importCount++;
+            ->headersToSnakeCase()
+            ->getRows()
+            ->each(function ($row) {
+                $attributes = ['amazon_order_id' => Arr::get($row, 'amazon_order_id')];
+                AmazonFulfilledShipment::updateOrCreate($attributes, $row);
             });
     }
 }

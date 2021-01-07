@@ -2,55 +2,101 @@
 
 namespace EolabsIo\AmazonMws\Domain\Shared;
 
+use Illuminate\Support\Str;
+use Illuminate\Support\LazyCollection;
+use EolabsIo\AmazonMws\Domain\Shared\Exceptions\CsvHeaderRowCountMismatchException;
+
 class Csv
 {
-    public $file;
+    protected string $path;
 
-    public function __construct($file)
-    {
-        $this->file = $file;
-    }
-    public static function from($file)
-    {
-        return new static($file);
-    }
+    protected bool $processHeader = true;
 
-    public function columns()
+    protected bool $headersToSnakeCase = false;
+
+    protected string $delimiter = ',';
+
+    protected array $headers = [];
+
+
+    public static function from(string $file, string $delimiter = ',')
     {
-        return $this->openFile(function ($handle) {
-            return array_filter(fgetcsv($handle, 1000, ","));
-        });
+        return new static($file, $delimiter);
     }
 
-    public function eachRow($callback)
+    public function __construct(string $path, string $delimiter = ',')
     {
-        $this->openFile(function ($handle) use ($callback) {
-            $columns = array_filter(fgetcsv($handle, 1000, ','));
+        $this->path = $path;
+        $this->useDelimiter($delimiter);
+    }
 
-            while (($data = fgetcsv($handle, 1000, ',')) !== false) {
-                $row = [];
+    public function getPath(): string
+    {
+        return $this->path;
+    }
 
-                for ($i = 0; $i < count($data); $i++) {
-                    if (! isset($columns[$i])) {
-                        continue;
-                    }
-
-                    $row[$columns[$i]] = $data[$i];
-                }
-
-                $callback($row);
-            }
-        });
+    public function noHeaderRow(): self
+    {
+        $this->processHeader = false;
 
         return $this;
     }
 
-    protected function openFile($callback)
+    public function useDelimiter(string $delimiter): self
     {
-        $handle = fopen($this->file->getRealPath(), "r");
+        $this->delimiter = $delimiter;
 
-        return $callback($handle);
+        return $this;
+    }
 
-        fclose($handle);
+    public function headersToSnakeCase(): self
+    {
+        $this->headersToSnakeCase = true;
+
+        return $this;
+    }
+
+
+    public function getRows(): LazyCollection
+    {
+        return LazyCollection::make(function () {
+            $handle = fopen($this->getPath(), "r");
+
+            if ($this->processHeader) {
+                $this->headers = $this->processHeaderRow(fgetcsv($handle, $this->delimiter));
+            }
+
+            while (($line = fgetcsv($handle, $this->delimiter)) !== false) {
+                yield $this->getValueFromRow($line);
+            }
+
+            fclose($handle);
+        });
+    }
+
+    protected function processHeaderRow(array $headers): array
+    {
+        if ($this->headersToSnakeCase) {
+            $headers = array_map(function ($header) {
+                return Str::of($header)->camel()->snake();
+            }, $headers);
+        }
+
+        return $headers;
+    }
+
+    protected function getValueFromRow(array $row): array
+    {
+        if (! $this->processHeader) {
+            return $row;
+        }
+
+        throw_if(
+            count($row) != count($this->headers),
+            CsvHeaderRowCountMismatchException::class,
+            "Header and Row Count must be equal!"
+        );
+
+        return array_combine($this->headers, $row);
     }
 }
