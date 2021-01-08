@@ -4,6 +4,7 @@ namespace EolabsIo\AmazonMws\Tests\Feature\Reports;
 
 use Illuminate\Support\Facades\Queue;
 use EolabsIo\AmazonMws\Tests\TestCase;
+use EolabsIo\AmazonMws\Domain\Reports\Models\AmazonFulfilledShipment;
 use EolabsIo\AmazonMws\Domain\Reports\Jobs\ImportAmazonFulfilledShipments;
 
 class ImportAmazonFulfilledShipmentsTest extends TestCase
@@ -28,5 +29,6 @@ class ImportAmazonFulfilledShipmentsTest extends TestCase
         });
 
         $this->assertDatabaseCount('amazon_fulfilled_shipments', 4);
+        dd(AmazonFulfilledShipment::all()->first()->toArray());
     }
 }

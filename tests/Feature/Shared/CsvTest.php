@@ -16,11 +16,12 @@ class CsvTest extends TestCase
 
         $rows = Csv::from($file)->getRows()->all();
 
-        $this->assertCount(4, $rows);
+        $this->assertCount(5, $rows);
         $this->assertEquals('100-3590565-0113041', $rows[0]['amazon-order-id']);
         $this->assertEquals('101-4340462-1457012', $rows[1]['amazon-order-id']);
         $this->assertEquals('102-7910932-2381033', $rows[2]['amazon-order-id']);
         $this->assertEquals('103-2260656-3601064', $rows[3]['amazon-order-id']);
+        $this->assertEquals('S01-2412417-1075636', $rows[4]['amazon-order-id']);
     }
 
     /** @test */
@@ -30,11 +31,12 @@ class CsvTest extends TestCase
 
         $rows = Csv::from($file)->headersToSnakeCase()->getRows()->all();
 
-        $this->assertCount(4, $rows);
+        $this->assertCount(5, $rows);
         $this->assertEquals('100-3590565-0113041', $rows[0]['amazon_order_id']);
         $this->assertEquals('101-4340462-1457012', $rows[1]['amazon_order_id']);
         $this->assertEquals('102-7910932-2381033', $rows[2]['amazon_order_id']);
         $this->assertEquals('103-2260656-3601064', $rows[3]['amazon_order_id']);
+        $this->assertNull($rows[4]['purchase_date']);
     }
 
     /** @test */

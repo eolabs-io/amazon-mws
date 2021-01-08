@@ -97,6 +97,13 @@ class Csv
             "Header and Row Count must be equal!"
         );
 
-        return array_combine($this->headers, $row);
+        return array_combine($this->headers, $this->processRow($row));
+    }
+
+    public function processRow($row): array
+    {
+        return array_map(function ($item) {
+            return ($item === '') ? null : $item;
+        }, $row);
     }
 }
