@@ -25,7 +25,7 @@ class CreateAmazonFulfilledShipmentsTable extends Migration
             $table->dateTime('payments_date')->nullable();
             $table->dateTime('shipment_date');
             $table->dateTime('reporting_date');
-            $table->string('buyer_email');
+            $table->string('buyer_email')->nullable();
             $table->string('buyer_name')->nullable();
             $table->string('buyer_phone_number')->nullable();
             $table->string('sku');

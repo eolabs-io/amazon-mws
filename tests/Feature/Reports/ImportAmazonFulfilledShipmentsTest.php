@@ -28,7 +28,6 @@ class ImportAmazonFulfilledShipmentsTest extends TestCase
             return true;
         });
 
-        $this->assertDatabaseCount('amazon_fulfilled_shipments', 4);
-        dd(AmazonFulfilledShipment::all()->first()->toArray());
+        $this->assertDatabaseCount('amazon_fulfilled_shipments', 5);
     }
 }
