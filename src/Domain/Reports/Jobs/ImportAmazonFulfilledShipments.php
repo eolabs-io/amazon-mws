@@ -4,28 +4,27 @@ namespace EolabsIo\AmazonMws\Domain\Reports\Jobs;
 
 use Illuminate\Support\Arr;
 use Illuminate\Bus\Queueable;
+use Illuminate\Support\Enumerable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
-use EolabsIo\AmazonMws\Domain\Shared\Csv;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use EolabsIo\AmazonMws\Domain\Reports\Models\AmazonFulfilledShipment;
-use EolabsIo\AmazonMws\Domain\Reports\Jobs\ImportAmazonFulfilledShipment;
 
 class ImportAmazonFulfilledShipments implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    public $file;
+    public Enumerable $shipments;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($file)
+    public function __construct(Enumerable $shipments)
     {
-        $this->file = $file;
+        $this->shipments = $shipments;
     }
 
     /**
@@ -35,12 +34,9 @@ class ImportAmazonFulfilledShipments implements ShouldQueue
      */
     public function handle()
     {
-        Csv::from($this->file)
-            ->headersToSnakeCase()
-            ->getRows()
-            ->each(function ($row) {
-                $attributes = ['amazon_order_id' => Arr::get($row, 'amazon_order_id')];
-                AmazonFulfilledShipment::updateOrCreate($attributes, $row);
-            });
+        $this->shipments->each(function ($shipment) {
+            $attributes = ['amazon_order_id' => Arr::get($shipment, 'amazon_order_id')];
+            AmazonFulfilledShipment::updateOrCreate($attributes, $shipment);
+        });
     }
 }

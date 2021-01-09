@@ -4,7 +4,7 @@ namespace EolabsIo\AmazonMws\Tests\Feature\Reports;
 
 use Illuminate\Support\Facades\Queue;
 use EolabsIo\AmazonMws\Tests\TestCase;
-use EolabsIo\AmazonMws\Domain\Reports\Models\AmazonFulfilledShipment;
+use EolabsIo\AmazonMws\Domain\Shared\Csv;
 use EolabsIo\AmazonMws\Domain\Reports\Jobs\ImportAmazonFulfilledShipments;
 
 class ImportAmazonFulfilledShipmentsTest extends TestCase
@@ -21,7 +21,14 @@ class ImportAmazonFulfilledShipmentsTest extends TestCase
     {
         $file = __DIR__ .'/../../Stubs/Responses/AmazonFulfilledShipments.csv';
 
-        ImportAmazonFulfilledShipments::dispatch($file);
+        Csv::from($file)
+            ->headersToSnakeCase()
+            ->getRows()
+            ->chunk(100)
+            ->each(function ($shipments) {
+                ImportAmazonFulfilledShipments::dispatch($shipments);
+            });
+
 
         Queue::assertPushed(ImportAmazonFulfilledShipments::class, function ($job) {
             $job->handle();
