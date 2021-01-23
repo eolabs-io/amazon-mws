@@ -33,6 +33,7 @@ use EolabsIo\AmazonMws\Domain\Orders\Providers\EventServiceProvider as OrdersEve
 use EolabsIo\AmazonMws\Domain\Finance\Providers\EventServiceProvider as FinanceEventServiceProvider;
 use EolabsIo\AmazonMws\Domain\Reports\Providers\EventServiceProvider as ReportsEventServiceProvider;
 use EolabsIo\AmazonMws\Domain\Sellers\Providers\EventServiceProvider as SellersEventServiceProvider;
+use EolabsIo\AmazonMws\Domain\Shared\Providers\EventServiceProvider as SharedEventServiceProvider;
 use EolabsIo\AmazonMws\Domain\Products\Providers\EventServiceProvider as ProductsEventServiceProvider;
 use EolabsIo\AmazonMws\Domain\Inventory\Providers\EventServiceProvider as InventoryEventServiceProvider;
 
@@ -82,6 +83,7 @@ class AmazonMwsServiceProvider extends ServiceProvider
         $this->app->register(ReviewsServiceProvider::class);
         $this->app->register(SellersEventServiceProvider::class);
         $this->app->register(ReportsEventServiceProvider::class);
+        $this->app->register(SharedEventServiceProvider::class);
 
         // Register the main class to use with the facade
         $this->app->singleton('inventory-list', function () {

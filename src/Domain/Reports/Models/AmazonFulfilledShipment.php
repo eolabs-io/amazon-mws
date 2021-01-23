@@ -3,9 +3,22 @@
 namespace EolabsIo\AmazonMws\Domain\Reports\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use EolabsIo\AmazonMws\Domain\Reports\Events\AmazonFulfilledShipmentWasCreated;
+use EolabsIo\AmazonMws\Domain\Reports\Events\AmazonFulfilledShipmentWasUpdated;
 
 class AmazonFulfilledShipment extends Model
 {
+
+    /**
+     * The event map for the model.
+     *
+     * @var array
+     */
+    protected $dispatchesEvents = [
+        'created' => AmazonFulfilledShipmentWasCreated::class,
+        'updated' => AmazonFulfilledShipmentWasUpdated::class,
+    ];
+
     /**
      * The attributes that should be cast.
      *
