@@ -103,7 +103,16 @@ class Csv
     public function processRow($row): array
     {
         return array_map(function ($item) {
-            return ($item === '') ? null : $item;
+            if ($item === '') {
+                return null;
+            }
+
+            $encoding = mb_detect_encoding($item, 'UTF-8, ISO-8859-1, WINDOWS-1252, WINDOWS-1251', true);
+            if ($encoding != 'UTF-8') {
+                $item = iconv($encoding, 'UTF-8//IGNORE', $item);
+            }
+
+            return $item;
         }, $row);
     }
 }
