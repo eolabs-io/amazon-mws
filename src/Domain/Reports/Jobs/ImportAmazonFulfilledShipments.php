@@ -10,10 +10,11 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use EolabsIo\AmazonMws\Domain\Reports\Models\AmazonFulfilledShipment;
+use Illuminate\Bus\Batchable;
 
 class ImportAmazonFulfilledShipments implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Batchable, Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     public Enumerable $shipments;
 
