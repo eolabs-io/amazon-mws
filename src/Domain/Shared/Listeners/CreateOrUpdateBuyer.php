@@ -17,6 +17,10 @@ class CreateOrUpdateBuyer
 
     private function createOrUpdateFromAmazonFulfilledShipment(AmazonFulfilledShipment $shipment)
     {
+        if (is_null($shipment->buyer_email)) {
+            return;
+        }
+
         $attributes = [
             'email' => $shipment->buyer_email
         ];
