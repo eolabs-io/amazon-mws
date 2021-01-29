@@ -2,29 +2,29 @@
 
 namespace EolabsIo\AmazonMws\Domain\Reports\Jobs;
 
-use Illuminate\Bus\Batchable;
+use Illuminate\Support\Arr;
 use Illuminate\Bus\Queueable;
-use Illuminate\Support\Enumerable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use EolabsIo\AmazonMws\Domain\Reports\Jobs\ImportAmazonFulfilledShipment;
+use EolabsIo\AmazonMws\Domain\Reports\Models\AmazonFulfilledShipment;
+use Illuminate\Bus\Batchable;
 
-class ImportAmazonFulfilledShipments implements ShouldQueue
+class ImportAmazonFulfilledShipment implements ShouldQueue
 {
     use Batchable, Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    public Enumerable $shipments;
+    public $shipment;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(Enumerable $shipments)
+    public function __construct($shipment)
     {
-        $this->shipments = $shipments;
+        $this->shipment = $shipment;
     }
 
     /**
@@ -34,8 +34,7 @@ class ImportAmazonFulfilledShipments implements ShouldQueue
      */
     public function handle()
     {
-        $this->shipments->each(function ($shipment) {
-            ImportAmazonFulfilledShipment::dispatch($shipment)->onQueue(null);
-        });
+        $attributes = ['shipment_item_id' => Arr::get($this->shipment, 'shipment_item_id')];
+        AmazonFulfilledShipment::updateOrCreate($attributes, $this->shipment);
     }
 }

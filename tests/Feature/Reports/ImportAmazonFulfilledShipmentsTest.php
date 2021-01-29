@@ -5,8 +5,9 @@ namespace EolabsIo\AmazonMws\Tests\Feature\Reports;
 use Illuminate\Support\Facades\Queue;
 use EolabsIo\AmazonMws\Tests\TestCase;
 use EolabsIo\AmazonMws\Domain\Shared\Csv;
-use EolabsIo\AmazonMws\Domain\Reports\Jobs\ImportAmazonFulfilledShipments;
 use EolabsIo\AmazonMws\Domain\Reports\Models\AmazonFulfilledShipment;
+use EolabsIo\AmazonMws\Domain\Reports\Jobs\ImportAmazonFulfilledShipment;
+use EolabsIo\AmazonMws\Domain\Reports\Jobs\ImportAmazonFulfilledShipments;
 
 class ImportAmazonFulfilledShipmentsTest extends TestCase
 {
@@ -36,12 +37,6 @@ class ImportAmazonFulfilledShipmentsTest extends TestCase
             return true;
         });
 
-        $this->assertDatabaseCount('amazon_fulfilled_shipments', 5);
-
-        $shipments = AmazonFulfilledShipment::all()->toArray();
-
-        $this->assertEquals('123th street', trim($shipments[0]['ship_address1']));
-        $this->assertEquals('100 1st ave', $shipments[1]['ship_address1']);
-        $this->assertEquals('637 w 90th', $shipments[2]['ship_address1']);
+        Queue::assertPushed(ImportAmazonFulfilledShipment::class, 5);
     }
 }

@@ -18,7 +18,7 @@ class CreateAmazonFulfilledShipmentsTable extends Migration
             $table->string('amazon_order_id');
             $table->string('merchant_order_id')->nullable();
             $table->string('shipment_id');
-            $table->string('shipment_item_id');
+            $table->string('shipment_item_id')->unique();
             $table->string('amazon_order_item_id');
             $table->string('merchant_order_item_id')->nullable();
             $table->dateTime('purchase_date')->nullable();
