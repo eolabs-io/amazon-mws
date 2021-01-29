@@ -3,13 +3,14 @@
 namespace EolabsIo\AmazonMws\Domain\Reports\Jobs;
 
 use Illuminate\Support\Arr;
+use Illuminate\Bus\Batchable;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\Middleware\WithoutOverlapping;
 use EolabsIo\AmazonMws\Domain\Reports\Models\AmazonFulfilledShipment;
-use Illuminate\Bus\Batchable;
 
 class ImportAmazonFulfilledShipment implements ShouldQueue
 {
@@ -36,5 +37,16 @@ class ImportAmazonFulfilledShipment implements ShouldQueue
     {
         $attributes = ['shipment_item_id' => Arr::get($this->shipment, 'shipment_item_id')];
         AmazonFulfilledShipment::updateOrCreate($attributes, $this->shipment);
+    }
+
+    /**
+     * Get the middleware the job should pass through.
+     *
+     * @return array
+     */
+    public function middleware()
+    {
+        $buyerEmail = Arr::get($this->shipment, 'buyer_email');
+        return [new WithoutOverlapping($buyerEmail)];
     }
 }
