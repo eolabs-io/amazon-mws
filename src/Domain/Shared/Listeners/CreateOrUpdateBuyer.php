@@ -38,6 +38,6 @@ class CreateOrUpdateBuyer
             'phone_number' => $shipment->ship_phone_number,
         ];
 
-        Buyer::updateOrCreate($attributes, $values);
+        Buyer::lockForUpdate()->updateOrCreate($attributes, $values);
     }
 }
