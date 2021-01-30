@@ -18,6 +18,8 @@ class ImportAmazonFulfilledShipment implements ShouldQueue
 
     public $shipment;
 
+    public $tries = 25;
+
     /**
      * Create a new job instance.
      *
@@ -47,6 +49,6 @@ class ImportAmazonFulfilledShipment implements ShouldQueue
     public function middleware()
     {
         $buyerEmail = Arr::get($this->shipment, 'buyer_email');
-        return [new WithoutOverlapping($buyerEmail)];
+        return [(new WithoutOverlapping($buyerEmail))->releaseAfter(rand(5, 10))];
     }
 }
