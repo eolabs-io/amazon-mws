@@ -19,7 +19,9 @@ class CreateProductCategoriesTable extends Migration
             $table->string('product_category_name');
             $table->string('parent_id')->nullable();
             $table->timestamps();
+        });
 
+        Schema::table('product_categories', function (Blueprint $table) {
             $table->foreign('parent_id')->references('product_category_id')->on('product_categories')->nullOnDelete();
         });
     }
