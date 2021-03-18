@@ -40,8 +40,8 @@ class PersistProductCategoriesAction extends BasePersistAction
         ];
     }
 
-    public function shouldCreateFromList(): bool
-    {
-        return false;
-    }
+    // public function shouldCreateFromList(): bool
+    // {
+    //     return false;
+    // }
 }

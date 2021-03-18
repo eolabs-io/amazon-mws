@@ -8,7 +8,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use EolabsIo\AmazonMws\Domain\Products\Actions\PersistProductCategoriesForSkuAction;
+use EolabsIo\AmazonMws\Domain\Products\Actions\PersistProductCategoriesAction;
 
 class ProcessGetProductCategoriesForSkuResponse implements ShouldQueue
 {
@@ -34,6 +34,6 @@ class ProcessGetProductCategoriesForSkuResponse implements ShouldQueue
      */
     public function handle()
     {
-        (new PersistProductCategoriesForSkuAction($this->results))->execute();
+        (new PersistProductCategoriesAction($this->results))->execute();
     }
 }

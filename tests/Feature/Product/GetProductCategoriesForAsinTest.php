@@ -69,7 +69,7 @@ class GetProductCategoriesForAsinTest extends TestCase
                             ->fetch();
 
         // dd($response);
-        $productCategories = $response['Self'];
+        $productCategories = $response['Self'][0];
 
         $this->assertEquals(2420095011, $productCategories['ProductCategoryId']);
         $this->assertEquals('Compression Shorts', $productCategories['ProductCategoryName']);

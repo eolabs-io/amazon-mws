@@ -39,7 +39,7 @@ class PerformFetchGetProductCategoriesForAsinTest extends TestCase
 
         // Assert a job was pushed...
         Queue::assertPushed(ProcessGetProductCategoriesForAsinResponse::class, function ($job) {
-            return data_get($job->results, 'Self.ProductCategoryId') === '2420095011';
+            return data_get($job->results, 'Self.0.ProductCategoryId') === '2420095011';
         });
     }
 }
