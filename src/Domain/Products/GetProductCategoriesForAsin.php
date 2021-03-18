@@ -2,24 +2,24 @@
 
 namespace EolabsIo\AmazonMws\Domain\Products;
 
-use EolabsIo\AmazonMws\Domain\Products\Concerns\InteractsWithASINList;
+use EolabsIo\AmazonMws\Domain\Products\Concerns\InteractsWithASIN;
 use EolabsIo\AmazonMws\Domain\Products\Concerns\InteractsWithMarketplaceId;
 
-class GetMatchingProduct extends ProductCore
+class GetProductCategoriesForAsin extends ProductCore
 {
     use InteractsWithMarketplaceId,
-        InteractsWithASINList;
+        InteractsWithASIN;
 
 
     public function resolveOptionalParameters(): void
     {
         $this->mergeParameters([$this->getMarketplaceIdParameter(),
-                                 $this->getASINListParameter(),
+                                 $this->getASINParameter(),
                              ]);
     }
 
     public function getAction(): string
     {
-        return 'GetMatchingProduct';
+        return 'GetProductCategoriesForASIN';
     }
 }

@@ -21,19 +21,22 @@ use EolabsIo\AmazonMws\Domain\Products\Command\ProductCommand;
 use EolabsIo\AmazonMws\Domain\Finance\ListFinancialEventGroups;
 use EolabsIo\AmazonMws\Domain\Orders\Command\OrderItemsCommand;
 use EolabsIo\AmazonMws\Domain\Inventory\Command\InventoryCommand;
+use EolabsIo\AmazonMws\Domain\Products\GetProductCategoriesForSKU;
+use EolabsIo\AmazonMws\Domain\Products\GetProductCategoriesForAsin;
 use EolabsIo\AmazonMws\Domain\Reports\Command\RequestReportCommand;
 use EolabsIo\AmazonMws\Domain\Finance\Command\FinancialEventCommand;
 use EolabsIo\AmazonMws\Domain\Sellers\ListMarketplaceParticipations;
 use EolabsIo\AmazonMws\Domain\Reviews\Command\LogReviewRatingCommand;
+use EolabsIo\AmazonMws\Domain\Products\Command\ProductCategoryCommand;
 use EolabsIo\AmazonMws\Domain\Reviews\Command\GetProductReviewsCommand;
 use EolabsIo\AmazonMws\Domain\Reviews\Providers\ReviewsServiceProvider;
 use EolabsIo\AmazonMws\Domain\Finance\Command\FinancialEventGroupCommand;
 use EolabsIo\AmazonMws\Domain\Inventory\ServiceStatus as InventoryServiceStatus;
 use EolabsIo\AmazonMws\Domain\Orders\Providers\EventServiceProvider as OrdersEventServiceProvider;
+use EolabsIo\AmazonMws\Domain\Shared\Providers\EventServiceProvider as SharedEventServiceProvider;
 use EolabsIo\AmazonMws\Domain\Finance\Providers\EventServiceProvider as FinanceEventServiceProvider;
 use EolabsIo\AmazonMws\Domain\Reports\Providers\EventServiceProvider as ReportsEventServiceProvider;
 use EolabsIo\AmazonMws\Domain\Sellers\Providers\EventServiceProvider as SellersEventServiceProvider;
-use EolabsIo\AmazonMws\Domain\Shared\Providers\EventServiceProvider as SharedEventServiceProvider;
 use EolabsIo\AmazonMws\Domain\Products\Providers\EventServiceProvider as ProductsEventServiceProvider;
 use EolabsIo\AmazonMws\Domain\Inventory\Providers\EventServiceProvider as InventoryEventServiceProvider;
 
@@ -60,6 +63,7 @@ class AmazonMwsServiceProvider extends ServiceProvider
                 FinancialEventCommand::class,
                 FinancialEventGroupCommand::class,
                 ProductCommand::class,
+                ProductCategoryCommand::class,
                 LogReviewRatingCommand::class,
                 GetProductReviewsCommand::class,
                 SellerCommand::class,
@@ -144,6 +148,14 @@ class AmazonMwsServiceProvider extends ServiceProvider
 
         $this->app->singleton('get-report-list', function () {
             return new GetReportList;
+        });
+
+        $this->app->singleton('get-product-categories-for-asin', function () {
+            return new GetProductCategoriesForAsin;
+        });
+
+        $this->app->singleton('get-product-categories-for-sku', function () {
+            return new GetProductCategoriesForSKU;
         });
     }
 }

@@ -2,8 +2,7 @@
 
 namespace EolabsIo\AmazonMws\Domain\Products\Concerns;
 
-
-trait InteractsASINList
+trait InteractsWithASINList
 {
     /** @var array */
     private $asins = [];
@@ -16,26 +15,25 @@ trait InteractsASINList
     }
 
     public function hasAsins(): bool
-	{
-		return count($this->asins) > 0;
-	}
+    {
+        return count($this->asins) > 0;
+    }
 
-	public function getAsins(): array
-	{
-		return $this->asins;
-	}
+    public function getAsins(): array
+    {
+        return $this->asins;
+    }
 
     public function formattedAsins(): array
     {
-         return collect($this->getAsins())->mapWithKeys(function ($item, $key){
-             $key++;
-             return ["ASINList.ASIN.{$key}" => $item ];
-         })->toArray();
+        return collect($this->getAsins())->mapWithKeys(function ($item, $key) {
+            $key++;
+            return ["ASINList.ASIN.{$key}" => $item ];
+        })->toArray();
     }
 
     public function getAsinListParameter(): array
     {
         return $this->formattedASINs();
     }
-
 }

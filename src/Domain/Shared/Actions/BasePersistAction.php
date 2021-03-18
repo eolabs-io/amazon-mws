@@ -20,7 +20,7 @@ abstract class BasePersistAction
 
     public function execute()
     {
-        $this->createFromList();
+        ($this->shouldCreateFromList()) ? $this->createFromList() : $this->create();
     }
 
     private function createFromList()
@@ -30,6 +30,13 @@ abstract class BasePersistAction
 
             $this->firePersistedActionEvent($item);
         }
+    }
+
+    private function create()
+    {
+        $item = $this->createItem($this->list);
+
+        $this->firePersistedActionEvent($item);
     }
 
     abstract protected function createItem($list): Model;
@@ -47,5 +54,10 @@ abstract class BasePersistAction
     public function getPersistedEvent()
     {
         return null;
+    }
+
+    public function shouldCreateFromList(): bool
+    {
+        return true;
     }
 }
