@@ -3,7 +3,8 @@
 namespace EolabsIo\AmazonMws\Domain\Reviews;
 
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Http;
+use Symfony\Component\HttpClient\HttpClient;
+use Symfony\Component\BrowserKit\HttpBrowser;
 use EolabsIo\AmazonMwsResponseParser\Support\Facades\ReviewResponseParser;
 
 abstract class ReviewCore
@@ -23,12 +24,29 @@ abstract class ReviewCore
         return $this->asin;
     }
 
+    // public function fetch(): Collection
+    // {
+    //     $response = Http::get($this->getUrl());
+    //     $this->parsedResponse = $this->parseResponse($response);
+
+    //     return $this->getParsedResponse();
+    // }
+
     public function fetch(): Collection
     {
-        $response = Http::get($this->getUrl());
+        $response = $this->get($this->getUrl());
+
         $this->parsedResponse = $this->parseResponse($response);
 
         return $this->getParsedResponse();
+    }
+
+    public function get($url)
+    {
+        $browser = new HttpBrowser(HttpClient::create());
+        $browser->request('GET', $url);
+
+        return $browser->getResponse();
     }
 
     public function getQueryParameters(): array

@@ -4,6 +4,7 @@ namespace EolabsIo\AmazonMws\Tests\Feature\Reviews;
 
 use Illuminate\Support\Facades\Queue;
 use EolabsIo\AmazonMws\Tests\TestCase;
+use EolabsIo\AmazonMws\Support\Facades\GetReviewRating;
 use EolabsIo\AmazonMws\Tests\Concerns\CreatesGetReviewRating;
 use EolabsIo\AmazonMws\Domain\Reviews\Jobs\PerformFetchGetReviewRating;
 use EolabsIo\AmazonMws\Domain\Reviews\Jobs\ProcessGetReviewRatingResponse;
@@ -17,6 +18,7 @@ class PerformFetchGetReviewRatingTest extends TestCase
         parent::setUp();
 
         Queue::fake();
+        GetReviewRating::fake();
     }
 
 

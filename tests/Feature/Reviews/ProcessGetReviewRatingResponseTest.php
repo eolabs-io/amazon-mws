@@ -4,6 +4,7 @@ namespace EolabsIo\AmazonMws\Tests\Feature\Reviews;
 
 use EolabsIo\AmazonMws\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use EolabsIo\AmazonMws\Support\Facades\GetReviewRating;
 use EolabsIo\AmazonMws\Tests\Concerns\CreatesGetReviewRating;
 use EolabsIo\AmazonMws\Domain\Reviews\Models\ReviewRatingHistory;
 use EolabsIo\AmazonMws\Domain\Reviews\Jobs\ProcessGetReviewRatingResponse;
@@ -17,6 +18,7 @@ class ProcessGetReviewRatingResponseTest extends TestCase
     {
         parent::setUp();
 
+        GetReviewRating::fake();
         $getReviewRating = $this->createGetReviewRating();
 
         $results = $getReviewRating->fetch();

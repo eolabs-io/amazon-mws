@@ -5,6 +5,7 @@ namespace EolabsIo\AmazonMws\Tests\Feature\Reviews;
 use Illuminate\Support\Carbon;
 use EolabsIo\AmazonMws\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use EolabsIo\AmazonMws\Support\Facades\GetProductReview;
 use EolabsIo\AmazonMws\Domain\Reviews\Models\ProductReview;
 use EolabsIo\AmazonMws\Tests\Concerns\CreatesGetProductReview;
 use EolabsIo\AmazonMws\Domain\Reviews\Jobs\ProcessGetProductReviewResponse;
@@ -17,6 +18,8 @@ class ProcessGetProductReviewResponseTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+
+        GetProductReview::fake();
 
         $getProductReview = $this->createGetProductReviewWithImages(); //createGetProductReview();
 

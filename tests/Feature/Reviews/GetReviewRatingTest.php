@@ -11,6 +11,7 @@ class GetReviewRatingTest extends TestCase
     /** @test */
     public function it_gets_the_correct_rating()
     {
+        GetReviewRating::fake();
         GetReviewRatingFactory::new()->fakeGetReviewRatingResponse();
 
         $asin = "B00200000Q";

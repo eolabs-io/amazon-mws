@@ -5,6 +5,7 @@ namespace EolabsIo\AmazonMws\Tests\Feature\Reviews;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Queue;
 use EolabsIo\AmazonMws\Tests\TestCase;
+use EolabsIo\AmazonMws\Support\Facades\GetProductReview;
 use EolabsIo\AmazonMws\Tests\Concerns\CreatesGetProductReview;
 use EolabsIo\AmazonMws\Domain\Reviews\Events\FetchGetProductReview;
 use EolabsIo\AmazonMws\Domain\Reviews\Jobs\PerformFetchGetProductReview;
@@ -19,6 +20,7 @@ class PerformFetchGetProductReviewTest extends TestCase
         parent::setUp();
 
         Queue::fake();
+        GetProductReview::fake();
     }
 
     /** @test */

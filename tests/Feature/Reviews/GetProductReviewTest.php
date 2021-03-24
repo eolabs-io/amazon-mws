@@ -10,9 +10,25 @@ use EolabsIo\AmazonMws\Tests\Factories\GetProductReviewFactory;
 class GetProductReviewTest extends TestCase
 {
 
+    // /** @test */
+    // public function it_test_broswer()
+    // {
+    //     $asin = "B07L8MMCZV";
+    //     $pageNumber = 1;
+    //     $result = GetProductReview::withAsin($asin)
+    //             ->withPageNumber($pageNumber)
+    //             ->fetch();
+
+    //     // dd($result);
+    //     // Http::assertSent(function ($request) use ($asin, $pageNumber) {
+    //     //     return $request->url() == "https://www.amazon.com/product-reviews/{$asin}?pageNumber={$pageNumber}";
+    //     // });
+    // }
+
     /** @test */
     public function it_sends_the_correct_request_query()
     {
+        GetProductReview::fake();
         GetProductReviewFactory::new()->fakeGetProductReviewResponse();
 
         $asin = "B00200000Q";
@@ -29,6 +45,7 @@ class GetProductReviewTest extends TestCase
     /** @test */
     public function it_gets_the_correct_response()
     {
+        GetProductReview::fake();
         GetProductReviewFactory::new()->fakeGetProductReviewResponse();
 
         $asin = "B00200000Q";
@@ -47,6 +64,7 @@ class GetProductReviewTest extends TestCase
     /** @test */
     public function it_can_change_the_page_response()
     {
+        GetProductReview::fake();
         GetProductReviewFactory::new()->fakeGetProductReviewResponse();
         $pageNumber = 2;
         $asin = "B00200000Q";
