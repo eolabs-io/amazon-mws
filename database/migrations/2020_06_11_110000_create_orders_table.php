@@ -61,6 +61,11 @@ class CreateOrdersTable extends AmazonMwsMigration
             // $table->foreign('payment_execution_detail_id')->references('id')->on('payment_execution_detail_items')->onDelete('cascade');
             $table->foreign('payment_method_details_id')->references('id')->on('payment_method_details')->onDelete('cascade');
             $table->foreign('buyer_tax_info_id')->references('id')->on('buyer_tax_infos')->onDelete('cascade');
+
+            $table->index('amazon_order_id');
+            $table->index('buyer_email');
+            $table->index('purchase_date');
+            $table->index('order_status');
         });
     }
 
@@ -71,6 +76,13 @@ class CreateOrdersTable extends AmazonMwsMigration
      */
     public function down()
     {
+        Schema::table('orders', function (Blueprint $table) {
+            $table->dropIndex('orders_amazon_order_id_index');
+            $table->dropIndex('orders_buyer_email_index');
+            $table->dropIndex('orders_purchase_date_index');
+            $table->dropIndex('orders_order_status_index');
+        });
+
         Schema::dropIfExists('orders');
     }
 }

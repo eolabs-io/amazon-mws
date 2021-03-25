@@ -70,6 +70,9 @@ class CreateOrderItemsTable extends AmazonMwsMigration
             // PromotionIds
             $table->foreign('cod_fee_id')->references('id')->on('money')->onDelete('cascade');
             $table->foreign('cod_fee_discount_id')->references('id')->on('money')->onDelete('cascade');
+
+            $table->index('amazon_order_id');
+            $table->index('ASIN');
         });
     }
 
@@ -80,6 +83,11 @@ class CreateOrderItemsTable extends AmazonMwsMigration
      */
     public function down()
     {
+        Schema::table('order_items', function (Blueprint $table) {
+            $table->dropIndex('order_items_amazon_order_id_index');
+            $table->dropIndex('order_items_ASIN_index');
+        });
+
         Schema::dropIfExists('order_items');
     }
 }
