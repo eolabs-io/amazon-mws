@@ -47,13 +47,21 @@ class AmazonMwsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-        $this->loadFactoriesFrom(__DIR__.'/../database/factories');
+        // $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+        // $this->loadFactoriesFrom(__DIR__.'/../database/factories');
 
         if ($this->app->runningInConsole()) {
+            if (AmazonMws::$runsMigrations) {
+                $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+            }
+
+            $this->publishes([
+                __DIR__.'/../database/migrations' => database_path('migrations/amazonMws'),
+            ], 'amazon-mws-migrations');
+
             $this->publishes([
                 __DIR__.'/../config/config.php' => config_path('amazon-mws.php'),
-            ], 'config');
+            ], 'amazon-mws-config');
 
             // Registering package commands.
             $this->commands([
