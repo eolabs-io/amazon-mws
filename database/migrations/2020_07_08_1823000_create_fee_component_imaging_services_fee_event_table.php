@@ -2,9 +2,9 @@
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Database\Migrations\Migration;
+use EolabsIo\AmazonMws\Domain\Shared\Migrations\AmazonMwsMigration;
 
-class CreateFeeComponentImagingServicesFeeEventTable extends Migration
+class CreateFeeComponentImagingServicesFeeEventTable extends AmazonMwsMigration
 {
     /**
      * Run the migrations.

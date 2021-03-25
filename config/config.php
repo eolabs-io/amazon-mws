@@ -4,8 +4,8 @@
  * You can place your custom package configuration in here.
  */
 return [
-	'constants' => [
-		'amazon' => [
+    'constants' => [
+        'amazon' => [
             'application' => 'LaravelAmazonMWS',
             'appversion' => '2.0',
             'version' => [
@@ -19,6 +19,10 @@ return [
                 'sellers' => '2011-07-01',
                 'finances' => '2015-05-01',
             ],
-        ], 
-	]
+        ],
+    ],
+
+    'database' => [
+        'connection' => env('DB_AMAZON_MWS_CONNECTION'),
+    ],
 ];

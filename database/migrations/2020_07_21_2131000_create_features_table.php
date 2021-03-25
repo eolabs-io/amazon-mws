@@ -1,11 +1,10 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use EolabsIo\AmazonMws\Domain\Shared\Migrations\AmazonMwsMigration;
 
-
-class CreateFeaturesTable extends Migration
+class CreateFeaturesTable extends AmazonMwsMigration
 {
     /**
      * Run the migrations.
@@ -20,7 +19,7 @@ class CreateFeaturesTable extends Migration
             $table->unsignedBigInteger('item_attribute_id');
             $table->timestamps();
 
-            $table->foreign('item_attribute_id')->references('id')->on('item_attributes')->onDelete('cascade'); 
+            $table->foreign('item_attribute_id')->references('id')->on('item_attributes')->onDelete('cascade');
         });
     }
 

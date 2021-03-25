@@ -2,9 +2,9 @@
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Database\Migrations\Migration;
+use EolabsIo\AmazonMws\Domain\Shared\Migrations\AmazonMwsMigration;
 
-class CreateItemTaxWithheldTaxWithheldComponentTable extends Migration
+class CreateItemTaxWithheldTaxWithheldComponentTable extends AmazonMwsMigration
 {
     /**
      * Run the migrations.

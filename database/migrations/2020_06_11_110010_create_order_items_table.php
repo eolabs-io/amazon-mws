@@ -2,10 +2,9 @@
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Database\Migrations\Migration;
+use EolabsIo\AmazonMws\Domain\Shared\Migrations\AmazonMwsMigration;
 
-
-class CreateOrderItemsTable extends Migration
+class CreateOrderItemsTable extends AmazonMwsMigration
 {
     /**
      * Run the migrations.
@@ -40,7 +39,7 @@ class CreateOrderItemsTable extends Migration
             // PromotionIds
             $table->unsignedBigInteger('cod_fee_id')->nullable();
             $table->unsignedBigInteger('cod_fee_discount_id')->nullable();
-            $table->boolean('is_gift')->nullable(); 
+            $table->boolean('is_gift')->nullable();
             $table->string('gift_message_text')->nullable();
             $table->string('gift_wrap_level')->nullable();
             $table->string('condition_note')->nullable();
@@ -49,8 +48,8 @@ class CreateOrderItemsTable extends Migration
             $table->dateTime('scheduled_delivery_start_date')->nullable();
             $table->dateTime('scheduled_delivery_end_date')->nullable();
             $table->string('price_designation')->nullable();
-            $table->boolean('is_transparency')->nullable(); 
-            $table->boolean('serial_number_required')->nullable(); 
+            $table->boolean('is_transparency')->nullable();
+            $table->boolean('serial_number_required')->nullable();
             $table->timestamps();
 
             $table->foreign('amazon_order_id')->references('amazon_order_id')->on('orders');

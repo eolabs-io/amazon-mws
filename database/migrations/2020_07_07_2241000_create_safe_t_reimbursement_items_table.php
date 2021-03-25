@@ -1,11 +1,10 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use EolabsIo\AmazonMws\Domain\Shared\Migrations\AmazonMwsMigration;
 
-
-class CreateSafeTReimbursementItemsTable extends Migration
+class CreateSafeTReimbursementItemsTable extends AmazonMwsMigration
 {
     /**
      * Run the migrations.
@@ -19,7 +18,7 @@ class CreateSafeTReimbursementItemsTable extends Migration
             $table->unsignedBigInteger('safe_t_reimbursement_event_id');
             $table->timestamps();
 
-            $table->foreign('safe_t_reimbursement_event_id')->references('id')->on('safe_t_reimbursement_events')->onDelete('cascade');    
+            $table->foreign('safe_t_reimbursement_event_id')->references('id')->on('safe_t_reimbursement_events')->onDelete('cascade');
         });
     }
 
