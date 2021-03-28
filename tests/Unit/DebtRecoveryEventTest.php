@@ -9,7 +9,6 @@ use EolabsIo\AmazonMws\Domain\Finance\Models\DebtRecoveryItem;
 
 class DebtRecoveryEventTest extends BaseModelTest
 {
-
     protected function getModelClass()
     {
         return DebtRecoveryEvent::class;
@@ -18,8 +17,8 @@ class DebtRecoveryEventTest extends BaseModelTest
     /** @test */
     public function it_has_recoveryAmount_relationship()
     {
-        $debtRecoveryEvent = factory(DebtRecoveryEvent::class)->create(['recovery_amount_id' => null]);
-        $recoveryAmount = factory(CurrencyAmount::class)->create();
+        $debtRecoveryEvent = DebtRecoveryEvent::factory()->create(['recovery_amount_id' => null]);
+        $recoveryAmount = CurrencyAmount::factory()->create();
 
         $debtRecoveryEvent->recoveryAmount()->associate($recoveryAmount);
 
@@ -29,8 +28,8 @@ class DebtRecoveryEventTest extends BaseModelTest
     /** @test */
     public function it_has_overPaymentCredit_relationship()
     {
-        $debtRecoveryEvent = factory(DebtRecoveryEvent::class)->create(['over_payment_credit_id' => null]);
-        $overPaymentCredit = factory(CurrencyAmount::class)->create();
+        $debtRecoveryEvent = DebtRecoveryEvent::factory()->create(['over_payment_credit_id' => null]);
+        $overPaymentCredit = CurrencyAmount::factory()->create();
 
         $debtRecoveryEvent->overPaymentCredit()->associate($overPaymentCredit);
 
@@ -40,24 +39,28 @@ class DebtRecoveryEventTest extends BaseModelTest
     /** @test */
     public function it_has_debtRecoveryItemList_relationship()
     {
-        $debtRecoveryEvent = factory(DebtRecoveryEvent::class)->create();
-        $debtRecoveryItemList = factory(DebtRecoveryItem::class, 3)->create();
+        $debtRecoveryEvent = DebtRecoveryEvent::factory()->create();
+        $debtRecoveryItemList = DebtRecoveryItem::factory()->times(3)->create();
 
         $debtRecoveryEvent->debtRecoveryItemList()->toggle($debtRecoveryItemList);
 
-        $this->assertArraysEqual($debtRecoveryItemList->toArray(), 
-                                 $debtRecoveryEvent->debtRecoveryItemList->toArray());
+        $this->assertArraysEqual(
+            $debtRecoveryItemList->toArray(),
+            $debtRecoveryEvent->debtRecoveryItemList->toArray()
+        );
     }
 
     /** @test */
     public function it_has_chargeInstrumentList_relationship()
     {
-        $debtRecoveryEvent = factory(DebtRecoveryEvent::class)->create();
-        $chargeInstrumentList = factory(ChargeInstrument::class, 3)->create();
+        $debtRecoveryEvent = DebtRecoveryEvent::factory()->create();
+        $chargeInstrumentList = ChargeInstrument::factory()->times(3)->create();
 
         $debtRecoveryEvent->chargeInstrumentList()->toggle($chargeInstrumentList);
 
-        $this->assertArraysEqual($chargeInstrumentList->toArray(), 
-                                 $debtRecoveryEvent->chargeInstrumentList->toArray());
+        $this->assertArraysEqual(
+            $chargeInstrumentList->toArray(),
+            $debtRecoveryEvent->chargeInstrumentList->toArray()
+        );
     }
 }

@@ -2,11 +2,12 @@
 
 namespace EolabsIo\AmazonMws\Domain\Reports\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use EolabsIo\AmazonMws\Domain\Shared\Models\AmazonMwsModel;
+use EolabsIo\AmazonMws\Database\Factories\AmazonFulfilledShipmentFactory;
 use EolabsIo\AmazonMws\Domain\Reports\Events\AmazonFulfilledShipmentWasCreated;
 use EolabsIo\AmazonMws\Domain\Reports\Events\AmazonFulfilledShipmentWasUpdated;
 
-class AmazonFulfilledShipment extends Model
+class AmazonFulfilledShipment extends AmazonMwsModel
 {
 
     /**
@@ -87,4 +88,14 @@ class AmazonFulfilledShipment extends Model
                             'fulfillment_channel',
                             'sales_channel',
                 ];
+
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    public static function newFactory()
+    {
+        return AmazonFulfilledShipmentFactory::new();
+    }
 }

@@ -7,7 +7,6 @@ use EolabsIo\AmazonMws\Domain\Finance\Models\CurrencyAmount;
 
 class FeeComponentTest extends BaseModelTest
 {
-
     protected function getModelClass()
     {
         return FeeComponent::class;
@@ -16,8 +15,8 @@ class FeeComponentTest extends BaseModelTest
     /** @test */
     public function it_has_feeComponent_relationship()
     {
-        $feeComponent = factory(FeeComponent::class)->create(['fee_amount_id' => null]);
-        $feeAmount = factory(CurrencyAmount::class)->create();
+        $feeComponent = FeeComponent::factory()->create(['fee_amount_id' => null]);
+        $feeAmount = CurrencyAmount::factory()->create();
 
         $feeComponent->feeAmount()->associate($feeAmount);
 

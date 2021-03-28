@@ -21,8 +21,8 @@ class OrderItemTest extends BaseModelTest
     /** @test */
     public function it_has_buyerCustomizedInfo_relationship()
     {
-        $orderItem = factory(OrderItem::class)->create(['buyer_customized_info_id' => null]);
-        $buyerCustomizedInfo = factory(BuyerCustomizedInfo::class)->create();
+        $orderItem = OrderItem::factory()->create(['buyer_customized_info_id' => null]);
+        $buyerCustomizedInfo = BuyerCustomizedInfo::factory()->create();
 
         $orderItem->buyerCustomizedInfo()->associate($buyerCustomizedInfo);
 
@@ -32,8 +32,8 @@ class OrderItemTest extends BaseModelTest
     /** @test */
     public function it_has_pointsGranted_relationship()
     {
-        $order = factory(OrderItem::class)->create(['points_granted_id' => null]);
-        $pointsGranted = factory(PointsGranted::class)->create();
+        $order = OrderItem::factory()->create(['points_granted_id' => null]);
+        $pointsGranted = PointsGranted::factory()->create();
 
         $order->pointsGranted()->associate($pointsGranted);
 
@@ -43,8 +43,8 @@ class OrderItemTest extends BaseModelTest
     /** @test */
     public function it_has_productInfo_relationship()
     {
-        $order = factory(OrderItem::class)->create(['product_info_id' => null]);
-        $productInfo = factory(ProductInfo::class)->create();
+        $order = OrderItem::factory()->create(['product_info_id' => null]);
+        $productInfo = ProductInfo::factory()->create();
 
         $order->ProductInfo()->associate($productInfo);
 
@@ -54,8 +54,8 @@ class OrderItemTest extends BaseModelTest
     /** @test */
     public function it_has_itemPrice_relationship()
     {
-        $order = factory(OrderItem::class)->create(['item_price_id' => null]);
-        $itemPrice = factory(Money::class)->create();
+        $order = OrderItem::factory()->create(['item_price_id' => null]);
+        $itemPrice = Money::factory()->create();
 
         $order->itemPrice()->associate($itemPrice);
 
@@ -65,8 +65,8 @@ class OrderItemTest extends BaseModelTest
     /** @test */
     public function it_has_shippingPrice_relationship()
     {
-        $order = factory(OrderItem::class)->create(['shipping_price_id' => null]);
-        $shippingPrice = factory(Money::class)->create();
+        $order = OrderItem::factory()->create(['shipping_price_id' => null]);
+        $shippingPrice = Money::factory()->create();
 
         $order->shippingPrice()->associate($shippingPrice);
 
@@ -76,8 +76,8 @@ class OrderItemTest extends BaseModelTest
     /** @test */
     public function it_has_giftWrapPrice_relationship()
     {
-        $order = factory(OrderItem::class)->create(['gift_wrap_price_id' => null]);
-        $giftWrapPrice = factory(Money::class)->create();
+        $order = OrderItem::factory()->create(['gift_wrap_price_id' => null]);
+        $giftWrapPrice = Money::factory()->create();
 
         $order->giftWrapPrice()->associate($giftWrapPrice);
 
@@ -87,8 +87,8 @@ class OrderItemTest extends BaseModelTest
     /** @test */
     public function it_has_taxCollection_relationship()
     {
-        $order = factory(OrderItem::class)->create(['tax_collection_id' => null]);
-        $taxCollection = factory(TaxCollection::class)->create();
+        $order = OrderItem::factory()->create(['tax_collection_id' => null]);
+        $taxCollection = TaxCollection::factory()->create();
 
         $order->taxCollection()->associate($taxCollection);
 
@@ -98,8 +98,8 @@ class OrderItemTest extends BaseModelTest
     /** @test */
     public function it_has_itemTax_relationship()
     {
-        $order = factory(OrderItem::class)->create(['item_tax_id' => null]);
-        $itemTax = factory(Money::class)->create();
+        $order = OrderItem::factory()->create(['item_tax_id' => null]);
+        $itemTax = Money::factory()->create();
 
         $order->itemTax()->associate($itemTax);
 
@@ -109,8 +109,8 @@ class OrderItemTest extends BaseModelTest
     /** @test */
     public function it_has_shippingTax_relationship()
     {
-        $order = factory(OrderItem::class)->create(['shipping_tax_id' => null]);
-        $shippingTax = factory(Money::class)->create();
+        $order = OrderItem::factory()->create(['shipping_tax_id' => null]);
+        $shippingTax = Money::factory()->create();
 
         $order->shippingTax()->associate($shippingTax);
 
@@ -120,8 +120,8 @@ class OrderItemTest extends BaseModelTest
     /** @test */
     public function it_has_giftWrapTax_relationship()
     {
-        $order = factory(OrderItem::class)->create(['gift_wrap_tax_id' => null]);
-        $giftWrapTax = factory(Money::class)->create();
+        $order = OrderItem::factory()->create(['gift_wrap_tax_id' => null]);
+        $giftWrapTax = Money::factory()->create();
 
         $order->giftWrapTax()->associate($giftWrapTax);
 
@@ -131,8 +131,8 @@ class OrderItemTest extends BaseModelTest
     /** @test */
     public function it_has_shippingDiscount_relationship()
     {
-        $order = factory(OrderItem::class)->create(['shipping_discount_id' => null]);
-        $shippingDiscount = factory(Money::class)->create();
+        $order = OrderItem::factory()->create(['shipping_discount_id' => null]);
+        $shippingDiscount = Money::factory()->create();
 
         $order->shippingDiscount()->associate($shippingDiscount);
 
@@ -142,8 +142,8 @@ class OrderItemTest extends BaseModelTest
     /** @test */
     public function it_has_shippingDiscountTax_relationship()
     {
-        $order = factory(OrderItem::class)->create(['shipping_discount_tax_id' => null]);
-        $shippingDiscountTax = factory(Money::class)->create();
+        $order = OrderItem::factory()->create(['shipping_discount_tax_id' => null]);
+        $shippingDiscountTax = Money::factory()->create();
 
         $order->shippingDiscountTax()->associate($shippingDiscountTax);
 
@@ -153,8 +153,8 @@ class OrderItemTest extends BaseModelTest
     /** @test */
     public function it_has_promotionDiscount_relationship()
     {
-        $order = factory(OrderItem::class)->create(['promotion_discount_id' => null]);
-        $promotionDiscount = factory(Money::class)->create();
+        $order = OrderItem::factory()->create(['promotion_discount_id' => null]);
+        $promotionDiscount = Money::factory()->create();
 
         $order->promotionDiscount()->associate($promotionDiscount);
 
@@ -164,8 +164,8 @@ class OrderItemTest extends BaseModelTest
     /** @test */
     public function it_has_promotionDiscountTax_relationship()
     {
-        $order = factory(OrderItem::class)->create(['promotion_discount_tax_id' => null]);
-        $promotionDiscountTax = factory(Money::class)->create();
+        $order = OrderItem::factory()->create(['promotion_discount_tax_id' => null]);
+        $promotionDiscountTax = Money::factory()->create();
 
         $order->promotionDiscountTax()->associate($promotionDiscountTax);
 
@@ -175,8 +175,8 @@ class OrderItemTest extends BaseModelTest
     /** @test */
     public function it_has_codFee_relationship()
     {
-        $order = factory(OrderItem::class)->create(['cod_fee_id' => null]);
-        $codFee = factory(Money::class)->create();
+        $order = OrderItem::factory()->create(['cod_fee_id' => null]);
+        $codFee = Money::factory()->create();
 
         $order->codFee()->associate($codFee);
 
@@ -186,8 +186,8 @@ class OrderItemTest extends BaseModelTest
     /** @test */
     public function it_has_codFeeDiscount_relationship()
     {
-        $order = factory(OrderItem::class)->create(['cod_fee_discount_id' => null]);
-        $codFeeDiscount = factory(Money::class)->create();
+        $order = OrderItem::factory()->create(['cod_fee_discount_id' => null]);
+        $codFeeDiscount = Money::factory()->create();
 
         $order->codFeeDiscount()->associate($codFeeDiscount);
 
@@ -197,9 +197,9 @@ class OrderItemTest extends BaseModelTest
     /** @test */
     public function it_has_order_relationship()
     {
-        $order = factory(Order::class)->create();
-        $orderItem = factory(OrderItem::class, 2)->create(['amazon_order_id' => $order->amazon_order_id])->first();
-        factory(OrderItem::class, 3)->create();
+        $order = Order::factory()->create();
+        $orderItem = OrderItem::factory()->times(2)->create(['amazon_order_id' => $order->amazon_order_id])->first();
+        OrderItem::factory()->times(3)->create();
 
         $this->assertArraysEqual($order->toArray(), $orderItem->order->toArray());
     }

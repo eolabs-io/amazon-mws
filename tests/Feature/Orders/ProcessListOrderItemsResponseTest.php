@@ -9,19 +9,17 @@ use EolabsIo\AmazonMws\Tests\Concerns\CreatesListOrderItems;
 use EolabsIo\AmazonMws\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-
 class ProcessListOrderItemsResponseTest extends TestCase
 {
-
     use RefreshDatabase,
         CreatesListOrderItems;
 
     protected function setUp(): void
     {
         parent::setUp();
-        
-        factory(Order::class)->create(["amazon_order_id" => "058-1233752-8214740"]);
-        
+
+        Order::factory()->create(["amazon_order_id" => "058-1233752-8214740"]);
+
         $listOrderItems = $this->createListOrderItems();
 
         $results = $listOrderItems->fetch();
@@ -39,9 +37,11 @@ class ProcessListOrderItemsResponseTest extends TestCase
 
         $this->assertEquals($orderItem->seller_sku, 'CBA_OTF_1');
 
-        // buyerCustomizedInfo relationship                   
-        $this->assertEquals($orderItem->buyerCustomizedInfo->customized_url, 
-                            "https://zme-caps.amazon.com/t/bR6qHkzSOxuB/J8nbWhze0Bd3DkajkOdY-XQbWkFralegp2sr_QZiKEE/1");
+        // buyerCustomizedInfo relationship
+        $this->assertEquals(
+            $orderItem->buyerCustomizedInfo->customized_url,
+            "https://zme-caps.amazon.com/t/bR6qHkzSOxuB/J8nbWhze0Bd3DkajkOdY-XQbWkFralegp2sr_QZiKEE/1"
+        );
 
         // PointsGranted
         $this->assertEquals($orderItem->pointsGranted->points_number, 10);
@@ -50,7 +50,7 @@ class ProcessListOrderItemsResponseTest extends TestCase
 
         // ProductInfo
         $this->assertEquals($orderItem->productInfo->number_of_items, 12);
-    
+
         // ItemPrice
         $this->assertEquals($orderItem->itemPrice->currency_code, "JPY");
         $this->assertEquals($orderItem->itemPrice->amount, "25.99");
@@ -66,7 +66,7 @@ class ProcessListOrderItemsResponseTest extends TestCase
         // TaxCollection
         $this->assertEquals($orderItem->taxCollection->model, "MarketplaceFacilitator");
         $this->assertEquals($orderItem->taxCollection->responsible_party, "Amazon Services, Inc.");
-    
+
         // ItemTax
         $this->assertEquals($orderItem->itemTax->currency_code, "USD");
         $this->assertEquals($orderItem->itemTax->amount, "0.99");
@@ -103,5 +103,4 @@ class ProcessListOrderItemsResponseTest extends TestCase
         $this->assertEquals($orderItem->codFeeDiscount->currency_code, "JPY");
         $this->assertEquals($orderItem->codFeeDiscount->amount, "1.00");
     }
-
 }

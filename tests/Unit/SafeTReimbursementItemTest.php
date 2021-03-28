@@ -8,7 +8,6 @@ use EolabsIo\AmazonMws\Domain\Finance\Models\SafeTReimbursementItem;
 
 class SafeTReimbursementItemTest extends BaseModelTest
 {
-
     protected function getModelClass()
     {
         return SafeTReimbursementItem::class;
@@ -17,17 +16,17 @@ class SafeTReimbursementItemTest extends BaseModelTest
     /** @test */
     public function safeTReimbursementEvent()
     {
-        $safeTReimbursementEvent = factory(SafeTReimbursementEvent::class)->create();
-        $safeTReimbursementItem = factory(SafeTReimbursementItem::class)->create(['safe_t_reimbursement_event_id' => $safeTReimbursementEvent->id]);
+        $safeTReimbursementEvent = SafeTReimbursementEvent::factory()->create();
+        $safeTReimbursementItem = SafeTReimbursementItem::factory()->create(['safe_t_reimbursement_event_id' => $safeTReimbursementEvent->id]);
 
-        $this->assertArraysEqual($safeTReimbursementEvent->toArray(), $safeTReimbursementItem->safeTReimbursementEvent->toArray());   
+        $this->assertArraysEqual($safeTReimbursementEvent->toArray(), $safeTReimbursementItem->safeTReimbursementEvent->toArray());
     }
 
     /** @test */
     public function it_has_itemChargeList_relationship()
     {
-        $safeTReimbursementItem = factory(SafeTReimbursementItem::class)->create();
-        $itemChargeList = factory(ChargeComponent::class, 3)->create();
+        $safeTReimbursementItem = SafeTReimbursementItem::factory()->create();
+        $itemChargeList = ChargeComponent::factory()->times(3)->create();
 
         $safeTReimbursementItem->itemChargeList()->toggle($itemChargeList);
 

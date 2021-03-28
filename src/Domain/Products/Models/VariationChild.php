@@ -3,10 +3,10 @@
 namespace EolabsIo\AmazonMws\Domain\Products\Models;
 
 use EolabsIo\AmazonMws\Domain\Products\Models\Product;
-use Illuminate\Database\Eloquent\Model;
+use EolabsIo\AmazonMws\Domain\Shared\Models\AmazonMwsModel;
+use EolabsIo\AmazonMws\Database\Factories\VariationChildFactory;
 
-
-class VariationChild extends Model
+class VariationChild extends AmazonMwsModel
 {
     /**
      * The attributes that are mass assignable.
@@ -14,14 +14,24 @@ class VariationChild extends Model
      * @var array
      */
     protected $fillable = [
-    						'product_id',
-							'color', 
-							'size', 
-    					];
+                            'product_id',
+                            'color',
+                            'size',
+                        ];
 
-	public function product()
-	{
-		return $this->belongsTo(Product::class);
-	}
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
 
+
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    public static function newFactory()
+    {
+        return VariationChildFactory::new();
+    }
 }

@@ -2,10 +2,10 @@
 
 namespace EolabsIo\AmazonMws\Domain\Orders\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use EolabsIo\AmazonMws\Database\Factories\AddressFactory;
+use EolabsIo\AmazonMws\Domain\Shared\Models\AmazonMwsModel;
 
-
-class Address extends Model
+class Address extends AmazonMwsModel
 {
     /**
      * The attributes that are mass assignable.
@@ -26,6 +26,15 @@ class Address extends Model
                     'country_code',
                     'phone',
                     'address_type',
-				];
+                ];
 
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    public static function newFactory()
+    {
+        return AddressFactory::new();
+    }
 }

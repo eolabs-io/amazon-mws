@@ -3,10 +3,10 @@
 namespace EolabsIo\AmazonMws\Domain\Orders\Models;
 
 use EolabsIo\AmazonMws\Domain\Orders\Models\Money;
-use Illuminate\Database\Eloquent\Model;
+use EolabsIo\AmazonMws\Domain\Shared\Models\AmazonMwsModel;
+use EolabsIo\AmazonMws\Database\Factories\PaymentExecutionDetailItemFactory;
 
-
-class PaymentExecutionDetailItem extends Model
+class PaymentExecutionDetailItem extends AmazonMwsModel
 {
     /**
      * The attributes that are mass assignable.
@@ -14,14 +14,23 @@ class PaymentExecutionDetailItem extends Model
      * @var array
      */
     protected $fillable = [
-    				'money_id',
+                    'money_id',
                     'payment_method',
                     'order_id',
-				];
+                ];
 
-	public function payment()
-	{
-		return $this->belongsTo(Money::class);
-	}
+    public function payment()
+    {
+        return $this->belongsTo(Money::class);
+    }
 
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    public static function newFactory()
+    {
+        return PaymentExecutionDetailItemFactory::new();
+    }
 }

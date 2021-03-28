@@ -21,7 +21,7 @@ class ProductCategoryCommandTest extends TestCase
     /** @test */
     public function it_can_execute_product_category_for_asin_artisan_command()
     {
-        $store = factory(Store::class)->create();
+        $store = Store::factory()->create();
 
         $this->artisan('amazonmws:product-category '.$store->id.'
                                                 --marketplace-id=ATVPDKIKX0DER
@@ -41,7 +41,7 @@ class ProductCategoryCommandTest extends TestCase
     /** @test */
     public function it_can_execute_product_category_for_sku_artisan_command()
     {
-        $store = factory(Store::class)->create();
+        $store = Store::factory()->create();
 
         $this->artisan('amazonmws:product-category '.$store->id.'
                                                     --marketplace-id=ATVPDKIKX0DER

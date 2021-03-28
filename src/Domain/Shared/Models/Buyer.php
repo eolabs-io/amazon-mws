@@ -2,9 +2,10 @@
 
 namespace EolabsIo\AmazonMws\Domain\Shared\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use EolabsIo\AmazonMws\Database\Factories\BuyerFactory;
+use EolabsIo\AmazonMws\Domain\Shared\Models\AmazonMwsModel;
 
-class Buyer extends Model
+class Buyer extends AmazonMwsModel
 {
 
     /**
@@ -24,4 +25,14 @@ class Buyer extends Model
                     'country',
                     'phone_number',
                 ];
+
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    public static function newFactory()
+    {
+        return BuyerFactory::new();
+    }
 }

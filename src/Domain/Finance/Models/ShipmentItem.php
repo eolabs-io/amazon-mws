@@ -2,14 +2,14 @@
 
 namespace EolabsIo\AmazonMws\Domain\Finance\Models;
 
-use EolabsIo\AmazonMws\Domain\Finance\Models\ChargeComponent;
-use EolabsIo\AmazonMws\Domain\Finance\Models\FeeComponent;
 use EolabsIo\AmazonMws\Domain\Finance\Models\Promotion;
+use EolabsIo\AmazonMws\Domain\Finance\Models\FeeComponent;
+use EolabsIo\AmazonMws\Domain\Shared\Models\AmazonMwsModel;
+use EolabsIo\AmazonMws\Domain\Finance\Models\ChargeComponent;
+use EolabsIo\AmazonMws\Database\Factories\ShipmentItemFactory;
 use EolabsIo\AmazonMws\Domain\Finance\Models\TaxWithheldComponent;
-use Illuminate\Database\Eloquent\Model;
 
-
-class ShipmentItem extends Model
+class ShipmentItem extends AmazonMwsModel
 {
     /**
      * The attributes that are mass assignable.
@@ -23,14 +23,14 @@ class ShipmentItem extends Model
                     'quantity_shipped',
                     'cost_of_points_granted_id',
                     'cost_of_points_returned_id',
-				];
+                ];
 
     protected $hidden = ['pivot'];
 
-	public function itemChargeList()
-	{
-		return $this->belongsToMany(ChargeComponent::class, 'charge_component_item_charge');
-	}
+    public function itemChargeList()
+    {
+        return $this->belongsToMany(ChargeComponent::class, 'charge_component_item_charge');
+    }
 
     public function itemTaxWithheldList()
     {
@@ -50,17 +50,17 @@ class ShipmentItem extends Model
     public function itemFeeAdjustmentList()
     {
         return $this->belongsToMany(FeeComponent::class, 'fee_component_item_fee_adjustment');
-    } 
+    }
 
     public function promotionList()
     {
         return $this->belongsToMany(Promotion::class, 'promotion_promotion_list');
-    } 
+    }
 
     public function promotionAdjustmentList()
     {
         return $this->belongsToMany(Promotion::class, 'promotion_promotion_adjustment_list');
-    } 
+    }
 
     public function costOfPointsGranted()
     {
@@ -70,5 +70,16 @@ class ShipmentItem extends Model
     public function costOfPointsReturned()
     {
         return $this->belongsTo(CurrencyAmount::class, 'cost_of_points_returned_id', 'id')->withDefault();
+    }
+
+
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    public static function newFactory()
+    {
+        return ShipmentItemFactory::new();
     }
 }

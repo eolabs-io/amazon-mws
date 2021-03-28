@@ -2,13 +2,13 @@
 
 namespace EolabsIo\AmazonMws\Domain\Finance\Models;
 
-use EolabsIo\AmazonMws\Domain\Finance\Models\ChargeComponent;
-use EolabsIo\AmazonMws\Domain\Finance\Models\CurrencyAmount;
 use EolabsIo\AmazonMws\Domain\Finance\Models\FeeComponent;
-use Illuminate\Database\Eloquent\Model;
+use EolabsIo\AmazonMws\Domain\Shared\Models\AmazonMwsModel;
+use EolabsIo\AmazonMws\Domain\Finance\Models\CurrencyAmount;
+use EolabsIo\AmazonMws\Domain\Finance\Models\ChargeComponent;
+use EolabsIo\AmazonMws\Database\Factories\CouponPaymentEventFactory;
 
-
-class CouponPaymentEvent extends Model
+class CouponPaymentEvent extends AmazonMwsModel
 {
 
     /**
@@ -34,12 +34,12 @@ class CouponPaymentEvent extends Model
                     'fee_component_id',
                     'charge_component_id',
                     'total_amount_id',
-				];
+                ];
 
-	public function feeComponent()
-	{
-		return $this->belongsTo(FeeComponent::class, 'fee_component_id', 'id')->withDefault();
-	}
+    public function feeComponent()
+    {
+        return $this->belongsTo(FeeComponent::class, 'fee_component_id', 'id')->withDefault();
+    }
 
     public function chargeComponent()
     {
@@ -51,4 +51,13 @@ class CouponPaymentEvent extends Model
         return $this->belongsTo(CurrencyAmount::class, 'total_amount_id', 'id')->withDefault();
     }
 
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    public static function newFactory()
+    {
+        return CouponPaymentEventFactory::new();
+    }
 }

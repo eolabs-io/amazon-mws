@@ -15,7 +15,6 @@ use Illuminate\Support\Facades\Event;
 
 class OrderTest extends BaseModelTest
 {
-
     protected function getModelClass()
     {
         return Order::class;
@@ -24,8 +23,8 @@ class OrderTest extends BaseModelTest
     /** @test */
     public function it_dispatches_order_was_created_event_on_create()
     {
-        $order = factory(Order::class)->create();
-        
+        $order = Order::factory()->create();
+
         Event::assertDispatched(function (OrderWasCreated $event) use ($order) {
             return $event->order->id === $order->id;
         });
@@ -36,9 +35,9 @@ class OrderTest extends BaseModelTest
     /** @test */
     public function it_dispatches_order_was_created_event_on_update()
     {
-        $order = factory(Order::class)->create();
-        $order->update(factory(Order::class)->make()->toArray());
-        
+        $order = Order::factory()->create();
+        $order->update(Order::factory()->make()->toArray());
+
         Event::assertDispatched(OrderWasCreated::class, 1);
 
         Event::assertDispatched(OrderWasUpdated::class, 1);
@@ -47,66 +46,69 @@ class OrderTest extends BaseModelTest
     /** @test */
     public function it_has_shippingAddress_relationship()
     {
-    	$order = factory(Order::class)->create(['shipping_address_id' => null]);
-    	$address = factory(Address::class)->create();
+        $order = Order::factory()->create(['shipping_address_id' => null]);
+        $address = Address::factory()->create();
 
-    	$order->shippingAddress()->associate($address);
+        $order->shippingAddress()->associate($address);
 
-    	$this->assertArraysEqual($address->toArray(), $order->shippingAddress->toArray());
+        $this->assertArraysEqual($address->toArray(), $order->shippingAddress->toArray());
     }
 
     /** @test */
     public function it_has_orderTotal_relationship()
     {
-    	$order = factory(Order::class)->create(['order_total_id' => null]);
-    	$orderTotal = factory(Money::class)->create();
+        $order = Order::factory()->create(['order_total_id' => null]);
+        $orderTotal = Money::factory()->create();
 
-    	$order->orderTotal()->associate($orderTotal);
+        $order->orderTotal()->associate($orderTotal);
 
-    	$this->assertArraysEqual($orderTotal->toArray(), $order->orderTotal->toArray());
+        $this->assertArraysEqual($orderTotal->toArray(), $order->orderTotal->toArray());
     }
 
     /** @test */
     public function it_has_paymentExecutionDetail_relationship()
     {
-    	$order = factory(Order::class)->create();
-    	$paymentExecutionDetail = factory(PaymentExecutionDetailItem::class, 10)->create(['order_id' => $order->id])->toArray();
+        $order = Order::factory()->create();
+        $paymentExecutionDetail = PaymentExecutionDetailItem::factory()->times(10)->create(['order_id' => $order->id])->toArray();
 
-    	$this->assertArraysEqual($paymentExecutionDetail, 
-    							 $order->paymentExecutionDetail->toArray());
+        $this->assertArraysEqual(
+            $paymentExecutionDetail,
+            $order->paymentExecutionDetail->toArray()
+        );
     }
 
     /** @test */
     public function it_has_paymentMethodDetails_relationship()
     {
-    	$order = factory(Order::class)->create(['order_total_id' => null]);
-    	$paymentMethodDetails = factory(PaymentMethodDetail::class)->create();
+        $order = Order::factory()->create(['order_total_id' => null]);
+        $paymentMethodDetails = PaymentMethodDetail::factory()->create();
 
-    	$order->paymentMethodDetails()->associate($paymentMethodDetails);
+        $order->paymentMethodDetails()->associate($paymentMethodDetails);
 
-    	$this->assertArraysEqual($paymentMethodDetails->toArray(), 
-    							 $order->paymentMethodDetails->toArray());
+        $this->assertArraysEqual(
+            $paymentMethodDetails->toArray(),
+            $order->paymentMethodDetails->toArray()
+        );
     }
 
     /** @test */
     public function it_has_buyerTaxInfo_relationship()
     {
-    	$order = factory(Order::class)->create(['order_total_id' => null]);
-    	$buyerTaxInfo = factory(BuyerTaxInfo::class)->create();
+        $order = Order::factory()->create(['order_total_id' => null]);
+        $buyerTaxInfo = BuyerTaxInfo::factory()->create();
 
-    	$order->buyerTaxInfo()->associate($buyerTaxInfo);
+        $order->buyerTaxInfo()->associate($buyerTaxInfo);
 
-    	$this->assertArraysEqual($buyerTaxInfo->toArray(), $order->buyerTaxInfo->toArray());
-    } 
+        $this->assertArraysEqual($buyerTaxInfo->toArray(), $order->buyerTaxInfo->toArray());
+    }
 
 
     /** @test */
     public function it_has_orderItem_relationship()
     {
-        $order = factory(Order::class, 2)->create()->first();
-        $orderItems = factory(OrderItem::class,10)->create(['amazon_order_id' => $order->amazon_order_id]);
+        $order = Order::factory()->times(2)->create()->first();
+        $orderItems = OrderItem::factory()->times(10)->create(['amazon_order_id' => $order->amazon_order_id]);
 
         $this->assertArraysEqual($orderItems->toArray(), $order->orderItems->toArray());
-    } 
-
+    }
 }

@@ -2,14 +2,14 @@
 
 namespace EolabsIo\AmazonMws\Domain\Finance\Models;
 
-use EolabsIo\AmazonMws\Domain\Finance\Models\ChargeComponent;
-use EolabsIo\AmazonMws\Domain\Finance\Models\CurrencyAmount;
 use EolabsIo\AmazonMws\Domain\Finance\Models\FeeComponent;
+use EolabsIo\AmazonMws\Domain\Shared\Models\AmazonMwsModel;
+use EolabsIo\AmazonMws\Domain\Finance\Models\CurrencyAmount;
+use EolabsIo\AmazonMws\Domain\Finance\Models\ChargeComponent;
 use EolabsIo\AmazonMws\Domain\Finance\Models\TaxWithheldComponent;
-use Illuminate\Database\Eloquent\Model;
+use EolabsIo\AmazonMws\Database\Factories\RentalTransactionEventFactory;
 
-
-class RentalTransactionEvent extends Model
+class RentalTransactionEvent extends AmazonMwsModel
 {
     /**
      * The attributes that should be cast.
@@ -33,8 +33,8 @@ class RentalTransactionEvent extends Model
                     'marketplace_name',
                     'rental_initial_value_id',
                     'rental_reimbursement_id',
-				];
-    
+                ];
+
     protected $hidden = ['pivot'];
 
     public function rentalChargeList()
@@ -62,4 +62,13 @@ class RentalTransactionEvent extends Model
         return $this->belongsToMany(TaxWithheldComponent::class, 'rental_tax_withheld_tax_withheld_component');
     }
 
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    public static function newFactory()
+    {
+        return RentalTransactionEventFactory::new();
+    }
 }

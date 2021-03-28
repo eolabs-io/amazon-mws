@@ -7,7 +7,6 @@ use EolabsIo\AmazonMws\Domain\Finance\Models\TDSReimbursementEvent;
 
 class TDSReimbursementEventTest extends BaseModelTest
 {
-
     protected function getModelClass()
     {
         return TDSReimbursementEvent::class;
@@ -16,12 +15,11 @@ class TDSReimbursementEventTest extends BaseModelTest
     /** @test */
     public function it_has_reimbursedAmount_relationship()
     {
-        $tdsReimbursementEvent = factory(TDSReimbursementEvent::class)->create();
-        $reimbursedAmount = factory(CurrencyAmount::class)->create();
+        $tdsReimbursementEvent = TDSReimbursementEvent::factory()->create();
+        $reimbursedAmount = CurrencyAmount::factory()->create();
 
         $tdsReimbursementEvent->reimbursedAmount()->associate($reimbursedAmount);
 
         $this->assertArraysEqual($reimbursedAmount->toArray(), $tdsReimbursementEvent->reimbursedAmount->toArray());
     }
-
 }

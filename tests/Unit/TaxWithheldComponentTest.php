@@ -7,7 +7,6 @@ use EolabsIo\AmazonMws\Domain\Finance\Models\TaxWithheldComponent;
 
 class TaxWithheldComponentTest extends BaseModelTest
 {
-
     protected function getModelClass()
     {
         return TaxWithheldComponent::class;
@@ -16,8 +15,8 @@ class TaxWithheldComponentTest extends BaseModelTest
     /** @test */
     public function it_has_taxesWithheld_relationship()
     {
-        $taxWithheldComponent = factory(TaxWithheldComponent::class)->create();
-        $chargeComponents = factory(ChargeComponent::class, 5)->create();
+        $taxWithheldComponent = TaxWithheldComponent::factory()->create();
+        $chargeComponents = ChargeComponent::factory()->times(5)->create();
 
         $taxWithheldComponent->taxesWithheld()->toggle($chargeComponents);
 

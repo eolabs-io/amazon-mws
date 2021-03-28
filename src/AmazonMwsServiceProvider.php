@@ -47,9 +47,6 @@ class AmazonMwsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-        // $this->loadFactoriesFrom(__DIR__.'/../database/factories');
-
         if ($this->app->runningInConsole()) {
             if (AmazonMws::$runsMigrations) {
                 $this->loadMigrationsFrom(__DIR__.'/../database/migrations');

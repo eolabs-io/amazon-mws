@@ -3,10 +3,11 @@
 namespace EolabsIo\AmazonMws\Domain\Reviews\Models;
 
 use Illuminate\Support\Carbon;
-use Illuminate\Database\Eloquent\Model;
+use EolabsIo\AmazonMws\Domain\Shared\Models\AmazonMwsModel;
+use EolabsIo\AmazonMws\Database\Factories\ProductReviewFactory;
 use EolabsIo\AmazonMws\Domain\Reviews\Models\ProductReviewImage;
 
-class ProductReview extends Model
+class ProductReview extends AmazonMwsModel
 {
     /**
      * The attributes that should be cast.
@@ -58,5 +59,15 @@ class ProductReview extends Model
     public function setDateForEditingAttribute($value)
     {
         $this->date = Carbon::parse($value);
+    }
+
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    public static function newFactory()
+    {
+        return ProductReviewFactory::new();
     }
 }

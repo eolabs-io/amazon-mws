@@ -2,7 +2,6 @@
 
 namespace EolabsIo\AmazonMws\Tests\Feature;
 
-use EolabsIo\AmazonMwsClient\Models\Store;
 use EolabsIo\AmazonMws\Domain\Shared\Exceptions\AccessDeniedException;
 use EolabsIo\AmazonMws\Domain\Shared\Exceptions\InputStreamDisconnectedException;
 use EolabsIo\AmazonMws\Domain\Shared\Exceptions\InternalErrorException;
@@ -16,10 +15,6 @@ use EolabsIo\AmazonMws\Support\Facades\InventoryList;
 use EolabsIo\AmazonMws\Tests\Factories\InventoryFactory;
 use EolabsIo\AmazonMws\Tests\Factories\StoreFactory;
 use EolabsIo\AmazonMws\Tests\TestCase;
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Http;
-use SimpleXMLElement;
 
 class HandlesExceptionsTest extends TestCase
 {
@@ -39,7 +34,7 @@ class HandlesExceptionsTest extends TestCase
     {
         $this->expectException(InputStreamDisconnectedException::class);
 
-    	InventoryFactory::new()->fakeInputStreamDisconnectedErrorResponse();
+        InventoryFactory::new()->fakeInputStreamDisconnectedErrorResponse();
 
         $response = InventoryList::withStore($this->store)->fetch();
     }

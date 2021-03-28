@@ -1,14 +1,29 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace EolabsIo\AmazonMws\Database\Factories;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use EolabsIo\AmazonMws\Domain\Orders\Models\BuyerTaxInfo;
 
-use Faker\Generator as Faker;
+class BuyerTaxInfoFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = BuyerTaxInfo::class;
 
-$factory->define(BuyerTaxInfo::class, function (Faker $faker) {
-    return [
-            'company_legal_name' => $faker->text(30), 
-            'taxing_region' => $faker->text(30),
-    ];
-});
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'company_legal_name' => $this->faker->text(30),
+            'taxing_region' => $this->faker->text(30),
+        ];
+    }
+}

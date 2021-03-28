@@ -1,16 +1,30 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace EolabsIo\AmazonMws\Database\Factories;
 
-use EolabsIo\AmazonMws\Domain\Finance\Models\ChargeComponent;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use EolabsIo\AmazonMws\Domain\Finance\Models\CurrencyAmount;
-use Faker\Generator as Faker;
+use EolabsIo\AmazonMws\Domain\Finance\Models\ChargeComponent;
 
-$factory->define(ChargeComponent::class, function (Faker $faker) {
-    return [
-            'charge_type' => $faker->randomElement(['Principal', 'Tax', 'MarketplaceFacilitatorTax', 'TCS-UTGST']),
-            'charge_amount_id' => function(){
-            	return factory(CurrencyAmount::class)->create()->id;
-            },
-    ];
-});
+class ChargeComponentFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = ChargeComponent::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'charge_type' => $this->faker->randomElement(['Principal', 'Tax', 'MarketplaceFacilitatorTax', 'TCS-UTGST']),
+            'charge_amount_id' => CurrencyAmount::factory(),
+        ];
+    }
+}

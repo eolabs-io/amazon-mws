@@ -2,10 +2,10 @@
 
 namespace EolabsIo\AmazonMws\Domain\Finance\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use EolabsIo\AmazonMws\Domain\Shared\Models\AmazonMwsModel;
+use EolabsIo\AmazonMws\Database\Factories\ServiceProviderCreditEventFactory;
 
-
-class ServiceProviderCreditEvent extends Model
+class ServiceProviderCreditEvent extends AmazonMwsModel
 {
     /**
      * The attributes that are mass assignable.
@@ -21,6 +21,15 @@ class ServiceProviderCreditEvent extends Model
                     'seller_store_name',
                     'provider_id',
                     'provider_store_name',
-				];
+                ];
 
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    public static function newFactory()
+    {
+        return ServiceProviderCreditEventFactory::new();
+    }
 }

@@ -2,13 +2,13 @@
 
 namespace EolabsIo\AmazonMws\Domain\Finance\Models;
 
+use EolabsIo\AmazonMws\Domain\Shared\Models\AmazonMwsModel;
 use EolabsIo\AmazonMws\Domain\Finance\Models\CurrencyAmount;
-use Illuminate\Database\Eloquent\Model;
+use EolabsIo\AmazonMws\Database\Factories\TDSReimbursementEventFactory;
 
-
-class TDSReimbursementEvent extends Model
+class TDSReimbursementEvent extends AmazonMwsModel
 {
-    
+
     /**
      * The attributes that should be cast.
      *
@@ -33,13 +33,23 @@ class TDSReimbursementEvent extends Model
     protected $fillable = [
                     'posted_date',
                     'tds_order_id',
-                    'reimbursed_amount_id',                    
-				];
-    
+                    'reimbursed_amount_id',
+                ];
 
-	public function reimbursedAmount()
-	{
-		return $this->belongsTo(CurrencyAmount::class, 'reimbursed_amount_id', 'id')->withDefault();
-	}
 
+    public function reimbursedAmount()
+    {
+        return $this->belongsTo(CurrencyAmount::class, 'reimbursed_amount_id', 'id')->withDefault();
+    }
+
+
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    public static function newFactory()
+    {
+        return TDSReimbursementEventFactory::new();
+    }
 }

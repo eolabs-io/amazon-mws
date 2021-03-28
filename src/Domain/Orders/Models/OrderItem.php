@@ -2,15 +2,16 @@
 
 namespace EolabsIo\AmazonMws\Domain\Orders\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use EolabsIo\AmazonMws\Domain\Orders\Models\Money;
 use EolabsIo\AmazonMws\Domain\Products\Models\Product;
 use EolabsIo\AmazonMws\Domain\Orders\Models\ProductInfo;
 use EolabsIo\AmazonMws\Domain\Orders\Models\PointsGranted;
 use EolabsIo\AmazonMws\Domain\Orders\Models\TaxCollection;
+use EolabsIo\AmazonMws\Database\Factories\OrderItemFactory;
+use EolabsIo\AmazonMws\Domain\Shared\Models\AmazonMwsModel;
 use EolabsIo\AmazonMws\Domain\Orders\Models\BuyerCustomizedInfo;
 
-class OrderItem extends Model
+class OrderItem extends AmazonMwsModel
 {
 
     /**
@@ -158,5 +159,15 @@ class OrderItem extends Model
     public function product()
     {
         return $this->belongsTo(Product::class, 'ASIN', 'asin');
+    }
+
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    public static function newFactory()
+    {
+        return OrderItemFactory::new();
     }
 }

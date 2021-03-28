@@ -7,7 +7,6 @@ use EolabsIo\AmazonMws\Domain\Finance\Models\CurrencyAmount;
 
 class ChargeComponentTest extends BaseModelTest
 {
-
     protected function getModelClass()
     {
         return ChargeComponent::class;
@@ -16,8 +15,8 @@ class ChargeComponentTest extends BaseModelTest
     /** @test */
     public function it_has_chargeAmount_relationship()
     {
-        $chargeComponent = factory(ChargeComponent::class)->create(['charge_amount_id' => null]);
-        $chargeAmount = factory(CurrencyAmount::class)->create();
+        $chargeComponent = ChargeComponent::factory()->create(['charge_amount_id' => null]);
+        $chargeAmount = CurrencyAmount::factory()->create();
 
         $chargeComponent->chargeAmount()->associate($chargeAmount);
 

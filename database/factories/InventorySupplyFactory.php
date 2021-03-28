@@ -1,25 +1,39 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace EolabsIo\AmazonMws\Database\Factories;
 
-use EolabsIo\AmazonMws\Domain\Inventory\Models\InventorySupply;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use EolabsIo\AmazonMws\Domain\Shared\Models\Timepoint;
-use Faker\Generator as Faker;
+use EolabsIo\AmazonMws\Domain\Inventory\Models\InventorySupply;
 
-$factory->define(InventorySupply::class, function (Faker $faker) {
-    $condition = $faker->randomElement(['NewItem','NewWithWarranty','NewOEM','NewOpenBox','UsedLikeNew','UsedVeryGood','UsedGood','UsedAcceptable','UsedPoor','UsedRefurbished','CollectibleLikeNew','CollectibleVeryGood','CollectibleGood','CollectibleAcceptable','CollectiblePoor','RefurbishedWithWarranty','Refurbished','Club',
-    ]);
+class InventorySupplyFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = InventorySupply::class;
 
-    return [
-            'seller_sku' => $faker->unique()->text(14),
-            'fnsku' => $faker->unique()->text(14),
-            'asin' => $faker->unique()->text(14),
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        $condition = $this->faker->randomElement(['NewItem','NewWithWarranty','NewOEM','NewOpenBox','UsedLikeNew','UsedVeryGood','UsedGood','UsedAcceptable','UsedPoor','UsedRefurbished','CollectibleLikeNew','CollectibleVeryGood','CollectibleGood','CollectibleAcceptable','CollectiblePoor','RefurbishedWithWarranty','Refurbished','Club',
+        ]);
+
+        return [
+            'seller_sku' => $this->faker->unique()->text(14),
+            'fnsku' => $this->faker->unique()->text(14),
+            'asin' => $this->faker->unique()->text(14),
             'condition' => $condition,
-            'total_supply_quantity' => $faker->numberBetween(1, 9999),
-            'in_stock_supply_quantity' => $faker->numberBetween(1, 9999),
-            'earliest_availability_id' => function () {
-                return factory(Timepoint::class)->create()->id;
-            },
-            'in_use' => $faker->boolean(95),
-    ];
-});
+            'total_supply_quantity' => $this->faker->numberBetween(1, 9999),
+            'in_stock_supply_quantity' => $this->faker->numberBetween(1, 9999),
+            'earliest_availability_id' => Timepoint::factory(),
+            'in_use' => $this->faker->boolean(95),
+        ];
+    }
+}

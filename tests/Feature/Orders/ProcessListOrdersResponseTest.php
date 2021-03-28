@@ -8,10 +8,8 @@ use EolabsIo\AmazonMws\Tests\Concerns\CreatesListOrders;
 use EolabsIo\AmazonMws\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-
 class ProcessListOrdersResponseTest extends TestCase
 {
-
     use RefreshDatabase,
         CreatesListOrders;
 
@@ -19,7 +17,7 @@ class ProcessListOrdersResponseTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        
+
         $listOrders = $this->createListOrders();
 
         $results = $listOrders->fetch();
@@ -40,7 +38,7 @@ class ProcessListOrdersResponseTest extends TestCase
         $this->assertEquals($order->order_status, "Unshipped");
         $this->assertEquals($order->fulfillment_channel, "MFN");
         $this->assertEquals($order->sales_channel, "Amazon.com");
-        
+
 
         $this->assertDatabaseHas('addresses', [ "name" => "Buyer name",
                                                 "address_line_1" => "1234 Any St.",
@@ -53,7 +51,7 @@ class ProcessListOrdersResponseTest extends TestCase
         $this->assertDatabaseHas('money', ["currency_code" => "USD", "amount" => "25.00"]);
         $this->assertDatabaseHas('money', ["currency_code" => "JPY", "amount" => "10.00"]);
         $this->assertDatabaseHas('money', ["currency_code" => "JPY", "amount" => "317.00"]);
-        $this->assertDatabaseHas('money',  ["currency_code" => "JPY", "amount" => "1180.00"]);                                     
+        $this->assertDatabaseHas('money', ["currency_code" => "JPY", "amount" => "1180.00"]);
 
         $this->assertDatabaseHas('payment_execution_detail_items', ["payment_method" => "PointsAccount"]);
         $this->assertDatabaseHas('payment_execution_detail_items', ["payment_method" => "GC"]);
@@ -61,17 +59,15 @@ class ProcessListOrdersResponseTest extends TestCase
 
         $this->assertDatabaseHas('payment_method_details', [ "payment_method_detail" => "CreditCard"]);
 
-        $this->assertDatabaseHas('buyer_tax_infos', [ "company_legal_name" => "Company Name","taxing_region" => "US"]);   
-        $this->assertDatabaseHas('buyer_tax_infos', [ "company_legal_name" => null,"taxing_region" => "BR"]);      
-
+        $this->assertDatabaseHas('buyer_tax_infos', [ "company_legal_name" => "Company Name","taxing_region" => "US"]);
+        $this->assertDatabaseHas('buyer_tax_infos', [ "company_legal_name" => null,"taxing_region" => "BR"]);
     }
 
     /** @test */
     public function it_has_a_marketplace_id()
     {
         $order = Order::where(["amazon_order_id" => "483-3488972-0896720"])->first();
-        
+
         $this->assertEquals($order->marketplace_id, 'A2Q3Y263D00KWC');
     }
-
 }

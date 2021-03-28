@@ -1,22 +1,34 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace EolabsIo\AmazonMws\Database\Factories;
 
-use EolabsIo\AmazonMws\Domain\Finance\Models\CurrencyAmount;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use EolabsIo\AmazonMws\Domain\Finance\Models\ShipmentItem;
-use Faker\Generator as Faker;
+use EolabsIo\AmazonMws\Domain\Finance\Models\CurrencyAmount;
 
-$factory->define(ShipmentItem::class, function (Faker $faker) {
-    return [
-            'seller_sku' => $faker->text(30),
-            'order_item_id' => $faker->text(30),
-            'order_adjustment_item_id' => $faker->text(30),
-            'quantity_shipped' => $faker->numberBetween(1, 100),
-            'cost_of_points_granted_id' => function(){
-            	return factory(CurrencyAmount::class)->create()->id;
-            },
-            'cost_of_points_returned_id' => function(){
-            	return factory(CurrencyAmount::class)->create()->id;
-            },
-    ];
-});
+class ShipmentItemFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = ShipmentItem::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'seller_sku' => $this->faker->text(30),
+            'order_item_id' => $this->faker->text(30),
+            'order_adjustment_item_id' => $this->faker->text(30),
+            'quantity_shipped' => $this->faker->numberBetween(1, 100),
+            'cost_of_points_granted_id' =>CurrencyAmount::factory(),
+            'cost_of_points_returned_id' =>CurrencyAmount::factory(),
+        ];
+    }
+}

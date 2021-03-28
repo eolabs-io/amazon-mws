@@ -1,23 +1,34 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace EolabsIo\AmazonMws\Database\Factories;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use EolabsIo\AmazonMws\Domain\Finance\Models\CurrencyAmount;
 use EolabsIo\AmazonMws\Domain\Finance\Models\RetrochargeEvent;
-use Faker\Generator as Faker;
 
-$factory->define(RetrochargeEvent::class, function (Faker $faker) {
+class RetrochargeEventFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = RetrochargeEvent::class;
 
-    return [
-    		'retrocharge_event_type' => $faker->randomElement(['Retrocharge', 'RetrochargeReversal']),
-            'amazon_order_id' => $faker->text(30),
-            'posted_date' => $faker->dateTime(),
-            'base_tax_id' => function(){
-                return factory(CurrencyAmount::class)->create()->id;
-            },
-            'shipping_tax_id' => function(){
-                return factory(CurrencyAmount::class)->create()->id;
-            },
-            'marketplace_name' => $faker->text(30),
-    ];
-});
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'retrocharge_event_type' => $this->faker->randomElement(['Retrocharge', 'RetrochargeReversal']),
+            'amazon_order_id' => $this->faker->text(30),
+            'posted_date' => $this->faker->dateTime(),
+            'base_tax_id' => CurrencyAmount::factory(),
+            'shipping_tax_id' => CurrencyAmount::factory(),
+            'marketplace_name' => $this->faker->text(30),
+        ];
+    }
+}

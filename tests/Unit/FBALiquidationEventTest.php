@@ -7,7 +7,6 @@ use EolabsIo\AmazonMws\Domain\Finance\Models\FBALiquidationEvent;
 
 class FBALiquidationEventTest extends BaseModelTest
 {
-
     protected function getModelClass()
     {
         return FBALiquidationEvent::class;
@@ -16,8 +15,8 @@ class FBALiquidationEventTest extends BaseModelTest
     /** @test */
     public function it_has_liquidationProceedsAmount_relationship()
     {
-        $fbaLiquidationEvent = factory(FBALiquidationEvent::class)->create(['liquidation_proceeds_amount_id' => null]);
-        $liquidationProceedsAmount = factory(CurrencyAmount::class)->create();
+        $fbaLiquidationEvent = FBALiquidationEvent::factory()->create(['liquidation_proceeds_amount_id' => null]);
+        $liquidationProceedsAmount = CurrencyAmount::factory()->create();
 
         $fbaLiquidationEvent->liquidationProceedsAmount()->associate($liquidationProceedsAmount);
 
@@ -27,8 +26,8 @@ class FBALiquidationEventTest extends BaseModelTest
     /** @test */
     public function it_has_liquidationFeeAmount_relationship()
     {
-        $fbaLiquidationEvent = factory(FBALiquidationEvent::class)->create(['liquidation_fee_amount_id' => null]);
-        $liquidationFeeAmount = factory(CurrencyAmount::class)->create();
+        $fbaLiquidationEvent = FBALiquidationEvent::factory()->create(['liquidation_fee_amount_id' => null]);
+        $liquidationFeeAmount = CurrencyAmount::factory()->create();
 
         $fbaLiquidationEvent->liquidationFeeAmount()->associate($liquidationFeeAmount);
 

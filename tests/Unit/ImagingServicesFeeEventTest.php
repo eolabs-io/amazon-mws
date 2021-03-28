@@ -7,7 +7,6 @@ use EolabsIo\AmazonMws\Domain\Finance\Models\ImagingServicesFeeEvent;
 
 class ImagingServicesFeeEventTest extends BaseModelTest
 {
-
     protected function getModelClass()
     {
         return ImagingServicesFeeEvent::class;
@@ -16,13 +15,11 @@ class ImagingServicesFeeEventTest extends BaseModelTest
     /** @test */
     public function it_has_imagingServicesFeeEvent_relationship()
     {
-        $imagingServicesFeeEvent = factory(ImagingServicesFeeEvent::class)->create();
-        $feeList = factory(FeeComponent::class, 3)->create();
+        $imagingServicesFeeEvent = ImagingServicesFeeEvent::factory()->create();
+        $feeList = FeeComponent::factory()->times(3)->create();
 
         $imagingServicesFeeEvent->feeList()->toggle($feeList);
 
         $this->assertArraysEqual($feeList->toArray(), $imagingServicesFeeEvent->feeList->toArray());
     }
-
 }
-

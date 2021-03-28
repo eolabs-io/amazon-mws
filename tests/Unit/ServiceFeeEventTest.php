@@ -7,7 +7,6 @@ use EolabsIo\AmazonMws\Domain\Finance\Models\ServiceFeeEvent;
 
 class ServiceFeeEventTest extends BaseModelTest
 {
-
     protected function getModelClass()
     {
         return ServiceFeeEvent::class;
@@ -16,8 +15,8 @@ class ServiceFeeEventTest extends BaseModelTest
     /** @test */
     public function it_has_feeList_relationship()
     {
-        $serviceFeeEvent = factory(ServiceFeeEvent::class)->create();
-        $feeList = factory(FeeComponent::class, 3)->create();
+        $serviceFeeEvent = ServiceFeeEvent::factory()->create();
+        $feeList = FeeComponent::factory()->times(3)->create();
 
         $serviceFeeEvent->feeList()->toggle($feeList);
 

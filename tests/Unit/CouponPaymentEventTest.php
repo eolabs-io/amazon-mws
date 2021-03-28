@@ -9,7 +9,6 @@ use EolabsIo\AmazonMws\Domain\Finance\Models\FeeComponent;
 
 class CouponPaymentEventTest extends BaseModelTest
 {
-
     protected function getModelClass()
     {
         return CouponPaymentEvent::class;
@@ -18,8 +17,8 @@ class CouponPaymentEventTest extends BaseModelTest
     /** @test */
     public function it_has_feeComponent_relationship()
     {
-        $couponPaymentEvent = factory(CouponPaymentEvent::class)->create(['fee_component_id' => null]);
-        $feeComponent = factory(FeeComponent::class)->create();
+        $couponPaymentEvent = CouponPaymentEvent::factory()->create(['fee_component_id' => null]);
+        $feeComponent = FeeComponent::factory()->create();
 
         $couponPaymentEvent->feeComponent()->associate($feeComponent);
 
@@ -29,8 +28,8 @@ class CouponPaymentEventTest extends BaseModelTest
     /** @test */
     public function it_has_chargeComponent_relationship()
     {
-        $couponPaymentEvent = factory(CouponPaymentEvent::class)->create(['charge_component_id' => null]);
-        $chargeComponent = factory(ChargeComponent::class)->create();
+        $couponPaymentEvent = CouponPaymentEvent::factory()->create(['charge_component_id' => null]);
+        $chargeComponent = ChargeComponent::factory()->create();
 
         $couponPaymentEvent->chargeComponent()->associate($chargeComponent);
 
@@ -40,8 +39,8 @@ class CouponPaymentEventTest extends BaseModelTest
     /** @test */
     public function it_has_totalAmount_relationship()
     {
-        $couponPaymentEvent = factory(CouponPaymentEvent::class)->create(['total_amount_id' => null]);
-        $totalAmount = factory(CurrencyAmount::class)->create();
+        $couponPaymentEvent = CouponPaymentEvent::factory()->create(['total_amount_id' => null]);
+        $totalAmount = CurrencyAmount::factory()->create();
 
         $couponPaymentEvent->totalAmount()->associate($totalAmount);
 

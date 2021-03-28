@@ -2,11 +2,12 @@
 
 namespace EolabsIo\AmazonMws\Domain\Inventory\Models;
 
-use EolabsIo\AmazonMws\Domain\Inventory\Models\InventorySupplyDetail;
 use EolabsIo\AmazonMws\Domain\Shared\Models\Timepoint;
-use Illuminate\Database\Eloquent\Model;
+use EolabsIo\AmazonMws\Domain\Shared\Models\AmazonMwsModel;
+use EolabsIo\AmazonMws\Database\Factories\InventorySupplyFactory;
+use EolabsIo\AmazonMws\Domain\Inventory\Models\InventorySupplyDetail;
 
-class InventorySupply extends Model
+class InventorySupply extends AmazonMwsModel
 {
     /**
      * The attributes that should be cast.
@@ -42,5 +43,15 @@ class InventorySupply extends Model
     public function details()
     {
         return $this->hasMany(InventorySupplyDetail::class, 'inventory_supply_id', 'id');
+    }
+
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    public static function newFactory()
+    {
+        return InventorySupplyFactory::new();
     }
 }

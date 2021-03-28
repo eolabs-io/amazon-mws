@@ -9,7 +9,6 @@ use EolabsIo\AmazonMws\Domain\Finance\Models\SellerReviewEnrollmentPaymentEvent;
 
 class SellerReviewEnrollmentPaymentEventTest extends BaseModelTest
 {
-
     protected function getModelClass()
     {
         return SellerReviewEnrollmentPaymentEvent::class;
@@ -18,8 +17,8 @@ class SellerReviewEnrollmentPaymentEventTest extends BaseModelTest
     /** @test */
     public function it_has_feeComponent_relationship()
     {
-        $sellerReviewEnrollmentPaymentEvent = factory(SellerReviewEnrollmentPaymentEvent::class)->create();
-        $feeComponent = factory(FeeComponent::class)->create();
+        $sellerReviewEnrollmentPaymentEvent = SellerReviewEnrollmentPaymentEvent::factory()->create();
+        $feeComponent = FeeComponent::factory()->create();
 
         $sellerReviewEnrollmentPaymentEvent->feeComponent()->associate($feeComponent);
 
@@ -29,8 +28,8 @@ class SellerReviewEnrollmentPaymentEventTest extends BaseModelTest
     /** @test */
     public function it_has_chargeComponent_relationship()
     {
-        $sellerReviewEnrollmentPaymentEvent = factory(SellerReviewEnrollmentPaymentEvent::class)->create(['charge_component_id' => null]);
-        $chargeComponent = factory(ChargeComponent::class)->create();
+        $sellerReviewEnrollmentPaymentEvent = SellerReviewEnrollmentPaymentEvent::factory()->create(['charge_component_id' => null]);
+        $chargeComponent = ChargeComponent::factory()->create();
 
         $sellerReviewEnrollmentPaymentEvent->chargeComponent()->associate($chargeComponent);
 
@@ -40,8 +39,8 @@ class SellerReviewEnrollmentPaymentEventTest extends BaseModelTest
     /** @test */
     public function it_has_totalAmount_relationship()
     {
-        $sellerReviewEnrollmentPaymentEvent = factory(SellerReviewEnrollmentPaymentEvent::class)->create(['total_amount_id' => null]);
-        $totalAmount = factory(CurrencyAmount::class)->create();
+        $sellerReviewEnrollmentPaymentEvent = SellerReviewEnrollmentPaymentEvent::factory()->create(['total_amount_id' => null]);
+        $totalAmount = CurrencyAmount::factory()->create();
 
         $sellerReviewEnrollmentPaymentEvent->totalAmount()->associate($totalAmount);
 

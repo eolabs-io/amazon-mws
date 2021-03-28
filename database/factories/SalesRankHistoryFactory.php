@@ -1,14 +1,30 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace EolabsIo\AmazonMws\Database\Factories;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use EolabsIo\AmazonMws\Domain\Products\Models\SalesRankHistory;
-use Faker\Generator as Faker;
 
-$factory->define(SalesRankHistory::class, function (Faker $faker) {
-    return [
-            'asin' => $faker->text(10),
-            'product_category_id' => $faker->text(10),
-            'rank' => $faker->randomNumber(),
-    ];
-});
+class SalesRankHistoryFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = SalesRankHistory::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'asin' => $this->faker->text(10),
+            'product_category_id' => $this->faker->text(10),
+            'rank' => $this->faker->randomNumber(),
+        ];
+    }
+}

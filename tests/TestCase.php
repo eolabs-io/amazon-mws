@@ -8,7 +8,6 @@ use EolabsIo\AmazonMws\AmazonMwsServiceProvider;
 use EolabsIo\AmazonMws\Tests\Factories\AmazonConstantsFactory;
 use Illuminate\Support\Facades\Event;
 use Orchestra\Testbench\TestCase as Orchestra;
-use ReflectionObject;
 
 abstract class TestCase extends Orchestra
 {
@@ -21,10 +20,10 @@ abstract class TestCase extends Orchestra
         $vendorPath = '/vendor/eolabs-io/amazon-mws-client';
 
         $this->loadMigrationsFrom(realpath(dirname(__DIR__) . $vendorPath .'/database/migrations'));
-        $this->withFactories(realpath(dirname(__DIR__) . $vendorPath .'/database/factories'));
+        // $this->withFactories(realpath(dirname(__DIR__) . $vendorPath .'/database/factories'));
 
         $this->loadMigrationsFrom(realpath(dirname(__DIR__) .'/database/migrations'));
-        $this->withFactories(realpath(dirname(__DIR__) .'/database/factories'));
+        // $this->withFactories(realpath(dirname(__DIR__) .'/database/factories'));
 
         $this->initialEvent = Event::getFacadeRoot();
         Event::fake();

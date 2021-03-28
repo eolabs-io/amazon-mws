@@ -7,7 +7,6 @@ use EolabsIo\AmazonMws\Domain\Finance\Models\CurrencyAmount;
 
 class DirectPaymentTest extends BaseModelTest
 {
-
     protected function getModelClass()
     {
         return DirectPayment::class;
@@ -16,8 +15,8 @@ class DirectPaymentTest extends BaseModelTest
     /** @test */
     public function it_has_directPayment_relationship()
     {
-        $directPayment = factory(DirectPayment::class)->create(['direct_payment_amount_id' => null]);
-        $directPaymentAmount = factory(CurrencyAmount::class)->create();
+        $directPayment = DirectPayment::factory()->create(['direct_payment_amount_id' => null]);
+        $directPaymentAmount = CurrencyAmount::factory()->create();
 
         $directPayment->directPaymentAmount()->associate($directPaymentAmount);
 

@@ -22,7 +22,7 @@ class CreateOrUpdateBuyerTest extends TestCase
 
         Event::fake();
 
-        $this->shipment = factory(AmazonFulfilledShipment::class)->create();
+        $this->shipment = AmazonFulfilledShipment::factory()->create();
         $this->event = new AmazonFulfilledShipmentWasCreated($this->shipment);
     }
 

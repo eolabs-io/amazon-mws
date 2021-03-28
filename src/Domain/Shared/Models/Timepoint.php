@@ -2,19 +2,19 @@
 
 namespace EolabsIo\AmazonMws\Domain\Shared\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use EolabsIo\AmazonMws\Database\Factories\TimepointFactory;
+use EolabsIo\AmazonMws\Domain\Shared\Models\AmazonMwsModel;
 
-
-class Timepoint extends Model
+class Timepoint extends AmazonMwsModel
 {
-	/**
-	 * The attributes that should be cast.
-	 *
-	 * @var array
-	 */
-	protected $casts = [
-	    'date_time' => 'datetime',
-	];
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'date_time' => 'datetime',
+    ];
 
     /**
      * The attributes that are mass assignable.
@@ -22,7 +22,18 @@ class Timepoint extends Model
      * @var array
      */
     protected $fillable = [
-		            'timepoint_type',
-		            'date_time',
-				];
+                    'timepoint_type',
+                    'date_time',
+                ];
+
+
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    public static function newFactory()
+    {
+        return TimepointFactory::new();
+    }
 }

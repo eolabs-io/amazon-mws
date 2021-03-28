@@ -1,16 +1,30 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace EolabsIo\AmazonMws\Database\Factories;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use EolabsIo\AmazonMws\Domain\Finance\Models\CurrencyAmount;
 use EolabsIo\AmazonMws\Domain\Finance\Models\LoanServicingEvent;
-use Faker\Generator as Faker;
 
-$factory->define(LoanServicingEvent::class, function (Faker $faker) {
-    return [
-            'source_business_event_type' => $faker->randomElement(['LoanAdvance', 'LoanPayment', 'LoanRefund']),
-            'loan_amount_id' => function(){
-            	return factory(CurrencyAmount::class)->create()->id;
-            },
-    ];
-});
+class LoanServicingEventFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = LoanServicingEvent::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'source_business_event_type' => $this->faker->randomElement(['LoanAdvance', 'LoanPayment', 'LoanRefund']),
+            'loan_amount_id' => CurrencyAmount::factory(),
+        ];
+    }
+}

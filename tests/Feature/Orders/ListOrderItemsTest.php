@@ -2,120 +2,113 @@
 
 namespace EolabsIo\AmazonMws\Tests\Feature\Orders;
 
-use EolabsIo\AmazonMwsClient\Models\Store;
-use EolabsIo\AmazonMws\Support\Facades\ListOrderItems;
-use EolabsIo\AmazonMws\Tests\Factories\ListOrderItemsFactory;
-use EolabsIo\AmazonMws\Tests\Factories\StoreFactory;
-use EolabsIo\AmazonMws\Tests\TestCase;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Http;
-use EndpointSeeder;
-
+use EolabsIo\AmazonMws\Tests\TestCase;
+use EolabsIo\AmazonMws\Tests\Factories\StoreFactory;
+use EolabsIo\AmazonMws\Support\Facades\ListOrderItems;
+use EolabsIo\AmazonMws\Tests\Factories\ListOrderItemsFactory;
+use EolabsIo\AmazonMwsClient\Database\Seeders\EndpointSeeder;
 
 class ListOrderItemsTest extends TestCase
 {
-
     protected function setUp(): void
     {
         parent::setUp();
         $knownDate = Carbon::create(2020, 3, 24, 12);
-		    Carbon::setTestNow($knownDate);  
+        Carbon::setTestNow($knownDate);
     }
 
     protected function tearDown(): void
     {
         parent::tearDown();
-        Carbon::setTestNow();  
+        Carbon::setTestNow();
     }
 
     /** @test */
     public function it_sends_the_correct_order_item_request_query()
     {
+        ListOrderItemsFactory::new()->fakeListOrderItemsResponse();
 
-    	ListOrderItemsFactory::new()->fakeListOrderItemsResponse();
+        $store = StoreFactory::new()
+                                       ->withValidAttributes()
+                                     ->create();
 
-    	$store = StoreFactory::new()
-              						 ->withValidAttributes()
-              					   ->create();
-
-      $response = ListOrderItems::withStore($store)
-                                ->withAmazonOrderId( '058-1233752-8214740' )
+        $response = ListOrderItems::withStore($store)
+                                ->withAmazonOrderId('058-1233752-8214740')
                                 ->fetch();
 
-      Http::assertSent(function ($request){
-        	return $request->url() == 'https://mws.amazonservices.com/Orders/2013-09-01' &&
+        Http::assertSent(function ($request) {
+            return $request->url() == 'https://mws.amazonservices.com/Orders/2013-09-01' &&
                  $request['AWSAccessKeyId'] == '0PB842EXAMPLE7N4ZTR2' &&
-      				   $request['MWSAuthToken'] == 'amzn.mws.4ea38b7b-f563-7709-4bae-87aeaEXAMPLE' &&
-      				   $request['SellerId'] == 'A2NEXAMPLETF53' &&
-      				   $request['Version'] == '2013-09-01' &&
-      				   $request['SignatureMethod'] == 'HmacSHA256' &&
-      				   $request['SignatureVersion'] == '2' &&
-      				   $request['Timestamp'] == '2020-03-24T12:00:00Z' &&
-      				   $request['AmazonOrderId'] == '058-1233752-8214740' &&
-      				   $request['Action'] == 'ListOrderItems' &&
-      				   $request['Signature'] == '+z2sdTGWJU9jFHf0LYpgVT6rjlR3b5i4laTihSdx+Lo=';
+                         $request['MWSAuthToken'] == 'amzn.mws.4ea38b7b-f563-7709-4bae-87aeaEXAMPLE' &&
+                         $request['SellerId'] == 'A2NEXAMPLETF53' &&
+                         $request['Version'] == '2013-09-01' &&
+                         $request['SignatureMethod'] == 'HmacSHA256' &&
+                         $request['SignatureVersion'] == '2' &&
+                         $request['Timestamp'] == '2020-03-24T12:00:00Z' &&
+                         $request['AmazonOrderId'] == '058-1233752-8214740' &&
+                         $request['Action'] == 'ListOrderItems' &&
+                         $request['Signature'] == '+z2sdTGWJU9jFHf0LYpgVT6rjlR3b5i4laTihSdx+Lo=';
         });
-
     }
 
     /** @test */
     public function it_can_get_order_items()
     {
-  		ListOrderItemsFactory::new()->fakeListOrderItemsResponse();
-      
-      $store = StoreFactory::new()
-      						         ->withValidAttributes()
-      					           ->create();
+        ListOrderItemsFactory::new()->fakeListOrderItemsResponse();
 
-      $response = ListOrderItems::withStore($store)->withAmazonOrderId( '058-1233752-8214740' )->fetch();
+        $store = StoreFactory::new()
+                                       ->withValidAttributes()
+                                     ->create();
 
-  		$this->assertArrayHasKey('OrderItems', $response->toArray());
+        $response = ListOrderItems::withStore($store)->withAmazonOrderId('058-1233752-8214740')->fetch();
 
-  		$asin1 = data_get($response, 'OrderItems.0.ASIN');
-  		$asin2 = data_get($response, 'OrderItems.1.ASIN');
+        $this->assertArrayHasKey('OrderItems', $response->toArray());
 
-  		$this->assertEquals($asin1, 'BT0093TELA');
-  		$this->assertEquals($asin2, 'BCTU1104UEFB');
-      
+        $asin1 = data_get($response, 'OrderItems.0.ASIN');
+        $asin2 = data_get($response, 'OrderItems.1.ASIN');
+
+        $this->assertEquals($asin1, 'BT0093TELA');
+        $this->assertEquals($asin2, 'BCTU1104UEFB');
     }
 
     /** @test */
     public function it_can_get_order_items_with_token()
     {
-      $this->seed(EndpointSeeder::class);
+        $this->seed(EndpointSeeder::class);
 
-      ListOrderItemsFactory::new()->fakeListOrderItemsTokenResponse();
-      $store = StoreFactory::new()
+        ListOrderItemsFactory::new()->fakeListOrderItemsTokenResponse();
+        $store = StoreFactory::new()
                            ->withValidAttributes()
                            ->withDefaultMarketplaces()
                            ->create();
 
-      $listOrderItems = ListOrderItems::withStore($store)->withAmazonOrderId( '058-1233752-8214740' );              
-      $response = $listOrderItems->fetch();
+        $listOrderItems = ListOrderItems::withStore($store)->withAmazonOrderId('058-1233752-8214740');
+        $response = $listOrderItems->fetch();
 
-      $this->assertTrue($listOrderItems->hasNextToken());
-            
-      $nextTokenResponse = $listOrderItems->fetch();
+        $this->assertTrue($listOrderItems->hasNextToken());
 
-      $this->assertArrayHasKey('OrderItems', $response->toArray());
-      $this->assertArrayHasKey('OrderItems', $nextTokenResponse->toArray());
+        $nextTokenResponse = $listOrderItems->fetch();
 
-      $asin1 = data_get($response, 'OrderItems.0.ASIN');
+        $this->assertArrayHasKey('OrderItems', $response->toArray());
+        $this->assertArrayHasKey('OrderItems', $nextTokenResponse->toArray());
 
-      $this->assertEquals($asin1, 'BT0093TELA');
+        $asin1 = data_get($response, 'OrderItems.0.ASIN');
 
-      $this->assertSentListOrderItems();
-      $this->assertSentListOrderItemsByNextToken();
+        $this->assertEquals($asin1, 'BT0093TELA');
 
+        $this->assertSentListOrderItems();
+        $this->assertSentListOrderItemsByNextToken();
     }
 
     public function assertSentListOrderItems()
     {
-      $requestResponsePairs = Http::recorded($cb = null);
-      $request = $requestResponsePairs[0][0];
+        $requestResponsePairs = Http::recorded($cb = null);
+        $request = $requestResponsePairs[0][0];
 
-      $this->assertTrue(
-         $request->url() == 'https://mws.amazonservices.com/Orders/2013-09-01' &&
+        $this->assertTrue(
+            $request->url() == 'https://mws.amazonservices.com/Orders/2013-09-01' &&
          $request['AWSAccessKeyId'] == '0PB842EXAMPLE7N4ZTR2' &&
          $request['MWSAuthToken'] == 'amzn.mws.4ea38b7b-f563-7709-4bae-87aeaEXAMPLE' &&
          $request['SellerId'] == 'A2NEXAMPLETF53' &&
@@ -126,16 +119,16 @@ class ListOrderItemsTest extends TestCase
          $request['AmazonOrderId'] == '058-1233752-8214740' &&
          $request['Action'] == 'ListOrderItems' &&
          $request['Signature'] == '+z2sdTGWJU9jFHf0LYpgVT6rjlR3b5i4laTihSdx+Lo='
-      );
+        );
     }
 
     public function assertSentListOrderItemsByNextToken()
     {
-      $requestResponsePairs = Http::recorded($cb = null);
-      $request = $requestResponsePairs[1][0];
+        $requestResponsePairs = Http::recorded($cb = null);
+        $request = $requestResponsePairs[1][0];
 
-      $this->assertTrue( 
-         $request->url() == 'https://mws.amazonservices.com/Orders/2013-09-01' &&
+        $this->assertTrue(
+            $request->url() == 'https://mws.amazonservices.com/Orders/2013-09-01' &&
          $request['AWSAccessKeyId'] == '0PB842EXAMPLE7N4ZTR2' &&
          $request['MWSAuthToken'] == 'amzn.mws.4ea38b7b-f563-7709-4bae-87aeaEXAMPLE' &&
          $request['SellerId'] == 'A2NEXAMPLETF53' &&
@@ -146,7 +139,6 @@ class ListOrderItemsTest extends TestCase
          $request['Action'] == 'ListOrderItemsByNextToken' &&
          $request['NextToken'] == 'MRgZW55IGNhcm5hbCBwbGVhc3VyZS6=' &&
          $request['Signature'] == 'H5TWwGq029XRScXC+nHsLnI0vDrRjSHeh8blUeLo028='
-      );
+        );
     }
-
 }

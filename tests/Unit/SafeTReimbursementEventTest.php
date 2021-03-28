@@ -8,7 +8,6 @@ use EolabsIo\AmazonMws\Domain\Finance\Models\SafeTReimbursementItem;
 
 class SafeTReimbursementEventTest extends BaseModelTest
 {
-
     protected function getModelClass()
     {
         return SafeTReimbursementEvent::class;
@@ -17,8 +16,8 @@ class SafeTReimbursementEventTest extends BaseModelTest
     /** @test */
     public function it_has_perUnitAmount_relationship()
     {
-        $safeTReimbursementEvent = factory(SafeTReimbursementEvent::class)->create(['reimbursed_amount_id' => null]);
-        $reimbursedAmount = factory(CurrencyAmount::class)->create();
+        $safeTReimbursementEvent = SafeTReimbursementEvent::factory()->create(['reimbursed_amount_id' => null]);
+        $reimbursedAmount = CurrencyAmount::factory()->create();
 
         $safeTReimbursementEvent->reimbursedAmount()->associate($reimbursedAmount);
 
@@ -28,8 +27,8 @@ class SafeTReimbursementEventTest extends BaseModelTest
     /** @test */
     public function it_has_safeTReimbursementItemList_relationship()
     {
-        $safeTReimbursementEvent = factory(SafeTReimbursementEvent::class)->create();
-        $safeTReimbursementItemList = factory(SafeTReimbursementItem::class, 3)->create(['safe_t_reimbursement_event_id' => $safeTReimbursementEvent->id]);
+        $safeTReimbursementEvent = SafeTReimbursementEvent::factory()->create();
+        $safeTReimbursementItemList = SafeTReimbursementItem::factory()->times(3)->create(['safe_t_reimbursement_event_id' => $safeTReimbursementEvent->id]);
 
         $this->assertArraysEqual($safeTReimbursementItemList->toArray(), $safeTReimbursementEvent->safeTReimbursementItemList->toArray());
     }

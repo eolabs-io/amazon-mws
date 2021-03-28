@@ -1,17 +1,31 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace EolabsIo\AmazonMws\Database\Factories;
 
-use EolabsIo\AmazonMws\Domain\Finance\Models\AdjustmentEvent;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use EolabsIo\AmazonMws\Domain\Finance\Models\CurrencyAmount;
-use Faker\Generator as Faker;
+use EolabsIo\AmazonMws\Domain\Finance\Models\AdjustmentEvent;
 
-$factory->define(AdjustmentEvent::class, function (Faker $faker) {
-    return [
-            'adjustment_type' => $faker->randomElement(['FBAInventoryReimbursement', 'ReserveEvent', 'SellerRewards']),
-            'adjustment_amount_id' => function() {
-            	return factory(CurrencyAmount::class)->create()->id;
-            },
-            'posted_date' => $faker->dateTime(),
-    ];
-});
+class AdjustmentEventFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = AdjustmentEvent::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'adjustment_type' => $this->faker->randomElement(['FBAInventoryReimbursement', 'ReserveEvent', 'SellerRewards']),
+            'adjustment_amount_id' => CurrencyAmount::factory(),
+            'posted_date' => $this->faker->dateTime(),
+        ];
+    }
+}

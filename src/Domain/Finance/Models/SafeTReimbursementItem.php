@@ -2,14 +2,14 @@
 
 namespace EolabsIo\AmazonMws\Domain\Finance\Models;
 
+use EolabsIo\AmazonMws\Domain\Shared\Models\AmazonMwsModel;
 use EolabsIo\AmazonMws\Domain\Finance\Models\ChargeComponent;
 use EolabsIo\AmazonMws\Domain\Finance\Models\SafeTReimbursementEvent;
-use Illuminate\Database\Eloquent\Model;
+use EolabsIo\AmazonMws\Database\Factories\SafeTReimbursementItemFactory;
 
-
-class SafeTReimbursementItem extends Model
+class SafeTReimbursementItem extends AmazonMwsModel
 {
-        
+
     /**
      * The attributes that are mass assignable.
      *
@@ -21,9 +21,19 @@ class SafeTReimbursementItem extends Model
     {
         return $this->belongsTo(SafeTReimbursementEvent::class);
     }
-    
-	public function itemChargeList()
-	{
-		return $this->belongsToMany(ChargeComponent::class);
-	}
+
+    public function itemChargeList()
+    {
+        return $this->belongsToMany(ChargeComponent::class);
+    }
+
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    public static function newFactory()
+    {
+        return SafeTReimbursementItemFactory::new();
+    }
 }

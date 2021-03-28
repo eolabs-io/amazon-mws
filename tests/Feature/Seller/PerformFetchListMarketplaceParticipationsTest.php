@@ -2,16 +2,10 @@
 
 namespace EolabsIo\AmazonMws\Tests\Feature\Seller;
 
-use EolabsIo\AmazonMwsClient\Models\Store;
 use EolabsIo\AmazonMws\Domain\Sellers\Jobs\PerformFetchListMarketplaceParticipations;
 use EolabsIo\AmazonMws\Domain\Sellers\Jobs\ProcessListMarketplaceParticipationsResponse;
 use EolabsIo\AmazonMws\Tests\Concerns\CreatesListMarketplaceParticipations;
-use EolabsIo\AmazonMws\Tests\Factories\StoreFactory;
 use EolabsIo\AmazonMws\Tests\TestCase;
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Event;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Queue;
 
 class PerformFetchListMarketplaceParticipationsTest extends TestCase
@@ -47,7 +41,5 @@ class PerformFetchListMarketplaceParticipationsTest extends TestCase
         Queue::assertPushed(ProcessListMarketplaceParticipationsResponse::class, function ($job) {
             return data_get($job->results, 'ListParticipations.0.MarketplaceId') === 'ATVPDKIKX0DER';
         });
-
     }
-
 }

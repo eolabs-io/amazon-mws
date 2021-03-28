@@ -7,7 +7,6 @@ use EolabsIo\AmazonMws\Domain\Finance\Models\CurrencyAmount;
 
 class AffordabilityExpenseReversalEventTest extends BaseModelTest
 {
-
     protected function getModelClass()
     {
         return AffordabilityExpenseReversalEvent::class;
@@ -16,8 +15,8 @@ class AffordabilityExpenseReversalEventTest extends BaseModelTest
     /** @test */
     public function it_has_baseExpense_relationship()
     {
-        $affordabilityExpenseReversalEvent = factory(AffordabilityExpenseReversalEvent::class)->create(['base_expense_id' => null]);
-        $baseExpense = factory(CurrencyAmount::class)->create();
+        $affordabilityExpenseReversalEvent = AffordabilityExpenseReversalEvent::factory()->create(['base_expense_id' => null]);
+        $baseExpense = CurrencyAmount::factory()->create();
 
         $affordabilityExpenseReversalEvent->baseExpense()->associate($baseExpense);
 
@@ -27,8 +26,8 @@ class AffordabilityExpenseReversalEventTest extends BaseModelTest
     /** @test */
     public function it_has_totalExpense_relationship()
     {
-        $affordabilityExpenseReversalEvent = factory(AffordabilityExpenseReversalEvent::class)->create(['total_expense_id' => null]);
-        $totalExpense = factory(CurrencyAmount::class)->create();
+        $affordabilityExpenseReversalEvent = AffordabilityExpenseReversalEvent::factory()->create(['total_expense_id' => null]);
+        $totalExpense = CurrencyAmount::factory()->create();
 
         $affordabilityExpenseReversalEvent->totalExpense()->associate($totalExpense);
 
@@ -38,8 +37,8 @@ class AffordabilityExpenseReversalEventTest extends BaseModelTest
     /** @test */
     public function it_has_taxTypeIGST_relationship()
     {
-        $affordabilityExpenseReversalEvent = factory(AffordabilityExpenseReversalEvent::class)->create();
-        $taxTypeIGST = factory(CurrencyAmount::class)->create();
+        $affordabilityExpenseReversalEvent = AffordabilityExpenseReversalEvent::factory()->create();
+        $taxTypeIGST = CurrencyAmount::factory()->create();
 
         $affordabilityExpenseReversalEvent->taxTypeIGST()->associate($taxTypeIGST);
 
@@ -49,8 +48,8 @@ class AffordabilityExpenseReversalEventTest extends BaseModelTest
     /** @test */
     public function it_has_taxTypeCGST_relationship()
     {
-        $affordabilityExpenseReversalEvent = factory(AffordabilityExpenseReversalEvent::class)->create();
-        $taxTypeCGST = factory(CurrencyAmount::class)->create();
+        $affordabilityExpenseReversalEvent = AffordabilityExpenseReversalEvent::factory()->create();
+        $taxTypeCGST = CurrencyAmount::factory()->create();
 
         $affordabilityExpenseReversalEvent->taxTypeCGST()->associate($taxTypeCGST);
 
@@ -60,8 +59,8 @@ class AffordabilityExpenseReversalEventTest extends BaseModelTest
     /** @test */
     public function it_has_taxTypeSGST_relationship()
     {
-        $affordabilityExpenseReversalEvent = factory(AffordabilityExpenseReversalEvent::class)->create();
-        $taxTypeSGST = factory(CurrencyAmount::class)->create();
+        $affordabilityExpenseReversalEvent = AffordabilityExpenseReversalEvent::factory()->create();
+        $taxTypeSGST = CurrencyAmount::factory()->create();
 
         $affordabilityExpenseReversalEvent->taxTypeSGST()->associate($taxTypeSGST);
 

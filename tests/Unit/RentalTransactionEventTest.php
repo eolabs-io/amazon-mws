@@ -10,7 +10,6 @@ use EolabsIo\AmazonMws\Domain\Finance\Models\TaxWithheldComponent;
 
 class RentalTransactionEventTest extends BaseModelTest
 {
-
     protected function getModelClass()
     {
         return RentalTransactionEvent::class;
@@ -19,8 +18,8 @@ class RentalTransactionEventTest extends BaseModelTest
     /** @test */
     public function it_has_rentalChargeList_relationship()
     {
-        $rentalTransactionEvent = factory(RentalTransactionEvent::class)->create();
-        $rentalChargeList = factory(ChargeComponent::class, 3)->create();
+        $rentalTransactionEvent = RentalTransactionEvent::factory()->create();
+        $rentalChargeList = ChargeComponent::factory()->times(3)->create();
 
         $rentalTransactionEvent->rentalChargeList()->toggle($rentalChargeList);
 
@@ -30,8 +29,8 @@ class RentalTransactionEventTest extends BaseModelTest
     /** @test */
     public function it_has_rentalFeeList_relationship()
     {
-        $rentalTransactionEvent = factory(RentalTransactionEvent::class)->create();
-        $rentalFeeList = factory(FeeComponent::class, 3)->create();
+        $rentalTransactionEvent = RentalTransactionEvent::factory()->create();
+        $rentalFeeList = FeeComponent::factory()->times(3)->create();
 
         $rentalTransactionEvent->rentalFeeList()->toggle($rentalFeeList);
 
@@ -41,8 +40,8 @@ class RentalTransactionEventTest extends BaseModelTest
     /** @test */
     public function it_has_rentalInitialValue_relationship()
     {
-        $rentalTransactionEvent = factory(RentalTransactionEvent::class)->create(['rental_initial_value_id' => null]);
-        $rentalInitialValue = factory(CurrencyAmount::class)->create();
+        $rentalTransactionEvent = RentalTransactionEvent::factory()->create(['rental_initial_value_id' => null]);
+        $rentalInitialValue = CurrencyAmount::factory()->create();
 
         $rentalTransactionEvent->rentalInitialValue()->associate($rentalInitialValue);
 
@@ -52,8 +51,8 @@ class RentalTransactionEventTest extends BaseModelTest
     /** @test */
     public function it_has_rentalReimbursement_relationship()
     {
-        $rentalTransactionEvent = factory(RentalTransactionEvent::class)->create(['rental_reimbursement_id' => null]);
-        $rentalReimbursement = factory(CurrencyAmount::class)->create();
+        $rentalTransactionEvent = RentalTransactionEvent::factory()->create(['rental_reimbursement_id' => null]);
+        $rentalReimbursement = CurrencyAmount::factory()->create();
 
         $rentalTransactionEvent->rentalReimbursement()->associate($rentalReimbursement);
 
@@ -63,8 +62,8 @@ class RentalTransactionEventTest extends BaseModelTest
     /** @test */
     public function it_has_rentalTaxWithheldList_relationship()
     {
-        $rentalTransactionEvent = factory(RentalTransactionEvent::class)->create();
-        $rentalTaxWithheldList = factory(TaxWithheldComponent::class, 3)->create();
+        $rentalTransactionEvent = RentalTransactionEvent::factory()->create();
+        $rentalTaxWithheldList = TaxWithheldComponent::factory()->times(3)->create();
 
         $rentalTransactionEvent->rentalTaxWithheldList()->toggle($rentalTaxWithheldList);
 

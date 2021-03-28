@@ -7,7 +7,6 @@ use EolabsIo\AmazonMws\Domain\Finance\Models\FinancialEventGroup;
 
 class FinancialEventGroupTest extends BaseModelTest
 {
-
     protected function getModelClass()
     {
         return FinancialEventGroup::class;
@@ -16,8 +15,8 @@ class FinancialEventGroupTest extends BaseModelTest
     /** @test */
     public function it_has_originalTotal_relationship()
     {
-        $financialEventGroup = factory(FinancialEventGroup::class)->create(['original_total_id' => null]);
-        $originalTotal = factory(CurrencyAmount::class)->create();
+        $financialEventGroup = FinancialEventGroup::factory()->create(['original_total_id' => null]);
+        $originalTotal = CurrencyAmount::factory()->create();
 
         $financialEventGroup->originalTotal()->associate($originalTotal);
 
@@ -27,19 +26,19 @@ class FinancialEventGroupTest extends BaseModelTest
     /** @test */
     public function it_has_convertedTotal_relationship()
     {
-        $financialEventGroup = factory(FinancialEventGroup::class)->create(['converted_total_id' => null]);
-        $convertedTotal = factory(CurrencyAmount::class)->create();
+        $financialEventGroup = FinancialEventGroup::factory()->create(['converted_total_id' => null]);
+        $convertedTotal = CurrencyAmount::factory()->create();
 
         $financialEventGroup->convertedTotal()->associate($convertedTotal);
 
         $this->assertArraysEqual($convertedTotal->toArray(), $financialEventGroup->convertedTotal->toArray());
     }
 
-	/** @test */
+    /** @test */
     public function it_has_beginningBalance_relationship()
     {
-        $financialEventGroup = factory(FinancialEventGroup::class)->create(['beginning_balance_id' => null]);
-        $beginningBalance = factory(CurrencyAmount::class)->create();
+        $financialEventGroup = FinancialEventGroup::factory()->create(['beginning_balance_id' => null]);
+        $beginningBalance = CurrencyAmount::factory()->create();
 
         $financialEventGroup->beginningBalance()->associate($beginningBalance);
 

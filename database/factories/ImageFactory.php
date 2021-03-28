@@ -1,15 +1,31 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace EolabsIo\AmazonMws\Database\Factories;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use EolabsIo\AmazonMws\Domain\Products\Models\Image;
-use Faker\Generator as Faker;
 
-$factory->define(Image::class, function (Faker $faker) {
-    return [
-            'url' => $faker->url(),
-            'height' => $faker->randomFloat(2, 0, 999999),
-            'width' => $faker->randomFloat(2, 0, 999999),
-            'units' => $faker->randomElement(['Pixels', 'inch', 'cm']),
-    ];
-});
+class ImageFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Image::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'url' => $this->faker->url(),
+            'height' => $this->faker->randomFloat(2, 0, 999999),
+            'width' => $this->faker->randomFloat(2, 0, 999999),
+            'units' => $this->faker->randomElement(['Pixels', 'inch', 'cm']),
+        ];
+    }
+}

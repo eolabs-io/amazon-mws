@@ -2,10 +2,10 @@
 
 namespace EolabsIo\AmazonMws\Domain\Finance\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use EolabsIo\AmazonMws\Domain\Shared\Models\AmazonMwsModel;
+use EolabsIo\AmazonMws\Database\Factories\CurrencyAmountFactory;
 
-
-class CurrencyAmount extends Model
+class CurrencyAmount extends AmazonMwsModel
 {
     /**
      * The attributes that are mass assignable.
@@ -15,6 +15,15 @@ class CurrencyAmount extends Model
     protected $fillable = [
                     'currency_code',
                     'currency_amount',
-				];
+                ];
 
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    public static function newFactory()
+    {
+        return CurrencyAmountFactory::new();
+    }
 }

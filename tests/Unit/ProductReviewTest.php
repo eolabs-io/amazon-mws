@@ -15,8 +15,8 @@ class ProductReviewTest extends BaseModelTest
     /** @test */
     public function it_has_ProductReviewImage_relationship()
     {
-        $productReview = factory(ProductReview::class)->create();
-        $image = factory(ProductReviewImage::class)->make();
+        $productReview = ProductReview::factory()->create();
+        $image = ProductReviewImage::factory()->make();
 
         $productReview->images()->save($image);
         $productReviewImages = $productReview->images->pluck('url');
@@ -26,8 +26,8 @@ class ProductReviewTest extends BaseModelTest
     /** @test */
     public function it_has_ProductReviewImages_relationship()
     {
-        $productReview = factory(ProductReview::class)->create();
-        $images = factory(ProductReviewImage::class, 3)->make();
+        $productReview = ProductReview::factory()->create();
+        $images = ProductReviewImage::factory()->times(3)->make();
 
         $productReview->images()->saveMany($images);
         $productReviewImages = $productReview->images->pluck('url');

@@ -44,9 +44,9 @@ class GetProductReviewsCommandTest extends TestCase
     /** @test */
     public function it_can_execute_product_review_with_marketplace_lookup_artisan_command()
     {
-        factory(Product::class)->create(['marketplace_id' => 'ATVPDKIKX0DER', 'asin' => 'B123456789']);
-        factory(Product::class)->create(['marketplace_id' => 'ATVPDKIKX0DER', 'asin' => 'B987654321']);
-        factory(Product::class)->create(['marketplace_id' => 'XXXPDKIKX0XXX', 'asin' => 'B111111111']);
+        Product::factory()->create(['marketplace_id' => 'ATVPDKIKX0DER', 'asin' => 'B123456789']);
+        Product::factory()->create(['marketplace_id' => 'ATVPDKIKX0DER', 'asin' => 'B987654321']);
+        Product::factory()->create(['marketplace_id' => 'XXXPDKIKX0XXX', 'asin' => 'B111111111']);
 
         $this->artisan('amazonmws:get-product-reviews
                              --marketplace-ids=ATVPDKIKX0DER

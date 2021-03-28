@@ -21,11 +21,11 @@ class RefundEventTest extends ShipmentEventTest
         $buyerEmail = 'foo@bar.com';
         $expectedRefundEvents = 3;
 
-        $orders = factory(Order::class, 10)->create(['buyer_email' => $buyerEmail]);
+        $orders = Order::factory()->times(10)->create(['buyer_email' => $buyerEmail]);
         $amazonOrderId = $orders->first()->amazon_order_id;
 
         $orders->each(function ($order) {
-            factory(OrderItem::class)->create([
+            OrderItem::factory()->create([
                 'amazon_order_id' => $order->amazon_order_id,
                 'seller_sku' => 'sku1',
                 'quantity_shipped' => 1
@@ -33,9 +33,9 @@ class RefundEventTest extends ShipmentEventTest
         });
 
         $orders->take($expectedRefundEvents)->each(function ($order) {
-            $refundEvent = factory(RefundEvent::class)->create(['amazon_order_id' => $order->amazon_order_id]);
+            $refundEvent = RefundEvent::factory()->create(['amazon_order_id' => $order->amazon_order_id]);
             $order->orderItems->each(function ($orderItem) use ($refundEvent) {
-                $shipmentItem = factory(ShipmentItem::class)->create([
+                $shipmentItem = ShipmentItem::factory()->create([
                     'seller_sku' => $orderItem->seller_sku,
                     'quantity_shipped' => $orderItem->quantity_shipped
                 ]);

@@ -1,31 +1,37 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace EolabsIo\AmazonMws\Database\Factories;
 
-use EolabsIo\AmazonMws\Domain\Finance\Models\AffordabilityExpenseReversalEvent;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use EolabsIo\AmazonMws\Domain\Finance\Models\CurrencyAmount;
-use Faker\Generator as Faker;
+use EolabsIo\AmazonMws\Domain\Finance\Models\AffordabilityExpenseReversalEvent;
 
-$factory->define(AffordabilityExpenseReversalEvent::class, function (Faker $faker) {
-    return [
-			'posted_date' => $faker->dateTime(),
-            'transaction_type' => $faker->text(30),
-            'amazon_order_id' => $faker->text(30),
-            'base_expense_id' => function() {
-            	return factory(CurrencyAmount::class)->create()->id;
-            },
-            'total_expense_id' => function() {
-            	return factory(CurrencyAmount::class)->create()->id;
-            },
-            'tax_type_igst_id' => function() {
-                return factory(CurrencyAmount::class)->create()->id;
-            },
-            'tax_type_cgst_id' => function() {
-                return factory(CurrencyAmount::class)->create()->id;
-            },
-            'tax_type_sgst_id' => function() {
-                return factory(CurrencyAmount::class)->create()->id;
-            },
-            'marketplace_id' => $faker->text(30),
-    ];
-});
+class AffordabilityExpenseReversalEventFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = AffordabilityExpenseReversalEvent::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'posted_date' => $this->faker->dateTime(),
+            'transaction_type' => $this->faker->text(30),
+            'amazon_order_id' => $this->faker->text(30),
+            'base_expense_id' => CurrencyAmount::factory(),
+            'total_expense_id' => CurrencyAmount::factory(),
+            'tax_type_igst_id' => CurrencyAmount::factory(),
+            'tax_type_cgst_id' => CurrencyAmount::factory(),
+            'tax_type_sgst_id' => CurrencyAmount::factory(),
+            'marketplace_id' => $this->faker->text(30),
+        ];
+    }
+}

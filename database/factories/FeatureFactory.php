@@ -1,16 +1,30 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace EolabsIo\AmazonMws\Database\Factories;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use EolabsIo\AmazonMws\Domain\Products\Models\Feature;
 use EolabsIo\AmazonMws\Domain\Products\Models\ItemAttributes;
-use Faker\Generator as Faker;
 
-$factory->define(Feature::class, function (Faker $faker) {
-    return [
-            'feature' => $faker->text(25),
-            'item_attribute_id' => function() {
-            	return factory(ItemAttributes::class)->create()->id;
-            },
-    ];
-});
+class FeatureFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Feature::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'feature' => $this->faker->text(25),
+            'item_attribute_id' => ItemAttributes::factory(),
+        ];
+    }
+}

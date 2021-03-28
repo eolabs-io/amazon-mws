@@ -2,16 +2,16 @@
 
 namespace EolabsIo\AmazonMws\Domain\Finance\Models;
 
-use EolabsIo\AmazonMws\Domain\Finance\Models\ChargeComponent;
-use EolabsIo\AmazonMws\Domain\Finance\Models\CurrencyAmount;
 use EolabsIo\AmazonMws\Domain\Finance\Models\FeeComponent;
-use Illuminate\Database\Eloquent\Model;
+use EolabsIo\AmazonMws\Domain\Shared\Models\AmazonMwsModel;
+use EolabsIo\AmazonMws\Domain\Finance\Models\CurrencyAmount;
+use EolabsIo\AmazonMws\Domain\Finance\Models\ChargeComponent;
+use EolabsIo\AmazonMws\Database\Factories\SellerReviewEnrollmentPaymentEventFactory;
 
-
-class SellerReviewEnrollmentPaymentEvent extends Model
+class SellerReviewEnrollmentPaymentEvent extends AmazonMwsModel
 {
-	
-	/**
+
+    /**
      * The attributes that should be cast.
      *
      * @var array
@@ -32,21 +32,30 @@ class SellerReviewEnrollmentPaymentEvent extends Model
                     'fee_component_id',
                     'charge_component_id',
                     'total_amount_id',
-				];
+                ];
 
-	public function feeComponent()
-	{
-		return $this->belongsTo(FeeComponent::class, 'fee_component_id', 'id')->withDefault();
-	}
+    public function feeComponent()
+    {
+        return $this->belongsTo(FeeComponent::class, 'fee_component_id', 'id')->withDefault();
+    }
 
-	public function chargeComponent()
-	{
-		return $this->belongsTo(ChargeComponent::class, 'charge_component_id', 'id')->withDefault();
-	}
+    public function chargeComponent()
+    {
+        return $this->belongsTo(ChargeComponent::class, 'charge_component_id', 'id')->withDefault();
+    }
 
-	public function totalAmount()
-	{
-		return $this->belongsTo(CurrencyAmount::class, 'total_amount_id', 'id')->withDefault();
-	}
+    public function totalAmount()
+    {
+        return $this->belongsTo(CurrencyAmount::class, 'total_amount_id', 'id')->withDefault();
+    }
 
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    public static function newFactory()
+    {
+        return SellerReviewEnrollmentPaymentEventFactory::new();
+    }
 }

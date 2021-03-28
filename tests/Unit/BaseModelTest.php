@@ -10,7 +10,7 @@ use Illuminate\Support\Arr;
 
 abstract class BaseModelTest extends TestCase
 {
-	use RefreshDatabase,
+    use RefreshDatabase,
         RequiresModelFactories;
 
     /** @var string */
@@ -28,27 +28,26 @@ abstract class BaseModelTest extends TestCase
 
     public function seedDatabase()
     {
-        
     }
 
-   /** @test */
+    /** @test */
     public function it_can_find_models()
     {
-        $modelsInDb = $this->factory(10)->create();
+        $modelsInDb =  $this->modelClass::factory(10)->create();
 
         $models = $this->modelClass::All();
 
         $this->assertArraysEqual($models->toArray(), $modelsInDb->toArray());
     }
 
-   /** @test */
+    /** @test */
     public function it_can_create_a_model()
     {
-        $data = $this->factory()->make()->toArray();
+        $data = $this->modelClass::factory()->make()->toArray();
 
         $model = $this->modelClass::create($data);
         $table = $model->getTable();
-        
+
         $this->assertInstanceOf($this->modelClass, $model);
         $this->assertDatabaseHasModel($model);
     }
@@ -56,11 +55,11 @@ abstract class BaseModelTest extends TestCase
     /** @test */
     public function it_can_find_a_model()
     {
-        $model = $this->factory()->create();
+        $model = $this->modelClass::factory()->create();
         $primaryKey = $this->getPrimaryKeyValue($model);
 
         $found = $this->modelClass::find($primaryKey);
-        
+
         $this->assertInstanceOf($this->modelClass, $found);
         $this->assertEquals($found->toArray(), $model->toArray());
     }
@@ -68,9 +67,9 @@ abstract class BaseModelTest extends TestCase
     /** @test */
     public function it_can_update_a_model()
     {
-        $model = $this->factory()->create();
+        $model = $this->modelClass::factory()->create();
         $table = $model->getTable();
-        $data = $this->removePrimaryKeyFromModel( $this->factory()->make() );
+        $data = $this->removePrimaryKeyFromModel($this->modelClass::factory()->make());
 
         $update = $model->update($data);
 
@@ -82,7 +81,7 @@ abstract class BaseModelTest extends TestCase
     /** @test */
     public function it_can_delete_a_model()
     {
-        $model = $this->factory()->create();
+        $model = $this->modelClass::factory()->create();
         $table = $model->getTable();
 
         $model->delete();
@@ -91,8 +90,8 @@ abstract class BaseModelTest extends TestCase
     }
 
     // Helpers //
-    public function assertArraysEqual($array1, $array2){
-
+    public function assertArraysEqual($array1, $array2)
+    {
         $sortedArray1 = Arr::sortRecursive($array1);
         $sortedArray2 = Arr::sortRecursive($array2);
 

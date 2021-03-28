@@ -2,11 +2,11 @@
 
 namespace EolabsIo\AmazonMws\Domain\Finance\Models;
 
+use EolabsIo\AmazonMws\Domain\Shared\Models\AmazonMwsModel;
 use EolabsIo\AmazonMws\Domain\Finance\Models\CurrencyAmount;
-use Illuminate\Database\Eloquent\Model;
+use EolabsIo\AmazonMws\Database\Factories\ChargeInstrumentFactory;
 
-
-class ChargeInstrument extends Model
+class ChargeInstrument extends AmazonMwsModel
 {
 
     /**
@@ -18,13 +18,22 @@ class ChargeInstrument extends Model
                     'description',
                     'tail',
                     'amount_id',
-				];
+                ];
 
     protected $hidden = ['pivot'];
 
-	public function amount()
-	{
-		return $this->belongsTo(CurrencyAmount::class, 'amount_id', 'id')->withDefault();
-	}
+    public function amount()
+    {
+        return $this->belongsTo(CurrencyAmount::class, 'amount_id', 'id')->withDefault();
+    }
 
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    public static function newFactory()
+    {
+        return ChargeInstrumentFactory::new();
+    }
 }

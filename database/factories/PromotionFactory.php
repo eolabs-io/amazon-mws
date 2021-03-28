@@ -1,17 +1,31 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace EolabsIo\AmazonMws\Database\Factories;
 
-use EolabsIo\AmazonMws\Domain\Finance\Models\CurrencyAmount;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use EolabsIo\AmazonMws\Domain\Finance\Models\Promotion;
-use Faker\Generator as Faker;
+use EolabsIo\AmazonMws\Domain\Finance\Models\CurrencyAmount;
 
-$factory->define(Promotion::class, function (Faker $faker) {
-    return [
-            'promotion_type' => $faker->text(30),
-            'promotion_id' => $faker->text(30),
-            'promotion_amount_id' => function(){
-            	return factory(CurrencyAmount::class)->create()->id;
-            },
-    ];
-});
+class PromotionFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Promotion::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'promotion_type' => $this->faker->text(30),
+            'promotion_id' => $this->faker->text(30),
+            'promotion_amount_id' => CurrencyAmount::factory(),
+        ];
+    }
+}

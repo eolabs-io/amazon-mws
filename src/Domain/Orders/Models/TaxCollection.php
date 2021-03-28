@@ -2,10 +2,10 @@
 
 namespace EolabsIo\AmazonMws\Domain\Orders\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use EolabsIo\AmazonMws\Domain\Shared\Models\AmazonMwsModel;
+use EolabsIo\AmazonMws\Database\Factories\TaxCollectionFactory;
 
-
-class TaxCollection extends Model
+class TaxCollection extends AmazonMwsModel
 {
     /**
      * The attributes that are mass assignable.
@@ -15,6 +15,15 @@ class TaxCollection extends Model
     protected $fillable = [
                     'model',
                     'responsible_party',
-				];
+                ];
 
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    public static function newFactory()
+    {
+        return TaxCollectionFactory::new();
+    }
 }

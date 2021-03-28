@@ -16,8 +16,8 @@ class InventorySupplyTest extends BaseModelTest
     /** @test */
     public function it_can_create_a_earliest_availability_relationship()
     {
-        $inventorySupply = factory(InventorySupply::class)->create(['earliest_availability_id' => null]);
-        $timepoint = factory(Timepoint::class)->make()->toArray();
+        $inventorySupply = InventorySupply::factory()->create(['earliest_availability_id' => null]);
+        $timepoint = Timepoint::factory()->make()->toArray();
 
         $earliestAvailability = $inventorySupply->earliestAvailability;
         $earliestAvailability->fill($timepoint)->save();
@@ -35,9 +35,9 @@ class InventorySupplyTest extends BaseModelTest
     /** @test */
     public function it_can_create_supply_detail_relationship()
     {
-        $inventorySupply = factory(InventorySupply::class, 10)->create()->first();
+        $inventorySupply = InventorySupply::factory()->times(10)->create()->first();
 
-        $details = factory(InventorySupplyDetail::class, 10)->make()->toArray();
+        $details = InventorySupplyDetail::factory()->times(10)->make()->toArray();
 
         $inventorySupply->details()->delete();
         $inventorySupply->details()->createMany($details);
@@ -51,8 +51,8 @@ class InventorySupplyTest extends BaseModelTest
     /** @test */
     public function it_can_have_duplicate_asin()
     {
-        $inventorySupply1 = factory(InventorySupply::class)->create();
-        $inventorySupply2 = factory(InventorySupply::class)->create(['asin' => $inventorySupply1->asin]);
+        $inventorySupply1 = InventorySupply::factory()->create();
+        $inventorySupply2 = InventorySupply::factory()->create(['asin' => $inventorySupply1->asin]);
 
         $this->assertDatabaseCount('inventory_supplies', 2);
     }

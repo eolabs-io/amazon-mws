@@ -2,17 +2,18 @@
 
 namespace EolabsIo\AmazonMws\Domain\Orders\Models;
 
+use EolabsIo\AmazonMws\Domain\Orders\Models\Money;
+use EolabsIo\AmazonMws\Domain\Orders\Models\Address;
+use EolabsIo\AmazonMws\Domain\Orders\Models\OrderItem;
+use EolabsIo\AmazonMws\Database\Factories\OrderFactory;
+use EolabsIo\AmazonMws\Domain\Orders\Models\BuyerTaxInfo;
+use EolabsIo\AmazonMws\Domain\Shared\Models\AmazonMwsModel;
 use EolabsIo\AmazonMws\Domain\Orders\Events\OrderWasCreated;
 use EolabsIo\AmazonMws\Domain\Orders\Events\OrderWasUpdated;
-use EolabsIo\AmazonMws\Domain\Orders\Models\Address;
-use EolabsIo\AmazonMws\Domain\Orders\Models\BuyerTaxInfo;
-use EolabsIo\AmazonMws\Domain\Orders\Models\Money;
-use EolabsIo\AmazonMws\Domain\Orders\Models\OrderItem;
-use EolabsIo\AmazonMws\Domain\Orders\Models\PaymentExecutionDetailItem;
 use EolabsIo\AmazonMws\Domain\Orders\Models\PaymentMethodDetail;
-use Illuminate\Database\Eloquent\Model;
+use EolabsIo\AmazonMws\Domain\Orders\Models\PaymentExecutionDetailItem;
 
-class Order extends Model
+class Order extends AmazonMwsModel
 {
     /**
      * The event map for the model.
@@ -127,5 +128,15 @@ class Order extends Model
     public function orderHistory()
     {
         return $this->hasMany(Order::class, 'buyer_email', 'buyer_email');
+    }
+
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    public static function newFactory()
+    {
+        return OrderFactory::new();
     }
 }

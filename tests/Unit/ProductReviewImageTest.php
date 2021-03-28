@@ -15,8 +15,8 @@ class ProductReviewImageTest extends BaseModelTest
     /** @test */
     public function it_has_ProductReview_relationship()
     {
-        $productReview = factory(ProductReview::class)->create();
-        $productReviewImage = factory(ProductReviewImage::class)->create(['product_review_id' => $productReview->id]);
+        $productReview = ProductReview::factory()->create();
+        $productReviewImage = ProductReviewImage::factory()->create(['product_review_id' => $productReview->id]);
 
         $this->assertEquals($productReview->toArray(), $productReviewImage->productReview->toArray());
     }

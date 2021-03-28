@@ -2,16 +2,12 @@
 
 namespace EolabsIo\AmazonMws\Tests\Feature\Orders;
 
-use EolabsIo\AmazonMwsClient\Models\Store;
 use EolabsIo\AmazonMws\Domain\Orders\Events\FetchListOrders;
 use EolabsIo\AmazonMws\Domain\Orders\Jobs\PerformFetchListOrders;
 use EolabsIo\AmazonMws\Domain\Orders\Jobs\ProcessListOrdersResponse;
 use EolabsIo\AmazonMws\Tests\Concerns\CreatesListOrders;
-use EolabsIo\AmazonMws\Tests\Factories\StoreFactory;
 use EolabsIo\AmazonMws\Tests\TestCase;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Event;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Queue;
 
 class PerformFetchListOrdersTest extends TestCase
@@ -73,5 +69,4 @@ class PerformFetchListOrdersTest extends TestCase
         // Assert that was not called for NextToken
         Event::assertDispatched(FetchListOrders::class);
     }
-
 }

@@ -19,7 +19,7 @@ class RequestReportCommandTest extends TestCase
     /** @test */
     public function it_can_execute_request_report_artisan_command()
     {
-        $store = factory(Store::class)->create();
+        $store = Store::factory()->create();
 
         $this->artisan('amazonmws:request-report '.$store->id.'
                 --report-type=_GET_AMAZON_FULFILLED_SHIPMENTS_DATA_

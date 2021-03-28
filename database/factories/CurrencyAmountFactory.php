@@ -1,13 +1,29 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace EolabsIo\AmazonMws\Database\Factories;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use EolabsIo\AmazonMws\Domain\Finance\Models\CurrencyAmount;
-use Faker\Generator as Faker;
 
-$factory->define(CurrencyAmount::class, function (Faker $faker) {
-    return [
-            'currency_code' => $faker->currencyCode,
-            'currency_amount' => $faker->randomFloat(2, 0, 99999),
-    ];
-});
+class CurrencyAmountFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = CurrencyAmount::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'currency_code' => $this->faker->currencyCode,
+            'currency_amount' => $this->faker->randomFloat(2, 0, 99999),
+        ];
+    }
+}

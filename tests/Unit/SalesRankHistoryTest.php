@@ -20,8 +20,8 @@ class SalesRankHistoryTest extends BaseModelTest
         // Re-enables Events for test (Faked by default)
         Model::setEventDispatcher($this->initialEvent);
         $asin = 'B1234567879';
-        $product = factory(Product::class)->create(['asin' =>  $asin]);
-        $salesRank = factory(SalesRank::class)->create(['product_id' => $product->id]);
+        $product = Product::factory()->create(['asin' =>  $asin]);
+        $salesRank = SalesRank::factory()->create(['product_id' => $product->id]);
         $salesRank->load('product');
 
         $this->assertDatabaseCount('sales_rank_histories', 1);
@@ -36,8 +36,8 @@ class SalesRankHistoryTest extends BaseModelTest
     public function it_logs_sales_rank_on_sales_rank_update()
     {
         $asin = 'B1234567879';
-        $product = factory(Product::class)->create(['asin' =>  $asin]);
-        $salesRank = factory(SalesRank::class)->create(['product_id' => $product->id]);
+        $product = Product::factory()->create(['asin' =>  $asin]);
+        $salesRank = SalesRank::factory()->create(['product_id' => $product->id]);
         $salesRank->load('product');
 
         // Re-enables Events for test (Faked by default)
@@ -59,8 +59,8 @@ class SalesRankHistoryTest extends BaseModelTest
     public function it_can_turn_off_logging()
     {
         $asin = 'B1234567879';
-        $product = factory(Product::class)->create(['asin' =>  $asin]);
-        $salesRank = factory(SalesRank::class)->create(['product_id' => $product->id]);
+        $product = Product::factory()->create(['asin' =>  $asin]);
+        $salesRank = SalesRank::factory()->create(['product_id' => $product->id]);
         $salesRank->load('product');
         // Re-enables Events for test (Faked by default)
         Model::setEventDispatcher($this->initialEvent);

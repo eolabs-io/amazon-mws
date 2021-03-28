@@ -1,17 +1,31 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace EolabsIo\AmazonMws\Database\Factories;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use EolabsIo\AmazonMws\Domain\Finance\Models\CurrencyAmount;
 use EolabsIo\AmazonMws\Domain\Finance\Models\TDSReimbursementEvent;
-use Faker\Generator as Faker;
 
-$factory->define(TDSReimbursementEvent::class, function (Faker $faker) {
-    return [
-			'posted_date' => $faker->dateTime(),
-            'tds_order_id' => $faker->text(30),
-            'reimbursed_amount_id' => function() {
-            	return factory(CurrencyAmount::class)->create()->id;
-            },
+class TDSReimbursementEventFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = TDSReimbursementEvent::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'posted_date' => $this->faker->dateTime(),
+            'tds_order_id' => $this->faker->text(30),
+            'reimbursed_amount_id' => CurrencyAmount::factory(),
         ];
-});
+    }
+}

@@ -7,7 +7,6 @@ use EolabsIo\AmazonMws\Domain\Finance\Models\NetworkComminglingTransactionEvent;
 
 class NetworkComminglingTransactionEventTest extends BaseModelTest
 {
-
     protected function getModelClass()
     {
         return NetworkComminglingTransactionEvent::class;
@@ -16,8 +15,8 @@ class NetworkComminglingTransactionEventTest extends BaseModelTest
     /** @test */
     public function it_has_taxExclusiveAmount_relationship()
     {
-        $networkComminglingTransactionEvent = factory(NetworkComminglingTransactionEvent::class)->create();
-        $taxExclusiveAmount = factory(CurrencyAmount::class)->create();
+        $networkComminglingTransactionEvent = NetworkComminglingTransactionEvent::factory()->create();
+        $taxExclusiveAmount = CurrencyAmount::factory()->create();
 
         $networkComminglingTransactionEvent->taxExclusiveAmount()->associate($taxExclusiveAmount);
 
@@ -27,12 +26,11 @@ class NetworkComminglingTransactionEventTest extends BaseModelTest
     /** @test */
     public function it_has_taxAmount_relationship()
     {
-        $networkComminglingTransactionEvent = factory(NetworkComminglingTransactionEvent::class)->create();
-        $taxAmount = factory(CurrencyAmount::class)->create();
+        $networkComminglingTransactionEvent = NetworkComminglingTransactionEvent::factory()->create();
+        $taxAmount = CurrencyAmount::factory()->create();
 
         $networkComminglingTransactionEvent->taxAmount()->associate($taxAmount);
 
         $this->assertArraysEqual($taxAmount->toArray(), $networkComminglingTransactionEvent->taxAmount->toArray());
     }
-
 }

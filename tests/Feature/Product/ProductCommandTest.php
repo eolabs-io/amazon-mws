@@ -21,7 +21,7 @@ class ProductCommandTest extends TestCase
     /** @test */
     public function it_can_execute_product_artisan_command()
     {
-        $store = factory(Store::class)->create();
+        $store = Store::factory()->create();
 
         $this->artisan('amazonmws:product '.$store->id.'
                                                 --marketplace-id=ATVPDKIKX0DER

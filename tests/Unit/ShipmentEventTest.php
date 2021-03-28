@@ -8,10 +8,8 @@ use EolabsIo\AmazonMws\Domain\Finance\Models\FeeComponent;
 use EolabsIo\AmazonMws\Domain\Finance\Models\ShipmentEvent;
 use EolabsIo\AmazonMws\Domain\Finance\Models\ShipmentItem;
 
-
 class ShipmentEventTest extends BaseModelTest
 {
-
     protected function getModelClass()
     {
         return ShipmentEvent::class;
@@ -20,8 +18,8 @@ class ShipmentEventTest extends BaseModelTest
     /** @test */
     public function it_has_orderChargeList_relationship()
     {
-        $shipmentEvent = $this->factory()->create();
-        $orderChargeList = factory(ChargeComponent::class, 3)->create();
+        $shipmentEvent = $this->modelClass::factory()->create();
+        $orderChargeList = ChargeComponent::factory()->times(3)->create();
 
         $shipmentEvent->orderChargeList()->toggle($orderChargeList);
 
@@ -31,8 +29,8 @@ class ShipmentEventTest extends BaseModelTest
     /** @test */
     public function it_has_orderChargeAdjustmentList_relationship()
     {
-        $shipmentEvent = $this->factory()->create();
-        $orderChargeAdjustmentList = factory(ChargeComponent::class, 3)->create();
+        $shipmentEvent = $this->modelClass::factory()->create();
+        $orderChargeAdjustmentList = ChargeComponent::factory()->times(3)->create();
 
         $shipmentEvent->orderChargeAdjustmentList()->toggle($orderChargeAdjustmentList);
 
@@ -42,8 +40,8 @@ class ShipmentEventTest extends BaseModelTest
     /** @test */
     public function it_has_shipmentFeeList_relationship()
     {
-        $shipmentEvent = $this->factory()->create();
-        $shipmentFeeList = factory(FeeComponent::class, 3)->create();
+        $shipmentEvent = $this->modelClass::factory()->create();
+        $shipmentFeeList = FeeComponent::factory()->times(3)->create();
 
         $shipmentEvent->shipmentFeeList()->toggle($shipmentFeeList);
 
@@ -53,8 +51,8 @@ class ShipmentEventTest extends BaseModelTest
     /** @test */
     public function it_has_shipmentFeeAdjustmentList_relationship()
     {
-        $shipmentEvent = $this->factory()->create();
-        $shipmentFeeAdjustmentList = factory(FeeComponent::class, 3)->create();
+        $shipmentEvent = $this->modelClass::factory()->create();
+        $shipmentFeeAdjustmentList = FeeComponent::factory()->times(3)->create();
 
         $shipmentEvent->shipmentFeeAdjustmentList()->toggle($shipmentFeeAdjustmentList);
 
@@ -64,8 +62,8 @@ class ShipmentEventTest extends BaseModelTest
     /** @test */
     public function it_has_orderFeeList_relationship()
     {
-        $shipmentEvent = $this->factory()->create();
-        $orderFeeList = factory(FeeComponent::class, 3)->create();
+        $shipmentEvent = $this->modelClass::factory()->create();
+        $orderFeeList = FeeComponent::factory()->times(3)->create();
 
         $shipmentEvent->orderFeeList()->toggle($orderFeeList);
 
@@ -75,8 +73,8 @@ class ShipmentEventTest extends BaseModelTest
     /** @test */
     public function it_has_orderFeeAdjustmentList_relationship()
     {
-        $shipmentEvent = $this->factory()->create();
-        $orderFeeAdjustmentList = factory(FeeComponent::class, 3)->create();
+        $shipmentEvent = $this->modelClass::factory()->create();
+        $orderFeeAdjustmentList = FeeComponent::factory()->times(3)->create();
 
         $shipmentEvent->orderFeeAdjustmentList()->toggle($orderFeeAdjustmentList);
 
@@ -86,8 +84,8 @@ class ShipmentEventTest extends BaseModelTest
     /** @test */
     public function it_has_directPaymentList_relationship()
     {
-        $shipmentEvent = $this->factory()->create();
-        $directPaymentList = factory(DirectPayment::class, 3)->create();
+        $shipmentEvent = $this->modelClass::factory()->create();
+        $directPaymentList = DirectPayment::factory()->times(3)->create();
 
         $shipmentEvent->directPaymentList()->toggle($directPaymentList);
 
@@ -97,8 +95,8 @@ class ShipmentEventTest extends BaseModelTest
     /** @test */
     public function it_has_shipmentItemList_relationship()
     {
-        $shipmentEvent = $this->factory()->create();
-        $shipmentItemList = factory(ShipmentItem::class, 3)->create();
+        $shipmentEvent = $this->modelClass::factory()->create();
+        $shipmentItemList = ShipmentItem::factory()->times(3)->create();
 
         $shipmentEvent->shipmentItemList()->toggle($shipmentItemList);
 
@@ -108,8 +106,8 @@ class ShipmentEventTest extends BaseModelTest
     /** @test */
     public function it_has_shipmentItemAdjustmentList_relationship()
     {
-        $shipmentEvent = $this->factory()->create();
-        $shipmentItemAdjustmentList = factory(ShipmentItem::class, 3)->create();
+        $shipmentEvent = $this->modelClass::factory()->create();
+        $shipmentItemAdjustmentList = ShipmentItem::factory()->times(3)->create();
 
         $shipmentEvent->shipmentItemAdjustmentList()->toggle($shipmentItemAdjustmentList);
 

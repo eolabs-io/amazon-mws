@@ -1,20 +1,32 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace EolabsIo\AmazonMws\Database\Factories;
 
 use EolabsIo\AmazonMws\Domain\Orders\Models\Money;
 use EolabsIo\AmazonMws\Domain\Orders\Models\Order;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use EolabsIo\AmazonMws\Domain\Orders\Models\PaymentExecutionDetailItem;
-use Faker\Generator as Faker;
 
-$factory->define(PaymentExecutionDetailItem::class, function (Faker $faker) {
-    return [
-    		'money_id' => function () {
-				return factory(Money::class)->create()->id;
-    		},
-            'payment_method' => $faker->randomElement(['COD' ,'GC', 'PointsAccount']), 
-            'order_id' => function() {
-        		return factory(Order::class)->create()->id;
-            }, 
-    ];
-});
+class PaymentExecutionDetailItemFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = PaymentExecutionDetailItem::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'money_id' => Money::factory(),
+            'payment_method' => $this->faker->randomElement(['COD' ,'GC', 'PointsAccount']),
+            'order_id' => Order::factory(),
+        ];
+    }
+}

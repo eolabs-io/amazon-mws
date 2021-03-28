@@ -7,7 +7,6 @@ use EolabsIo\AmazonMws\Domain\Finance\Models\CurrencyAmount;
 
 class AdjustmentItemTest extends BaseModelTest
 {
-
     protected function getModelClass()
     {
         return AdjustmentItem::class;
@@ -16,8 +15,8 @@ class AdjustmentItemTest extends BaseModelTest
     /** @test */
     public function it_has_perUnitAmount_relationship()
     {
-        $adjustmentItem = factory(AdjustmentItem::class)->create(['per_unit_amount_id' => null]);
-        $perUnitAmount = factory(CurrencyAmount::class)->create();
+        $adjustmentItem = AdjustmentItem::factory()->create(['per_unit_amount_id' => null]);
+        $perUnitAmount = CurrencyAmount::factory()->create();
 
         $adjustmentItem->perUnitAmount()->associate($perUnitAmount);
 
@@ -27,12 +26,11 @@ class AdjustmentItemTest extends BaseModelTest
     /** @test */
     public function it_has_totalAmount_relationship()
     {
-        $adjustmentItem = factory(AdjustmentItem::class)->create(['total_amount_id' => null]);
-        $totalAmount = factory(CurrencyAmount::class)->create();
+        $adjustmentItem = AdjustmentItem::factory()->create(['total_amount_id' => null]);
+        $totalAmount = CurrencyAmount::factory()->create();
 
         $adjustmentItem->totalAmount()->associate($totalAmount);
 
         $this->assertArraysEqual($totalAmount->toArray(), $adjustmentItem->totalAmount->toArray());
     }
-
 }

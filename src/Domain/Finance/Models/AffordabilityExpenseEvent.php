@@ -2,13 +2,13 @@
 
 namespace EolabsIo\AmazonMws\Domain\Finance\Models;
 
+use EolabsIo\AmazonMws\Domain\Shared\Models\AmazonMwsModel;
 use EolabsIo\AmazonMws\Domain\Finance\Models\CurrencyAmount;
-use Illuminate\Database\Eloquent\Model;
+use EolabsIo\AmazonMws\Database\Factories\AffordabilityExpenseEventFactory;
 
-
-class AffordabilityExpenseEvent extends Model
+class AffordabilityExpenseEvent extends AmazonMwsModel
 {
-    
+
     /**
      * The attributes that should be cast.
      *
@@ -33,32 +33,41 @@ class AffordabilityExpenseEvent extends Model
                     'tax_type_cgst_id',
                     'tax_type_sgst_id',
                     'marketplace_id',
-				];
-    
+                ];
 
-	public function baseExpense()
-	{
-		return $this->belongsTo(CurrencyAmount::class, 'base_expense_id', 'id')->withDefault();
-	}
 
-	public function totalExpense()
-	{
-		return $this->belongsTo(CurrencyAmount::class, 'total_expense_id', 'id')->withDefault();
-	}
+    public function baseExpense()
+    {
+        return $this->belongsTo(CurrencyAmount::class, 'base_expense_id', 'id')->withDefault();
+    }
 
-	public function taxTypeIGST()
-	{
-		return $this->belongsTo(CurrencyAmount::class, 'tax_type_igst_id', 'id')->withDefault();
-	}
+    public function totalExpense()
+    {
+        return $this->belongsTo(CurrencyAmount::class, 'total_expense_id', 'id')->withDefault();
+    }
 
-	public function taxTypeCGST()
-	{
-		return $this->belongsTo(CurrencyAmount::class, 'tax_type_cgst_id', 'id')->withDefault();
-	}
+    public function taxTypeIGST()
+    {
+        return $this->belongsTo(CurrencyAmount::class, 'tax_type_igst_id', 'id')->withDefault();
+    }
 
-	public function taxTypeSGST()
-	{
-		return $this->belongsTo(CurrencyAmount::class, 'tax_type_sgst_id', 'id')->withDefault();
-	}
+    public function taxTypeCGST()
+    {
+        return $this->belongsTo(CurrencyAmount::class, 'tax_type_cgst_id', 'id')->withDefault();
+    }
 
+    public function taxTypeSGST()
+    {
+        return $this->belongsTo(CurrencyAmount::class, 'tax_type_sgst_id', 'id')->withDefault();
+    }
+
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    public static function newFactory()
+    {
+        return AffordabilityExpenseEventFactory::new();
+    }
 }

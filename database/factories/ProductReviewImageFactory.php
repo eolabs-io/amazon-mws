@@ -1,16 +1,30 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace EolabsIo\AmazonMws\Database\Factories;
 
-use Faker\Generator as Faker;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use EolabsIo\AmazonMws\Domain\Reviews\Models\ProductReview;
 use EolabsIo\AmazonMws\Domain\Reviews\Models\ProductReviewImage;
 
-$factory->define(ProductReviewImage::class, function (Faker $faker) {
-    return [
-            'product_review_id' => function () {
-                return factory(ProductReview::class)->create()->id;
-            },
-            'url' => $faker->url(),
-    ];
-});
+class ProductReviewImageFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = ProductReviewImage::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'product_review_id' => ProductReview::factory(),
+            'url' => $this->faker->url(),
+        ];
+    }
+}

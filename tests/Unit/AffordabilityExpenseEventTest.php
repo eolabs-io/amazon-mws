@@ -7,7 +7,6 @@ use EolabsIo\AmazonMws\Domain\Finance\Models\CurrencyAmount;
 
 class AffordabilityExpenseEventTest extends BaseModelTest
 {
-
     protected function getModelClass()
     {
         return AffordabilityExpenseEvent::class;
@@ -16,8 +15,8 @@ class AffordabilityExpenseEventTest extends BaseModelTest
     /** @test */
     public function it_has_baseExpense_relationship()
     {
-        $affordabilityExpenseEvent = factory(AffordabilityExpenseEvent::class)->create(['base_expense_id' => null]);
-        $baseExpense = factory(CurrencyAmount::class)->create();
+        $affordabilityExpenseEvent = AffordabilityExpenseEvent::factory()->create(['base_expense_id' => null]);
+        $baseExpense = CurrencyAmount::factory()->create();
 
         $affordabilityExpenseEvent->baseExpense()->associate($baseExpense);
 
@@ -27,8 +26,8 @@ class AffordabilityExpenseEventTest extends BaseModelTest
     /** @test */
     public function it_has_totalExpense_relationship()
     {
-        $affordabilityExpenseEvent = factory(AffordabilityExpenseEvent::class)->create(['total_expense_id' => null]);
-        $totalExpense = factory(CurrencyAmount::class)->create();
+        $affordabilityExpenseEvent = AffordabilityExpenseEvent::factory()->create(['total_expense_id' => null]);
+        $totalExpense = CurrencyAmount::factory()->create();
 
         $affordabilityExpenseEvent->totalExpense()->associate($totalExpense);
 
@@ -38,8 +37,8 @@ class AffordabilityExpenseEventTest extends BaseModelTest
     /** @test */
     public function it_has_taxTypeIGST_relationship()
     {
-        $affordabilityExpenseEvent = factory(AffordabilityExpenseEvent::class)->create();
-        $taxTypeIGST = factory(CurrencyAmount::class)->create();
+        $affordabilityExpenseEvent = AffordabilityExpenseEvent::factory()->create();
+        $taxTypeIGST = CurrencyAmount::factory()->create();
 
         $affordabilityExpenseEvent->taxTypeIGST()->associate($taxTypeIGST);
 
@@ -49,8 +48,8 @@ class AffordabilityExpenseEventTest extends BaseModelTest
     /** @test */
     public function it_has_taxTypeCGST_relationship()
     {
-        $affordabilityExpenseEvent = factory(AffordabilityExpenseEvent::class)->create();
-        $taxTypeCGST = factory(CurrencyAmount::class)->create();
+        $affordabilityExpenseEvent = AffordabilityExpenseEvent::factory()->create();
+        $taxTypeCGST = CurrencyAmount::factory()->create();
 
         $affordabilityExpenseEvent->taxTypeCGST()->associate($taxTypeCGST);
 
@@ -60,8 +59,8 @@ class AffordabilityExpenseEventTest extends BaseModelTest
     /** @test */
     public function it_has_taxTypeSGST_relationship()
     {
-        $affordabilityExpenseEvent = factory(AffordabilityExpenseEvent::class)->create();
-        $taxTypeSGST = factory(CurrencyAmount::class)->create();
+        $affordabilityExpenseEvent = AffordabilityExpenseEvent::factory()->create();
+        $taxTypeSGST = CurrencyAmount::factory()->create();
 
         $affordabilityExpenseEvent->taxTypeSGST()->associate($taxTypeSGST);
 

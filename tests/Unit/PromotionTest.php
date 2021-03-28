@@ -7,7 +7,6 @@ use EolabsIo\AmazonMws\Domain\Finance\Models\Promotion;
 
 class PromotionTest extends BaseModelTest
 {
-
     protected function getModelClass()
     {
         return Promotion::class;
@@ -16,8 +15,8 @@ class PromotionTest extends BaseModelTest
     /** @test */
     public function it_has_promotionAmount_relationship()
     {
-        $promotion = factory(Promotion::class)->create(['promotion_amount_id' => null]);
-        $promotionAmount = factory(CurrencyAmount::class)->create();
+        $promotion = Promotion::factory()->create(['promotion_amount_id' => null]);
+        $promotionAmount = CurrencyAmount::factory()->create();
 
         $promotion->promotionAmount()->associate($promotionAmount);
 

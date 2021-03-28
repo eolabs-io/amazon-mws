@@ -2,14 +2,14 @@
 
 namespace EolabsIo\AmazonMws\Domain\Finance\Models;
 
-use EolabsIo\AmazonMws\Domain\Finance\Models\ChargeComponent;
-use EolabsIo\AmazonMws\Domain\Finance\Models\DirectPayment;
 use EolabsIo\AmazonMws\Domain\Finance\Models\FeeComponent;
 use EolabsIo\AmazonMws\Domain\Finance\Models\ShipmentItem;
-use Illuminate\Database\Eloquent\Model;
+use EolabsIo\AmazonMws\Domain\Finance\Models\DirectPayment;
+use EolabsIo\AmazonMws\Domain\Shared\Models\AmazonMwsModel;
+use EolabsIo\AmazonMws\Domain\Finance\Models\ChargeComponent;
+use EolabsIo\AmazonMws\Database\Factories\ShipmentEventFactory;
 
-
-class ShipmentEvent extends Model
+class ShipmentEvent extends AmazonMwsModel
 {
     /**
      * The attributes that should be cast.
@@ -30,12 +30,12 @@ class ShipmentEvent extends Model
                     'seller_order_id',
                     'marketplace_name',
                     'posted_date',
-				];
+                ];
 
-	public function orderChargeList()
-	{
+    public function orderChargeList()
+    {
         return $this->morphToMany(ChargeComponent::class, 'charge_componentable', 'order_chargables');
-	}
+    }
 
     public function orderChargeAdjustmentList()
     {
@@ -43,14 +43,14 @@ class ShipmentEvent extends Model
     }
 
     public function shipmentFeeList()
-    {     
+    {
         return $this->morphToMany(FeeComponent::class, 'fee_componentable', 'shipment_feeables');
     }
 
     public function shipmentFeeAdjustmentList()
     {
         return $this->morphToMany(FeeComponent::class, 'fee_componentable', 'shipment_fee_adjustmentables');
-    } 
+    }
 
     public function orderFeeList()
     {
@@ -75,5 +75,15 @@ class ShipmentEvent extends Model
     public function shipmentItemAdjustmentList()
     {
         return $this->morphToMany(ShipmentItem::class, 'shipment_itemable', 'shipment_item_adjustmentables');
+    }
+
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    public static function newFactory()
+    {
+        return ShipmentEventFactory::new();
     }
 }

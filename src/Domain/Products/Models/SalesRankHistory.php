@@ -2,9 +2,10 @@
 
 namespace EolabsIo\AmazonMws\Domain\Products\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use EolabsIo\AmazonMws\Domain\Shared\Models\AmazonMwsModel;
+use EolabsIo\AmazonMws\Database\Factories\SalesRankHistoryFactory;
 
-class SalesRankHistory extends Model
+class SalesRankHistory extends AmazonMwsModel
 {
     /**
      * The attributes that are mass assignable.
@@ -16,4 +17,14 @@ class SalesRankHistory extends Model
                             'product_category_id',
                             'rank',
                         ];
+
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    public static function newFactory()
+    {
+        return SalesRankHistoryFactory::new();
+    }
 }

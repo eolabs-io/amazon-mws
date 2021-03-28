@@ -1,17 +1,31 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace EolabsIo\AmazonMws\Database\Factories;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use EolabsIo\AmazonMws\Domain\Products\Models\Product;
 use EolabsIo\AmazonMws\Domain\Products\Models\VariationChild;
-use Faker\Generator as Faker;
 
-$factory->define(VariationChild::class, function (Faker $faker) {
-    return [
-            'product_id' => function() {
-            	return factory(Product::class)->create()->id;
-            },
-            'color' => $faker->text(10),
-            'size' => $faker->text(10),
-    ];
-});
+class VariationChildFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = VariationChild::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'product_id' => Product::factory(),
+            'color' => $this->faker->text(10),
+            'size' => $this->faker->text(10),
+        ];
+    }
+}

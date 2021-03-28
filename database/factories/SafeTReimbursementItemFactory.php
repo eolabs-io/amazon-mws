@@ -1,15 +1,29 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace EolabsIo\AmazonMws\Database\Factories;
 
-use EolabsIo\AmazonMws\Domain\Finance\Models\SafeTReimbursementEvent;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use EolabsIo\AmazonMws\Domain\Finance\Models\SafeTReimbursementItem;
-use Faker\Generator as Faker;
+use EolabsIo\AmazonMws\Domain\Finance\Models\SafeTReimbursementEvent;
 
-$factory->define(SafeTReimbursementItem::class, function (Faker $faker) {
-    return [
-    		'safe_t_reimbursement_event_id' => function() { 
-    			return factory(SafeTReimbursementEvent::class)->create()->id;
-    		},
-    ];
-});
+class SafeTReimbursementItemFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = SafeTReimbursementItem::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'safe_t_reimbursement_event_id' => SafeTReimbursementEvent::factory(),
+        ];
+    }
+}

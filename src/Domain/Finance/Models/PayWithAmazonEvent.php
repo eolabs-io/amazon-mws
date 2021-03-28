@@ -2,12 +2,12 @@
 
 namespace EolabsIo\AmazonMws\Domain\Finance\Models;
 
-use EolabsIo\AmazonMws\Domain\Finance\Models\ChargeComponent;
 use EolabsIo\AmazonMws\Domain\Finance\Models\FeeComponent;
-use Illuminate\Database\Eloquent\Model;
+use EolabsIo\AmazonMws\Domain\Shared\Models\AmazonMwsModel;
+use EolabsIo\AmazonMws\Domain\Finance\Models\ChargeComponent;
+use EolabsIo\AmazonMws\Database\Factories\PayWithAmazonEventFactory;
 
-
-class PayWithAmazonEvent extends Model
+class PayWithAmazonEvent extends AmazonMwsModel
 {
     /**
      * The attributes that should be cast.
@@ -33,12 +33,12 @@ class PayWithAmazonEvent extends Model
                     'amount_description',
                     'fulfillment_channel',
                     'store_name',
-				];
+                ];
 
-	public function charge()
-	{
-		return $this->belongsTo(ChargeComponent::class);
-	}
+    public function charge()
+    {
+        return $this->belongsTo(ChargeComponent::class);
+    }
 
 
     public function feeList()
@@ -46,4 +46,13 @@ class PayWithAmazonEvent extends Model
         return $this->belongsToMany(FeeComponent::class, 'fee_component_fee_list');
     }
 
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    public static function newFactory()
+    {
+        return PayWithAmazonEventFactory::new();
+    }
 }

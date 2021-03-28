@@ -8,7 +8,6 @@ use EolabsIo\AmazonMws\Domain\Finance\Models\PayWithAmazonEvent;
 
 class PayWithAmazonEventTest extends BaseModelTest
 {
-
     protected function getModelClass()
     {
         return PayWithAmazonEvent::class;
@@ -17,8 +16,8 @@ class PayWithAmazonEventTest extends BaseModelTest
     /** @test */
     public function it_has_charge_relationship()
     {
-        $payWithAmazonEvent = factory(PayWithAmazonEvent::class)->create(['charge_id' => null]);
-        $charge = factory(ChargeComponent::class)->create();
+        $payWithAmazonEvent = PayWithAmazonEvent::factory()->create(['charge_id' => null]);
+        $charge = ChargeComponent::factory()->create();
 
         $payWithAmazonEvent->charge()->associate($charge);
 
@@ -28,12 +27,11 @@ class PayWithAmazonEventTest extends BaseModelTest
     /** @test */
     public function it_has_feeList_relationship()
     {
-        $payWithAmazonEvent = factory(PayWithAmazonEvent::class)->create();
-        $feeList = factory(FeeComponent::class, 3)->create();
+        $payWithAmazonEvent = PayWithAmazonEvent::factory()->create();
+        $feeList = FeeComponent::factory()->times(3)->create();
 
         $payWithAmazonEvent->feeList()->toggle($feeList);
 
         $this->assertArraysEqual($feeList->toArray(), $payWithAmazonEvent->feeList->toArray());
     }
-
 }
