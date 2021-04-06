@@ -2,55 +2,29 @@
 
 namespace EolabsIo\AmazonMws\Tests\Feature\Reviews;
 
-use Illuminate\Support\Facades\Http;
 use EolabsIo\AmazonMws\Tests\TestCase;
 use EolabsIo\AmazonMws\Support\Facades\GetProductReview;
-use EolabsIo\AmazonMws\Tests\Factories\GetProductReviewFactory;
+use EolabsIo\AmazonMws\Tests\Factories\Concerns\CreatesSolverMock;
 
 class GetProductReviewTest extends TestCase
 {
+    use CreatesSolverMock;
 
-    // /** @test */
-    // public function it_test_broswer()
-    // {
-    //     $asin = "B07L8MMCZV";
-    //     $pageNumber = 1;
-    //     $result = GetProductReview::withAsin($asin)
-    //             ->withPageNumber($pageNumber)
-    //             ->fetch();
+    public $asin;
 
-    //     // dd($result);
-    //     // Http::assertSent(function ($request) use ($asin, $pageNumber) {
-    //     //     return $request->url() == "https://www.amazon.com/product-reviews/{$asin}?pageNumber={$pageNumber}";
-    //     // });
-    // }
-
-    /** @test */
-    public function it_sends_the_correct_request_query()
+    protected function setUp(): void
     {
-        GetProductReview::fake();
-        GetProductReviewFactory::new()->fakeGetProductReviewResponse();
+        parent::setUp();
 
-        $asin = "B00200000Q";
-        $pageNumber = 2;
-        GetProductReview::withAsin($asin)
-            ->withPageNumber($pageNumber)
-            ->fetch();
-
-        Http::assertSent(function ($request) use ($asin, $pageNumber) {
-            return $request->url() == "https://www.amazon.com/product-reviews/{$asin}?pageNumber={$pageNumber}";
-        });
+        $this->asin = "B00200000Q";
     }
 
     /** @test */
     public function it_gets_the_correct_response()
     {
         GetProductReview::fake();
-        GetProductReviewFactory::new()->fakeGetProductReviewResponse();
 
-        $asin = "B00200000Q";
-        $response = GetProductReview::withAsin($asin)
-                        ->fetch();
+        $response = GetProductReview::withAsin($this->asin)->fetch();
 
         $this->assertEquals(1, $response['pageNumber']);
         $this->assertEquals(2, $response['nextPage']);
@@ -59,17 +33,17 @@ class GetProductReviewTest extends TestCase
         $this->assertEquals(439, $response['numberOfReviews']);
         $this->assertEquals(945, $response['numberOfRatings']);
         $this->assertCount(10, $response['reviews']);
+
+        $this->assertFalse($response['hasCaptcha']);
     }
 
     /** @test */
     public function it_can_change_the_page_response()
     {
         GetProductReview::fake();
-        GetProductReviewFactory::new()->fakeGetProductReviewResponse();
-        $pageNumber = 2;
-        $asin = "B00200000Q";
-        $response = GetProductReview::withAsin($asin)
-                            ->withPageNumber($pageNumber)
+
+        $response = GetProductReview::withAsin($this->asin)
+                            ->withPageNumber(2)
                             ->fetch();
 
         $this->assertEquals(2, $response['pageNumber']);
@@ -79,5 +53,30 @@ class GetProductReviewTest extends TestCase
         $this->assertEquals(439, $response['numberOfReviews']);
         $this->assertEquals(945, $response['numberOfRatings']);
         $this->assertCount(10, $response['reviews']);
+
+        $this->assertFalse($response['hasCaptcha']);
+    }
+
+    /** @test */
+    public function it_gets_the_correct_with_captcha_response()
+    {
+        GetProductReview::fake([
+            'type' => '__WithCaptcha__',
+            'solverCallback' => function () {
+                return $this->createSolverMock();
+            },
+        ]);
+
+        $response = GetProductReview::withAsin($this->asin)->fetch();
+
+        $this->assertEquals(1, $response['pageNumber']);
+        $this->assertEquals(2, $response['nextPage']);
+        $this->assertEquals(44, $response['totalNumberOfPages']);
+        $this->assertEquals(4.3, $response['averageStarsRating']);
+        $this->assertEquals(439, $response['numberOfReviews']);
+        $this->assertEquals(945, $response['numberOfRatings']);
+        $this->assertCount(10, $response['reviews']);
+
+        $this->assertFalse($response['hasCaptcha']);
     }
 }

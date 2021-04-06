@@ -7,26 +7,33 @@ use Illuminate\Support\Facades\Queue;
 use EolabsIo\AmazonMws\Tests\TestCase;
 use EolabsIo\AmazonMws\Support\Facades\GetProductReview;
 use EolabsIo\AmazonMws\Tests\Concerns\CreatesGetProductReview;
+use EolabsIo\AmazonMws\Tests\Factories\Concerns\CreatesSolverMock;
 use EolabsIo\AmazonMws\Domain\Reviews\Events\FetchGetProductReview;
 use EolabsIo\AmazonMws\Domain\Reviews\Jobs\PerformFetchGetProductReview;
 use EolabsIo\AmazonMws\Domain\Reviews\Jobs\ProcessGetProductReviewResponse;
 
 class PerformFetchGetProductReviewTest extends TestCase
 {
-    use CreatesGetProductReview;
+    use CreatesGetProductReview,
+        CreatesSolverMock;
+
+    public $asin;
 
     protected function setUp(): void
     {
         parent::setUp();
 
         Queue::fake();
-        GetProductReview::fake();
+
+        $this->asin = "B00200000Q";
     }
 
     /** @test */
     public function it_calls_the_correct_job()
     {
-        $getReviewRating = $this->createGetProductReview();
+        GetProductReview::fake();
+
+        $getReviewRating = GetProductReview::withAsin($this->asin);
 
         PerformFetchGetProductReview::dispatch($getReviewRating);
 
@@ -51,7 +58,9 @@ class PerformFetchGetProductReviewTest extends TestCase
     /** @test */
     public function it_calls_the_correct_job_with_no_extra_pages()
     {
-        $getReviewRating = $this->createGetProductReviewWithNoExtraPages();
+        GetProductReview::fake();
+
+        $getReviewRating = GetProductReview::withAsin($this->asin)->withPageNumber(44);
 
         PerformFetchGetProductReview::dispatch($getReviewRating);
 

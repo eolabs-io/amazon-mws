@@ -47,4 +47,22 @@ class GetProductReviewFactory
 
         return $this;
     }
+
+    public function fakeGetProductReviewWithCaptchaResponse(): self
+    {
+        $file = __DIR__ . '/../Stubs/Responses/Html/AmazonProductReviewWithCaptcha.html';
+        $getCaptchaReviewResponse = file_get_contents($file);
+
+        $file = __DIR__ . '/../Stubs/Responses/Html/AmazonProductReviewPage.html';
+        $getReviewResponse = file_get_contents($file);
+
+        Http::fake([
+             $this->endpoint => Http::sequence()
+                                    ->push($getCaptchaReviewResponse, 200)
+                                    ->push($getReviewResponse, 200)
+                                    ->whenEmpty(Http::response('', 404)),
+        ]);
+
+        return $this;
+    }
 }

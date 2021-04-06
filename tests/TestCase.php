@@ -20,10 +20,7 @@ abstract class TestCase extends Orchestra
         $vendorPath = '/vendor/eolabs-io/amazon-mws-client';
 
         $this->loadMigrationsFrom(realpath(dirname(__DIR__) . $vendorPath .'/database/migrations'));
-        // $this->withFactories(realpath(dirname(__DIR__) . $vendorPath .'/database/factories'));
-
         $this->loadMigrationsFrom(realpath(dirname(__DIR__) .'/database/migrations'));
-        // $this->withFactories(realpath(dirname(__DIR__) .'/database/factories'));
 
         $this->initialEvent = Event::getFacadeRoot();
         Event::fake();

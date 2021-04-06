@@ -3,14 +3,30 @@
 namespace EolabsIo\AmazonMws\Domain\Reviews;
 
 use Illuminate\Support\Collection;
+use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\BrowserKit\HttpBrowser;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
+use EolabsIo\AmazonMws\Domain\Reviews\Concerns\SolvesCaptcha;
 use EolabsIo\AmazonMwsResponseParser\Support\Facades\ReviewResponseParser;
 
 abstract class ReviewCore
 {
+    use SolvesCaptcha;
+
     public $parsedResponse;
     private $asin;
+    private HttpBrowser $browser;
+    private HttpClientInterface $client;
+    protected Crawler $crawler;
+
+
+    public function __construct(?HttpClientInterface $client = null, ?HttpBrowser $browser = null, ?string $baseUrl = null)
+    {
+        $baseUrl = $baseUrl ?? $this->getBaseUrl();
+        $this->client = $client ?? HttpClient::createForBaseUri($baseUrl);
+        $this->browser = $browser ?? new HttpBrowser($client);
+    }
 
     public function withAsin($asin): self
     {
@@ -24,29 +40,40 @@ abstract class ReviewCore
         return $this->asin;
     }
 
-    // public function fetch(): Collection
-    // {
-    //     $response = Http::get($this->getUrl());
-    //     $this->parsedResponse = $this->parseResponse($response);
-
-    //     return $this->getParsedResponse();
-    // }
-
     public function fetch(): Collection
     {
         $response = $this->get($this->getUrl());
 
-        $this->parsedResponse = $this->parseResponse($response);
+        $parsedResponse = $this->parseResponse($response);
+
+        // Check for Captcha
+        if ($this->hasCaptcha($parsedResponse)) {
+            $response = $this->solveCaptcha();
+            $parsedResponse = $this->parseResponse($response);
+        }
+
+        $this->parsedResponse = $parsedResponse;
 
         return $this->getParsedResponse();
     }
 
     public function get($url)
     {
-        $browser = new HttpBrowser(HttpClient::create());
-        $browser->request('GET', $url);
+        $browser = $this->getBrowser();
+
+        $this->crawler = $browser->request('GET', $url);
 
         return $browser->getResponse();
+    }
+
+    public function getBrowser(): HttpBrowser
+    {
+        return $this->browser;
+    }
+
+    public function getClient(): HttpClientInterface
+    {
+        return $this->client;
     }
 
     public function getQueryParameters(): array
@@ -83,5 +110,10 @@ abstract class ReviewCore
     public function getParsedResponse(): Collection
     {
         return $this->parsedResponse ?? collect();
+    }
+
+    public function hasCaptcha($parsedResponse): bool
+    {
+        return data_get($parsedResponse, 'hasCaptcha', false);
     }
 }

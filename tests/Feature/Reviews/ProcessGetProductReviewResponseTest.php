@@ -19,9 +19,11 @@ class ProcessGetProductReviewResponseTest extends TestCase
     {
         parent::setUp();
 
-        GetProductReview::fake();
+        GetProductReview::fake([
+            'type' => '__WithImages__',
+        ]);
 
-        $getProductReview = $this->createGetProductReviewWithImages(); //createGetProductReview();
+        $getProductReview = GetProductReview::withAsin('B00200000Q');
 
         $results = $getProductReview->fetch();
         $results['asin'] = $getProductReview->getAsin();

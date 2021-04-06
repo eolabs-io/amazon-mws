@@ -6,7 +6,6 @@ use EolabsIo\AmazonMwsClient\Models\Store;
 use EolabsIo\AmazonMws\Domain\Sellers\Events\FetchListMarketplaceParticipations;
 use EolabsIo\AmazonMws\Support\Facades\ListMarketplaceParticipations;
 use Illuminate\Console\Command;
-use Illuminate\Support\Carbon;
 
 class SellerCommand extends Command
 {
@@ -21,7 +20,7 @@ class SellerCommand extends Command
         $this->info('Getting Sellers marketplaces from Amazon MWS...');
 
         $store = Store::find($this->argument('store'));
-        
+
         $listMarketplaceParticipations = ListMarketplaceParticipations::withStore($store);
 
         FetchListMarketplaceParticipations::dispatch($listMarketplaceParticipations);

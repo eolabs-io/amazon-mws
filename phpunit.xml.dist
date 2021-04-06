@@ -30,6 +30,7 @@
         <!-- <env name="DB_DATABASE" value="AmazonMwsTest"/> -->
         <env name="DB_USERNAME" value="root"/>
         <env name="DB_PASSWORD" value=""/>
+        <env name="TWO_CAPTCHA_API_KEY" value="__df7cf86768d471d1e3af6d0b386a1d9d"/>
     </php>
     <logging>
         <log type="tap" target="build/report.tap"/>
