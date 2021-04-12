@@ -4,8 +4,9 @@ namespace EolabsIo\AmazonMws\Domain\Reviews;
 
 use Illuminate\Support\Collection;
 use Symfony\Component\DomCrawler\Crawler;
-use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\BrowserKit\HttpBrowser;
+use Symfony\Component\HttpClient\NativeHttpClient;
+use Symfony\Component\HttpClient\ScopingHttpClient;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use EolabsIo\AmazonMws\Domain\Reviews\Concerns\SolvesCaptcha;
 use EolabsIo\AmazonMwsResponseParser\Support\Facades\ReviewResponseParser;
@@ -24,8 +25,14 @@ abstract class ReviewCore
     public function __construct(?HttpClientInterface $client = null, ?HttpBrowser $browser = null, ?string $baseUrl = null)
     {
         $baseUrl = $baseUrl ?? $this->getBaseUrl();
-        $this->client = $client ?? HttpClient::createForBaseUri($baseUrl);
+        $this->client = $client ?? $this->createClient($baseUrl);
         $this->browser = $browser ?? new HttpBrowser($this->client);
+    }
+
+    public function createClient(string $baseUrl, array $defaultOptions = [], int $maxHostConnections = 6)
+    {
+        $client = new NativeHttpClient($defaultOptions, $maxHostConnections);
+        return ScopingHttpClient::forBaseUri($client, $baseUrl, $defaultOptions);
     }
 
     public function withAsin($asin): self
