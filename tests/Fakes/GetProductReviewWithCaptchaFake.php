@@ -3,6 +3,7 @@
 namespace EolabsIo\AmazonMws\Tests\Fakes;
 
 use Symfony\Component\HttpClient\Response\MockResponse;
+use EolabsIo\AmazonMws\Tests\Fakes\GetProductReviewFake;
 
 class GetProductReviewWithCaptchaFake extends GetProductReviewFake
 {

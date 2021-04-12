@@ -7,13 +7,11 @@ use EolabsIo\AmazonMws\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use EolabsIo\AmazonMws\Support\Facades\GetProductReview;
 use EolabsIo\AmazonMws\Domain\Reviews\Models\ProductReview;
-use EolabsIo\AmazonMws\Tests\Concerns\CreatesGetProductReview;
 use EolabsIo\AmazonMws\Domain\Reviews\Jobs\ProcessGetProductReviewResponse;
 
 class ProcessGetProductReviewResponseTest extends TestCase
 {
-    use RefreshDatabase,
-        CreatesGetProductReview;
+    use RefreshDatabase;
 
     protected function setUp(): void
     {
@@ -24,7 +22,6 @@ class ProcessGetProductReviewResponseTest extends TestCase
         ]);
 
         $getProductReview = GetProductReview::withAsin('B00200000Q');
-
         $results = $getProductReview->fetch();
         $results['asin'] = $getProductReview->getAsin();
 

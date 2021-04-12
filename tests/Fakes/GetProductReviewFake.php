@@ -16,7 +16,7 @@ class GetProductReviewFake extends GetProductReview
 
     public function __construct(?HttpClientInterface $client = null, ?HttpBrowser $browser = null, ?string $baseUrl = null)
     {
-        $client = $this->mockHttpClient();
+        $client = $client ?? $this->mockHttpClient();
 
         parent::__construct($client, $browser, $baseUrl);
     }

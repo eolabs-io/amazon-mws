@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Queue;
 use EolabsIo\AmazonMws\Tests\TestCase;
 use EolabsIo\AmazonMws\Support\Facades\GetProductReview;
-use EolabsIo\AmazonMws\Tests\Concerns\CreatesGetProductReview;
 use EolabsIo\AmazonMws\Tests\Factories\Concerns\CreatesSolverMock;
 use EolabsIo\AmazonMws\Domain\Reviews\Events\FetchGetProductReview;
 use EolabsIo\AmazonMws\Domain\Reviews\Jobs\PerformFetchGetProductReview;
@@ -14,8 +13,7 @@ use EolabsIo\AmazonMws\Domain\Reviews\Jobs\ProcessGetProductReviewResponse;
 
 class PerformFetchGetProductReviewTest extends TestCase
 {
-    use CreatesGetProductReview,
-        CreatesSolverMock;
+    use CreatesSolverMock;
 
     public $asin;
 

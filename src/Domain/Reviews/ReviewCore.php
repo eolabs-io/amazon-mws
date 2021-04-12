@@ -25,7 +25,7 @@ abstract class ReviewCore
     {
         $baseUrl = $baseUrl ?? $this->getBaseUrl();
         $this->client = $client ?? HttpClient::createForBaseUri($baseUrl);
-        $this->browser = $browser ?? new HttpBrowser($client);
+        $this->browser = $browser ?? new HttpBrowser($this->client);
     }
 
     public function withAsin($asin): self
