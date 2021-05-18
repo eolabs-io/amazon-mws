@@ -20,7 +20,7 @@
     "require": {
         "php": "^7.3",
         "2captcha/2captcha": "^1.0",
-        "doctrine/dbal": "2.10.2",
+        "doctrine/dbal": "^3.1",
         "eolabs-io/amazon-mws-client": "^2.0",
         "eolabs-io/amazon-mws-response-parser": "^2.0",
         "eolabs-io/amazon-mws-throttling-middleware": "^2.0",
