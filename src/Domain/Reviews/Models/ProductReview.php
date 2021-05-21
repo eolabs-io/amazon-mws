@@ -6,9 +6,19 @@ use Illuminate\Support\Carbon;
 use EolabsIo\AmazonMws\Domain\Shared\Models\AmazonMwsModel;
 use EolabsIo\AmazonMws\Database\Factories\ProductReviewFactory;
 use EolabsIo\AmazonMws\Domain\Reviews\Models\ProductReviewImage;
+use EolabsIo\AmazonMws\Domain\Reviews\Events\ProductReviewWasCreated;
 
 class ProductReview extends AmazonMwsModel
 {
+    /**
+     * The event map for the model.
+     *
+     * @var array
+     */
+    protected $dispatchesEvents = [
+        'created' => ProductReviewWasCreated::class,
+    ];
+
     /**
      * The attributes that should be cast.
      *
