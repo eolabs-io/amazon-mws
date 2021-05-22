@@ -11,10 +11,10 @@ class ProductReviewWasCreated
     use Dispatchable, SerializesModels;
 
     /** @var EolabsIo\AmazonMws\Domain\Reviews\Models\ProductReview */
-    public $productReview;
+    public $review;
 
-    public function __construct(ProductReview $productReview)
+    public function __construct(ProductReview $review)
     {
-        $this->productReview = $productReview;
+        $this->review = $review;
     }
 }
