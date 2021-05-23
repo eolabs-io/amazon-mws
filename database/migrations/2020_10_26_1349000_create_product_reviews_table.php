@@ -25,7 +25,10 @@ class CreateProductReviewsTable extends AmazonMwsMigration
             $table->boolean('earlyReviewerRewards');
             $table->boolean('vineVoice');
             $table->text('body');
+            $table->unsignedBigInteger('product_review_status_id')->nullable();
             $table->timestamps();
+
+            $table->foreign('product_review_status_id')->references('id')->on('product_review_statuses');
         });
     }
 

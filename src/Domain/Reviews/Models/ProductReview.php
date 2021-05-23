@@ -6,6 +6,7 @@ use Illuminate\Support\Carbon;
 use EolabsIo\AmazonMws\Domain\Shared\Models\AmazonMwsModel;
 use EolabsIo\AmazonMws\Database\Factories\ProductReviewFactory;
 use EolabsIo\AmazonMws\Domain\Reviews\Models\ProductReviewImage;
+use EolabsIo\AmazonMws\Domain\Reviews\Models\ProductReviewStatus;
 use EolabsIo\AmazonMws\Domain\Reviews\Events\ProductReviewWasCreated;
 
 class ProductReview extends AmazonMwsModel
@@ -49,11 +50,17 @@ class ProductReview extends AmazonMwsModel
                             'earlyReviewerRewards',
                             'vineVoice',
                             'body',
+                            'product_review_status_id',
                         ];
 
     public function images()
     {
         return $this->hasMany(ProductReviewImage::class);
+    }
+
+    public function status()
+    {
+        return $this->belongsTo(ProductReviewStatus::class, 'product_review_status_id');
     }
 
     public function getDateForHumansAttribute()

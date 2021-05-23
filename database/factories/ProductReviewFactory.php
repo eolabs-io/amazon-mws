@@ -4,6 +4,7 @@ namespace EolabsIo\AmazonMws\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use EolabsIo\AmazonMws\Domain\Reviews\Models\ProductReview;
+use EolabsIo\AmazonMws\Domain\Reviews\Models\ProductReviewStatus;
 
 class ProductReviewFactory extends Factory
 {
@@ -32,6 +33,7 @@ class ProductReviewFactory extends Factory
             'earlyReviewerRewards' => $this->faker->boolean,
             'vineVoice' => $this->faker->boolean,
             'body' => $this->faker->text(),
+            'product_review_status_id' => ProductReviewStatus::factory(),
         ];
     }
 }

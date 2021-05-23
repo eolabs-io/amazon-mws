@@ -4,6 +4,7 @@ namespace EolabsIo\AmazonMws\Tests\Unit;
 
 use EolabsIo\AmazonMws\Domain\Reviews\Models\ProductReview;
 use EolabsIo\AmazonMws\Domain\Reviews\Models\ProductReviewImage;
+use EolabsIo\AmazonMws\Domain\Reviews\Models\ProductReviewStatus;
 
 class ProductReviewTest extends BaseModelTest
 {
@@ -23,6 +24,7 @@ class ProductReviewTest extends BaseModelTest
 
         $this->assertTrue($productReviewImages->contains($image->url));
     }
+
     /** @test */
     public function it_has_ProductReviewImages_relationship()
     {
@@ -33,5 +35,17 @@ class ProductReviewTest extends BaseModelTest
         $productReviewImages = $productReview->images->pluck('url');
 
         $this->assertEquals($productReviewImages->toArray(), $images->pluck('url')->toArray());
+    }
+
+    /** @test */
+    public function it_has_ProductReviewStatus_relationship()
+    {
+        $expectedStatus = ProductReviewStatus::factory()->create();
+        ProductReview::factory()->create(['product_review_status_id' => $expectedStatus->id]);
+
+        $productReview = ProductReview::first();
+        $actualStatus = $productReview->status;
+
+        $this->assertEquals($expectedStatus->toArray(), $actualStatus->toArray());
     }
 }
