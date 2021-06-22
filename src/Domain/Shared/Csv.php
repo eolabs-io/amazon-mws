@@ -61,12 +61,13 @@ class Csv
     {
         return LazyCollection::make(function () {
             $handle = fopen($this->getPath(), "r");
+            $length = 0;
 
             if ($this->processHeader) {
-                $this->headers = $this->processHeaderRow(fgetcsv($handle, $this->delimiter));
+                $this->headers = $this->processHeaderRow(fgetcsv($handle, $length, $this->delimiter));
             }
 
-            while (($line = fgetcsv($handle, $this->delimiter)) !== false) {
+            while (($line = fgetcsv($handle, $length, $this->delimiter)) !== false) {
                 yield $this->getValueFromRow($line);
             }
 
