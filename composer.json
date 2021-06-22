@@ -18,7 +18,7 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "php": "^7.3",
+        "php": "^7.3|^8.0",
         "2captcha/2captcha": "^1.0",
         "doctrine/dbal": "^3.1",
         "eolabs-io/amazon-mws-client": "^2.0",
