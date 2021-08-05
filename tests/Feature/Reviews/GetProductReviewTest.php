@@ -28,10 +28,10 @@ class GetProductReviewTest extends TestCase
 
         $this->assertEquals(1, $response['pageNumber']);
         $this->assertEquals(2, $response['nextPage']);
-        $this->assertEquals(44, $response['totalNumberOfPages']);
+        $this->assertEquals(48, $response['totalNumberOfPages']);
         $this->assertEquals(4.3, $response['averageStarsRating']);
-        $this->assertEquals(439, $response['numberOfReviews']);
-        $this->assertEquals(945, $response['numberOfRatings']);
+        $this->assertEquals(479, $response['numberOfReviews']);
+        $this->assertEquals(1681, $response['numberOfRatings']);
         $this->assertCount(10, $response['reviews']);
 
         $this->assertFalse($response['hasCaptcha']);
@@ -48,10 +48,10 @@ class GetProductReviewTest extends TestCase
 
         $this->assertEquals(2, $response['pageNumber']);
         $this->assertEquals(3, $response['nextPage']);
-        $this->assertEquals(44, $response['totalNumberOfPages']);
+        $this->assertEquals(48, $response['totalNumberOfPages']);
         $this->assertEquals(4.3, $response['averageStarsRating']);
-        $this->assertEquals(439, $response['numberOfReviews']);
-        $this->assertEquals(945, $response['numberOfRatings']);
+        $this->assertEquals(479, $response['numberOfReviews']);
+        $this->assertEquals(1681, $response['numberOfRatings']);
         $this->assertCount(10, $response['reviews']);
 
         $this->assertFalse($response['hasCaptcha']);
@@ -71,10 +71,10 @@ class GetProductReviewTest extends TestCase
 
         $this->assertEquals(1, $response['pageNumber']);
         $this->assertEquals(2, $response['nextPage']);
-        $this->assertEquals(44, $response['totalNumberOfPages']);
+        $this->assertEquals(48, $response['totalNumberOfPages']);
         $this->assertEquals(4.3, $response['averageStarsRating']);
-        $this->assertEquals(439, $response['numberOfReviews']);
-        $this->assertEquals(945, $response['numberOfRatings']);
+        $this->assertEquals(479, $response['numberOfReviews']);
+        $this->assertEquals(1681, $response['numberOfRatings']);
         $this->assertCount(10, $response['reviews']);
 
         $this->assertFalse($response['hasCaptcha']);

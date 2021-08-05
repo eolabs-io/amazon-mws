@@ -18,8 +18,8 @@ class GetReviewRatingTest extends TestCase
         $response = GetReviewRating::withAsin($asin)
                         ->fetch();
 
-        $this->assertEquals(945, $response['numberOfRatings']);
-        $this->assertEquals(439, $response['numberOfReviews']);
+        $this->assertEquals(1681, $response['numberOfRatings']);
+        $this->assertEquals(479, $response['numberOfReviews']);
         $this->assertEquals(4.3, $response['averageStarsRating']);
     }
 }

@@ -37,8 +37,8 @@ class PerformFetchGetReviewRatingTest extends TestCase
 
         // Assert a job was pushed...
         Queue::assertPushed(ProcessGetReviewRatingResponse::class, function ($job) {
-            return data_get($job->results, 'numberOfRatings') === 945
-                && data_get($job->results, 'numberOfReviews') === 439
+            return data_get($job->results, 'numberOfRatings') === 1681
+                && data_get($job->results, 'numberOfReviews') === 479
                 && data_get($job->results, 'averageStarsRating') === 4.3
                 && data_get($job->results, 'asin') === 'B00200000Q';
         });

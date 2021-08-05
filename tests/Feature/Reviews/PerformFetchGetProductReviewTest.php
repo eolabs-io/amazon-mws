@@ -43,7 +43,7 @@ class PerformFetchGetProductReviewTest extends TestCase
 
         // Assert a job was pushed...
         Queue::assertPushed(ProcessGetProductReviewResponse::class, function ($job) {
-            return data_get($job->results, 'numberOfReviews') === 439
+            return data_get($job->results, 'numberOfReviews') === 479
                 && data_get($job->results, 'averageStarsRating') === 4.3
                 && data_get($job->results, 'asin') === 'B00200000Q'
                 && count(data_get($job->results, 'reviews')) == 10;
@@ -58,7 +58,7 @@ class PerformFetchGetProductReviewTest extends TestCase
     {
         GetProductReview::fake();
 
-        $getReviewRating = GetProductReview::withAsin($this->asin)->withPageNumber(44);
+        $getReviewRating = GetProductReview::withAsin($this->asin)->withPageNumber(48);
 
         PerformFetchGetProductReview::dispatch($getReviewRating);
 
@@ -70,7 +70,7 @@ class PerformFetchGetProductReviewTest extends TestCase
 
         // Assert a job was pushed...
         Queue::assertPushed(ProcessGetProductReviewResponse::class, function ($job) {
-            return data_get($job->results, 'numberOfReviews') === 439
+            return data_get($job->results, 'numberOfReviews') === 479
                     && data_get($job->results, 'averageStarsRating') === 4.3
                     && data_get($job->results, 'asin') === 'B00200000Q'
                     && count(data_get($job->results, 'reviews')) == 10;

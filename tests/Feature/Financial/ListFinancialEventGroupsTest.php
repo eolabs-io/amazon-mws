@@ -31,8 +31,8 @@ class ListFinancialEventGroupsTest extends TestCase
         ListFinancialEventGroupsFactory::new()->fakeListFinancialEventGroupsResponse();
 
         $store = StoreFactory::new()
-                                       ->withValidAttributes()
-                                     ->create();
+                         ->withValidAttributes()
+                         ->create();
 
         $response = ListFinancialEventGroups::withStore($store)
                             ->withFinancialEventGroupStartedAfter(Carbon::create(2020, 6, 8, 12))
